@@ -1,20 +1,30 @@
 name: Warmup
 
 # Runs the Trade Agent warmup before the US market open (14:45 UTC = 9:45 AM ET).
-# Produces GO/NO-GO verdicts per pair with full citations.
-# Writes to reports/warmup/ -- the human (or TradingView alert) triggers trades.
 #
-# This is the "read the news and check the chart" step.  It never places orders.
+# KEY: step 2 fetches LIVE candles from Bybit before the warmup runs.
+# Without this, the regime signal (bull/bear/range) is computed from
+# stale committed cache and the verdict is worthless.
+#
+# Also runs at 00:30 UTC (after 4h/1d bars close) so the morning verdict
+# uses fresh data even if the 14:45 run is delayed.
+#
+# This is the "read the charts and analyze deeply" step.  It never places orders.
 
 on:
   schedule:
-    - cron: "45 14 * * 1-5"   # Mon-Fri, 14:45 UTC = 9:45 AM ET
+    - cron: "30 0 * * *"      # 00:30 UTC -- after 4h bars close
+    - cron: "45 14 * * 1-5"   # 14:45 UTC Mon-Fri -- before US open
   workflow_dispatch:
     inputs:
       all:
         description: "Include AAPL equity"
         type: boolean
         default: true
+      pairs:
+        description: "Comma-separated base symbols (default: BTC ETH SOL)"
+        type: string
+        default: "BTC,ETH,SOL"
 
 permissions:
   contents: write
@@ -22,7 +32,7 @@ permissions:
 jobs:
   warmup:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -39,18 +49,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install ccxt pandas numpy pyarrow requests
 
+      - name: Fetch LIVE candles from Bybit
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          PAIRS="${{ inputs.pairs }}"
+          python fetch_live.py --pairs $(echo $PAIRS | tr ',' ' ') --tf 1h 4h 1d
+
       - name: Run warmup
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          FLAGS="--all"
-          python run_warmup.py $FLAGS
+          python run_warmup.py --all
 
       - name: Commit warmup report
         run: |
           git config user.name "warmup-bot"
           git config user.email "warmup-bot@users.noreply.github.com"
           git add research/reports/warmup/
+          git add research/data/
           if git diff --staged --quiet; then
             echo "nothing to commit"
           else
@@ -61,6 +78,9 @@ jobs:
       - name: Summary
         run: |
           echo "### Warmup complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Fresh candles fetched from Bybit before verdict.**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
           python -c "
           import json, os, glob
           wdir = 'research/reports/warmup'
@@ -71,5 +91,11 @@ jobs:
               with open(files[0]) as f:
                   data = json.load(f)
               for pair, r in data.items():
-                  print(f'- {pair}: {r[\"verdict\"]} (score={r[\"score\"]})')
+                  regime = r.get('regime') or 'N/A'
+                  tf = r.get('regime_tf') or ''
+                  fng = (r.get('fng') or {}).get('value', 'N/A')
+                  print(f'- **{pair}**: {r[\"verdict\"]} (score={r[\"score\"]})')
+                  print(f'  regime={regime} {tf}  F&G={fng}')
+                  for b in r.get('blockers', []):
+                      print(f'  BLOCK: {b}')
           " >> $GITHUB_STEP_SUMMARY
