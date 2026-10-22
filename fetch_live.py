@@ -30,46 +30,54 @@ WARMUP_TFS = ["1h", "4h", "1d"]
 
 
 def fetch_one(asset, tf):
-    """Fetch the latest bars for asset/tf and merge into the parquet cache."""
-    try:
-        import ccxt
-    except ImportError:
-        print(f"  {asset} {tf}: ccxt not installed")
-        return None
+    """Fetch the latest bars for asset/tf and merge into the parquet cache.
 
-    ex = ccxt.bybit({"enableRateLimit": True})
-    try:
-        # Fetch the last ~200 bars -- enough for EMA50/EMA200 + regime.
-        since = ex.parse8601(
-            (pd.Timestamp.utcnow() - pd.Timedelta(hours=48)).strftime(
-                "%Y-%m-%dT%H:%M:%SZ"
-            )
-        )
-        rows = []
-        remaining = True
-        while remaining and len(rows) < 500:
-            try:
-                batch = ex.fetch_ohlcv(
-                    f"{asset}/USDT", timeframe=tf, since=since, limit=200
+    Tries exchanges in order until one works.  Bybit geo-blocks GitHub
+    runner IPs (CloudFront 403), so we fall back to Binance which is
+    accessible from datacenter ranges.
+    """
+    rows = None
+    last_error = None
+    for exchange_name in ("bybit", "binance"):
+        try:
+            import ccxt
+
+            ex = getattr(ccxt, exchange_name)({"enableRateLimit": True})
+            since = ex.parse8601(
+                (pd.Timestamp.now("UTC") - pd.Timedelta(hours=48)).strftime(
+                    "%Y-%m-%dT%H:%M:%SZ"
                 )
-            except Exception as exc:
-                print(f"  {asset} {tf}: fetch error {exc}")
+            )
+            batch_rows = []
+            remaining = True
+            while remaining and len(batch_rows) < 500:
+                try:
+                    batch = ex.fetch_ohlcv(
+                        f"{asset}/USDT", timeframe=tf, since=since, limit=200
+                    )
+                except Exception as exc:
+                    last_error = f"{exchange_name} {tf}: fetch error {exc}"
+                    break
+                if not batch:
+                    remaining = False
+                    break
+                batch_rows.extend(batch)
+                last = batch[-1][0]
+                if last <= since:
+                    break
+                since = last + 1
+                time.sleep(ex.rateLimit / 1000)
+            if batch_rows:
+                rows = batch_rows
                 break
-            if not batch:
-                remaining = False
-                break
-            rows.extend(batch)
-            last = batch[-1][0]
-            if last <= since:
-                break
-            since = last + 1
-            time.sleep(ex.rateLimit / 1000)
-    except Exception as exc:
-        print(f"  {asset} {tf}: ERROR {type(exc).__name__}: {exc}")
-        return None
+        except ImportError:
+            continue
+        except Exception as exc:
+            last_error = f"{exchange_name} {tf}: ERROR {type(exc).__name__}: {exc}"
+            continue
 
     if not rows:
-        print(f"  {asset} {tf}: no rows returned")
+        print(f"  {asset} {tf}: all exchanges failed ({last_error})")
         return None
 
     new = pd.DataFrame(
