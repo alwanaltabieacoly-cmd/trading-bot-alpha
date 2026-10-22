@@ -1,0 +1,283 @@
+{
+  "BTC/USDT": {
+    "asof": "2026-10-22T23:49:48.118147+00:00",
+    "pair": "BTC/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -3,
+    "regime": "range",
+    "regime_tf": "4h",
+    "fng": {
+      "value": 55,
+      "classification": "Greed",
+      "date": "2026-10-17",
+      "source": "csv"
+    },
+    "fng_7d_change": -9,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-22T23:49:48.118147+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "BTC/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 81967.7,
+              "ema50": 82279.700056,
+              "ema200": 82007.420868,
+              "ema50_slope": -0.033032,
+              "dist_to_high20_pct": -1.439431,
+              "dist_to_low20_pct": 1.607015,
+              "atr_pct_14": 0.917896,
+              "volume_z_48": -0.843716,
+              "regime": "range"
+            },
+            "1d": {
+              "available": true,
+              "close": 81967.7,
+              "ema50": 80585.299924,
+              "ema200": 75968.551343,
+              "ema50_slope": 0.357451,
+              "dist_to_high20_pct": -6.060995,
+              "dist_to_low20_pct": 2.720278,
+              "atr_pct_14": 2.521124,
+              "volume_z_48": 1.538311,
+              "regime": "bull"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-20T13:01:58.273142+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.72,
+      "rationale": "Bearish 5m-1h with falling EMA slopes; 4h range near 20-bar low and account risk unknown."
+    },
+    "blockers": [
+      "deliberation=block: Bearish 5m-1h with falling EMA slopes; 4h range near 20-bar low and account risk unknown."
+    ]
+  },
+  "ETH/USDT": {
+    "asof": "2026-10-22T23:49:48.556036+00:00",
+    "pair": "ETH/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -5,
+    "regime": "bear",
+    "regime_tf": "4h",
+    "fng": {
+      "value": 55,
+      "classification": "Greed",
+      "date": "2026-10-17",
+      "source": "csv"
+    },
+    "fng_7d_change": -9,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-22T23:49:48.556036+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "ETH/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 2408.45,
+              "ema50": 2449.001335,
+              "ema200": 2520.290645,
+              "ema50_slope": -0.359882,
+              "dist_to_high20_pct": -1.564537,
+              "dist_to_low20_pct": 3.415776,
+              "atr_pct_14": 1.586824,
+              "volume_z_48": -1.154087,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 2408.44,
+              "ema50": 2483.389361,
+              "ema200": 2313.996223,
+              "ema50_slope": -0.590628,
+              "dist_to_high20_pct": -13.309337,
+              "dist_to_low20_pct": 3.901639,
+              "atr_pct_14": 4.215444,
+              "volume_z_48": -0.031657,
+              "regime": "bull"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-20T13:01:58.273142+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.85,
+      "rationale": "Bearish alignment across 5m-4h, price below EMA200 on all intraday frames, heavy 1h downside slope and thin bid depth."
+    },
+    "blockers": [
+      "regime=bear (4h)",
+      "deliberation=block: Bearish alignment across 5m-4h, price below EMA200 on all intraday frames, heavy 1h downside slope and thin bid depth."
+    ]
+  },
+  "SOL/USDT": {
+    "asof": "2026-10-22T23:49:48.674787+00:00",
+    "pair": "SOL/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -5,
+    "regime": "bear",
+    "regime_tf": "4h",
+    "fng": {
+      "value": 55,
+      "classification": "Greed",
+      "date": "2026-10-17",
+      "source": "csv"
+    },
+    "fng_7d_change": -9,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-22T23:49:48.674787+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "SOL/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 105.08,
+              "ema50": 106.124754,
+              "ema200": 109.187641,
+              "ema50_slope": -0.293482,
+              "dist_to_high20_pct": -1.091867,
+              "dist_to_low20_pct": 4.650931,
+              "atr_pct_14": 1.82446,
+              "volume_z_48": -0.059099,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 105.07,
+              "ema50": 106.816591,
+              "ema200": 97.889839,
+              "ema50_slope": -0.477055,
+              "dist_to_high20_pct": -15.115528,
+              "dist_to_low20_pct": 4.640972,
+              "atr_pct_14": 4.848468,
+              "volume_z_48": -0.258454,
+              "regime": "bull"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-20T13:01:58.273142+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.82,
+      "rationale": "Bearish 5m/1h/4h, 1m data unavailable, wide spread; no long confirmation."
+    },
+    "blockers": [
+      "regime=bear (4h)",
+      "deliberation=block: Bearish 5m/1h/4h, 1m data unavailable, wide spread; no long confirmation."
+    ]
+  },
+  "AAPL": {
+    "asof": "2026-10-22T23:49:48.819651+00:00",
+    "pair": "AAPL",
+    "equity": true,
+    "verdict": "NO-GO",
+    "score": 0,
+    "regime": null,
+    "regime_tf": null,
+    "fng": {
+      "value": 55,
+      "classification": "Greed",
+      "date": "2026-10-17",
+      "source": "csv"
+    },
+    "fng_7d_change": -9,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-22T23:49:48.819651+00:00",
+      "live_orderbook": false,
+      "pairs": {
+        "AAPL": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": false
+            }
+          }
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-20T13:01:58.273142+00:00",
+      "action": null,
+      "size": null,
+      "confidence": null,
+      "rationale": null
+    },
+    "blockers": []
+  }
+}
