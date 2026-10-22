@@ -1,0 +1,75 @@
+name: Warmup
+
+# Runs the Trade Agent warmup before the US market open (14:45 UTC = 9:45 AM ET).
+# Produces GO/NO-GO verdicts per pair with full citations.
+# Writes to reports/warmup/ -- the human (or TradingView alert) triggers trades.
+#
+# This is the "read the news and check the chart" step.  It never places orders.
+
+on:
+  schedule:
+    - cron: "45 14 * * 1-5"   # Mon-Fri, 14:45 UTC = 9:45 AM ET
+  workflow_dispatch:
+    inputs:
+      all:
+        description: "Include AAPL equity"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  warmup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ccxt pandas numpy pyarrow requests
+
+      - name: Run warmup
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          FLAGS="--all"
+          python run_warmup.py $FLAGS
+
+      - name: Commit warmup report
+        run: |
+          git config user.name "warmup-bot"
+          git config user.email "warmup-bot@users.noreply.github.com"
+          git add research/reports/warmup/
+          if git diff --staged --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "warmup: run $(date -u +%Y-%m-%d_%H%M)"
+            git push
+          fi
+
+      - name: Summary
+        run: |
+          echo "### Warmup complete" >> $GITHUB_STEP_SUMMARY
+          python -c "
+          import json, os, glob
+          wdir = 'research/reports/warmup'
+          files = sorted(glob.glob(f'{wdir}/*.json'), reverse=True)
+          if not files:
+              print('no reports')
+          else:
+              with open(files[0]) as f:
+                  data = json.load(f)
+              for pair, r in data.items():
+                  print(f'- {pair}: {r[\"verdict\"]} (score={r[\"score\"]})')
+          " >> $GITHUB_STEP_SUMMARY
