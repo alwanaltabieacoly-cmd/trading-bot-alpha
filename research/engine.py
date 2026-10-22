@@ -21,8 +21,10 @@ def to_position(signal):
     return pos
 
 
-def backtest(df, signal, cost_per_side=config.COST_PER_SIDE):
+def backtest(df, signal, cost_per_side=None):
     """Return (per-bar returns, position, trades)."""
+    if cost_per_side is None:
+        cost_per_side = config.COST_PER_SIDE
     close = df["close"].to_numpy(dtype="float64")
     n = len(close)
     if n < 3:
@@ -40,7 +42,9 @@ def backtest(df, signal, cost_per_side=config.COST_PER_SIDE):
     return net, pos, trades
 
 
-def buy_and_hold(df, cost_per_side=config.COST_PER_SIDE):
+def buy_and_hold(df, cost_per_side=None):
+    if cost_per_side is None:
+        cost_per_side = config.COST_PER_SIDE
     close = df["close"].to_numpy(dtype="float64")
     n = len(close)
     pos = np.zeros(n)
@@ -90,11 +94,12 @@ def metrics(returns, periods_per_year):
     }
 
 
-def evaluate(df, signal, timeframe, mask=None):
+def evaluate(df, signal, timeframe, mask=None, symbol=None):
     """Backtest a signal over an optional boolean mask of bars."""
-    net, pos, trades = backtest(df, signal)
-    bh, bh_trades = buy_and_hold(df)
-    ppy = config.PERIODS_PER_YEAR[timeframe]
+    cost = config.cost_per_side(symbol) if symbol else config.COST_PER_SIDE
+    net, pos, trades = backtest(df, signal, cost_per_side=cost)
+    bh, bh_trades = buy_and_hold(df, cost_per_side=cost)
+    ppy = config.periods_per_year(symbol, timeframe) if symbol else config.PERIODS_PER_YEAR[timeframe]
     m = metrics(net if mask is None else net[mask], ppy)
     b = metrics(bh if mask is None else bh[mask], ppy)
     m["trades"] = trades

@@ -54,6 +54,11 @@ def main(argv=None):
     parser.add_argument("--api-url", default=None)
     parser.add_argument("--live-orderbook", action="store_true")
     parser.add_argument("--anonymize", action="store_true")
+    parser.add_argument(
+        "--single-agent",
+        action="store_true",
+        help="Skip the multi-agent deliberation layer (analyst only).",
+    )
     args = parser.parse_args(argv)
 
     pairs = parse_pairs(args.pairs)
@@ -61,19 +66,37 @@ def main(argv=None):
     live = args.asof is None
     asof_dt = common.utc_now() if live else common.parse_utc(args.asof)
 
-    decision = decision_agent.decide(
-        pairs,
-        asof_dt,
-        use_llm=use_llm,
-        api_url=args.api_url,
-        live_orderbook=args.live_orderbook,
-        anonymize=args.anonymize,
-    )
+    blackboard = None
+    if args.single_agent:
+        decision = decision_agent.decide(
+            pairs,
+            asof_dt,
+            use_llm=use_llm,
+            api_url=args.api_url,
+            live_orderbook=args.live_orderbook,
+            anonymize=args.anonymize,
+        )
+    else:
+        # Full multi-agent path: analyst -> risk -> critic -> synthesizer -> auditor.
+        # Deliberation is the default because the critic/auditor veto layer is the
+        # point of this system; --single-agent is the explicit opt-out.
+        from . import deliberate as deliberate_mod
+
+        decision, blackboard = deliberate_mod.run(
+            pairs,
+            asof_dt,
+            use_llm=use_llm,
+            api_url=args.api_url,
+            live_orderbook=args.live_orderbook,
+            anonymize=args.anonymize,
+        )
 
     generated_at = common.iso_utc(common.utc_now())
     record = build_record(
         decision, pairs, use_llm, args.live_orderbook, generated_at, anonymize=args.anonymize
     )
+    if blackboard is not None:
+        record["deliberation"] = blackboard.to_dict()
     common.DECISIONS_DIR.mkdir(parents=True, exist_ok=True)
     out_path = common.DECISIONS_DIR / (asof_dt.strftime("%Y-%m-%d_%H%M") + ".json")
     with open(out_path, "w", encoding="utf-8") as fh:
@@ -99,6 +122,8 @@ def main(argv=None):
             f"- {item.get('rationale', '')}"
         )
     print(f"wrote {out_path}")
+    if blackboard is not None:
+        print(f"deliberation rounds: {sorted(blackboard.rounds.keys())}")
     return 0
 
 

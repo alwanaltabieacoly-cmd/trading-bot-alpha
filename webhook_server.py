@@ -7,6 +7,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 import json, hmac, hashlib, os
+from typing import Optional
 
 app = FastAPI(title="TradingView Bridge")
 
@@ -26,6 +27,44 @@ class TVAlert(BaseModel):
     strategy: str = "sma200"
     confidence: float = 0.5
     secret: str = ""
+
+
+# --- strategy-aware routing -----------------------------------------------
+# Two strategy families:
+#   sma200  - crypto trend-following (BTC/ETH/SOL/BNB/XRP, 1D/4H)
+#   scalp   - equity mean-reversion (AAPL, 1M) from TradingView chart work
+# Crypto uses the multi-agent deliberation gate. Equity uses a built-in
+# guard (daily loss limit + known strategy) since there is no deliberation
+# cycle for equities yet.
+SCALP_STRATEGIES = {"aapl_scalp_trend", "aapl_scalp_reversion", "scalp"}
+EQUITY_SYMBOLS = {"AAPL", "MSFT", "GOOG", "TSLA", "SPY", "QQQ"}
+SCALP_DAILY_LOSS_LIMIT = 5.0
+
+
+def _is_equity(alert):
+    sym = alert.symbol.upper()
+    return sym in EQUITY_SYMBOLS or "/" not in sym
+
+
+def _scalp_guard(state, alert):
+    if alert.strategy not in SCALP_STRATEGIES:
+        return False, f"unknown scalp strategy: {alert.strategy}"
+    today = datetime.now(timezone.utc).date().isoformat()
+    daily_pnl = 0.0
+    if LOG_PATH.exists():
+        for line in LOG_PATH.read_text().strip().splitlines():
+            try:
+                t = json.loads(line)
+            except Exception:
+                continue
+            if t.get("ts", "").startswith(today) and t.get("pnl") is not None:
+                daily_pnl += float(t["pnl"])
+    if daily_pnl <= -SCALP_DAILY_LOSS_LIMIT:
+        return False, (
+            f"daily loss limit hit: {daily_pnl:.2f} <= "
+            f"-{SCALP_DAILY_LOSS_LIMIT:.2f}"
+        )
+    return True, f"daily P&L {daily_pnl:.2f} within limit"
 
 
 def _latest_decision():
@@ -111,10 +150,16 @@ async def tv_webhook(alert: TVAlert, x_tv_secret: str = Header(default="")):
     result = {"ts": ts, "alert": alert.model_dump(), "executed": False, "reason": ""}
 
     symbol = alert.symbol
+    is_equity = _is_equity(alert)
     pos = state["positions"].get(symbol, {"qty": 0.0, "avg": 0.0})
 
     if alert.action == "buy":
-        allowed, reason = _veto_check(symbol, "buy")
+        if is_equity:
+            allowed, reason = _scalp_guard(state, alert)
+            result["route"] = "scalp"
+        else:
+            allowed, reason = _veto_check(symbol, "buy")
+            result["route"] = "deliberation"
         if not allowed:
             result["reason"] = reason
             _save_state(state)
@@ -130,9 +175,12 @@ async def tv_webhook(alert: TVAlert, x_tv_secret: str = Header(default="")):
             result["cash"] = state["cash"]
             result["positions"] = state["positions"]
             return result
-        # size: 10% of equity per trade, capped by cash
-        stake = min(state["cash"] * 0.10, state["cash"])
-        qty = stake / alert.price if alert.price > 0 else 0
+        # TradingView can override with an explicit qty (shares).
+        if alert.qty is not None and alert.qty > 0:
+            qty = float(alert.qty)
+        else:
+            stake = min(state["cash"] * 0.10, state["cash"])
+            qty = stake / alert.price if alert.price > 0 else 0
         if qty <= 0:
             result["reason"] = "zero qty"
         else:

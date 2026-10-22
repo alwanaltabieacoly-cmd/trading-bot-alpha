@@ -1,0 +1,185 @@
+{
+  "BTC/USDT": {
+    "asof": "2026-10-22T21:15:38.287565+00:00",
+    "pair": "BTC/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -3,
+    "regime": null,
+    "regime_tf": null,
+    "fng": {
+      "value": 55,
+      "classification": "Greed",
+      "date": "2026-10-17",
+      "source": "csv"
+    },
+    "fng_7d_change": -9,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-22T21:15:38.287565+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "BTC/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": false
+            }
+          },
+          "orderbook": {
+            "spread_pct": 0.000123,
+            "bid_depth_1pct_usdt": 679837.74,
+            "ask_depth_1pct_usdt": 406702.62
+          }
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-21T05:00:00+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "blockers": [
+      "deliberation=block: synthesizer: blocked (analyst=block, critic=block)"
+    ]
+  },
+  "ETH/USDT": {
+    "asof": "2026-10-22T21:15:44.962942+00:00",
+    "pair": "ETH/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -3,
+    "regime": null,
+    "regime_tf": null,
+    "fng": {
+      "value": 55,
+      "classification": "Greed",
+      "date": "2026-10-17",
+      "source": "csv"
+    },
+    "fng_7d_change": -9,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-22T21:15:44.962942+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "ETH/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": false
+            }
+          },
+          "orderbook": {
+            "spread_pct": 0.000418,
+            "bid_depth_1pct_usdt": 275002.67,
+            "ask_depth_1pct_usdt": 368447.86
+          }
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-21T05:00:00+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "blockers": [
+      "deliberation=block: synthesizer: blocked (analyst=block, critic=block)"
+    ]
+  },
+  "SOL/USDT": {
+    "asof": "2026-10-22T21:15:50.149152+00:00",
+    "pair": "SOL/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -3,
+    "regime": null,
+    "regime_tf": null,
+    "fng": {
+      "value": 55,
+      "classification": "Greed",
+      "date": "2026-10-17",
+      "source": "csv"
+    },
+    "fng_7d_change": -9,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-22T21:15:50.149152+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "SOL/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": false
+            }
+          },
+          "orderbook": {
+            "spread_pct": 0.009626,
+            "bid_depth_1pct_usdt": 1739171.09,
+            "ask_depth_1pct_usdt": 1161170.57
+          }
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-21T05:00:00+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "blockers": [
+      "deliberation=block: synthesizer: blocked (analyst=block, critic=block)"
+    ]
+  }
+}

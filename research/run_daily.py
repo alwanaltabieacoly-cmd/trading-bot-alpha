@@ -87,8 +87,8 @@ def eval_candidate(cid, params, fn, frames, train_end, holdout_start):
                 signal = pd.Series(np.asarray(signal, dtype=bool), index=df.index)
 
             net, pos, _ = engine.backtest(df, signal)
-            tr = engine.evaluate(df, signal, tf, mask=train_m)
-            hd = engine.evaluate(df, signal, tf, mask=hold_m)
+            tr = engine.evaluate(df, signal, tf, mask=train_m, symbol=asset)
+            hd = engine.evaluate(df, signal, tf, mask=hold_m, symbol=asset)
             per_asset[f"{asset}_{tf}"] = {"train": tr, "holdout": hd}
             n_obs = max(n_obs, tr["bars"])
 
@@ -209,11 +209,20 @@ def main(argv=None):
     else:
         print("\n[1/6] using cached data (--no-fetch)")
 
+    # Crypto frames
     frames = []
     for a in config.ASSETS:
         for tf in config.TIMEFRAMES:
             df = data.load(a, tf)
             if df is None or len(df) < 300:
+                print(f"  WARNING: no usable data for {a} {tf}")
+                continue
+            frames.append((a, tf, df))
+    # Equity frames (TradingView integration)
+    for a in config.EQUITY_ASSETS:
+        for tf in config.EQUITY_TIMEFRAMES:
+            df = data.load(a, tf)
+            if df is None or len(df) < 30:
                 print(f"  WARNING: no usable data for {a} {tf}")
                 continue
             frames.append((a, tf, df))
@@ -387,6 +396,8 @@ def main(argv=None):
         "config": {
             "assets": config.ASSETS,
             "timeframes": config.TIMEFRAMES,
+            "equity_assets": config.EQUITY_ASSETS,
+            "equity_timeframes": config.EQUITY_TIMEFRAMES,
             "fee_per_side": config.FEE_PER_SIDE,
             "slippage_per_side": config.SLIPPAGE_PER_SIDE,
             "train_end": train_end,

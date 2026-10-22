@@ -8,6 +8,28 @@ from datetime import datetime, timezone
 # --- market ---------------------------------------------------------------
 EXCHANGE = "bybit"
 ASSETS = ["BTC", "ETH", "SOL", "BNB", "XRP"]
+
+# --- equity assets (TradingView integration) ------------------------------
+# These are fetched from Yahoo Finance (free, no API key) and backtested
+# alongside the crypto universe. The 1m AAPL scalp is the bridge between
+# the TradingView chart work and the GitHub research harness.
+EQUITY_ASSETS = ["AAPL"]
+EQUITY_TIMEFRAMES = ["1m", "5m", "15m", "1h", "1d"]
+
+# --- costs (equity, US market standard) -----------------------------------
+# AAPL on 1m: $0.01-$0.02 spread, ~$0.005 per share commission.
+# Modelled conservatively as 0.05% per side (spread + commission + slippage).
+EQUITY_COST_PER_SIDE = 0.0005
+
+# --- periods --------------------------------------------------------------
+# 1m intraday has 390 trading bars/day x 252 trading days.
+PERIODS_PER_YEAR_EQUITY = {
+    "1m": 390 * 252,
+    "5m": 78 * 252,
+    "15m": 26 * 252,
+    "1h": 6.5 * 252,
+    "1d": 252,
+}
 TIMEFRAMES = ["1d", "4h"]
 
 # --- costs (Bybit spot standard tier) -------------------------------------
@@ -74,3 +96,20 @@ for _d in (DATA_DIR, REPORT_DIR, STATE_DIR, LOG_DIR):
 
 def now_iso():
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
+
+
+def cost_per_side(symbol):
+    """Return the per-side cost for a given symbol.
+    Crypto uses Bybit's taker fee + slippage. Equities use a spread +
+    commission model appropriate to the timeframe.
+    """
+    if symbol in EQUITY_ASSETS:
+        return EQUITY_COST_PER_SIDE
+    return COST_PER_SIDE
+
+
+def periods_per_year(symbol, timeframe):
+    """Pick the right bar count for the asset class."""
+    if symbol in EQUITY_ASSETS:
+        return PERIODS_PER_YEAR_EQUITY.get(timeframe, 252)
+    return PERIODS_PER_YEAR.get(timeframe, 365)

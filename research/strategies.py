@@ -150,6 +150,51 @@ def sma_trend_efficiency(df, period=200, er_n=30, er_min=0.25):
     return np.where(np.isnan(s), False, s)
 
 
+# --- equity scalp strategies (TradingView integration) --------------------
+def aapl_scalp_trend(df, sma_period=200, ema_period=9, rsi_period=14, rsi_max=50):
+    """1-min AAPL scalp: enter long when price > SMA200 (uptrend),
+    RSI < 50 (not overbought), and EMA9 is turning up (bounce).
+    This is the bar-level approximation of the TradingView scalp rules
+    in SCALP_STRATEGY.md. The intrabar TP/SL ($0.50/$0.75) cannot be
+    modelled in a position-only backtest, so the edge here is the trend
+    filter + pullback entry, which is what actually decides whether to
+    be in the market at all.
+    """
+    close = df["close"]
+    sma = _sma(close, sma_period)
+    ema = _ema(close, ema_period)
+    rsi = _rsi(close, rsi_period)
+
+    uptrend = close > sma
+    not_overbought = rsi < rsi_max
+    ema_rising = ema > ema.shift(1)
+
+    entry = uptrend & not_overbought & ema_rising
+    return entry.fillna(False)
+
+
+def aapl_scalp_reversion(df, ema_period=9, rsi_oversold=30, rsi_overbought=70):
+    """Mean-reversion scalp: enter when RSI dips below oversold and
+    price bounces off EMA9. Exit when RSI reaches overbought.
+    Works on the 1m AAPL chart where mean reversion dominates
+    over trend-following inside the day.
+    """
+    close = df["close"]
+    ema = _ema(close, ema_period)
+    rsi = _rsi(close, 14)
+
+    oversold = rsi < rsi_oversold
+    ema_rising = ema > ema.shift(1)
+    entry = oversold & ema_rising
+
+    overbought = rsi > rsi_overbought
+    exit_sig = overbought & (ema < ema.shift(1))
+
+    pos = entry.copy()
+    pos[exit_sig] = False
+    return pos.fillna(False).astype(bool)
+
+
 # --------------------------------------------------------------------------
 # registry
 # --------------------------------------------------------------------------
@@ -246,6 +291,32 @@ REGISTRY = [
             "er_min": [0.2, 0.3],
         },
         sma_trend_efficiency,
+    ),
+    # --- equity scalp families (TradingView integration) -------------------
+    # These are the bar-level approximation of the AAPL 1m scalp rules.
+    # The intrabar TP/SL cannot be modelled in a position-only backtest,
+    # so the edge tested here is the trend filter + entry logic, which is
+    # what actually decides whether to be in the market at all.
+    (
+        "aapl_scalp_trend",
+        "1m AAPL: close > SMA200 + RSI < 50 + EMA9 rising",
+        {
+            "sma_period": [200],
+            "ema_period": [9, 21],
+            "rsi_period": [14],
+            "rsi_max": [45, 50, 55],
+        },
+        aapl_scalp_trend,
+    ),
+    (
+        "aapl_scalp_reversion",
+        "1m AAPL: RSI oversold + EMA9 bounce, exit on overbought",
+        {
+            "ema_period": [9, 21],
+            "rsi_oversold": [25, 30, 35],
+            "rsi_overbought": [65, 70, 75],
+        },
+        aapl_scalp_reversion,
     ),
 ]
 

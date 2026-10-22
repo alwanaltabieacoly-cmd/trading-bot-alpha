@@ -65,13 +65,31 @@ def rnd(value, nd=6):
 
 
 def load_candles(pair, tf, asof):
+    """Load cached candles for a pair/timeframe.
+
+    Primary source: feather cache under user_data/data/bybit/ (legacy).
+    Fallback: parquet cache under research/data/ (the canonical data layer
+    maintained by research/data.py).  The fallback is what actually runs
+    today -- the feather files were never populated.
+    """
     path = DATA_DIR / f"{pair_to_base(pair)}-{tf}.feather"
-    if not path.exists():
-        return None
-    try:
-        df = pd.read_feather(path)
-    except Exception:
-        return None
+    df = None
+    if path.exists():
+        try:
+            df = pd.read_feather(path)
+        except Exception:
+            df = None
+
+    if df is None or df.empty:
+        try:
+            from research import data as _rdata
+            # The research cache stores files as <BASE>_<tf>.parquet
+            # (e.g. BTC_1d.parquet), not <BASE_QUOTE>_<tf>.parquet.
+            base = pair.split("/")[0].split("-")[0]
+            df = _rdata.load(base, tf)
+        except Exception:
+            df = None
+
     if df is None or df.empty or "date" not in df.columns:
         return None
     df = df.copy()

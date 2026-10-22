@@ -70,3 +70,89 @@ def run(pairs, asof, use_llm=True, api_url=None, live_orderbook=False, anonymize
     decision["pairs"] = decision_pairs
     decision["deliberation"] = b.to_dict()
     return decision, b
+
+
+# --- CLI entrypoint -------------------------------------------------------
+# The GitHub Actions workflow calls `python -m agents.deliberate`. Without this
+# block Python imports the module and exits 0 without running anything, so the
+# workflow reported "success" every cycle while producing zero decisions.
+def main(argv=None):
+    import argparse
+    import json
+
+    parser = argparse.ArgumentParser(prog="python -m agents.deliberate")
+    parser.add_argument("--pairs", default=None)
+    parser.add_argument("--asof", default=None)
+    parser.add_argument("--no-llm", action="store_true")
+    parser.add_argument("--api-url", default=None)
+    parser.add_argument("--live-orderbook", action="store_true")
+    parser.add_argument("--anonymize", action="store_true")
+    args = parser.parse_args(argv)
+
+    # Reuse run_cycle's pair parsing / config whitelist logic.
+    from .run_cycle import default_pairs, parse_pairs
+
+    pairs = parse_pairs(args.pairs)
+    use_llm = not args.no_llm
+    live = args.asof is None
+    asof_dt = common.utc_now() if live else common.parse_utc(args.asof)
+
+    decision, b = run(
+        pairs,
+        asof_dt,
+        use_llm=use_llm,
+        api_url=args.api_url,
+        live_orderbook=args.live_orderbook,
+        anonymize=args.anonymize,
+    )
+
+    generated_at = common.iso_utc(common.utc_now())
+    common.DECISIONS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = common.DECISIONS_DIR / (asof_dt.strftime("%Y-%m-%d_%H%M") + ".json")
+    record = {
+        "asof": decision["asof"],
+        "generated_at": generated_at,
+        "pairs": list(pairs),
+        "live_orderbook": bool(args.live_orderbook),
+        "use_llm": bool(use_llm),
+        "anonymize": bool(args.anonymize),
+        "inputs": decision["reports"],
+        "prompts": decision["prompts"],
+        "raw": decision["raw"],
+        "model": decision["model"],
+        "decision": {
+            "source": decision["source"],
+            "followups": decision["followups"],
+            "pairs": decision["pairs"],
+        },
+        "deliberation": b.to_dict(),
+    }
+    with open(out_path, "w", encoding="utf-8") as fh:
+        json.dump(record, fh, indent=2, default=str)
+
+    if live:
+        common.LATEST_DECISION_PATH.parent.mkdir(parents=True, exist_ok=True)
+        latest = {
+            "asof": decision["asof"],
+            "generated_at": generated_at,
+            "source": decision["source"],
+            "pairs": decision["pairs"],
+        }
+        with open(common.LATEST_DECISION_PATH, "w", encoding="utf-8") as fh:
+            json.dump(latest, fh, indent=2, default=str)
+
+    for pair in pairs:
+        item = decision["pairs"].get(pair, {})
+        print(
+            f"{pair} {item.get('action', 'block')} "
+            f"size={item.get('size', 0.0)} "
+            f"conf={item.get('confidence', 0.0)} "
+            f"- {item.get('rationale', '')}"
+        )
+    print(f"wrote {out_path}")
+    print(f"deliberation rounds: {sorted(b.rounds.keys())}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
