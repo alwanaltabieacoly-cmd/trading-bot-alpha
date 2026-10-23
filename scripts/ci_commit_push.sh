@@ -7,6 +7,10 @@
 # - Push rejected   -> another job/machine pushed first: rebase onto the remote
 #                      branch and retry (max 3 attempts). Never force-pushes,
 #                      so commits from other workflows or your PC are never lost.
+# - Unstaged files  -> autostashed around the rebase. Without --autostash the
+#                      rebase aborts ("You have unstaged changes") and the run
+#                      loses its commit; that happened 2026-10-23 when Daily
+#                      learning and Deliberate pushed at the same second.
 # - Rebase conflict -> fails loudly (non-zero) so a human looks at it.
 set -euo pipefail
 
@@ -26,7 +30,7 @@ for attempt in 1 2 3; do
     exit 0
   fi
   echo "push rejected (attempt ${attempt}/3) - rebasing onto origin/${branch} and retrying"
-  git pull --rebase origin "${branch}"
+  git pull --rebase --autostash origin "${branch}"
 done
 
 echo "::error::push failed after 3 attempts"
