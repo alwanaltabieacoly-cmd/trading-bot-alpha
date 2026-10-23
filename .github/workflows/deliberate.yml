@@ -63,7 +63,11 @@ jobs:
         run: |
           git config user.name "deliberation-bot"
           git config user.email "deliberation-bot@users.noreply.github.com"
-          git add reports/decisions user_data/decisions 2>/dev/null || true
+          # user_data/decisions/ is in .gitignore, so plain `git add` silently
+          # skips it - and that is exactly the file the Render webhook reads
+          # (webhook_server.py: LATEST_DECISION_PATH). Force-add it.
+          git add reports/decisions
+          git add -f user_data/decisions/latest.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "nothing to commit"
           else
