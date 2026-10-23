@@ -197,12 +197,14 @@ def build_markdown(payload):
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="scripts/daily_brief.py")
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--out", default=None,
+                        help="explicit output path (default: research/reports/brief/<date>.md)")
     args = parser.parse_args(argv)
     payload = collect()
     markdown = build_markdown(payload)
     if args.write:
-        BRIEF_DIR.mkdir(parents=True, exist_ok=True)
-        path = BRIEF_DIR / f"{payload['date']}.md"
+        path = Path(args.out) if args.out else BRIEF_DIR / f"{payload['date']}.md"
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(markdown, encoding="utf-8")
         print(f"wrote {path}")
     print(markdown)

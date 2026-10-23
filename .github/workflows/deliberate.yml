@@ -113,9 +113,14 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          python scripts/daily_brief.py --write
+          # Timestamped: the EOD learning brief and this midday brief must never
+          # fight over the same tracked file (that caused a rebase conflict).
+          STAMP="$(date -u +%Y-%m-%d_%H%M)"
+          BRIEF="research/reports/brief/${STAMP}.md"
+          python scripts/daily_brief.py --write --out "$BRIEF"
+          echo "BRIEF_PATH=$BRIEF" >> "$GITHUB_ENV"
           echo "" >> "$GITHUB_STEP_SUMMARY"
-          tail -n 40 "research/reports/brief/$(date -u +%Y-%m-%d).md" >> "$GITHUB_STEP_SUMMARY" || true
+          tail -n 40 "$BRIEF" >> "$GITHUB_STEP_SUMMARY" || true
 
       - name: Commit decisions
         if: env.RUN_NOW == '1'
