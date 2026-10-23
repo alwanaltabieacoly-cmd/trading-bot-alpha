@@ -29,16 +29,28 @@ from research import config, data
 WARMUP_TFS = ["1h", "4h", "1d"]
 
 
+# Per-exchange pair format.  Most use BTC/USDT but Kraken, Bitstamp and
+# Coinbase use USD or USD-margined variants.
+PAIR_FORMAT = {
+    "bybit": "{base}/USDT",
+    "binance": "{base}/USDT",
+    "kraken": "{base}/USD",
+    "bitstamp": "{base}USD",
+    "coinbase": "{base}-USD",
+    "kucoin": "{base}/USDT",
+    "okx": "{base}/USDT",
+}
+
 def fetch_one(asset, tf):
     """Fetch the latest bars for asset/tf and merge into the parquet cache.
 
-    Tries exchanges in order until one works.  Bybit geo-blocks GitHub
-    runner IPs (CloudFront 403), so we fall back to Binance which is
-    accessible from datacenter ranges.
+    Tries exchanges in order until one works.  Bybit and Binance both
+    geo-block GitHub runner IPs (CloudFront 403, 451).  Kraken, Bitstamp,
+    Coinbase, Kucoin and OKx are tested and reachable.
     """
     rows = None
     last_error = None
-    for exchange_name in ("bybit", "binance"):
+    for exchange_name in ("bybit", "kraken", "bitstamp", "coinbase", "kucoin", "okx"):
         try:
             import ccxt
 
@@ -53,7 +65,8 @@ def fetch_one(asset, tf):
             while remaining and len(batch_rows) < 500:
                 try:
                     batch = ex.fetch_ohlcv(
-                        f"{asset}/USDT", timeframe=tf, since=since, limit=200
+                        PAIR_FORMAT[exchange_name].format(base=asset),
+                        timeframe=tf, since=since, limit=200
                     )
                 except Exception as exc:
                     last_error = f"{exchange_name} {tf}: fetch error {exc}"
