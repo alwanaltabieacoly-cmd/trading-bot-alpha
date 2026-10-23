@@ -48,12 +48,29 @@ jobs:
         run: |
           python run_outcome.py --all
 
+      - name: Tune scoring weights from outcome history
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python -c "
+from agents import feature_engine
+result, n = feature_engine.tune_weights()
+if result:
+    print(f'Tuned {len(result)} weights from {n} samples')
+    for k, v in sorted(result.items()):
+        print(f'  {k}: {v}')
+else:
+    print(f'Not enough samples to tune ({n}/20 needed)')
+"
+
       - name: Commit outcome log
         run: |
           git config user.name "outcome-bot"
           git config user.email "outcome-bot@users.noreply.github.com"
           git add research/reports/warmup/outcome_log.jsonl
           git add research/reports/warmup/
+          git add research/reports/verdicts/
+          git add user_data/feature_weights.json
           if git diff --staged --quiet; then
             echo "nothing to commit"
           else

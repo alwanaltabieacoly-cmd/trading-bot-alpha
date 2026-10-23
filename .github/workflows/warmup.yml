@@ -62,6 +62,20 @@ jobs:
         run: |
           python run_warmup.py --all
 
+      - name: Scan for most profitable pairs
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python asset_scanner.py --top 15 --json > research/reports/asset_scan.json
+          echo "### Top pairs by profitability" >> $GITHUB_STEP_SUMMARY
+          python -c "
+import json
+with open('research/reports/asset_scan.json') as f:
+    results = json.load(f)
+for i, r in enumerate(results[:5]):
+    print(f'{i+1}. {r[\"pair\"]}: score={r[\"profit_score\"]:+.4f}  momentum={r[\"momentum\"]:+.4f}  close={r[\"close\"]}')
+" >> $GITHUB_STEP_SUMMARY
+
       - name: Commit warmup report
         run: |
           git config user.name "warmup-bot"
