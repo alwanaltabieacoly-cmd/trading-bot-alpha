@@ -6,6 +6,11 @@ name: Scan IC
 # (score-based only where the IC is predictive).
 #
 # Runs on a clean runner with no PC involvement.
+#
+# Failure contract (no silent passes):
+#   * the refresh step has no `|| true` -- a failed refresh fails the job
+#   * the measurement step fails the job if any class returns zero snapshots,
+#     because "insufficient" is a measurement failure, not a finding
 
 on:
   schedule:
@@ -42,12 +47,18 @@ jobs:
       - name: Refresh universe data
         env:
           PYTHONPATH: ${{ github.workspace }}
-        run: python -m agents.universe --refresh --max 24 --days 400 || true
+        # No `|| true`: a failed refresh must fail this job, not silently
+        # produce an empty cache that the measurement then reports as
+        # "insufficient".
+        run: python -m agents.universe --refresh --max 24 --days 400
 
       - name: Measure scan information coefficient
         env:
           PYTHONPATH: ${{ github.workspace }}
-        run: python scripts/scan_ic.py --write
+        # Fails the job if every class comes back with zero snapshots. That
+        # outcome means the measurement is broken, never that the signal has
+        # no evidence -- and it must be red, not a green run with a caveat.
+        run: python scripts/scan_ic.py --write --require-snapshots
 
       - name: Regenerate shortlist with IC verdict
         env:

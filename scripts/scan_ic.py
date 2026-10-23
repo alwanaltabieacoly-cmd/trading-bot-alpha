@@ -83,26 +83,32 @@ def _load_class(asset_class):
 
 
 def snapshots(asset_class, data):
-    """Yield (date, scores dict, forward returns dict) using only past data."""
+    """Yield (date, scores dict, forward returns dict) using only past data.
+
+    The timestamp axis comes from the symbol with the longest history, not from
+    the intersection of every symbol's dates. A global intersection collapses as
+    soon as symbols have heterogeneous coverage (24 crypto pairs across six
+    exchanges do), which silently produced zero snapshots in CI while the same
+    code measured fine locally with fewer symbols. Each symbol still contributes
+    only its own past bars, so there is no look-ahead: a symbol whose history
+    starts after the stamp is simply skipped at that timestamp.
+    """
     tf, horizon, step, max_snaps, min_symbols = SETTINGS[asset_class]
     if len(data) < min_symbols:
         return []
-    # Common date axis: intersection keeps comparisons honest.
-    index = None
-    for frame in data.values():
-        dates = set(pd.to_datetime(frame["date"], utc=True))
-        index = dates if index is None else index & dates
-    axis = sorted(index or [])
+    provider = max(data, key=lambda s: len(data[s]))
+    axis = sorted(set(pd.to_datetime(data[provider]["date"], utc=True)))
     if len(axis) < MIN_BARS + horizon + step:
         return []
 
     picked = []
     for t_index in range(MIN_BARS, len(axis) - horizon, step):
         stamp = axis[t_index]
+        stamp_ts = pd.Timestamp(stamp)
         scores, forwards = {}, {}
         for symbol, frame in data.items():
             dates = pd.to_datetime(frame["date"], utc=True)
-            pos = int(np.searchsorted(dates.astype("int64").to_numpy(), pd.Timestamp(stamp).value))
+            pos = int(np.searchsorted(dates.astype("int64").to_numpy(), stamp_ts.value))
             if pos < MIN_BARS or pos + horizon >= len(frame):
                 continue
             hist = frame.iloc[:pos]
@@ -177,6 +183,11 @@ def markdown(report):
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="scripts/scan_ic.py")
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--require-snapshots", action="store_true",
+                        help="exit non-zero if any class measures zero snapshots. "
+                             "Zero snapshots means the measurement is broken, not "
+                             "that the signal has no evidence, so it must fail the "
+                             "job rather than be recorded as 'insufficient'.")
     args = parser.parse_args(argv)
     report = {"generated_at": datetime.now(timezone.utc).isoformat(), "classes": {}}
     for asset_class in SETTINGS:
@@ -192,6 +203,15 @@ def main(argv=None):
         OUT_JSON.write_text(json.dumps(report, indent=2, default=str), encoding="utf-8")
         OUT_MD.write_text(text, encoding="utf-8")
         print(f"wrote {OUT_JSON}")
+
+    # Fail closed: a class that measured zero snapshots is a broken measurement.
+    if args.require_snapshots:
+        broken = [c for c, r in report["classes"].items()
+                  if r.get("n_snapshots", 0) == 0]
+        if broken:
+            print(f"REFUSING: zero snapshots for {broken} -- measurement is broken, "
+                  f"not evidence-free", file=sys.stderr)
+            return 2
     return 0
 
 
