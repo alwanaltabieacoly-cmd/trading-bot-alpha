@@ -1,0 +1,58 @@
+{
+  "source": "vibe-trading alpha_bench",
+  "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
+  "age_hours": 0.0,
+  "generated_at": "2026-10-23T18:22:08.205530+00:00",
+  "asof": "2026-10-23",
+  "zoo": "academic",
+  "universe": "sp500",
+  "period": "2024-2025",
+  "n_alphas_tested": 12,
+  "n_skipped": 0,
+  "top": [
+    {
+      "alpha": "academic_carhart_mom",
+      "theme": "momentum",
+      "ic_mean": 0.028393,
+      "ir": 0.1217,
+      "ic_positive_ratio": 0.5944,
+      "ic_count": 249
+    },
+    {
+      "alpha": "academic_strev",
+      "theme": "reversal",
+      "ic_mean": 0.011184,
+      "ir": 0.0584,
+      "ic_positive_ratio": 0.5062,
+      "ic_count": 480
+    },
+    {
+      "alpha": "academic_cma",
+      "theme": "quality",
+      "ic_mean": 0.002398,
+      "ir": 0.0288,
+      "ic_positive_ratio": 0.5366,
+      "ic_count": 382
+    },
+    {
+      "alpha": "academic_high52w",
+      "theme": "momentum",
+      "ic_mean": 0.00021,
+      "ir": 0.0009,
+      "ic_positive_ratio": 0.536,
+      "ic_count": 250
+    },
+    {
+      "alpha": "academic_corr_rewire",
+      "theme": "volatility",
+      "ic_mean": -0.000129,
+      "ir": -0.0009,
+      "ic_positive_ratio": 0.511,
+      "ic_count": 362
+    }
+  ],
+  "caveats": [
+    "cross-sectional IC across the universe, not a per-pair entry signal",
+    "constituents are the current list (survivorship-biased) -> IC quoted above is biased upward"
+  ]
+}
