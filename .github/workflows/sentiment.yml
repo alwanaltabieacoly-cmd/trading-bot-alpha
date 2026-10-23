@@ -3,9 +3,6 @@ name: Sentiment
 # Runs the sentiment collector (F&G + GDELT + Reddit) every 6 hours,
 # 24/7, even with the PC off.  Writes to sentiment/sentiment.sqlite
 # which the Trade Agent warmup reads for its GO/NO-GO verdict.
-#
-# This is the "agents working day and night to find news" half of the system.
-# It never touches exchange credentials and never places orders.
 
 on:
   schedule:
@@ -54,14 +51,4 @@ jobs:
       - name: Summary
         run: |
           echo "### Sentiment complete" >> $GITHUB_STEP_SUMMARY
-          python -c "
-          import sqlite3
-          conn = sqlite3.connect('sentiment/sentiment.sqlite')
-          for t in ['fng','gdelt_tone','reddit_posts']:
-              try:
-                  n = conn.execute(f'SELECT COUNT(*) FROM {t}').fetchone()[0]
-                  print(f'- {t}: {n} rows')
-              except Exception as e:
-                  print(f'- {t}: {e}')
-          conn.close()
-          " >> $GITHUB_STEP_SUMMARY
+          python summary_sentiment.py >> $GITHUB_STEP_SUMMARY
