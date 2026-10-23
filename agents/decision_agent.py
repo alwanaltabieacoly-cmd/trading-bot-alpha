@@ -292,14 +292,21 @@ def _fallback(pairs, size_cap, market):
     result = {}
     for pair in pairs:
         timeframes = market.get("pairs", {}).get(pair, {}).get("timeframes", {})
-        regime_1h = timeframes.get("1h", {}).get("regime")
-        regime_4h = timeframes.get("4h", {}).get("regime")
-        if size_cap > 0 and regime_1h == "bull" and regime_4h == "bull":
+        # Prefer the highest-signal available timeframe; equities/FX only have 1d.
+        regime = None
+        used_tf = None
+        for name in ("4h", "1d", "1h"):
+            slot = timeframes.get(name) or {}
+            if slot.get("available") and slot.get("regime"):
+                regime = slot["regime"]
+                used_tf = name
+                break
+        if size_cap > 0 and regime == "bull":
             result[pair] = {
                 "action": "allow",
                 "size": common.rnd(size_cap),
                 "confidence": 0.5,
-                "rationale": "fallback rule: 1h and 4h regime bull",
+                "rationale": f"fallback rule: {used_tf} regime bull",
             }
         else:
             result[pair] = {
@@ -307,7 +314,7 @@ def _fallback(pairs, size_cap, market):
                 "size": 0.0,
                 "confidence": 0.5,
                 "rationale": (
-                    f"fallback rule: 1h regime={regime_1h}, 4h regime={regime_4h}, "
+                    f"fallback rule: {used_tf or 'no'} regime={regime}, "
                     f"size_cap={size_cap}"
                 ),
             }

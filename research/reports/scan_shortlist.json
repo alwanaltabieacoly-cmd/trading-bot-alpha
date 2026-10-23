@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-10-23T19:01:42.369454+00:00",
+  "min_score": 0.0,
+  "quota": {
+    "crypto": 3,
+    "equity": 2,
+    "forex": 1
+  },
+  "picks": [
+    {
+      "symbol": "USDJPY",
+      "decision_symbol": "USDJPY",
+      "asset_class": "forex",
+      "profit_score": 2.2432,
+      "momentum": -0.352,
+      "micro_score": 0.9824
+    },
+    {
+      "symbol": "AAPL",
+      "decision_symbol": "AAPL",
+      "asset_class": "equity",
+      "profit_score": 1.804,
+      "momentum": 0.839,
+      "micro_score": 0.042
+    },
+    {
+      "symbol": "ETH/USD",
+      "decision_symbol": "ETH/USDT",
+      "asset_class": "crypto",
+      "profit_score": 0.0405,
+      "momentum": 0.0189,
+      "micro_score": 0.0009
+    }
+  ],
+  "decision_pairs": [
+    "USDJPY",
+    "AAPL",
+    "ETH/USDT"
+  ]
+}

@@ -44,7 +44,10 @@ class TVAlert(BaseModel):
 # guard (daily loss limit + known strategy) since there is no deliberation
 # cycle for equities yet.
 SCALP_STRATEGIES = {"aapl_scalp_trend", "aapl_scalp_reversion", "scalp"}
-EQUITY_SYMBOLS = {"AAPL", "MSFT", "GOOG", "TSLA", "SPY", "QQQ"}
+EQUITY_SYMBOLS = {
+    "AAPL", "MSFT", "GOOG", "GOOGL", "TSLA", "SPY", "QQQ",
+    "NVDA", "AMZN", "META", "AMD", "NFLX", "AVGO",
+}
 SCALP_DAILY_LOSS_LIMIT = 5.0
 
 

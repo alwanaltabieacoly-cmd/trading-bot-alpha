@@ -28,7 +28,7 @@ import pandas as pd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from agents import common, feature_engine
+from agents import common, feature_engine, universe
 from research import config
 
 # Untracked cache for pairs outside config.ASSETS (git-ignored): keeps the
@@ -229,6 +229,7 @@ def _score_pair(base, tf="4h", fetch_missing=False):
     score = mom * 2.0 + micro * 3.0 + vol * 1.5 + vspike * 2.0 + pos * 2.0
     return {
         "pair": pair,
+        "asset_class": "crypto",
         "tf": tf,
         "close": feats["last_close"],
         "momentum": round(mom, 4),
@@ -247,28 +248,62 @@ def _normalise_pair(value):
     return text.split("/")[0]
 
 
-def run(pairs=None, top_n=10, as_json=False, max_pairs=20, tf="4h", fetch_missing=False):
+def _scan_candidates(asset_class, max_pairs, tf, fetch_missing):
+    """Yield (record, display_pair, skip_reason) for one asset class."""
+    out = []
+    if asset_class == "crypto":
+        tf_crypto = tf or "4h"
+        for base in _watchlist(max_pairs=max_pairs, tf=tf_crypto)[:max_pairs]:
+            try:
+                record, reason = _score_pair(base, tf=tf_crypto, fetch_missing=fetch_missing)
+            except Exception as e:  # one bad pair must not kill the scan
+                record, reason = None, f"{type(e).__name__}: {e}"
+            out.append((record, f"{base}/USD", reason))
+        return out
+
+    if asset_class not in ("equity", "forex"):
+        return [(None, "?", f"unknown asset class: {asset_class}")]
+    for symbol in universe.watchlist(asset_class, max_pairs):
+        try:
+            record, reason = universe.score(symbol, fetch_missing=fetch_missing)
+        except Exception as e:
+            record, reason = None, f"{type(e).__name__}: {e}"
+        out.append((record, universe.display_symbol(symbol), reason))
+    return out
+
+
+def run(pairs=None, top_n=10, as_json=False, max_pairs=20, tf=None,
+        fetch_missing=False, asset_class="crypto"):
     """Score the universe. Returns the ranked records (may be empty)."""
     if pairs:
-        candidates = [_normalise_pair(p) for p in pairs]
+        classes = ("crypto",)
+        explicit = [_normalise_pair(p) for p in pairs]
+        results, skipped = [], []
+        for base in explicit[:max_pairs]:
+            try:
+                record, reason = _score_pair(base, tf=tf or "4h", fetch_missing=fetch_missing)
+            except Exception as e:
+                record, reason = None, f"{type(e).__name__}: {e}"
+            if record:
+                results.append(record)
+            else:
+                skipped.append({"pair": f"{base}/USD", "asset_class": "crypto",
+                                "reason": reason or "no features"})
     else:
-        candidates = _watchlist(max_pairs=max_pairs, tf=tf)
-
-    results = []
-    skipped = []
-    for base in candidates[:max_pairs]:
-        try:
-            record, reason = _score_pair(base, tf=tf, fetch_missing=fetch_missing)
-        except Exception as e:  # one bad pair must not kill the scan
-            record, reason = None, f"{type(e).__name__}: {e}"
-        if record:
-            results.append(record)
-        else:
-            skipped.append({"pair": f"{base}/USD", "reason": reason or "no features"})
+        classes = ("crypto", "equity", "forex") if asset_class == "all" else (asset_class,)
+        results, skipped = [], []
+        for cls in classes:
+            for record, pair_name, reason in _scan_candidates(cls, max_pairs, tf, fetch_missing):
+                if record:
+                    results.append(record)
+                else:
+                    skipped.append({"pair": pair_name, "asset_class": cls,
+                                    "reason": reason or "no features"})
 
     results.sort(key=lambda r: r["profit_score"], reverse=True)
 
-    _log(f"scanned {len(results)}/{len(candidates[:max_pairs])} pairs on {tf}", as_json=as_json)
+    label = ",".join(classes)
+    _log(f"scanned {len(results)}/{len(results) + len(skipped)} symbols across {label}", as_json=as_json)
     for item in skipped:
         _log(f"  skip {item['pair']}: {item['reason']}", as_json=as_json)
 
@@ -276,11 +311,11 @@ def run(pairs=None, top_n=10, as_json=False, max_pairs=20, tf="4h", fetch_missin
         print(json.dumps(results[:top_n], indent=2, default=str))
         return results
 
-    _log(f"\n=== TOP {top_n} PAIRS BY PROFITABILITY ===")
+    _log(f"\n=== TOP {top_n} SYMBOLS BY PROFITABILITY ===")
     for i, r in enumerate(results[:top_n]):
-        _log(f"#{i+1} {r['pair']:12s} score={r['profit_score']:+.4f}  "
-             f"mom={r['momentum']:+.4f}  micro={r['micro_score']:+.4f}  "
-             f"vol={r['vol_regime']:+.3f}  close={r['close']}")
+        _log(f"#{i+1} {r['pair']:12s} [{r.get('asset_class', '?')}] "
+             f"score={r['profit_score']:+.4f}  mom={r['momentum']:+.4f}  "
+             f"micro={r['micro_score']:+.4f}  close={r['close']}")
     return results
 
 
@@ -289,20 +324,24 @@ def main(argv=None):
     ap.add_argument("--pairs", nargs="*", default=None,
                     help="explicit bases, e.g. --pairs BTC ETH (default: curated universe)")
     ap.add_argument("--top", type=int, default=10)
-    ap.add_argument("--tf", default="4h", choices=sorted(FETCH_DAYS),
-                    help="candle timeframe (default: 4h)")
+    ap.add_argument("--tf", default=None, choices=sorted(FETCH_DAYS),
+                    help="candle timeframe (default: 4h crypto / 1d equities+FX)")
+    ap.add_argument("--asset-class", default="crypto",
+                    choices=["crypto", "equity", "forex", "all"],
+                    help="which universe to scan (default: crypto)")
     ap.add_argument("--max-pairs", type=int, default=20)
     ap.add_argument("--fetch-missing", action="store_true",
-                    help="download uncached pairs (slow; writes research/data/*.parquet)")
+                    help="download uncached symbols (slow; writes git-ignored caches)")
     ap.add_argument("--json", action="store_true",
                     help="stdout is pure JSON; progress goes to stderr")
     ap.add_argument("--strict", action="store_true",
-                    help="exit 1 when no pair could be scored")
+                    help="exit 1 when no symbol could be scored")
     args = ap.parse_args(argv)
 
     results = run(
         pairs=args.pairs, top_n=args.top, as_json=args.json,
         max_pairs=args.max_pairs, tf=args.tf, fetch_missing=args.fetch_missing,
+        asset_class=args.asset_class,
     )
     if args.strict and not results:
         _log("no pairs could be scored (strict mode)", as_json=args.json)

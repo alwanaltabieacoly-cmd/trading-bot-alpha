@@ -45,7 +45,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ccxt pandas numpy pyarrow requests
+          pip install ccxt pandas numpy pyarrow requests yfinance
 
       - name: Fetch LIVE candles from Kraken
         env:
@@ -64,11 +64,12 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          # Wide universe: the first 5 tracked assets come from the committed
-          # research cache; missing majors are fetched into the git-ignored
-          # scan cache (research/data/scan/) so the repo stays lean.
-          python asset_scanner.py --top 15 --tf 4h --max-pairs 12 --fetch-missing --json \
+          # Multi-asset scan: crypto majors (exchange chain), US large caps and
+          # FX majors (Yahoo). Missing symbols are fetched into git-ignored
+          # caches; the repo stays lean.
+          python asset_scanner.py --top 20 --asset-class all --max-pairs 20 --fetch-missing --json \
             > research/reports/asset_scan.json 2> research/reports/asset_scan_diagnostics.txt
+          python scripts/scan_shortlist.py
           # Surface the skip reasons in the run log as well as the artifact.
           tail -n 25 research/reports/asset_scan_diagnostics.txt
           python summary_scan.py >> "$GITHUB_STEP_SUMMARY"
@@ -79,7 +80,7 @@ jobs:
           git config user.email "warmup-bot@users.noreply.github.com"
           # Tolerant adds: under `bash -e` a missing or fully-ignored pathspec
           # aborts the whole job (this is how the 2026-10-23 outcome run died).
-          for p in research/reports/warmup research/reports/verdicts research/reports/asset_scan.json research/reports/asset_scan_diagnostics.txt research/data; do
+          for p in research/reports/warmup research/reports/verdicts research/reports/asset_scan.json research/reports/asset_scan_diagnostics.txt research/reports/scan_shortlist.json research/data; do
             git add "$p" 2>/dev/null || echo "skip (nothing to add): $p"
           done
           # Never force-push: rebase + retry, so parallel workflows and the PC

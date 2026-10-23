@@ -90,6 +90,16 @@ def load_candles(pair, tf, asof):
         except Exception:
             df = None
 
+    if df is None or df.empty:
+        # Widened universe cache: research/data/scan (crypto) and
+        # research/data/universe (equities + FX), both git-ignored.
+        try:
+            from . import universe
+            base = pair.split("/")[0].split("-")[0]
+            df = universe.load(base, tf)
+        except Exception:
+            df = None
+
     if df is None or df.empty or "date" not in df.columns:
         return None
     df = df.copy()

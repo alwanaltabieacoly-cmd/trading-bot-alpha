@@ -23,18 +23,31 @@ def analyze(asof, market_report, analyst_recommendation):
     for pair, rec in (analyst_recommendation or {}).items():
         action = rec.get("action", "block")
         ev = _evidence_for(market_report, pair)
-        # Red-team checks
-        issues = []
         tf = market_report.get("pairs", {}).get(pair, {}).get("timeframes", {})
-        r1 = tf.get("1h", {}).get("regime")
-        r4 = tf.get("4h", {}).get("regime")
-        if action == "allow" and r1 != "bull":
-            issues.append("1h regime not bull while allowing entry")
-        if action == "allow" and r4 != "bull":
-            issues.append("4h regime not bull while allowing entry")
-        atr = tf.get("1h", {}).get("atr_pct_14")
+        # Availability-aware regime check: equities/FX legitimately have only
+        # 1d data, so a missing intraday regime must not veto them. Crypto with
+        # a bear regime, or any symbol with NO regime data at all, still blocks.
+        issues = []
+        if action == "allow":
+            regimes = {
+                name: (tf.get(name) or {}).get("regime")
+                for name in ("1h", "4h", "1d")
+                if (tf.get(name) or {}).get("available")
+            }
+            regimes = {k: v for k, v in regimes.items() if v}
+            if not regimes:
+                issues.append("no regime data available (fail closed)")
+            else:
+                bears = ",".join(sorted(k for k, v in regimes.items() if v == "bear"))
+                if bears:
+                    issues.append(f"bear regime on {bears}")
+                elif not any(v == "bull" for v in regimes.values()):
+                    issues.append("no bull regime on any available timeframe")
+        atr = (tf.get("1h") or {}).get("atr_pct_14")
+        if atr is None:
+            atr = (tf.get("4h") or {}).get("atr_pct_14")
         if atr is not None and atr > 5.0:
-            issues.append(f"1h ATR {atr}% high -> slippage risk")
+            issues.append(f"ATR {atr}% high -> slippage risk")
         if issues:
             rec_out = "block"
             blockers.extend(issues)

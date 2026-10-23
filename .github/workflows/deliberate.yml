@@ -11,9 +11,9 @@ on:
   workflow_dispatch:
     inputs:
       pairs:
-        description: "Comma-separated pairs (default: BTC/USDT,ETH/USDT,SOL/USDT)"
+        description: "Comma-separated symbols. Blank = auto shortlist from the multi-asset scan."
         type: string
-        default: "BTC/USDT,ETH/USDT,SOL/USDT"
+        default: ""
       asof:
         description: "As-of timestamp (UTC ISO). Leave blank for now."
         type: string
@@ -44,7 +44,30 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ccxt pandas numpy pyarrow
+          pip install ccxt pandas numpy pyarrow yfinance
+
+      - name: Refresh multi-asset universe
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          # Crypto (exchange chain) + equities + FX (Yahoo). Bounded and
+          # non-fatal: a data gap must not stop deliberation.
+          python -m agents.universe --refresh --max 20 --days 400 || true
+
+      - name: Resolve pairs (explicit or scan shortlist)
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          IN="${{ inputs.pairs }}"
+          if [ -z "$IN" ]; then
+            IN="$(python scripts/scan_shortlist.py --print 2>/dev/null || true)"
+          fi
+          if [ -z "$IN" ]; then
+            IN="BTC/USDT,ETH/USDT,SOL/USDT"
+            echo "::notice::no positive shortlist - using default pairs"
+          fi
+          echo "DELIB_PAIRS=$IN" >> "$GITHUB_ENV"
+          echo "pairs=$IN" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Run deliberation
         env:
@@ -56,7 +79,7 @@ jobs:
             ASOF="${{ inputs.asof }}"
           fi
           python -m agents.deliberate \
-            --pairs "${{ inputs.pairs }}" \
+            --pairs "$DELIB_PAIRS" \
             --asof "$ASOF"
 
       - name: Commit decisions
