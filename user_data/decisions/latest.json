@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-23T19:00:00+00:00",
-  "generated_at": "2026-10-23T19:06:21.012264+00:00",
+  "generated_at": "2026-10-23T19:35:45.837728+00:00",
   "source": "fallback",
   "pairs": {
     "USDJPY": {
@@ -15,7 +15,25 @@
       "confidence": 0.5,
       "rationale": "synthesizer: blocked (critic=block)"
     },
-    "ETH/USDT": {
+    "SPY": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (critic=block)"
+    },
+    "BCH/USDT": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "XLM/USDT": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "ALGO/USDT": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
@@ -26,7 +44,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
     "age_hours": 0.03,
-    "generated_at": "2026-10-23T19:04:35.420463+00:00",
+    "generated_at": "2026-10-23T19:34:02.476007+00:00",
     "asof": "2026-10-23",
     "zoo": "academic",
     "universe": "sp500",
@@ -136,69 +154,69 @@
     "asset_scan": [
       {
         "pair": "USDJPY",
-        "profit_score": 2.2432,
-        "momentum": -0.352,
-        "micro_score": 0.9824
+        "profit_score": 2.2502,
+        "momentum": -0.3488,
+        "micro_score": 0.9826
       },
       {
         "pair": "AAPL",
-        "profit_score": 1.804,
-        "momentum": 0.839,
-        "micro_score": 0.042
+        "profit_score": 1.7964,
+        "momentum": 0.8355,
+        "micro_score": 0.0418
+      },
+      {
+        "pair": "SPY",
+        "profit_score": 1.6132,
+        "momentum": -0.4125,
+        "micro_score": 0.4794
+      },
+      {
+        "pair": "BCH/USD",
+        "profit_score": 1.5892,
+        "momentum": 0.7391,
+        "micro_score": 0.037
+      },
+      {
+        "pair": "XLM/USD",
+        "profit_score": 1.3976,
+        "momentum": -0.5128,
+        "micro_score": 0.4744
+      },
+      {
+        "pair": "ALGO/USD",
+        "profit_score": 0.8551,
+        "momentum": -0.765,
+        "micro_score": 0.4617
       },
       {
         "pair": "GBPUSD",
-        "profit_score": 0.6266,
-        "momentum": 0.2914,
-        "micro_score": 0.0146
+        "profit_score": 0.6401,
+        "momentum": 0.2977,
+        "micro_score": 0.0149
       },
       {
-        "pair": "ETH/USD",
-        "profit_score": 0.0405,
-        "momentum": 0.0189,
-        "micro_score": 0.0009
+        "pair": "TSLA",
+        "profit_score": 0.3989,
+        "momentum": 0.1855,
+        "micro_score": 0.0093
       },
       {
-        "pair": "SOL/USD",
-        "profit_score": -0.0608,
-        "momentum": -0.0283,
-        "micro_score": -0.0014
+        "pair": "APT/USD",
+        "profit_score": 0.2929,
+        "momentum": -1.0266,
+        "micro_score": 0.4487
       },
       {
-        "pair": "BTC/USD",
-        "profit_score": -0.2324,
-        "momentum": -0.1081,
-        "micro_score": -0.0054
-      },
-      {
-        "pair": "EURUSD",
-        "profit_score": -0.311,
-        "momentum": -0.1447,
-        "micro_score": -0.0072
-      },
-      {
-        "pair": "MSFT",
-        "profit_score": -0.4316,
-        "momentum": -0.2008,
-        "micro_score": -0.01
-      },
-      {
-        "pair": "NVDA",
-        "profit_score": -0.448,
-        "momentum": -1.3711,
-        "micro_score": 0.4314
-      },
-      {
-        "pair": "BNB/USD",
-        "profit_score": -0.6163,
-        "momentum": -0.2867,
-        "micro_score": -0.0143
+        "pair": "QQQ",
+        "profit_score": 0.1975,
+        "momentum": -1.071,
+        "micro_score": 0.4465
       }
     ],
     "historical_lessons": "HISTORICAL LESSONS (from 32 labelled outcomes, accuracy 56%): (1) SOL/USDT verdict accuracy is 38% over 8 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-23T19:06:21.012040+00:00",
+    "generated_at": "2026-10-23T19:35:45.837481+00:00",
     "overall": {
       "n": 32,
       "hits": 18,
