@@ -64,6 +64,17 @@ jobs:
           git add research/reports/quality 2>/dev/null || echo "skip (nothing to add): quality"
           bash scripts/ci_commit_push.sh "learning: digest $(date -u +%Y-%m-%d_%H%M)"
 
+      - name: System check (reports + configs + gate)
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          # Committed after the learning commit, so the tree is clean. A failure
+          # here means an artifact/config is missing, stale or unparseable.
+          if ! python scripts/system_check.py >> "$GITHUB_STEP_SUMMARY" 2>&1; then
+            echo "::error::system check reported failures - see step summary"
+            exit 1
+          fi
+
       - name: Summary
         run: |
           echo "### Daily learning digest" >> "$GITHUB_STEP_SUMMARY"
