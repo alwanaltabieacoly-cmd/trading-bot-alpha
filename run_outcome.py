@@ -109,7 +109,7 @@ def run(pairs, equity_symbols=None, asof=None):
             "last_price": last_price,
             "result": result,
         })
-        print(f"  {pair:12s} warmup={verdict:5s} score={score:3d}  "
+        print(f"  {pair:12s} warmup={verdict:5s} score={score:6.1f}  "
               f"1h chg={chg if chg is not None else 'N/A':>7}%  -> {result}")
 
     for sym in equity_symbols:
@@ -137,7 +137,7 @@ def run(pairs, equity_symbols=None, asof=None):
             "last_price": last_price,
             "result": result,
         })
-        print(f"  {sym:12s} warmup={verdict:5s} score={score:3d}  "
+        print(f"  {sym:12s} warmup={verdict:5s} score={score:6.1f}  "
               f"1d chg={chg if chg is not None else 'N/A':>7}%  -> {result}")
 
     # Write to outcome log
