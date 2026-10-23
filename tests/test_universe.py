@@ -42,6 +42,12 @@ class UniverseClassifyTest(unittest.TestCase):
     def test_unknown_is_none(self):
         self.assertIsNone(universe.classify("NOT_A_THING"))
 
+    def test_forex_ticker_fallbacks(self):
+        self.assertEqual(universe._yahoo_tickers("XAUUSD"), ("XAUUSD=X", "GC=F"))
+        self.assertEqual(universe._yahoo_tickers("XAGUSD"), ("XAGUSD=X", "SI=F"))
+        self.assertEqual(universe._yahoo_tickers("EURUSD"), ("EURUSD=X",))
+        self.assertEqual(universe._yahoo_tickers("AAPL"), ("AAPL",))
+
     def test_display_and_decision_symbols(self):
         self.assertEqual(universe.display_symbol("BTC/USDT"), "BTC/USD")
         self.assertEqual(universe.decision_symbol("BTC"), "BTC/USDT")

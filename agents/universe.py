@@ -43,7 +43,12 @@ EQUITY_SYMBOLS = [
 FOREX_YF = {
     "EURUSD": "EURUSD=X", "GBPUSD": "GBPUSD=X", "USDJPY": "USDJPY=X",
     "AUDUSD": "AUDUSD=X", "USDCAD": "USDCAD=X", "USDCHF": "USDCHF=X",
-    "NZDUSD": "NZDUSD=X", "XAUUSD": "XAUUSD=X",
+    "NZDUSD": "NZDUSD=X", "XAUUSD": "XAUUSD=X", "XAGUSD": "XAGUSD=X",
+}
+# Yahoo has no spot XAU/XAG symbols; COMEX futures are the usable free proxy.
+YAHOO_FALLBACKS = {
+    "XAUUSD": ("XAUUSD=X", "GC=F"),
+    "XAGUSD": ("XAGUSD=X", "SI=F"),
 }
 CLASSES = ("crypto", "equity", "forex")
 DEFAULT_TF = {"crypto": "4h", "equity": "1d", "forex": "1d"}
@@ -167,12 +172,32 @@ def _fetch_crypto(base, tf, days):
     raise RuntimeError("all exchanges failed (" + ", ".join(errors) + ")")
 
 
+def _yahoo_tickers(symbol):
+    """Candidate Yahoo tickers, best first (spot FX, else free futures proxy)."""
+    base = _base(symbol)
+    if base in YAHOO_FALLBACKS:
+        return YAHOO_FALLBACKS[base]
+    return (FOREX_YF.get(base, base),)
+
+
 def _fetch_yahoo(symbol, tf, days):
+    import warnings
+
     from research import data as rdata
-    cls = classify(symbol)
-    ticker = FOREX_YF.get(_base(symbol), _base(symbol)) if cls == "forex" else _base(symbol)
-    frame = rdata.fetch_equity_candles(ticker, tf, days_back=days)
-    return _normalise_frame(frame)
+    last_error = None
+    for ticker in _yahoo_tickers(symbol):
+        try:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")  # yfinance/pandas deprecation noise
+                frame = rdata.fetch_equity_candles(ticker, tf, days_back=days)
+        except Exception as e:
+            last_error = e
+            continue
+        normalised = _normalise_frame(frame)
+        if normalised is not None and len(normalised) >= MIN_BARS:
+            return normalised
+    suffix = f": {type(last_error).__name__}" if last_error else ""
+    raise RuntimeError(f"yahoo failed for {_yahoo_tickers(symbol)}{suffix}")
 
 
 def fetch(symbol, tf=None, days=None):
