@@ -50,6 +50,7 @@ def collect(now=None):
         "gate": {},
         "vibe": None,
         "learning": None,
+        "quality": _load_json(ROOT / "research" / "reports" / "quality" / "data_quality.json"),
     }
 
     record, path = evidence_gate.newest_decision()
@@ -184,6 +185,27 @@ def build_markdown(payload):
     else:
         lines.append("")
         lines.append("No learning digest yet.")
+    lines.append("")
+
+    lines.append("## Data quality")
+    quality = payload.get("quality")
+    if isinstance(quality, dict) and quality.get("counts"):
+        counts = quality["counts"]
+        lines.append("")
+        lines.append(f"ok **{counts.get('ok', 0)}** - warn **{counts.get('warn', 0)}** - bad **{counts.get('bad', 0)}**")
+        offenders = [row for row in quality.get("symbols") or [] if row.get("verdict") != "ok"][:6]
+        if offenders:
+            lines.append("")
+            lines.append("| symbol | class | verdict | bars | reason |")
+            lines.append("|---|---|---|---|---|")
+            for row in offenders:
+                lines.append(
+                    f"| {row.get('symbol')} | {row.get('asset_class')} | {row.get('verdict')} | "
+                    f"{row.get('bars')} | {row.get('reason')} |"
+                )
+    else:
+        lines.append("")
+        lines.append("No data-quality report yet.")
     lines.append("")
 
     lines.append("## How to act")

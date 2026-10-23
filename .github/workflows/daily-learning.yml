@@ -19,7 +19,7 @@ permissions:
 jobs:
   learn:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
 
     steps:
       - name: Checkout
@@ -30,8 +30,21 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Install data dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy pyarrow ccxt yfinance
+
       - name: Build daily digest
         run: python -m agents.daily_learning --write
+
+      - name: Refresh data and audit quality
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          # Bounded refresh so the audit measures the same data a session uses.
+          python -m agents.universe --refresh --max 20 --days 400 || true
+          python scripts/data_quality.py --write
 
       - name: Build act-on-it brief
         env:
@@ -48,6 +61,7 @@ jobs:
           git add research/reports/learning 2>/dev/null || echo "skip (nothing to add): learning json"
           git add research/LESSONS_AUTO.md 2>/dev/null || echo "skip (nothing to add): lessons md"
           git add research/reports/brief 2>/dev/null || echo "skip (nothing to add): brief"
+          git add research/reports/quality 2>/dev/null || echo "skip (nothing to add): quality"
           bash scripts/ci_commit_push.sh "learning: digest $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary
@@ -55,3 +69,5 @@ jobs:
           echo "### Daily learning digest" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
           python -m agents.daily_learning --markdown >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python scripts/data_quality.py >> "$GITHUB_STEP_SUMMARY"
