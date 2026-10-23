@@ -1,21 +1,21 @@
 {
-  "asof": "2026-10-23T18:00:00+00:00",
-  "generated_at": "2026-10-23T18:53:25.424558+00:00",
+  "asof": "2026-10-23T19:00:00+00:00",
+  "generated_at": "2026-10-23T19:06:21.012264+00:00",
   "source": "fallback",
   "pairs": {
-    "BTC/USDT": {
+    "USDJPY": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "AAPL": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (critic=block)"
     },
     "ETH/USDT": {
-      "action": "block",
-      "size": 0.0,
-      "confidence": 0.5,
-      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
-    },
-    "SOL/USDT": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
@@ -25,8 +25,8 @@
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
-    "age_hours": 0.01,
-    "generated_at": "2026-10-23T18:53:06.053310+00:00",
+    "age_hours": 0.03,
+    "generated_at": "2026-10-23T19:04:35.420463+00:00",
     "asof": "2026-10-23",
     "zoo": "academic",
     "universe": "sp500",
@@ -85,7 +85,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.01,
+      "age_hours": 0.03,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -135,28 +135,28 @@
     },
     "asset_scan": [
       {
-        "pair": "BCH/USD",
-        "profit_score": 1.7478,
-        "momentum": 0.813,
-        "micro_score": 0.0406
+        "pair": "USDJPY",
+        "profit_score": 2.2432,
+        "momentum": -0.352,
+        "micro_score": 0.9824
       },
       {
-        "pair": "DOGE/USD",
-        "profit_score": 0.1286,
-        "momentum": 0.0598,
-        "micro_score": 0.003
+        "pair": "AAPL",
+        "profit_score": 1.804,
+        "momentum": 0.839,
+        "micro_score": 0.042
+      },
+      {
+        "pair": "GBPUSD",
+        "profit_score": 0.6266,
+        "momentum": 0.2914,
+        "micro_score": 0.0146
       },
       {
         "pair": "ETH/USD",
         "profit_score": 0.0405,
         "momentum": 0.0189,
         "micro_score": 0.0009
-      },
-      {
-        "pair": "ADA/USD",
-        "profit_score": -0.0301,
-        "momentum": -0.014,
-        "micro_score": -0.0007
       },
       {
         "pair": "SOL/USD",
@@ -171,34 +171,34 @@
         "micro_score": -0.0054
       },
       {
-        "pair": "LINK/USD",
-        "profit_score": -0.4669,
-        "momentum": -0.2171,
-        "micro_score": -0.0109
+        "pair": "EURUSD",
+        "profit_score": -0.311,
+        "momentum": -0.1447,
+        "micro_score": -0.0072
+      },
+      {
+        "pair": "MSFT",
+        "profit_score": -0.4316,
+        "momentum": -0.2008,
+        "micro_score": -0.01
+      },
+      {
+        "pair": "NVDA",
+        "profit_score": -0.448,
+        "momentum": -1.3711,
+        "micro_score": 0.4314
       },
       {
         "pair": "BNB/USD",
         "profit_score": -0.6163,
         "momentum": -0.2867,
         "micro_score": -0.0143
-      },
-      {
-        "pair": "LTC/USD",
-        "profit_score": -0.8152,
-        "momentum": -0.3791,
-        "micro_score": -0.019
-      },
-      {
-        "pair": "AVAX/USD",
-        "profit_score": -0.9851,
-        "momentum": -0.4582,
-        "micro_score": -0.0229
       }
     ],
     "historical_lessons": "HISTORICAL LESSONS (from 32 labelled outcomes, accuracy 56%): (1) SOL/USDT verdict accuracy is 38% over 8 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-23T18:53:25.424419+00:00",
+    "generated_at": "2026-10-23T19:06:21.012040+00:00",
     "overall": {
       "n": 32,
       "hits": 18,
