@@ -43,7 +43,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           # Bounded refresh so the audit measures the same data a session uses.
-          python -m agents.universe --refresh --max 20 --days 400 || true
+          python -m agents.universe --refresh --max 24 --days 400 || true
           python scripts/data_quality.py --write
 
       - name: Build act-on-it brief

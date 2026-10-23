@@ -67,7 +67,7 @@ jobs:
           # Multi-asset scan: crypto majors (exchange chain), US large caps and
           # FX majors (Yahoo). Missing symbols are fetched into git-ignored
           # caches; the repo stays lean.
-          python asset_scanner.py --top 20 --asset-class all --max-pairs 20 --fetch-missing --json \
+          python asset_scanner.py --top 20 --asset-class all --max-pairs 24 --fetch-missing --json \
             > research/reports/asset_scan.json 2> research/reports/asset_scan_diagnostics.txt
           python scripts/scan_shortlist.py
           # Surface the skip reasons in the run log as well as the artifact.

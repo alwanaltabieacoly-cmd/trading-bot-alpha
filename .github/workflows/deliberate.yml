@@ -76,7 +76,7 @@ jobs:
         run: |
           # Crypto (exchange chain) + equities + FX (Yahoo). Bounded and
           # non-fatal: a data gap must not stop deliberation.
-          python -m agents.universe --refresh --max 20 --days 400 || true
+          python -m agents.universe --refresh --max 24 --days 400 || true
 
       - name: Resolve pairs (explicit or scan shortlist)
         if: env.RUN_NOW == '1'
