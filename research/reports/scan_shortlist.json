@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T19:01:42.369454+00:00",
+  "generated_at": "2026-10-23T19:06:33.537327+00:00",
   "min_score": 0.0,
   "quota": {
     "crypto": 3,
@@ -11,30 +11,57 @@
       "symbol": "USDJPY",
       "decision_symbol": "USDJPY",
       "asset_class": "forex",
-      "profit_score": 2.2432,
-      "momentum": -0.352,
-      "micro_score": 0.9824
+      "profit_score": 2.2344,
+      "momentum": -0.3561,
+      "micro_score": 0.9822
     },
     {
       "symbol": "AAPL",
       "decision_symbol": "AAPL",
       "asset_class": "equity",
-      "profit_score": 1.804,
-      "momentum": 0.839,
-      "micro_score": 0.042
+      "profit_score": 1.7939,
+      "momentum": 0.8344,
+      "micro_score": 0.0417
     },
     {
-      "symbol": "ETH/USD",
-      "decision_symbol": "ETH/USDT",
+      "symbol": "SPY",
+      "decision_symbol": "SPY",
+      "asset_class": "equity",
+      "profit_score": 1.5761,
+      "momentum": -0.4297,
+      "micro_score": 0.4785
+    },
+    {
+      "symbol": "XLM/USD",
+      "decision_symbol": "XLM/USDT",
       "asset_class": "crypto",
-      "profit_score": 0.0405,
-      "momentum": 0.0189,
-      "micro_score": 0.0009
+      "profit_score": 1.5464,
+      "momentum": -0.4435,
+      "micro_score": 0.4778
+    },
+    {
+      "symbol": "BCH/USD",
+      "decision_symbol": "BCH/USDT",
+      "asset_class": "crypto",
+      "profit_score": 1.4215,
+      "momentum": 0.6611,
+      "micro_score": 0.0331
+    },
+    {
+      "symbol": "AVAX/USD",
+      "decision_symbol": "AVAX/USDT",
+      "asset_class": "crypto",
+      "profit_score": 0.8275,
+      "momentum": -0.7779,
+      "micro_score": 0.4611
     }
   ],
   "decision_pairs": [
     "USDJPY",
     "AAPL",
-    "ETH/USDT"
+    "SPY",
+    "XLM/USDT",
+    "BCH/USDT",
+    "AVAX/USDT"
   ]
 }
