@@ -72,7 +72,7 @@ jobs:
             echo "nothing to commit"
           else
             git commit -m "deliberation: run $(date -u +%Y-%m-%d_%H%M)"
-            git push
+            git push --force
           fi
 
       - name: Summary
