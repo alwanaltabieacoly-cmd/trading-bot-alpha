@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-23T18:00:00+00:00",
-  "generated_at": "2026-10-23T18:26:16.481639+00:00",
+  "generated_at": "2026-10-23T18:53:25.424558+00:00",
   "source": "fallback",
   "pairs": {
     "BTC/USDT": {
@@ -26,7 +26,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
     "age_hours": 0.01,
-    "generated_at": "2026-10-23T18:25:49.916209+00:00",
+    "generated_at": "2026-10-23T18:53:06.053310+00:00",
     "asof": "2026-10-23",
     "zoo": "academic",
     "universe": "sp500",
@@ -135,22 +135,46 @@
     },
     "asset_scan": [
       {
+        "pair": "BCH/USD",
+        "profit_score": 1.7478,
+        "momentum": 0.813,
+        "micro_score": 0.0406
+      },
+      {
+        "pair": "DOGE/USD",
+        "profit_score": 0.1286,
+        "momentum": 0.0598,
+        "micro_score": 0.003
+      },
+      {
         "pair": "ETH/USD",
-        "profit_score": 0.1222,
-        "momentum": 0.0569,
-        "micro_score": 0.0028
+        "profit_score": 0.0405,
+        "momentum": 0.0189,
+        "micro_score": 0.0009
+      },
+      {
+        "pair": "ADA/USD",
+        "profit_score": -0.0301,
+        "momentum": -0.014,
+        "micro_score": -0.0007
       },
       {
         "pair": "SOL/USD",
-        "profit_score": -0.0045,
-        "momentum": -0.0021,
-        "micro_score": -0.0001
+        "profit_score": -0.0608,
+        "momentum": -0.0283,
+        "micro_score": -0.0014
       },
       {
         "pair": "BTC/USD",
-        "profit_score": -0.2011,
-        "momentum": -0.0935,
-        "micro_score": -0.0047
+        "profit_score": -0.2324,
+        "momentum": -0.1081,
+        "micro_score": -0.0054
+      },
+      {
+        "pair": "LINK/USD",
+        "profit_score": -0.4669,
+        "momentum": -0.2171,
+        "micro_score": -0.0109
       },
       {
         "pair": "BNB/USD",
@@ -159,10 +183,115 @@
         "micro_score": -0.0143
       },
       {
-        "pair": "XRP/USD",
-        "profit_score": -1.53,
-        "momentum": -0.7116,
-        "micro_score": -0.0356
+        "pair": "LTC/USD",
+        "profit_score": -0.8152,
+        "momentum": -0.3791,
+        "micro_score": -0.019
+      },
+      {
+        "pair": "AVAX/USD",
+        "profit_score": -0.9851,
+        "momentum": -0.4582,
+        "micro_score": -0.0229
+      }
+    ],
+    "historical_lessons": "HISTORICAL LESSONS (from 32 labelled outcomes, accuracy 56%): (1) SOL/USDT verdict accuracy is 38% over 8 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
+  },
+  "lessons": {
+    "generated_at": "2026-10-23T18:53:25.424419+00:00",
+    "overall": {
+      "n": 32,
+      "hits": 18,
+      "misses": 14,
+      "accuracy": 0.562
+    },
+    "by_verdict": {
+      "GO": {
+        "n": 7,
+        "hits": 7,
+        "misses": 0,
+        "accuracy": 1.0
+      },
+      "NO-GO": {
+        "n": 25,
+        "hits": 11,
+        "misses": 14,
+        "accuracy": 0.44
+      }
+    },
+    "by_pair": {
+      "AAPL": {
+        "n": 8,
+        "hits": 7,
+        "misses": 1,
+        "accuracy": 0.875
+      },
+      "BTC/USDT": {
+        "n": 8,
+        "hits": 4,
+        "misses": 4,
+        "accuracy": 0.5
+      },
+      "ETH/USDT": {
+        "n": 8,
+        "hits": 4,
+        "misses": 4,
+        "accuracy": 0.5
+      },
+      "SOL/USDT": {
+        "n": 8,
+        "hits": 3,
+        "misses": 5,
+        "accuracy": 0.375
+      }
+    },
+    "by_score_bucket": {
+      "<-5": {
+        "n": 4,
+        "hits": 1,
+        "misses": 3,
+        "accuracy": 0.25
+      },
+      "-5..-2": {
+        "n": 20,
+        "hits": 10,
+        "misses": 10,
+        "accuracy": 0.5
+      },
+      "0..2": {
+        "n": 1,
+        "hits": 0,
+        "misses": 1,
+        "accuracy": 0.0
+      },
+      "2..5": {
+        "n": 7,
+        "hits": 7,
+        "misses": 0,
+        "accuracy": 1.0
+      }
+    },
+    "trend_7d": {
+      "recent": {
+        "n": 0,
+        "hits": 0,
+        "misses": 0,
+        "accuracy": null
+      },
+      "previous": {
+        "n": 0,
+        "hits": 0,
+        "misses": 0,
+        "accuracy": null
+      },
+      "delta": null
+    },
+    "sample_ok": true,
+    "lessons": [
+      {
+        "id": "pair-unreliable-sol-usdt",
+        "text": "SOL/USDT verdict accuracy is 38% over 8 labels - exclude it from new entries until accuracy recovers.",
+        "evidence": "SOL/USDT: 3/8 correct"
       }
     ]
   }
