@@ -7,7 +7,7 @@ then adds red-team + audit + synthesis on top.
 import sys
 
 from . import common, decision_agent, critic_agent, auditor_agent, synthesizer_agent, blackboard as bb
-from . import vibe_evidence
+from . import daily_learning, vibe_evidence
 
 
 def run(pairs, asof, use_llm=True, api_url=None, live_orderbook=False, anonymize=False):
@@ -60,6 +60,29 @@ def run(pairs, asof, use_llm=True, api_url=None, live_orderbook=False, anonymize
     if vibe_entry:
         b.add(vibe_entry)
 
+    # Cite the daily learning digest: explicit lessons derived from labelled
+    # outcomes (accuracy, anti-predictive verdicts, unreliable pairs). The
+    # auditor validates the evidence like any other claim; lessons never veto.
+    try:
+        learning = daily_learning.learn()
+        lessons = learning.get("lessons") or []
+    except Exception as e:  # learning must never break a decision
+        print(f"lessons: digest unavailable ({type(e).__name__}: {e})", file=sys.stderr)
+        learning, lessons = None, []
+    if lessons:
+        b.add({
+            "agent": "lessons",
+            "round": 1,
+            "claims": [
+                {"text": item["text"], "evidence": [f"lesson={item['id']}", item["evidence"]]}
+                for item in lessons
+            ],
+            "recommendation": "abstain",
+            "confidence": 0.5,
+            "blockers": [],
+            "pair_recommendations": {},
+        })
+
     # Round 2: synthesizer + auditor
     synth_entry, decision_pairs = synthesizer_agent.analyze(
         asof_dt, market, risk, analyst_rec, critic_raw.get("pair_recommendations", {}), 2
@@ -84,6 +107,7 @@ def run(pairs, asof, use_llm=True, api_url=None, live_orderbook=False, anonymize
 
     decision["pairs"] = decision_pairs
     decision["vibe_factors"] = vibe
+    decision["lessons"] = learning
     decision["deliberation"] = b.to_dict()
     return decision, b
 
@@ -143,6 +167,7 @@ def main(argv=None):
         },
         "deliberation": b.to_dict(),
         "vibe_factors": decision.get("vibe_factors"),
+        "lessons": decision.get("lessons"),
     }
     with open(out_path, "w", encoding="utf-8") as fh:
         json.dump(record, fh, indent=2, default=str)
@@ -158,6 +183,7 @@ def main(argv=None):
         # Evidence carried into the live gate (Render/PC reads this file).
         "vibe_factors": decision.get("vibe_factors"),
         "evidence": decision.get("evidence"),
+        "lessons": decision.get("lessons"),
     }
     with open(common.LATEST_DECISION_PATH, "w", encoding="utf-8") as fh:
         json.dump(latest, fh, indent=2, default=str)
@@ -181,6 +207,11 @@ def main(argv=None):
         )
     else:
         print("vibe-factors: no benchmark artifact yet (run the 'Vibe-Trading research' workflow)")
+    learned = decision.get("lessons") or {}
+    n_lessons = len(learned.get("lessons") or [])
+    acc = (learned.get("overall") or {}).get("accuracy")
+    print(f"lessons: {n_lessons} active (labelled={((learned.get('overall') or {}).get('n'))}, "
+          f"accuracy={acc})")
     return 0
 
 

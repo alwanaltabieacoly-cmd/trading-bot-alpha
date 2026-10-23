@@ -3,7 +3,7 @@ import json
 import random
 
 from . import common, market_agent, news_agent, risk_agent, session_agent
-from . import evidence_gate, vibe_evidence
+from . import daily_learning, evidence_gate, vibe_evidence
 
 INSTRUCTION = (
     "You are a risk veto layer for a crypto spot trading bot (Bybit, USDT pairs). "
@@ -50,6 +50,12 @@ def _evidence_payload():
              "momentum": row.get("momentum"), "micro_score": row.get("micro_score")}
             for row in ranked[:10]
         ]
+    try:
+        lessons = daily_learning.prompt_block()
+    except Exception:
+        lessons = ""
+    if lessons:
+        payload["historical_lessons"] = lessons
     return payload
 
 
