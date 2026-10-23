@@ -84,19 +84,22 @@ def _score_pair(base, tf="1h"):
     }
 
 
-def run(pairs=None, top_n=10, as_json=False):
+def run(pairs=None, top_n=10, as_json=False, max_pairs=20):
     if pairs is None:
         pairs = _fetch_kraken_pairs()
+    pairs = pairs[:max_pairs]
     print(f"Scanning {len(pairs)} pairs from Kraken...")
 
     results = []
     for i, base in enumerate(pairs):
         if (i + 1) % 10 == 0:
             print(f"  ... {i+1}/{len(pairs)}")
-        r = _score_pair(base)
-        if r:
-            results.append(r)
-        time.sleep(0.1)  # rate limit
+        try:
+            r = _score_pair(base)
+            if r:
+                results.append(r)
+        except Exception:
+            continue
 
     results.sort(key=lambda r: r["profit_score"], reverse=True)
 
