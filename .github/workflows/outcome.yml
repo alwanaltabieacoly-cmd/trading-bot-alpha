@@ -9,6 +9,10 @@ on:
     - cron: "55 20 * * 1-5"   # 20:55 UTC Mon-Fri
   workflow_dispatch:
 
+concurrency:
+  group: outcome
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -55,10 +59,11 @@ jobs:
           git config user.name "outcome-bot"
           git config user.email "outcome-bot@users.noreply.github.com"
           mkdir -p research/reports/verdicts
-          git add research/reports/warmup/outcome_log.jsonl
-          git add research/reports/warmup/
-          git add research/reports/verdicts/
+          # Tolerant adds: under `bash -e` a missing pathspec aborts the job.
+          git add research/reports/warmup 2>/dev/null || echo "skip (nothing to add): warmup reports"
+          git add research/reports/verdicts 2>/dev/null || echo "skip (nothing to add): verdicts"
           git add -f user_data/feature_weights.json 2>/dev/null || true
+          # Never force-push: rebase + retry keeps parallel workflow commits.
           bash scripts/ci_commit_push.sh "outcome: run $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary

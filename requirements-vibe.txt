@@ -1,0 +1,5 @@
+# Vibe-Trading (MCP server + alpha benchmark engine).
+# Used by .github/workflows/vibe-research.yml and by local MCP clients
+# configured through .mcp.json. Kept separate from requirements.txt so the
+# Freqtrade bot's runtime environment stays lean.
+vibe-trading-ai>=0.1.18

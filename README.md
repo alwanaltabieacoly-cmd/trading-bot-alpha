@@ -197,3 +197,24 @@ Kept here so the same dead ends are not re-explored:
 The intelligence in this system comes from **robustness** — more assets,
 more years, no look-ahead, real fees, statistical correction for the
 number of trials — not from a bigger model.
+
+---
+
+## Vibe-Trading MCP (optional research power-up)
+
+The repo ships a portable MCP config at `.mcp.json` that exposes
+[Vibe-Trading](https://github.com/HKUDS/Vibe-Trading) — 478 pre-built alphas,
+11 backtest engines, factor analysis, options pricing, news/web research — to
+any MCP-capable agent (Claude Code, opencode/Alphacode, Cursor).
+
+```bash
+pip install -r requirements-vibe.txt   # provides the `vibe-trading-mcp` command
+```
+
+The agent then gets `backtest`, `get_market_data`, `factor_analysis`,
+`alpha_zoo`, `web_search`, `read_url` and 76 more tools. The core research
+tools need **no API key** for US/HK/crypto data.
+
+CI also runs a deterministic alpha benchmark every weekday
+(`.github/workflows/vibe-research.yml`) and commits the report under
+`research/reports/vibe/`. No LLM calls, no broker credentials, no orders.

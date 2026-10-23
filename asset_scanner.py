@@ -34,6 +34,16 @@ DEFAULT_PAIRS = [
 ]
 
 
+def _log(msg="", as_json=False):
+    """Human/progress output.
+
+    In --json mode it goes to stderr so stdout stays parseable JSON: the warmup
+    workflow redirects stdout straight into research/reports/asset_scan.json,
+    and mixing log lines into that file corrupted it (preflight caught it).
+    """
+    print(msg, file=sys.stderr if as_json else sys.stdout)
+
+
 def _fetch_kraken_pairs():
     """Get the list of tradable USD pairs from Kraken."""
     try:
@@ -50,7 +60,7 @@ def _fetch_kraken_pairs():
                 pairs.append(base)
         return sorted(set(pairs))
     except Exception as e:
-        print(f"Kraken market fetch failed: {e}")
+        print(f"Kraken market fetch failed: {e}", file=sys.stderr)
         return DEFAULT_PAIRS
 
 
@@ -88,12 +98,12 @@ def run(pairs=None, top_n=10, as_json=False, max_pairs=20):
     if pairs is None:
         pairs = _fetch_kraken_pairs()
     pairs = pairs[:max_pairs]
-    print(f"Scanning {len(pairs)} pairs from Kraken...")
+    _log(f"Scanning {len(pairs)} pairs from Kraken...", as_json=as_json)
 
     results = []
     for i, base in enumerate(pairs):
         if (i + 1) % 10 == 0:
-            print(f"  ... {i+1}/{len(pairs)}")
+            _log(f"  ... {i+1}/{len(pairs)}", as_json=as_json)
         try:
             r = _score_pair(base)
             if r:
@@ -103,11 +113,11 @@ def run(pairs=None, top_n=10, as_json=False, max_pairs=20):
 
     results.sort(key=lambda r: r["profit_score"], reverse=True)
 
-    print(f"\n=== TOP {top_n} PAIRS BY PROFITABILITY ===")
+    _log(f"\n=== TOP {top_n} PAIRS BY PROFITABILITY ===", as_json=as_json)
     for i, r in enumerate(results[:top_n]):
-        print(f"#{i+1} {r['pair']:12s} score={r['profit_score']:+.4f}  "
-              f"mom={r['momentum']:+.4f}  micro={r['micro_score']:+.4f}  "
-              f"vol={r['vol_regime']:+.3f}  close={r['close']}")
+        _log(f"#{i+1} {r['pair']:12s} score={r['profit_score']:+.4f}  "
+             f"mom={r['momentum']:+.4f}  micro={r['micro_score']:+.4f}  "
+             f"vol={r['vol_regime']:+.3f}  close={r['close']}", as_json=as_json)
 
     if as_json:
         print(json.dumps(results[:top_n], indent=2, default=str))

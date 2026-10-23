@@ -9,6 +9,10 @@ on:
     - cron: "0 */6 * * *"   # every 6 hours
   workflow_dispatch:
 
+concurrency:
+  group: sentiment
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -41,12 +45,8 @@ jobs:
           git config user.name "sentiment-bot"
           git config user.email "sentiment-bot@users.noreply.github.com"
           git add -f sentiment/sentiment.sqlite
-          if git diff --staged --quiet; then
-            echo "nothing to commit"
-          else
-            git commit -m "sentiment: run $(date -u +%Y-%m-%d_%H%M)"
-            git push --force
-          fi
+          # Never force-push: rebase + retry keeps parallel workflow commits.
+          bash scripts/ci_commit_push.sh "sentiment: run $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary
         run: |

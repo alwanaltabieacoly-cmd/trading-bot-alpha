@@ -66,14 +66,10 @@ jobs:
           # user_data/decisions/ is in .gitignore, so plain `git add` silently
           # skips it - and that is exactly the file the Render webhook reads
           # (webhook_server.py: LATEST_DECISION_PATH). Force-add it.
-          git add reports/decisions
+          git add reports/decisions 2>/dev/null || echo "skip (nothing to add): reports/decisions"
           git add -f user_data/decisions/latest.json 2>/dev/null || true
-          if git diff --staged --quiet; then
-            echo "nothing to commit"
-          else
-            git commit -m "deliberation: run $(date -u +%Y-%m-%d_%H%M)"
-            git push --force
-          fi
+          # Never force-push: rebase + retry keeps parallel workflow commits.
+          bash scripts/ci_commit_push.sh "deliberation: run $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary
         run: |

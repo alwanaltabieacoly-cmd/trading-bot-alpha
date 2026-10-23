@@ -1,0 +1,108 @@
+name: Vibe-Trading research
+
+# Deterministic Vibe-Trading alpha benchmark.
+#
+# What it does: installs vibe-trading-ai, benchmarks the alpha zoo(s) on free
+# no-key market data (SP500 via yfinance/stooq, CSI300 via free akshare chain),
+# and commits the report. No LLM calls, no broker credentials, no orders.
+#
+# Why it matters: it adds 478 pre-built alphas and a cross-sectional IC engine
+# to the research half, every day, for free on a public repository.
+
+on:
+  schedule:
+    - cron: "40 21 * * 1-5"   # 21:40 UTC Mon-Fri, after Outcome (20:55)
+  workflow_dispatch:
+    inputs:
+      zoo:
+        description: "Alpha zoo to benchmark"
+        type: choice
+        options: [academic, alpha101, qlib158, gtja191]
+        default: academic
+      universe:
+        description: "Universe"
+        type: choice
+        options: [sp500, csi300]
+        default: sp500
+      period:
+        description: "Period: YYYY-YYYY"
+        type: string
+        default: "2024-2025"
+
+concurrency:
+  group: vibe-research
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  VIBE_ZOO: ${{ inputs.zoo || 'academic' }}
+  VIBE_UNIVERSE: ${{ inputs.universe || 'sp500' }}
+  VIBE_PERIOD: ${{ inputs.period || '2024-2025' }}
+
+jobs:
+  alpha-bench:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Vibe-Trading
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-vibe.txt
+          vibe-trading --version
+
+      - name: Run alpha benchmark
+        id: bench
+        run: |
+          mkdir -p research/reports/vibe
+          out="research/reports/vibe/$(date -u +%Y-%m-%d_%H%M)_${VIBE_ZOO}_${VIBE_UNIVERSE}.txt"
+          echo "REPORT_PATH=$out" >> "$GITHUB_ENV"
+          set +e
+          vibe-trading alpha bench \
+            --zoo "$VIBE_ZOO" \
+            --universe "$VIBE_UNIVERSE" \
+            --period "$VIBE_PERIOD" \
+            --top 10 --yes > "$out" 2>&1
+          code=$?
+          set -e
+          echo "exit_code=$code" >> "$out"
+          cat "$out"
+          # Per-symbol diagnostics mention "status": "error" even on success,
+          # so validate the report artifact instead of grepping the log.
+          python scripts/vibe_bench_check.py "$out" "$code"
+          html=$(grep -o '"report_path": "[^"]*"' "$out" | tail -1 | sed 's/.*: "//; s/"$//')
+          if [ -n "$html" ] && [ -f "$html" ]; then
+            cp "$html" research/reports/vibe/
+          fi
+
+      - name: Commit report
+        if: always()
+        run: |
+          git config user.name "vibe-bot"
+          git config user.email "vibe-bot@users.noreply.github.com"
+          git add research/reports/vibe 2>/dev/null || echo "skip (nothing to add): vibe reports"
+          bash scripts/ci_commit_push.sh "vibe: alpha bench $(date -u +%Y-%m-%d_%H%M)"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Vibe-Trading alpha benchmark" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "zoo=\`${VIBE_ZOO}\` universe=\`${VIBE_UNIVERSE}\` period=\`${VIBE_PERIOD}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "${REPORT_PATH:-}" ] && [ -f "$REPORT_PATH" ]; then
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+            tail -n 40 "$REPORT_PATH" >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
