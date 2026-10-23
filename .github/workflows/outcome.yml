@@ -57,7 +57,7 @@ jobs:
           git add research/reports/warmup/outcome_log.jsonl
           git add research/reports/warmup/
           git add research/reports/verdicts/
-          git add user_data/feature_weights.json
+          git add -f user_data/feature_weights.json 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "nothing to commit"
           else
