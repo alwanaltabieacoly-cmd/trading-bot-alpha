@@ -16,9 +16,9 @@ on:
         type: boolean
         default: true
       pairs:
-        description: "Comma-separated base symbols"
+        description: "Comma-separated base symbols. Blank = BTC,ETH,SOL (also the scheduled-run default)."
         type: string
-        default: "BTC,ETH,SOL"
+        default: ""
 
 concurrency:
   group: warmup
@@ -51,8 +51,18 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
+          # Scheduled runs have no inputs: inputs.pairs expands to "" and the
+          # old command died with "argument --pairs: expected at least one
+          # argument" (that was the 2026-10-23 18:44 UTC failure). Default here.
           PAIRS="${{ inputs.pairs }}"
-          python fetch_live.py --pairs $(echo $PAIRS | tr ',' ' ') --tf 1h 4h 1d
+          if [ -z "$PAIRS" ]; then
+            PAIRS="BTC,ETH,SOL"
+          fi
+          echo "fetch pairs: $PAIRS"
+          # Network flake must not abort the whole warmup: verdicts/scan can run
+          # on the committed cache, and the warning is visible in the log.
+          python fetch_live.py --pairs $(echo "$PAIRS" | tr ',' ' ') --tf 1h 4h 1d \
+            || echo "::warning::live candle fetch failed - continuing on cached data"
 
       - name: Run warmup
         env:
