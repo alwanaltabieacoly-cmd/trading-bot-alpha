@@ -54,6 +54,7 @@ jobs:
         run: |
           git config user.name "outcome-bot"
           git config user.email "outcome-bot@users.noreply.github.com"
+          mkdir -p research/reports/verdicts
           git add research/reports/warmup/outcome_log.jsonl
           git add research/reports/warmup/
           git add research/reports/verdicts/
