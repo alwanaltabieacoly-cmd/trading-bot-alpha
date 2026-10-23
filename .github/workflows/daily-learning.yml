@@ -33,12 +33,21 @@ jobs:
       - name: Build daily digest
         run: python -m agents.daily_learning --write
 
-      - name: Commit lessons
+      - name: Build act-on-it brief
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          python scripts/daily_brief.py --write
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          tail -n 40 "research/reports/brief/$(date -u +%Y-%m-%d).md" >> "$GITHUB_STEP_SUMMARY" || true
+
+      - name: Commit lessons and brief
         run: |
           git config user.name "learning-bot"
           git config user.email "learning-bot@users.noreply.github.com"
           git add research/reports/learning 2>/dev/null || echo "skip (nothing to add): learning json"
           git add research/LESSONS_AUTO.md 2>/dev/null || echo "skip (nothing to add): lessons md"
+          git add research/reports/brief 2>/dev/null || echo "skip (nothing to add): brief"
           bash scripts/ci_commit_push.sh "learning: digest $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary
