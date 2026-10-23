@@ -88,36 +88,10 @@ jobs:
           git add research/reports research/state research/data
           git add research/history.csv research/deep-report.md research/deep-report.json
           git add research/evolution.json research/evolution-log.jsonl
-          if git diff --staged --quiet; then
-            echo "nothing to commit"
-          else
-            git commit -m "research: run $(date -u +%Y-%m-%d_%H%M)"
-            git push
-          fi
+          bash scripts/ci_commit_push.sh "research: run $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary
         run: |
           echo "### Research run complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          python - <<'PY' >> $GITHUB_STEP_SUMMARY
-          import json, os, glob
-          state = json.load(open("research/state/champion.json"))
-          champ = state.get("champion") or {}
-          print(f"**Champion:** `{champ.get('id', 'none')}`")
-          print(f"- holdout CAGR: {champ.get('holdout_cagr', 'n/a')}%")
-          print(f"- holdout max drawdown: {champ.get('holdout_dd', 'n/a')}%")
-          print(f"- assets positive: {champ.get('assets_positive', 'n/a')}")
-          ch = state.get("challenger")
-          if ch:
-              print("")
-              print(f"**Challenger (awaiting paper confirmation):** `{ch.get('id')}`")
-              print(f"- holdout CAGR: {ch.get('holdout_cagr', 'n/a')}%")
-          print("")
-          print(f"- cumulative candidates tested: {state.get('cumulative_candidates_tested', 'n/a')}")
-          if os.path.exists("research/deep-report.json"):
-              d = json.load(open("research/deep-report.json"))
-              se = d.get("selection_efficiency", {})
-              print(f"- runs analysed: {d.get('n_runs', 'n/a')}")
-              print(f"- selection efficiency (rank corr): {se.get('mean_rank_correlation', 'n/a')}"
-                    f" -> {se.get('verdict', 'n/a')}")
-          PY
+          python scripts/research_summary.py >> $GITHUB_STEP_SUMMARY

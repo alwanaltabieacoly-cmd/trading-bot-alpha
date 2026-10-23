@@ -35,23 +35,20 @@ jobs:
       - name: Fetch latest candles for outcome comparison
         env:
           PYTHONPATH: ${{ github.workspace }}
-          run: |
         run: |
           python fetch_live.py --pairs BTC ETH SOL --tf 1h 4h 1d
 
       - name: Run outcome tracker
         env:
           PYTHONPATH: ${{ github.workspace }}
-          run: |
         run: |
           python run_outcome.py --all
 
       - name: Tune scoring weights from outcome history
         env:
           PYTHONPATH: ${{ github.workspace }}
-          run: |
         run: |
-          python -c "from agents import feature_engine; result, n = feature_engine.tune_weights(); print(f'Tuned {len(result)} weights from {n} samples' if result else f'Not enough samples ({n}/20 needed)')"
+          python scripts/tune_weights.py
 
       - name: Commit outcome log
         run: |
@@ -62,17 +59,11 @@ jobs:
           git add research/reports/warmup/
           git add research/reports/verdicts/
           git add -f user_data/feature_weights.json 2>/dev/null || true
-          if git diff --staged --quiet; then
-            echo "nothing to commit"
-          else
-            git commit -m "outcome: run $(date -u +%Y-%m-%d_%H%M)"
-            git push --force
-          fi
+          bash scripts/ci_commit_push.sh "outcome: run $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary
         env:
           PYTHONPATH: ${{ github.workspace }}
-          run: |
         run: |
           echo "### Outcome complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
