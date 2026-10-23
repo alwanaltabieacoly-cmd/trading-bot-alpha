@@ -86,15 +86,63 @@ def _load_scan_cache(base, tf):
     return df
 
 
+def _fetch_bars(exchange_name, symbol, tf, days):
+    """Fetch OHLCV from one ccxt exchange, paginating to cover ``days``."""
+    import ccxt
+    import time
+
+    ex = getattr(ccxt, exchange_name)({"enableRateLimit": True})
+    # Integer milliseconds: avoids pandas Timedelta unit deprecations entirely.
+    since = int(pd.Timestamp.now("UTC").timestamp() * 1000) - int(days * 86400 * 1000)
+    rows = []
+    while since < ex.milliseconds():
+        batch = ex.fetch_ohlcv(symbol, timeframe=tf, since=since, limit=1000)
+        if not batch:
+            break
+        rows.extend(batch)
+        last = batch[-1][0]
+        if last <= since or len(rows) > 20000:
+            break
+        since = last + 1
+        time.sleep(ex.rateLimit / 1000)
+    if not rows:
+        raise RuntimeError("no rows returned")
+    df = pd.DataFrame(rows, columns=["ts", "open", "high", "low", "close", "volume"])
+    df["date"] = pd.to_datetime(df["ts"], unit="ms", utc=True)
+    return (
+        df.drop(columns=["ts"])
+        .drop_duplicates(subset=["date"])
+        .sort_values("date")
+        .reset_index(drop=True)
+    )
+
+
+# Bybit and Binance geo-block GitHub runner IPs (CloudFront 403 / 451);
+# Kraken/OKX/KuCoin are reachable, so keep a real fallback chain instead of
+# failing the whole wide scan on one blocked venue.
+SCAN_EXCHANGES = (
+    ("kraken", "{base}/USD"),
+    ("okx", "{base}/USDT"),
+    ("kucoin", "{base}/USDT"),
+    ("binance", "{base}/USDT"),
+    ("coinbase", "{base}-USD"),
+    ("bybit", "{base}/USDT"),
+)
+
+
 def _fetch_scan_cache(base, tf, days):
-    """Download a pair into the untracked scan cache. Returns frame or None."""
-    from research import data as rdata
-    df = rdata.fetch_candles(base, tf, days_back=days)
-    if df is None or len(df) == 0:
-        return None
-    os.makedirs(SCAN_CACHE_DIR, exist_ok=True)
-    df.to_parquet(_scan_cache_path(base, tf), index=False, engine=rdata.PARQUET_ENGINE)
-    return df
+    """Download a pair into the untracked scan cache using the first reachable venue."""
+    errors = []
+    for exchange_name, fmt in SCAN_EXCHANGES:
+        try:
+            df = _fetch_bars(exchange_name, fmt.format(base=base), tf, days)
+        except Exception as e:
+            errors.append(f"{exchange_name}:{type(e).__name__}")
+            continue
+        os.makedirs(SCAN_CACHE_DIR, exist_ok=True)
+        df.to_parquet(_scan_cache_path(base, tf), index=False, engine="pyarrow")
+        return df
+    raise RuntimeError("all exchanges failed (" + ", ".join(errors) + ")")
 
 
 def _scan_cached_bases(tf):

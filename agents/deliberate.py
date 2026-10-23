@@ -147,19 +147,20 @@ def main(argv=None):
     with open(out_path, "w", encoding="utf-8") as fh:
         json.dump(record, fh, indent=2, default=str)
 
-    if live:
-        common.LATEST_DECISION_PATH.parent.mkdir(parents=True, exist_ok=True)
-        latest = {
-            "asof": decision["asof"],
-            "generated_at": generated_at,
-            "source": decision["source"],
-            "pairs": decision["pairs"],
-            # Evidence carried into the live gate (Render/PC reads this file).
-            "vibe_factors": decision.get("vibe_factors"),
-            "evidence": decision.get("evidence"),
-        }
-        with open(common.LATEST_DECISION_PATH, "w", encoding="utf-8") as fh:
-            json.dump(latest, fh, indent=2, default=str)
+    # Always publish the latest decision pointer: the Render webhook and the
+    # PC-off evidence gate read it, including for scheduled (non-live) runs.
+    common.LATEST_DECISION_PATH.parent.mkdir(parents=True, exist_ok=True)
+    latest = {
+        "asof": decision["asof"],
+        "generated_at": generated_at,
+        "source": decision["source"],
+        "pairs": decision["pairs"],
+        # Evidence carried into the live gate (Render/PC reads this file).
+        "vibe_factors": decision.get("vibe_factors"),
+        "evidence": decision.get("evidence"),
+    }
+    with open(common.LATEST_DECISION_PATH, "w", encoding="utf-8") as fh:
+        json.dump(latest, fh, indent=2, default=str)
 
     for pair in pairs:
         item = decision["pairs"].get(pair, {})

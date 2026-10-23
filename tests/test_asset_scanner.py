@@ -85,5 +85,18 @@ class TestScannerUniverse(unittest.TestCase):
         self.assertIn("skip ETH/USD", err.getvalue())
 
 
+class TestScanCache(unittest.TestCase):
+    def test_scan_cache_kept_outside_tracked_data_dir(self):
+        path = asset_scanner._scan_cache_path("ADA", "4h")
+        self.assertIn("scan", path.replace("\\", "/"))
+        self.assertTrue(path.endswith("ADA_4h.parquet"))
+
+    def test_all_exchange_failures_are_reported(self):
+        with mock.patch.object(asset_scanner, "SCAN_EXCHANGES", ()):
+            with self.assertRaises(RuntimeError) as ctx:
+                asset_scanner._fetch_scan_cache("ADA", "4h", 30)
+        self.assertIn("all exchanges failed", str(ctx.exception))
+
+
 if __name__ == "__main__":
     sys.exit(unittest.main())
