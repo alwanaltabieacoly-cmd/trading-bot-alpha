@@ -62,6 +62,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "nothing to commit"
           else
+            git pull --rebase || true
             git commit -m "outcome: run $(date -u +%Y-%m-%d_%H%M)"
             git push
           fi
