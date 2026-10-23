@@ -47,9 +47,8 @@ jobs:
           if git diff --staged --quiet; then
             echo "nothing to commit"
           else
-            git pull --rebase || true
             git commit -m "sentiment: run $(date -u +%Y-%m-%d_%H%M)"
-            git push
+            git push --force
           fi
 
       - name: Summary
