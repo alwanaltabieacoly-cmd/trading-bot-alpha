@@ -3,6 +3,7 @@ import json
 import random
 
 from . import common, market_agent, news_agent, risk_agent, session_agent
+from . import evidence_gate, vibe_evidence
 
 INSTRUCTION = (
     "You are a risk veto layer for a crypto spot trading bot (Bybit, USDT pairs). "
@@ -10,12 +11,46 @@ INSTRUCTION = (
     "You may only ALLOW or BLOCK entries per pair and optionally shrink the position size. "
     "You can never place, modify or close orders. "
     "When in doubt, block. "
+    "If an EVIDENCE block is present, your rationale must cite at least one alpha factor or "
+    "asset-scan number from it verbatim; never invent a number that is not in DATA or EVIDENCE. "
     "Respond with ONLY one JSON object and nothing else, no prose and no code fences, using exactly this schema: "
     '{"pairs": {"<PAIR>": {"action": "allow" or "block", "size": <0.0-1.0>, '
     '"confidence": <0.0-1.0>, "rationale": "<short text>"}}, "followups": ["<question>", "..."]}. '
     "Include one entry for every requested pair. size is a fraction of the normal stake. "
     "followups may be an empty list if no further data is needed."
 )
+
+
+def _evidence_payload():
+    """GitHub-produced evidence the analyst must reason over (may be empty)."""
+    payload = {}
+    try:
+        summary = vibe_evidence.summarize()
+    except Exception:
+        summary = None
+    if summary and summary.get("top"):
+        payload["alpha_bench"] = {
+            "zoo": summary.get("zoo"),
+            "universe": summary.get("universe"),
+            "period": summary.get("period"),
+            "age_hours": summary.get("age_hours"),
+            "top": summary["top"],
+            "caveats": summary.get("caveats"),
+        }
+    scan = evidence_gate.load_asset_scan()
+    if scan:
+        ranked = sorted(
+            (row for row in scan if isinstance(row, dict)
+             and isinstance(row.get("profit_score"), (int, float))),
+            key=lambda row: row["profit_score"],
+            reverse=True,
+        )
+        payload["asset_scan"] = [
+            {"pair": row.get("pair"), "profit_score": row.get("profit_score"),
+             "momentum": row.get("momentum"), "micro_score": row.get("micro_score")}
+            for row in ranked[:10]
+        ]
+    return payload
 
 
 def _asset_mapping(pairs, asof_dt):
@@ -169,14 +204,16 @@ def _payload(pairs, reports, anonymize, mapping):
     }
 
 
-def _build_prompt(pairs, asof, reports, anonymize=False, mapping=None):
+def _build_prompt(pairs, asof, reports, anonymize=False, mapping=None, evidence=None):
     payload = _payload(pairs, reports, anonymize, mapping)
-    return (
+    prompt = (
         INSTRUCTION
         + "\nDATA: "
         + json.dumps(payload, default=str)
-        + "\nReturn only the JSON object now."
     )
+    if evidence:
+        prompt += "\nEVIDENCE: " + json.dumps(evidence, default=str)
+    return prompt + "\nReturn only the JSON object now."
 
 
 def _followup_prompt(base_prompt, followups, reports, anonymize=False, mapping=None):
@@ -293,9 +330,14 @@ def decide(
     followups = []
     best = None
     model_used = None
+    try:
+        evidence = _evidence_payload()
+    except Exception:  # evidence is context, never a reason to fail a decision
+        evidence = {}
     if use_llm:
         prompt = _build_prompt(
-            pairs, asof_dt, reports, anonymize=anonymize, mapping=mapping
+            pairs, asof_dt, reports, anonymize=anonymize, mapping=mapping,
+            evidence=evidence,
         )
         prompts.append(prompt)
         for round_index in range(3):
@@ -339,4 +381,5 @@ def decide(
         "raw": raws,
         "anonymize": bool(anonymize),
         "mapping": mapping,
+        "evidence": evidence,
     }

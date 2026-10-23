@@ -154,6 +154,9 @@ def main(argv=None):
             "generated_at": generated_at,
             "source": decision["source"],
             "pairs": decision["pairs"],
+            # Evidence carried into the live gate (Render/PC reads this file).
+            "vibe_factors": decision.get("vibe_factors"),
+            "evidence": decision.get("evidence"),
         }
         with open(common.LATEST_DECISION_PATH, "w", encoding="utf-8") as fh:
             json.dump(latest, fh, indent=2, default=str)

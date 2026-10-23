@@ -12,6 +12,7 @@ Standalone use (used by the workflow summary step):
 """
 import json
 import re
+from datetime import datetime, timezone
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -85,9 +86,17 @@ def summarize(report_path=None, max_alphas=MAX_ALPHAS):
         return None
 
     match = _NAME_RE.match(path.stem)
+    try:
+        stat = path.stat()
+        age_hours = round((__import__("time").time() - stat.st_mtime) / 3600.0, 2)
+        generated_at = datetime.fromtimestamp(stat.st_mtime, timezone.utc).isoformat()
+    except OSError:
+        age_hours, generated_at = None, None
     return {
         "source": "vibe-trading alpha_bench",
         "artifact": path.as_posix(),
+        "age_hours": age_hours,
+        "generated_at": generated_at,
         "asof": match.group("date") if match else None,
         "zoo": data.get("zoo"),
         "universe": data.get("universe"),
@@ -159,8 +168,17 @@ def summary_text(summary):
 
 
 def main(argv=None):
+    import argparse
+
+    parser = argparse.ArgumentParser(prog="python -m agents.vibe_evidence")
+    parser.add_argument("--json", action="store_true",
+                        help="emit the summary as JSON (used by the workflow pointer file)")
+    args = parser.parse_args(argv)
     summary = summarize()
-    print(summary_text(summary))
+    if args.json:
+        print(json.dumps(summary or {}, indent=2, default=str))
+    else:
+        print(summary_text(summary))
     return 0
 
 

@@ -64,7 +64,10 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          python asset_scanner.py --top 15 --tf 4h --json \
+          # Wide universe: the first 5 tracked assets come from the committed
+          # research cache; missing majors are fetched into the git-ignored
+          # scan cache (research/data/scan/) so the repo stays lean.
+          python asset_scanner.py --top 15 --tf 4h --max-pairs 12 --fetch-missing --json \
             > research/reports/asset_scan.json 2> research/reports/asset_scan_diagnostics.txt
           # Surface the skip reasons in the run log as well as the artifact.
           tail -n 25 research/reports/asset_scan_diagnostics.txt

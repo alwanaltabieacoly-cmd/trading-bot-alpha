@@ -6,8 +6,12 @@ from fastapi import FastAPI, Request, HTTPException, Header
 from pydantic import BaseModel, Field
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-import json, hmac, hashlib, os
+import json, hmac, hashlib, os, sys
 from typing import Optional
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from agents import evidence_gate
 
 app = FastAPI(title="TradingView Bridge")
 
@@ -27,6 +31,9 @@ class TVAlert(BaseModel):
     strategy: str = "sma200"
     confidence: float = 0.5
     secret: str = ""
+    # Optional explicit size from TradingView. Was referenced downstream but
+    # missing from the model, so every buy raised AttributeError.
+    qty: Optional[float] = None
 
 
 # --- strategy-aware routing -----------------------------------------------
@@ -42,8 +49,20 @@ SCALP_DAILY_LOSS_LIMIT = 5.0
 
 
 def _is_equity(alert):
-    sym = alert.symbol.upper()
-    return sym in EQUITY_SYMBOLS or "/" not in sym
+    """Route by explicit evidence, not symbol shape.
+
+    Old behaviour treated any symbol without '/' as equity, so TradingView
+    alerts like BTCUSDT or BTC landed in the scalp path and died on
+    "unknown scalp strategy". Equity only when the symbol is a known equity or
+    the alert declares a scalp strategy; everything else takes the
+    deliberation + evidence-gate route (which fails closed).
+    """
+    sym = alert.symbol.upper().strip()
+    if sym in EQUITY_SYMBOLS:
+        return True
+    if str(alert.strategy).lower() in SCALP_STRATEGIES:
+        return True
+    return False
 
 
 def _scalp_guard(state, alert):
@@ -84,25 +103,27 @@ def _latest_decision():
     return None
 
 def _veto_check(symbol, action):
-    """Return (allowed, reason) based on deliberation. Fail-closed if no decision."""
-    dec = _latest_decision()
-    if not dec:
-        return False, "no deliberation decision available - fail closed"
-    pairs = dec.get("decision", {}).get("pairs")
-    if not isinstance(pairs, dict):
-        pairs = dec.get("pairs")
-    if not isinstance(pairs, dict):
-        pairs = {}
-    item = pairs.get(symbol)
-    if not item:
-        return False, f"{symbol} not in deliberation - fail closed"
+    """Return (allowed, reason) using the fail-closed evidence gate.
+
+    The gate blocks when the deliberation decision or the alpha-bench artifact
+    is missing/stale, when the symbol has no positive asset-scan score, or when
+    the symbol is absent from the decision. No guessing: absent evidence blocks.
+    """
+    gate = evidence_gate.check_entry(symbol)
+    if not gate["allowed"]:
+        return False, "evidence gate: " + "; ".join(gate["reasons"])
+    item = gate["evidence"].get("decision_pair") or {}
     d_action = item.get("action", "block")
     size = item.get("size", 0.0)
     if action in ("buy",) and d_action != "allow":
         return False, f"deliberation blocked {symbol}: {item.get('rationale','')}"
     if action in ("buy",) and (size is None or size <= 0):
         return False, f"deliberation size=0 for {symbol}"
-    return True, f"deliberation allows {symbol} (size={size}, conf={item.get('confidence')})"
+    scan = gate["evidence"].get("scan") or {}
+    return True, (
+        f"evidence gate ok | deliberation allows {symbol} "
+        f"(size={size}, conf={item.get('confidence')}, scan={scan.get('profit_score')})"
+    )
 
 
 def _time_gate():
@@ -156,6 +177,14 @@ async def tv_webhook(alert: TVAlert, x_tv_secret: str = Header(default="")):
     if alert.action == "buy":
         if is_equity:
             allowed, reason = _scalp_guard(state, alert)
+            if allowed:
+                vibe = evidence_gate.check_vibe()
+                if not vibe["allowed"]:
+                    allowed = False
+                    reason = "evidence gate: " + "; ".join(vibe["reasons"])
+                else:
+                    best = (vibe["evidence"].get("vibe") or {}).get("best_alpha")
+                    reason = f"{reason} | alpha={best}"
             result["route"] = "scalp"
         else:
             allowed, reason = _veto_check(symbol, "buy")

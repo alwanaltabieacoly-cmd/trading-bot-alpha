@@ -24,10 +24,16 @@ import json
 import os
 import sys
 
+import pandas as pd
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from agents import common, feature_engine
 from research import config
+
+# Untracked cache for pairs outside config.ASSETS (git-ignored): keeps the
+# scanner able to rank a wide universe without bloating the repository.
+SCAN_CACHE_DIR = os.path.join(config.DATA_DIR, "scan")
 
 # Curated universe, in priority order. Only bases that exist in the local
 # research cache can be scored; the rest are reported as skips.
@@ -62,6 +68,45 @@ def _cached_bases(tf):
     return out
 
 
+def _scan_cache_path(base, tf):
+    return os.path.join(SCAN_CACHE_DIR, f"{base}_{tf}.parquet")
+
+
+def _load_scan_cache(base, tf):
+    """Load a scan-only cached frame (untracked), or None."""
+    path = _scan_cache_path(base, tf)
+    if not os.path.exists(path):
+        return None
+    try:
+        df = pd.read_parquet(path)
+    except Exception:
+        return None
+    if df is None or len(df) == 0 or "date" not in df.columns:
+        return None
+    return df
+
+
+def _fetch_scan_cache(base, tf, days):
+    """Download a pair into the untracked scan cache. Returns frame or None."""
+    from research import data as rdata
+    df = rdata.fetch_candles(base, tf, days_back=days)
+    if df is None or len(df) == 0:
+        return None
+    os.makedirs(SCAN_CACHE_DIR, exist_ok=True)
+    df.to_parquet(_scan_cache_path(base, tf), index=False, engine=rdata.PARQUET_ENGINE)
+    return df
+
+
+def _scan_cached_bases(tf):
+    if not os.path.isdir(SCAN_CACHE_DIR):
+        return []
+    suffix = f"_{tf}.parquet"
+    return sorted(
+        name[: -len(suffix)] for name in os.listdir(SCAN_CACHE_DIR)
+        if name.endswith(suffix)
+    )
+
+
 def _kraken_listed():
     """Bases Kraken currently offers against USD/USDT. None when offline."""
     try:
@@ -92,7 +137,7 @@ def _watchlist(max_pairs=20, tf="4h"):
     candidates = list(DEFAULT_PAIRS) if listed is None else [b for b in DEFAULT_PAIRS if b in listed]
     if not candidates:
         candidates = list(DEFAULT_PAIRS)
-    cached = set(_cached_bases(tf))
+    cached = set(_cached_bases(tf)) | set(_scan_cached_bases(tf))
     # Prioritise pairs we can score right now, keep curated order otherwise.
     ordered = [b for b in candidates if b in cached] + [b for b in candidates if b not in cached]
     return ordered[:max_pairs]
@@ -102,14 +147,19 @@ def _score_pair(base, tf="4h", fetch_missing=False):
     """Score one base. Returns (record, skip_reason); exactly one is None."""
     pair = f"{base}/USD"
     df = common.load_candles(pair, tf, None)
+    if df is None:
+        df = _load_scan_cache(base, tf)  # untracked wide-universe cache
 
     if df is None and fetch_missing:
         try:
-            from research import data as rdata
-            rdata.update_asset(base, tf, days_back=FETCH_DAYS.get(tf, 365))
+            if base in config.ASSETS:
+                from research import data as rdata
+                rdata.update_asset(base, tf, days_back=FETCH_DAYS.get(tf, 365))
+                df = common.load_candles(pair, tf, None)
+            else:
+                df = _fetch_scan_cache(base, tf, FETCH_DAYS.get(tf, 365))
         except Exception as e:
             return None, f"fetch failed ({type(e).__name__}: {e})"
-        df = common.load_candles(pair, tf, None)
 
     if df is None:
         return None, f"no cached {tf} candles (run: python -m research.data.update_all)"

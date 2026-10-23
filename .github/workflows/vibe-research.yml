@@ -86,6 +86,11 @@ jobs:
             cp "$html" research/reports/vibe/
           fi
 
+      - name: Write latest evidence pointer
+        run: |
+          python -m agents.vibe_evidence --json > research/reports/vibe/latest.json
+          python -m agents.vibe_evidence >> "$GITHUB_STEP_SUMMARY"
+
       - name: Commit report
         if: always()
         run: |
