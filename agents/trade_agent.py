@@ -19,7 +19,7 @@ import sys
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
-from . import common, news_agent, market_agent
+from . import common, news_agent, market_agent, feature_engine
 
 
 def _read_json(path):
@@ -80,39 +80,88 @@ def warmup(pair, equity=False, asof=None):
     fng = news.get("fng") or {}
     gdelt = news.get("gdelt") or {}
 
-    # Scoring: simple rule-based GO/NO-GO
+    # Load current weights (tuned from past outcomes)
+    weights = feature_engine.load_weights()
+
+    # Extract candle micro-structure features from the best available TF
+    features = {}
+    tf_entry = market.get("pairs", {}).get(pair, {}).get("timeframes", {})
+    for tf in ("1h", "4h", "1d"):
+        entry = tf_entry.get(tf, {})
+        if entry.get("available"):
+            df = common.load_candles(pair, tf, asof_dt)
+            if df is not None and len(df) >= 5:
+                feats = feature_engine.extract(df, pair, tf)
+                if feats:
+                    features[tf] = feats
+                    break
+
+    # Scoring: weighted rule-based GO/NO-GO
     blockers = []
     score = 0
 
     if regime == "bull":
-        score += 2
+        score += weights.get("regime_bull", 2.0)
     elif regime == "bear":
-        score -= 2
+        score -= abs(weights.get("regime_bear", -2.0))
         blockers.append(f"regime=bear ({tf_used})")
 
     fng_val = fng.get("value")
     if fng_val is not None:
         if fng_val <= 25:
-            score += 1
+            score += weights.get("fng_fear", 1.0)
         elif fng_val >= 75:
-            score -= 1
+            score -= abs(weights.get("fng_greed", -1.0))
             blockers.append(f"fng={fng_val} (extreme greed)")
 
     # GDELT tone
     for q, data in gdelt.items():
         tone = data.get("tone_7d")
         if tone is not None and tone < 0:
-            score -= 1
+            score -= abs(weights.get("gdelt_neg", -1.0))
             blockers.append(f"gdelt[{q}] tone_7d={tone} (negative)")
+
+    # Candle micro-structure signals
+    if features:
+        tf_used_feat = list(features.keys())[0]
+        f = features[tf_used_feat]
+        micro = f.get("micro_score", 0)
+        if f.get("body_absorption", 0) > 0:
+            score += weights.get("absorption", 1.0)
+            blockers.append(f"candle absorption ({tf_used_feat})")
+        if f.get("body_exhaustion", 0) < 0:
+            score -= abs(weights.get("exhaustion", -1.0))
+            blockers.append(f"candle exhaustion ({tf_used_feat})")
+        mom = f.get("momentum_3_5_10_21", 0)
+        if mom > 0.1:
+            score += weights.get("momentum_up", 1.5)
+        elif mom < -0.1:
+            score -= abs(weights.get("momentum_down", -1.5))
+            blockers.append(f"momentum down ({tf_used_feat})")
+        if f.get("volume_spike", 0) > 0:
+            score += weights.get("volume_spike", 1.0)
+        elif f.get("volume_spike", 0) < 0:
+            score -= abs(weights.get("volume_spike", 1.0))
+            blockers.append(f"volume distribution ({tf_used_feat})")
 
     # Deliberation veto
     dec_pairs = (decision or {}).get("decision", {}).get("pairs", {})
     dec = dec_pairs.get(pair, {})
     if dec.get("action") == "block":
-        score -= 3
+        score -= abs(weights.get("deliberation_block", -3.0))
         blockers.append(f"deliberation=block: {dec.get('rationale', 'no reason')}")
 
     verdict = "GO" if score >= 1 else "NO-GO"
+
+    # Record the verdict with full feature vector for the tuner
+    feature_engine.record_verdict(
+        pair=pair,
+        features=features,
+        score=score,
+        verdict=verdict,
+        blockers=blockers,
+        weights_used=weights,
+    )
 
     result = {
         "asof": asof_iso,
@@ -135,6 +184,8 @@ def warmup(pair, equity=False, asof=None):
             "rationale": dec.get("rationale"),
         },
         "blockers": blockers,
+        "features": features,
+        "weights": weights,
     }
     return result
 
