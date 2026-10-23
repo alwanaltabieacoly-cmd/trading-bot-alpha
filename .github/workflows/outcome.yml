@@ -1,16 +1,12 @@
 name: Outcome
 
 # Closes the feedback loop on GitHub -- no PC needed.
-#
 # Runs after the warmup to compare GO/NO-GO verdicts against what actually
-# happened.  Writes to reports/warmup/outcome_log.jsonl.
-#
-# This is the "was I right?" step.  Accumulates evidence so we can answer
-# "does the warmup signal have real edge?" after 90 days.
+# happened, then tunes the scoring weights from outcome history.
 
 on:
   schedule:
-    - cron: "55 20 * * 1-5"   # 20:55 UTC Mon-Fri -- after US close
+    - cron: "55 20 * * 1-5"   # 20:55 UTC Mon-Fri
   workflow_dispatch:
 
 permissions:
@@ -52,16 +48,7 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          python -c "
-from agents import feature_engine
-result, n = feature_engine.tune_weights()
-if result:
-    print(f'Tuned {len(result)} weights from {n} samples')
-    for k, v in sorted(result.items()):
-        print(f'  {k}: {v}')
-else:
-    print(f'Not enough samples to tune ({n}/20 needed)')
-"
+          python -c "from agents import feature_engine; result, n = feature_engine.tune_weights(); print(f'Tuned {len(result)} weights from {n} samples' if result else f'Not enough samples ({n}/20 needed)')"
 
       - name: Commit outcome log
         run: |
@@ -79,30 +66,9 @@ else:
           fi
 
       - name: Summary
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           echo "### Outcome complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          python -c "
-          import json
-          log = 'research/reports/warmup/outcome_log.jsonl'
-          try:
-              with open(log) as f:
-                  lines = f.readlines()
-              if not lines:
-                  print('no outcomes yet')
-              else:
-                  latest = json.loads(lines[-1])
-                  outs = latest['outcomes']
-                  correct = sum(1 for o in outs if o['result']=='CORRECT')
-                  wrong = sum(1 for o in outs if o['result']=='WRONG')
-                  missed = sum(1 for o in outs if o['result']=='MISSED')
-                  total = len(outs)
-                  print(f'**Today**: {correct} correct, {wrong} wrong, {missed} missed ({correct/total*100:.0f}%)')
-                  print()
-                  for o in outs:
-                      chg = o.get('price_change_1h_pct') or o.get('price_change_1d_pct')
-                      chg_str = f'{chg:+.3f}%' if chg is not None else 'N/A'
-                      print(f'- {o[\"pair\"]}: {o[\"verdict\"]} -> {o[\"result\"]} ({chg_str})')
-          except FileNotFoundError:
-              print('no outcome log yet')
-          " >> $GITHUB_STEP_SUMMARY
+          python summary_outcome.py >> $GITHUB_STEP_SUMMARY

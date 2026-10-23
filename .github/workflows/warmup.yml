@@ -1,20 +1,14 @@
 name: Warmup
 
 # Runs the Trade Agent warmup before the US market open (14:45 UTC = 9:45 AM ET).
-#
-# KEY: step 2 fetches LIVE candles from Bybit before the warmup runs.
-# Without this, the regime signal (bull/bear/range) is computed from
-# stale committed cache and the verdict is worthless.
-#
-# Also runs at 00:30 UTC (after 4h/1d bars close) so the morning verdict
-# uses fresh data even if the 14:45 run is delayed.
-#
-# This is the "read the charts and analyze deeply" step.  It never places orders.
+# Fetches LIVE candles from Kraken before the verdict so the regime signal
+# is computed from fresh data, not stale committed cache.
+# Also runs at 00:30 UTC so the morning verdict uses fresh data.
 
 on:
   schedule:
-    - cron: "30 0 * * *"      # 00:30 UTC -- after 4h bars close
-    - cron: "45 14 * * 1-5"   # 14:45 UTC Mon-Fri -- before US open
+    - cron: "30 0 * * *"      # 00:30 UTC
+    - cron: "45 14 * * 1-5"   # 14:45 UTC Mon-Fri
   workflow_dispatch:
     inputs:
       all:
@@ -22,7 +16,7 @@ on:
         type: boolean
         default: true
       pairs:
-        description: "Comma-separated base symbols (default: BTC ETH SOL)"
+        description: "Comma-separated base symbols"
         type: string
         default: "BTC,ETH,SOL"
 
@@ -49,7 +43,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install ccxt pandas numpy pyarrow requests
 
-      - name: Fetch LIVE candles from Bybit
+      - name: Fetch LIVE candles from Kraken
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
@@ -67,20 +61,15 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           python asset_scanner.py --top 15 --json > research/reports/asset_scan.json
-          echo "### Top pairs by profitability" >> $GITHUB_STEP_SUMMARY
-          python -c "
-import json
-with open('research/reports/asset_scan.json') as f:
-    results = json.load(f)
-for i, r in enumerate(results[:5]):
-    print(f'{i+1}. {r[\"pair\"]}: score={r[\"profit_score\"]:+.4f}  momentum={r[\"momentum\"]:+.4f}  close={r[\"close\"]}')
-" >> $GITHUB_STEP_SUMMARY
+          python summary_scan.py >> $GITHUB_STEP_SUMMARY
 
       - name: Commit warmup report
         run: |
           git config user.name "warmup-bot"
           git config user.email "warmup-bot@users.noreply.github.com"
           git add research/reports/warmup/
+          git add research/reports/verdicts/
+          git add research/reports/asset_scan.json
           git add research/data/
           if git diff --staged --quiet; then
             echo "nothing to commit"
@@ -90,26 +79,11 @@ for i, r in enumerate(results[:5]):
           fi
 
       - name: Summary
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
           echo "### Warmup complete" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Fresh candles fetched from Bybit before verdict.**" >> $GITHUB_STEP_SUMMARY
+          echo "**Fresh candles fetched from Kraken before verdict.**" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          python -c "
-          import json, os, glob
-          wdir = 'research/reports/warmup'
-          files = sorted(glob.glob(f'{wdir}/*.json'), reverse=True)
-          if not files:
-              print('no reports')
-          else:
-              with open(files[0]) as f:
-                  data = json.load(f)
-              for pair, r in data.items():
-                  regime = r.get('regime') or 'N/A'
-                  tf = r.get('regime_tf') or ''
-                  fng = (r.get('fng') or {}).get('value', 'N/A')
-                  print(f'- **{pair}**: {r[\"verdict\"]} (score={r[\"score\"]})')
-                  print(f'  regime={regime} {tf}  F&G={fng}')
-                  for b in r.get('blockers', []):
-                      print(f'  BLOCK: {b}')
-          " >> $GITHUB_STEP_SUMMARY
+          python summary_warmup.py >> $GITHUB_STEP_SUMMARY
