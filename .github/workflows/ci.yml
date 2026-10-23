@@ -1,0 +1,45 @@
+name: CI
+
+# Regression gate: every push to main and every PR must pass the workspace
+# preflight (Python syntax, JSON/YAML validity, workflow structure, secret and
+# merge-conflict hygiene) plus the unit tests. This is what stops the
+# "empty scanner" / "corrupt JSON artifact" class of bug from coming back.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas numpy pyarrow ccxt pyyaml pytest
+
+      - name: Preflight (syntax, JSON/YAML, hygiene)
+        run: python preflight.py
+
+      - name: Unit tests
+        run: python -m pytest -q

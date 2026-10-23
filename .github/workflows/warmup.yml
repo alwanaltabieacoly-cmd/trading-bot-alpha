@@ -64,8 +64,9 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: |
-          python asset_scanner.py --top 15 --json > research/reports/asset_scan.json
-          python summary_scan.py >> $GITHUB_STEP_SUMMARY
+          python asset_scanner.py --top 15 --tf 4h --json \
+            > research/reports/asset_scan.json 2> research/reports/asset_scan_diagnostics.txt
+          python summary_scan.py >> "$GITHUB_STEP_SUMMARY"
 
       - name: Commit warmup report
         run: |
@@ -73,7 +74,7 @@ jobs:
           git config user.email "warmup-bot@users.noreply.github.com"
           # Tolerant adds: under `bash -e` a missing or fully-ignored pathspec
           # aborts the whole job (this is how the 2026-10-23 outcome run died).
-          for p in research/reports/warmup research/reports/verdicts research/reports/asset_scan.json research/data; do
+          for p in research/reports/warmup research/reports/verdicts research/reports/asset_scan.json research/reports/asset_scan_diagnostics.txt research/data; do
             git add "$p" 2>/dev/null || echo "skip (nothing to add): $p"
           done
           # Never force-push: rebase + retry, so parallel workflows and the PC

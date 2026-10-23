@@ -4,7 +4,10 @@ Wraps decision_agent.decide() outputs into a structured multi-agent
 deliberation. Keeps the existing decide() as the data-gathering/LLM step,
 then adds red-team + audit + synthesis on top.
 """
+import sys
+
 from . import common, decision_agent, critic_agent, auditor_agent, synthesizer_agent, blackboard as bb
+from . import vibe_evidence
 
 
 def run(pairs, asof, use_llm=True, api_url=None, live_orderbook=False, anonymize=False):
@@ -45,6 +48,18 @@ def run(pairs, asof, use_llm=True, api_url=None, live_orderbook=False, anonymize
     b.add(risk_entry)
     b.add(critic_raw)
 
+    # Cite the latest Vibe-Trading alpha benchmark when one has been committed
+    # by the "Vibe-Trading research" workflow. A missing artifact is normal and
+    # must not fail deliberation -- this is context, not a veto.
+    try:
+        vibe = vibe_evidence.summarize()
+        vibe_entry = vibe_evidence.blackboard_entry(vibe)
+    except Exception as e:  # evidence must never break a decision
+        print(f"vibe-factors: evidence unavailable ({type(e).__name__}: {e})", file=sys.stderr)
+        vibe, vibe_entry = None, None
+    if vibe_entry:
+        b.add(vibe_entry)
+
     # Round 2: synthesizer + auditor
     synth_entry, decision_pairs = synthesizer_agent.analyze(
         asof_dt, market, risk, analyst_rec, critic_raw.get("pair_recommendations", {}), 2
@@ -68,6 +83,7 @@ def run(pairs, asof, use_llm=True, api_url=None, live_orderbook=False, anonymize
         b.convergence = False
 
     decision["pairs"] = decision_pairs
+    decision["vibe_factors"] = vibe
     decision["deliberation"] = b.to_dict()
     return decision, b
 
@@ -126,6 +142,7 @@ def main(argv=None):
             "pairs": decision["pairs"],
         },
         "deliberation": b.to_dict(),
+        "vibe_factors": decision.get("vibe_factors"),
     }
     with open(out_path, "w", encoding="utf-8") as fh:
         json.dump(record, fh, indent=2, default=str)
@@ -151,6 +168,15 @@ def main(argv=None):
         )
     print(f"wrote {out_path}")
     print(f"deliberation rounds: {sorted(b.rounds.keys())}")
+    vibe = decision.get("vibe_factors")
+    if vibe and vibe.get("top"):
+        best = vibe["top"][0]
+        print(
+            f"vibe-factors: {best['alpha']} IR={best['ir']} IC_mean={best['ic_mean']} "
+            f"({vibe.get('zoo')}/{vibe.get('universe')} {vibe.get('period')})"
+        )
+    else:
+        print("vibe-factors: no benchmark artifact yet (run the 'Vibe-Trading research' workflow)")
     return 0
 
 

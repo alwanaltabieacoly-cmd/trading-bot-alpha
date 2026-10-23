@@ -72,7 +72,12 @@ jobs:
           bash scripts/ci_commit_push.sh "deliberation: run $(date -u +%Y-%m-%d_%H%M)"
 
       - name: Summary
+        env:
+          PYTHONPATH: ${{ github.workspace }}
         run: |
-          echo "### Deliberation complete" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          ls reports/decisions 2>/dev/null | tail -5 >> $GITHUB_STEP_SUMMARY || true
+          echo "### Deliberation complete" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          ls reports/decisions 2>/dev/null | tail -5 >> "$GITHUB_STEP_SUMMARY" || true
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          # Cite the latest Vibe-Trading alpha benchmark (no-op when absent).
+          python -m agents.vibe_evidence >> "$GITHUB_STEP_SUMMARY" || true
