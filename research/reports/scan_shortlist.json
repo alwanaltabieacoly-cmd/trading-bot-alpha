@@ -1,67 +1,69 @@
 {
-  "generated_at": "2026-10-23T20:15:31.549484+00:00",
+  "generated_at": "2026-10-23T20:43:06.454049+00:00",
   "min_score": 0.0,
   "quota": {
     "crypto": 3,
     "equity": 2,
     "forex": 1
   },
+  "ic_verdicts": {
+    "crypto": "no-evidence",
+    "equity": "no-evidence",
+    "forex": "no-evidence"
+  },
+  "selection_basis": [
+    "reference (scan IC not predictive)"
+  ],
   "picks": [
     {
-      "symbol": "SAND/USD",
-      "decision_symbol": "SAND",
+      "symbol": "BTC/USD",
+      "decision_symbol": "BTC/USDT",
       "asset_class": "crypto",
-      "profit_score": 2.7348,
-      "momentum": -1.9838,
-      "micro_score": 1.4008
+      "profit_score": null,
+      "selection_basis": "reference (scan IC not predictive)"
     },
     {
-      "symbol": "USDJPY",
-      "decision_symbol": "USDJPY",
-      "asset_class": "forex",
-      "profit_score": 2.2358,
-      "momentum": -0.3554,
-      "micro_score": 0.9822
+      "symbol": "ETH/USD",
+      "decision_symbol": "ETH/USDT",
+      "asset_class": "crypto",
+      "profit_score": null,
+      "selection_basis": "reference (scan IC not predictive)"
+    },
+    {
+      "symbol": "SOL/USD",
+      "decision_symbol": "SOL/USDT",
+      "asset_class": "crypto",
+      "profit_score": null,
+      "selection_basis": "reference (scan IC not predictive)"
     },
     {
       "symbol": "AAPL",
       "decision_symbol": "AAPL",
       "asset_class": "equity",
-      "profit_score": 2.0222,
-      "momentum": 0.9406,
-      "micro_score": 0.047
+      "profit_score": null,
+      "selection_basis": "reference (scan IC not predictive)"
     },
     {
-      "symbol": "SPY",
-      "decision_symbol": "SPY",
+      "symbol": "MSFT",
+      "decision_symbol": "MSFT",
       "asset_class": "equity",
-      "profit_score": 1.5141,
-      "momentum": -0.4586,
-      "micro_score": 0.4771
+      "profit_score": null,
+      "selection_basis": "reference (scan IC not predictive)"
     },
     {
-      "symbol": "XLM/USD",
-      "decision_symbol": "XLM/USDT",
-      "asset_class": "crypto",
-      "profit_score": 1.3824,
-      "momentum": -0.5198,
-      "micro_score": 0.474
-    },
-    {
-      "symbol": "LTC/USD",
-      "decision_symbol": "LTC/USDT",
-      "asset_class": "crypto",
-      "profit_score": 1.1836,
-      "momentum": -0.6123,
-      "micro_score": 0.4694
+      "symbol": "EURUSD",
+      "decision_symbol": "EURUSD",
+      "asset_class": "forex",
+      "profit_score": null,
+      "selection_basis": "reference (scan IC not predictive)"
     }
   ],
   "decision_pairs": [
-    "SAND",
-    "USDJPY",
+    "BTC/USDT",
+    "ETH/USDT",
+    "SOL/USDT",
     "AAPL",
-    "SPY",
-    "XLM/USDT",
-    "LTC/USDT"
+    "MSFT",
+    "EURUSD"
   ]
 }

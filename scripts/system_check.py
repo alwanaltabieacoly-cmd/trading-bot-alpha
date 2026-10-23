@@ -200,6 +200,43 @@ def check_git():
         _add("git", "WARN", f"unavailable ({type(e).__name__})")
 
 
+def check_health(now=None):
+    """Signal evidence and external-source health."""
+    now = now or datetime.now(timezone.utc)
+    ic = _load_json(ROOT / "research" / "reports" / "scan_ic.json")
+    if isinstance(ic, Exception):
+        _add("scan IC", "FAIL", f"unparseable: {ic}")
+    elif not ic:
+        _add("scan IC", "WARN", "no IC measurement yet (weekly Scan IC workflow)")
+    else:
+        classes = ic.get("classes") or {}
+        errors = [cls for cls, row in classes.items() if (row or {}).get("status") == "error"]
+        verdicts = {cls: (row or {}).get("verdict", (row or {}).get("status")) for cls, row in classes.items()}
+        stamp = _stamp_of(ic) or datetime.fromtimestamp(
+            (ROOT / "research" / "reports" / "scan_ic.json").stat().st_mtime, timezone.utc)
+        age = round((now - stamp).total_seconds() / 3600.0, 1)
+        if errors:
+            _add("scan IC", "WARN", f"errors in {errors}")
+        elif age > 192:
+            _add("scan IC", "WARN", f"stale {age}h (weekly cadence)")
+        else:
+            _add("scan IC", "PASS", f"{verdicts} ({age}h old)")
+
+    sources = _load_json(ROOT / "research" / "reports" / "health" / "sources.json")
+    if isinstance(sources, Exception):
+        _add("data sources", "FAIL", f"unparseable: {sources}")
+    elif not sources:
+        _add("data sources", "WARN", "no probe report yet (watchdog runs hourly)")
+    else:
+        flags = {name: item.get("ok") for name, item in (sources.get("sources") or {}).items()}
+        if sources.get("all_ok"):
+            _add("data sources", "PASS", f"all ok: {flags}")
+        elif sources.get("any_ok"):
+            _add("data sources", "WARN", f"partial: {flags}")
+        else:
+            _add("data sources", "FAIL", f"all down: {flags}")
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="scripts/system_check.py")
     parser.add_argument("--json", action="store_true")
@@ -208,6 +245,7 @@ def main(argv=None):
 
     check_artifacts()
     check_configs()
+    check_health()
     check_gate()
     if not args.no_git:
         check_git()

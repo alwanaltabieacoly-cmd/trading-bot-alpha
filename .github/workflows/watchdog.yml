@@ -1,0 +1,92 @@
+name: Watchdog
+
+# Self-healing scheduler. GitHub cron can skip slots; this runs hourly, checks
+# artifact freshness against each producer's cadence, and re-dispatches the
+# workflow that failed to fire (with a 3h cooldown so it cannot loop).
+# It also probes the external data sources and commits the health report.
+#
+# This is the answer to "GitHub cron is best-effort": a dropped slot is
+# recovered within an hour by a different mechanism.
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # hourly
+  workflow_dispatch:
+
+concurrency:
+  group: watchdog
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  actions: write   # required to dispatch other workflows
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ccxt pandas numpy pyarrow yfinance
+
+      - name: Probe data sources
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          # Health data is valuable even when sources are down: never fail here.
+          python scripts/source_health.py --write || echo "::warning::all data sources failed this probe"
+
+      - name: Detect stale artifacts
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/check_staleness.py --github-env "$GITHUB_ENV"
+
+      - name: Re-dispatch missing workflows
+        if: env.STALE_COUNT != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          IFS=',' read -ra WORKFLOWS <<< "$STALE_WORKFLOWS"
+          DISPATCHED=""
+          for wf in "${WORKFLOWS[@]}"; do
+            [ -z "$wf" ] && continue
+            echo "::notice::dispatching $wf (stale)"
+            if gh workflow run "$wf" --ref main; then
+              DISPATCHED="${DISPATCHED:+$DISPATCHED,}$wf"
+            else
+              echo "::warning::dispatch failed for $wf"
+            fi
+          done
+          if [ -n "$DISPATCHED" ]; then
+            python scripts/check_staleness.py --record-dispatched "$DISPATCHED"
+          fi
+
+      - name: Commit health state
+        run: |
+          git config user.name "watchdog-bot"
+          git config user.email "watchdog-bot@users.noreply.github.com"
+          git add research/reports/health 2>/dev/null || echo "skip (nothing to add): health"
+          bash scripts/ci_commit_push.sh "watchdog: health $(date -u +%Y-%m-%d_%H%M)"
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Watchdog" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "stale workflows: ${STALE_WORKFLOWS:-none}" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python scripts/check_staleness.py 2>&1 >> "$GITHUB_STEP_SUMMARY" || true
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          python scripts/source_health.py --summary >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true

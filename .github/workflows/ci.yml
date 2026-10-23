@@ -9,6 +9,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "0 5 * * *"   # daily drift check even with no pushes
   workflow_dispatch:
 
 concurrency:
@@ -36,8 +38,8 @@ jobs:
       - name: Install test dependencies
         run: |
           python -m pip install --upgrade pip
-          # fastapi/httpx are required by the webhook money-path tests.
-          pip install pandas numpy pyarrow ccxt pyyaml pytest fastapi httpx
+          # Pinned: a dependency release must not silently change behaviour.
+          pip install -r requirements-ci.txt
 
       - name: Preflight (syntax, JSON/YAML, hygiene)
         run: python preflight.py

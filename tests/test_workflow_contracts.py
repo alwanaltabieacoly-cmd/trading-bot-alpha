@@ -26,6 +26,7 @@ PY_MODULE_RE = re.compile(r"python3?\s+-m\s+((?:agents|research|sentiment)\.[A-Z
 # Scripts that write env vars through --github-env (invisible to `echo` parsing).
 GITHUB_ENV_WRITERS = {
     "scripts/should_run_deliberate.py": {"RUN_NOW", "RUN_REASON"},
+    "scripts/check_staleness.py": {"STALE_WORKFLOWS", "STALE_COUNT"},
 }
 INPUTS_RE = re.compile(r"\$\{\{\s*inputs\.")
 ENV_COND_RE = re.compile(r"env\.([A-Z][A-Z0-9_]+)")

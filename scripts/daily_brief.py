@@ -51,7 +51,11 @@ def collect(now=None):
         "vibe": None,
         "learning": None,
         "quality": _load_json(ROOT / "research" / "reports" / "quality" / "data_quality.json"),
+        "scan_ic": _load_json(ROOT / "research" / "reports" / "scan_ic.json"),
     }
+    shortlist_payload = _load_json(SHORTLIST_PATH) or {}
+    payload["shortlist"] = shortlist_payload.get("decision_pairs") or []
+    payload["selection_basis"] = shortlist_payload.get("selection_basis") or []
 
     record, path = evidence_gate.newest_decision()
     payload["decision"] = {
@@ -156,9 +160,32 @@ def build_markdown(payload):
         lines.append("No scan artifact yet.")
     lines.append("")
 
+    lines.append("## Does our score predict? (measured IC)")
+    ic = payload.get("scan_ic") or {}
+    classes = ic.get("classes") or {}
+    if classes:
+        lines.append("")
+        lines.append("| class | verdict | IC mean | IR | snapshots |")
+        lines.append("|---|---|---|---|---|")
+        for cls, row in classes.items():
+            row = row or {}
+            lines.append(f"| {cls} | {row.get('verdict', row.get('status'))} | "
+                         f"{row.get('ic_mean')} | {row.get('ir')} | {row.get('n_snapshots')} |")
+        lines.append("")
+        lines.append("Unless a class is **predictive**, its scan score is context only — "
+                     "the shortlist uses a fixed reference set instead of ranking by score.")
+    else:
+        lines.append("")
+        lines.append("No IC measurement yet (weekly `Scan IC` workflow).")
+    lines.append("")
+
     lines.append("## Deliberation shortlist")
     lines.append("")
-    lines.append(", ".join(payload.get("shortlist") or []) or "empty (no positive scores)")
+    lines.append(", ".join(payload.get("shortlist") or []) or "empty")
+    basis = payload.get("selection_basis") or []
+    if basis:
+        lines.append("")
+        lines.append(f"selection basis: {', '.join(basis)}")
     lines.append("")
 
     lines.append("## Alpha evidence (Vibe-Trading)")

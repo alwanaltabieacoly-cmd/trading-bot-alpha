@@ -51,6 +51,20 @@ def _evidence_payload():
             for row in ranked[:10]
         ]
     try:
+        ic_path = common.PROJECT_ROOT / "research" / "reports" / "scan_ic.json"
+        ic = json.loads(ic_path.read_text(encoding="utf-8"))
+        payload["scan_ic"] = {
+            cls: (row or {}).get("verdict")
+            for cls, row in (ic.get("classes") or {}).items()
+        }
+        payload["scan_ic_note"] = (
+            "scan_ic is the measured information coefficient of the scan score. "
+            "Use the score only as descriptive context; never treat a positive "
+            "score as evidence of an edge unless the verdict is 'predictive'."
+        )
+    except Exception:
+        pass
+    try:
         lessons = daily_learning.prompt_block()
     except Exception:
         lessons = ""

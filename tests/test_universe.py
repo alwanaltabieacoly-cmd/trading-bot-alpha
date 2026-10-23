@@ -113,21 +113,49 @@ class ShortlistTest(unittest.TestCase):
         {"pair": "EURUSD", "asset_class": "forex", "profit_score": 0.6, "momentum": 1, "micro_score": 1},
     ]
 
+    PREDICTIVE = {"classes": {
+        "crypto": {"verdict": "predictive"},
+        "equity": {"verdict": "predictive"},
+        "forex": {"verdict": "predictive"},
+    }}
+
     def test_quota_and_positive_only(self):
-        picks = scan_shortlist.select(self.ROWS, quota={"crypto": 2, "equity": 1, "forex": 1})
+        picks = scan_shortlist.select(self.ROWS, quota={"crypto": 2, "equity": 1, "forex": 1},
+                                      ic_report=self.PREDICTIVE)
         symbols = {p["decision_symbol"] for p in picks}
         self.assertEqual(symbols, {"BCH/USDT", "DOGE/USDT", "NVDA", "EURUSD"})
         self.assertNotIn("BTC/USDT", symbols)  # negative score excluded
 
     def test_rows_without_asset_class_default_to_crypto(self):
         rows = [{"pair": "ETH/USD", "profit_score": 0.8}]
-        picks = scan_shortlist.select(rows, quota={"crypto": 1, "equity": 0, "forex": 0})
+        picks = scan_shortlist.select(rows, quota={"crypto": 1, "equity": 0, "forex": 0},
+                                      ic_report=self.PREDICTIVE)
         self.assertEqual(picks[0]["decision_symbol"], "ETH/USDT")
 
     def test_empty_when_nothing_positive(self):
         picks = scan_shortlist.select(
-            [{"pair": "BTC/USD", "asset_class": "crypto", "profit_score": -1.0}])
+            [{"pair": "BTC/USD", "asset_class": "crypto", "profit_score": -1.0}],
+            ic_report=self.PREDICTIVE)
         self.assertEqual(picks, [])
+
+    def test_reference_set_when_ic_not_predictive(self):
+        # Measured IC is not predictive -> the score must not choose symbols.
+        report = {"classes": {"crypto": {"verdict": "no-evidence"},
+                              "equity": {"verdict": "no-evidence"},
+                              "forex": {"verdict": "no-evidence"}}}
+        picks = scan_shortlist.select(self.ROWS, quota={"crypto": 2, "equity": 1, "forex": 1},
+                                      ic_report=report)
+        self.assertEqual(len(picks), 4)
+        self.assertTrue(all(p["profit_score"] is None for p in picks))
+        self.assertTrue(all("reference" in p["selection_basis"] for p in picks))
+        self.assertEqual({p["decision_symbol"] for p in picks},
+                         {"BTC/USDT", "ETH/USDT", "AAPL", "EURUSD"})
+
+    def test_missing_ic_report_treated_as_not_predictive(self):
+        picks = scan_shortlist.select(self.ROWS, quota={"crypto": 1, "equity": 0, "forex": 0},
+                                      ic_report=None)
+        self.assertEqual(picks[0]["decision_symbol"], "BTC/USDT")
+        self.assertIn("reference", picks[0]["selection_basis"])
 
 
 class ScannerClassDispatchTest(unittest.TestCase):
