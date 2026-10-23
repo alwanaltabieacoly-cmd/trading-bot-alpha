@@ -1,41 +1,20 @@
 {
-  "generated_at": "2026-10-23T20:37:48.047424+00:00",
+  "generated_at": "2026-10-23T20:51:53.509472+00:00",
   "classes": {
     "crypto": {
-      "status": "ok",
-      "verdict": "no-evidence",
-      "n_snapshots": 60,
-      "n_symbols": 24,
-      "ic_mean": -0.07303,
-      "ic_std": 0.29655,
-      "ir": -0.2463,
-      "ic_positive_ratio": 0.4,
-      "horizon_bars": 6,
-      "tf": "4h"
+      "status": "insufficient",
+      "n_snapshots": 0,
+      "n_symbols": 24
     },
     "equity": {
-      "status": "ok",
-      "verdict": "no-evidence",
-      "n_snapshots": 120,
-      "n_symbols": 12,
-      "ic_mean": -0.03986,
-      "ic_std": 0.37334,
-      "ir": -0.1068,
-      "ic_positive_ratio": 0.475,
-      "horizon_bars": 1,
-      "tf": "1d"
+      "status": "insufficient",
+      "n_snapshots": 0,
+      "n_symbols": 12
     },
     "forex": {
-      "status": "ok",
-      "verdict": "no-evidence",
-      "n_snapshots": 120,
-      "n_symbols": 9,
-      "ic_mean": -0.05083,
-      "ic_std": 0.45377,
-      "ir": -0.112,
-      "ic_positive_ratio": 0.45,
-      "horizon_bars": 1,
-      "tf": "1d"
+      "status": "insufficient",
+      "n_snapshots": 0,
+      "n_symbols": 9
     }
   }
 }
