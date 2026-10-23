@@ -1,0 +1,437 @@
+{
+  "BTC/USDT": {
+    "asof": "2026-10-23T18:26:46.855059+00:00",
+    "pair": "BTC/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -5.0,
+    "regime": "bear",
+    "regime_tf": "1h",
+    "fng": {
+      "value": 50,
+      "classification": "Neutral",
+      "date": "2026-10-23",
+      "source": "sqlite"
+    },
+    "fng_7d_change": null,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-23T18:26:46.855059+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "BTC/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": true,
+              "close": 81479.6,
+              "ema50": 82168.417755,
+              "ema200": 83510.09035,
+              "ema50_slope": -0.159413,
+              "dist_to_high20_pct": -0.565151,
+              "dist_to_low20_pct": 0.592099,
+              "atr_pct_14": 0.425996,
+              "volume_z_48": -1.121975,
+              "regime": "bear"
+            },
+            "4h": {
+              "available": true,
+              "close": 81480.5,
+              "ema50": 82264.315153,
+              "ema200": 82075.637865,
+              "ema50_slope": -0.184189,
+              "dist_to_high20_pct": -3.959807,
+              "dist_to_low20_pct": 0.825108,
+              "atr_pct_14": 0.987344,
+              "volume_z_48": -1.146759,
+              "regime": "range"
+            },
+            "1d": {
+              "available": true,
+              "close": 81480.4,
+              "ema50": 80858.610228,
+              "ema200": 76223.121606,
+              "ema50_slope": 0.409462,
+              "dist_to_high20_pct": -6.341031,
+              "dist_to_low20_pct": 2.109603,
+              "atr_pct_14": 2.493693,
+              "volume_z_48": -1.872314,
+              "regime": "bull"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-23T18:00:00+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "blockers": [
+      "regime=bear (1h)",
+      "deliberation=block: synthesizer: blocked (analyst=block, critic=block)"
+    ],
+    "features": {
+      "1h": {
+        "tf": "1h",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": -0.0865,
+        "vol_regime": 0.0,
+        "volume_spike": 0.0,
+        "candle_position": 0.0,
+        "micro_score": -0.0043,
+        "n_bars": 48,
+        "last_close": 81479.6
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  },
+  "ETH/USDT": {
+    "asof": "2026-10-23T18:26:47.304772+00:00",
+    "pair": "ETH/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -5.0,
+    "regime": "bear",
+    "regime_tf": "1h",
+    "fng": {
+      "value": 50,
+      "classification": "Neutral",
+      "date": "2026-10-23",
+      "source": "sqlite"
+    },
+    "fng_7d_change": null,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-23T18:26:47.304772+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "ETH/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": true,
+              "close": 2403.53,
+              "ema50": 2418.565587,
+              "ema200": 2462.186102,
+              "ema50_slope": -0.122655,
+              "dist_to_high20_pct": -0.459698,
+              "dist_to_low20_pct": 1.157819,
+              "atr_pct_14": 0.597039,
+              "volume_z_48": -0.912803,
+              "regime": "bear"
+            },
+            "4h": {
+              "available": true,
+              "close": 2403.53,
+              "ema50": 2433.265236,
+              "ema200": 2500.827803,
+              "ema50_slope": -0.275368,
+              "dist_to_high20_pct": -4.794857,
+              "dist_to_low20_pct": 1.958979,
+              "atr_pct_14": 1.382372,
+              "volume_z_48": -1.286548,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 2403.53,
+              "ema50": 2475.041935,
+              "ema200": 2318.457645,
+              "ema50_slope": -0.45875,
+              "dist_to_high20_pct": -12.264557,
+              "dist_to_low20_pct": 3.689819,
+              "atr_pct_14": 3.979266,
+              "volume_z_48": -2.140634,
+              "regime": "bull"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-23T18:00:00+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "blockers": [
+      "regime=bear (1h)",
+      "deliberation=block: synthesizer: blocked (analyst=block, critic=block)"
+    ],
+    "features": {
+      "1h": {
+        "tf": "1h",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": -0.0176,
+        "vol_regime": 0.0,
+        "volume_spike": 0.0,
+        "candle_position": 0.0,
+        "micro_score": -0.0009,
+        "n_bars": 48,
+        "last_close": 2403.53
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  },
+  "SOL/USDT": {
+    "asof": "2026-10-23T18:26:47.394364+00:00",
+    "pair": "SOL/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -6.5,
+    "regime": "bear",
+    "regime_tf": "1h",
+    "fng": {
+      "value": 50,
+      "classification": "Neutral",
+      "date": "2026-10-23",
+      "source": "sqlite"
+    },
+    "fng_7d_change": null,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-23T18:26:47.394364+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "SOL/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": true,
+              "close": 104.2,
+              "ema50": 104.990853,
+              "ema200": 106.870605,
+              "ema50_slope": -0.108363,
+              "dist_to_high20_pct": -0.884619,
+              "dist_to_low20_pct": 1.047324,
+              "atr_pct_14": 0.653962,
+              "volume_z_48": -0.747196,
+              "regime": "bear"
+            },
+            "4h": {
+              "available": true,
+              "close": 104.2,
+              "ema50": 105.537597,
+              "ema200": 108.385167,
+              "ema50_slope": -0.256259,
+              "dist_to_high20_pct": -4.535044,
+              "dist_to_low20_pct": 1.263362,
+              "atr_pct_14": 1.494379,
+              "volume_z_48": -1.065041,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 104.19,
+              "ema50": 106.586038,
+              "ema200": 98.180274,
+              "ema50_slope": -0.282391,
+              "dist_to_high20_pct": -14.80785,
+              "dist_to_low20_pct": 3.764565,
+              "atr_pct_14": 4.286126,
+              "volume_z_48": -1.585438,
+              "regime": "bull"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-23T18:00:00+00:00",
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "blockers": [
+      "regime=bear (1h)",
+      "momentum down (1h)",
+      "deliberation=block: synthesizer: blocked (analyst=block, critic=block)"
+    ],
+    "features": {
+      "1h": {
+        "tf": "1h",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": -0.1278,
+        "vol_regime": 0.0,
+        "volume_spike": 0.0,
+        "candle_position": 0.0,
+        "micro_score": -0.0064,
+        "n_bars": 48,
+        "last_close": 104.2
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  },
+  "AAPL": {
+    "asof": "2026-10-23T18:26:47.549123+00:00",
+    "pair": "AAPL",
+    "equity": true,
+    "verdict": "GO",
+    "score": 3.5,
+    "regime": "bull",
+    "regime_tf": "1d",
+    "fng": {
+      "value": 50,
+      "classification": "Neutral",
+      "date": "2026-10-23",
+      "source": "sqlite"
+    },
+    "fng_7d_change": null,
+    "gdelt": {},
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-23T18:26:47.549123+00:00",
+      "live_orderbook": false,
+      "pairs": {
+        "AAPL": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 348.220001,
+              "ema50": 331.007387,
+              "ema200": 300.540002,
+              "ema50_slope": 0.857007,
+              "dist_to_high20_pct": -0.040184,
+              "dist_to_low20_pct": 6.878243,
+              "atr_pct_14": 1.747049,
+              "volume_z_48": 0.544014,
+              "regime": "bull"
+            }
+          }
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-23T18:00:00+00:00",
+      "action": null,
+      "size": null,
+      "confidence": null,
+      "rationale": null
+    },
+    "blockers": [],
+    "features": {
+      "1d": {
+        "tf": "1d",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": 0.788,
+        "vol_regime": 0.0,
+        "volume_spike": 0.0,
+        "candle_position": -0.5,
+        "micro_score": -0.4606,
+        "n_bars": 1100,
+        "last_close": 348.22
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  }
+}
