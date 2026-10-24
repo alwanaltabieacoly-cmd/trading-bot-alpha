@@ -127,6 +127,26 @@ class SnapshotAxisTest(unittest.TestCase):
             assert set(scores) <= set(data)
             assert set(forwards) <= set(data)
 
+    def test_microsecond_dates_do_not_skip_every_contributor(self):
+        """pandas 3.x defaults to datetime64[us]; Timestamp.value is nanoseconds.
+
+        Comparing them directly made searchsorted return len(frame) for every
+        symbol, so every contributor was skipped and the measurement silently
+        produced zero snapshots. DatetimeIndex.searchsorted is unit-safe.
+        """
+        data = {f"S{i}": _frame(200, seed=i + 1) for i in range(8)}
+        # Force the us storage path regardless of the installed pandas default.
+        # Constructed from a numpy datetime64[us] array, which is supported on
+        # both pandas 2.3.3 and 3.1.0 (as_unit is not).
+        for frame in data.values():
+            frame["date"] = pd.Series(
+                np.array(frame["date"].to_numpy(), dtype="datetime64[us]")
+            ).dt.tz_localize("UTC")
+        rows = scan_ic.snapshots("equity", data)
+        assert rows, "us-unit dates silently produced zero snapshots"
+        stamp, scores, _ = rows[0]
+        assert len(scores) >= 6
+
     def test_analyse_reports_symbols_even_when_no_snapshots(self):
         """n_symbols is always reported, so a zero-snapshot run is diagnosable."""
         fake_data = {f"S{i}": None for i in range(8)}

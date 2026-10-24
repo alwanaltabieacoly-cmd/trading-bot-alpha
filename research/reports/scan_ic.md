@@ -1,6 +1,6 @@
 # Scan information coefficient
 
-generated: 2026-10-23T22:35:59.340705+00:00
+generated: 2026-10-23T23:10:17.911000+00:00
 
 | class | verdict | snapshots | symbols | IC mean | IR | IC+ ratio |
 |---|---|---|---|---|---|---|

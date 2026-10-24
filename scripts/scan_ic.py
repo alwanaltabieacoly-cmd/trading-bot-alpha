@@ -103,12 +103,17 @@ def snapshots(asset_class, data):
 
     picked = []
     for t_index in range(MIN_BARS, len(axis) - horizon, step):
-        stamp = axis[t_index]
-        stamp_ts = pd.Timestamp(stamp)
+        stamp = pd.Timestamp(axis[t_index])
         scores, forwards = {}, {}
         for symbol, frame in data.items():
-            dates = pd.to_datetime(frame["date"], utc=True)
-            pos = int(np.searchsorted(dates.astype("int64").to_numpy(), stamp_ts.value))
+            # Unit-safe lookup. pandas 3.x stores datetimes as int64 microseconds
+            # by default while Timestamp.value is always nanoseconds: comparing them
+            # directly returned pos == len(frame) for every symbol, so every
+            # contributor was skipped and the measurement silently produced zero
+            # snapshots (verified: pandas 2.3.3 ns vs pandas 3.1.0 us). DatetimeIndex
+            # searchsorted compares in the frame own units, so it is correct on both.
+            # See test_scan_ic.py::SnapshotAxisTest.
+            pos = int(pd.DatetimeIndex(frame["date"]).searchsorted(stamp))
             if pos < MIN_BARS or pos + horizon >= len(frame):
                 continue
             hist = frame.iloc[:pos]
