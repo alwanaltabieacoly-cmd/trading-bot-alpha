@@ -13,7 +13,7 @@
     "promoted_at": "2026-10-19T23:46:19+00:00",
     "status": "initial_backtest_only",
     "note": "Chosen as the starting champion from the first run. Must confirm itself in live paper trading.",
-    "last_evaluated": "2026-10-24T07:24:56+00:00"
+    "last_evaluated": "2026-10-24T12:47:10+00:00"
   },
   "challenger": null,
   "history": [
@@ -246,10 +246,20 @@
       "challenger_proposed": false,
       "train_end": "2026-04-26",
       "holdout_start": "2026-04-27"
+    },
+    {
+      "at": "2026-10-24T12:47:10+00:00",
+      "n_candidates": 142,
+      "n_survivors": 0,
+      "best_id": "sma_trend_vol_filter_period200_vol_lookback30_vol_max_pct4.0",
+      "best_holdout_cagr": 30.001,
+      "challenger_proposed": false,
+      "train_end": "2026-04-26",
+      "holdout_start": "2026-04-27"
     }
   ],
   "created": "2026-10-19T23:46:19+00:00",
-  "cumulative_candidates_tested": 2786,
-  "last_run": "2026-10-24T07:24:56+00:00",
-  "last_run_report": "2026-10-24_0724.json"
+  "cumulative_candidates_tested": 2928,
+  "last_run": "2026-10-24T12:47:10+00:00",
+  "last_run_report": "2026-10-24_1247.json"
 }
