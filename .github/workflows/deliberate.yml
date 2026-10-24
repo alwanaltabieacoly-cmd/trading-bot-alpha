@@ -40,7 +40,7 @@ permissions:
 jobs:
   deliberate:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 40
 
     steps:
       - name: Checkout
@@ -68,6 +68,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install ccxt pandas numpy pyarrow yfinance
+
+      - name: Install opencode (free models, no key needed)
+        if: env.RUN_NOW == '1'
+        # agents/common.py calls `opencode run -m opencode/<free model>`. Without
+        # the CLI every decision was a rules-only fallback that blocks all pairs.
+        # Pinned version; the two MODELS are the zero-credential free tier.
+        run: |
+          npm install -g opencode-ai@1.19.3
+          opencode --version
 
       - name: Refresh multi-asset universe
         if: env.RUN_NOW == '1'
