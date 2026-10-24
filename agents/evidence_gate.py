@@ -85,7 +85,7 @@ def newest_decision(decisions_dir=None):
         files = [p for p in directory.glob("*.json") if p.is_file()]
         if not files:
             return None, None
-        path = max(files, key=lambda p: p.stat().st_mtime)
+        path = max(files, key=lambda p: p.name)  # names start YYYY-MM-DD_HHMM; mtime = checkout time on CI
         return json.loads(path.read_text(encoding="utf-8")), path
     except (OSError, ValueError):
         return None, None

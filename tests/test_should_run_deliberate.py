@@ -71,5 +71,34 @@ class DeliberateGateTest(unittest.TestCase):
         self.assertIn("RUN_REASON=", content)
 
 
+class ContentTimeTest(unittest.TestCase):
+    """CI checkout sets every mtime to "now"; ages must come from file content."""
+
+    def test_age_ignores_mtime(self):
+        import json
+        import os
+        import tempfile
+
+        import check_staleness as stale
+
+        d = Path(tempfile.mkdtemp())
+        (d / "2026-10-22_0400.json").write_text(
+            json.dumps({"generated_at": "2026-10-22T04:30:00+00:00"}), encoding="utf-8")
+        (d / "2026-10-23_1900.json").write_text(
+            json.dumps({"generated_at": "2026-10-23T19:35:45+00:00"}), encoding="utf-8")
+        now = datetime(2026, 10, 24, 20, 0, tzinfo=timezone.utc)
+        for p in d.iterdir():
+            os.utime(p, (now.timestamp(), now.timestamp()))  # what actions/checkout does
+        age, _ = stale._age_hours(d, now)
+        self.assertAlmostEqual(age, 24.4, delta=0.1)
+
+    def test_gate_catches_up_when_content_is_old(self):
+        stamp = datetime(2026, 10, 23, 19, 35, tzinfo=timezone.utc)
+        with mock.patch.object(gate, "newest_decision_time", return_value=stamp):
+            run, reason = gate.decide(now=_at(20, day=24))
+        self.assertTrue(run)
+        self.assertIn("catch-up", reason)
+
+
 if __name__ == "__main__":
     sys.exit(unittest.main())

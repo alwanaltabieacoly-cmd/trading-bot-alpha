@@ -29,7 +29,7 @@ COOLDOWN_HOURS = 3.0
 
 # artifact -> (owner workflow, max age hours)
 RULES = (
-    ("research/reports/asset_scan.json", "Warmup", 26.0),
+    ("research/reports/warmup/warmup_log.jsonl", "Warmup", 26.0),
     ("reports/decisions", "Deliberate", 14.0),
     ("research/reports/learning/daily_learning.json", "Daily learning", 30.0),
     ("research/reports/quality/data_quality.json", "Daily learning", 30.0),
@@ -38,16 +38,49 @@ RULES = (
 )
 
 
-def _age_hours(path, now):
+def _parse(value):
+    for fmt in ("%Y-%m-%d_%H%M",):
+        try:
+            return datetime.strptime(str(value), fmt).replace(tzinfo=timezone.utc)
+        except ValueError:
+            pass
+    try:
+        dt = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return dt if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+
+
+def content_time(path):
+    """When the artifact was PRODUCED, read from its own timestamp.
+
+    File mtime is useless on a CI runner: checkout sets every file to "now", so
+    everything looked fresh and stale workflows were never detected. Directory =
+    newest file by name (names start YYYY-MM-DD_HHMM). mtime is only the last
+    resort for files that carry no timestamp.
+    """
     if path.is_dir():
-        files = sorted(path.glob("*.json"), key=lambda p: p.stat().st_mtime)
-        if not files:
-            return None, None
-        newest = files[-1]
-        return (now - datetime.fromtimestamp(newest.stat().st_mtime, timezone.utc)).total_seconds() / 3600.0, str(newest)
+        files = sorted(p for p in path.glob("*.json") if p.is_file())
+        return content_time(files[-1]) if files else None
     if not path.is_file():
+        return None
+    try:
+        text = path.read_text(encoding="utf-8").strip()
+        data = json.loads(text.splitlines()[-1] if path.suffix == ".jsonl" else text)
+        if isinstance(data, dict):
+            stamp = _parse(data.get("generated_at") or data.get("asof") or data.get("ts"))
+            if stamp:
+                return stamp
+    except (OSError, ValueError, IndexError):
+        pass
+    return datetime.fromtimestamp(path.stat().st_mtime, timezone.utc)
+
+
+def _age_hours(path, now):
+    stamp = content_time(path)
+    if stamp is None:
         return None, None
-    return (now - datetime.fromtimestamp(path.stat().st_mtime, timezone.utc)).total_seconds() / 3600.0, str(path)
+    return (now - stamp).total_seconds() / 3600.0, str(path)
 
 
 def _state():

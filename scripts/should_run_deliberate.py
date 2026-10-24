@@ -26,6 +26,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from check_staleness import content_time  # noqa: E402
 LATEST = ROOT / "user_data" / "decisions" / "latest.json"
 DECISIONS = ROOT / "reports" / "decisions"
 SLOT_HOURS_UTC = (4, 10)
@@ -44,10 +47,9 @@ def newest_decision_time():
                 candidates.append(datetime.fromisoformat(str(stamp).replace("Z", "+00:00")))
         except (OSError, ValueError):
             pass
-    if DECISIONS.is_dir():
-        files = sorted(DECISIONS.glob("*.json"), key=lambda p: p.stat().st_mtime)
-        if files:
-            candidates.append(datetime.fromtimestamp(files[-1].stat().st_mtime, timezone.utc))
+    stamp = content_time(DECISIONS)
+    if stamp:
+        candidates.append(stamp)
     return max(candidates) if candidates else None
 
 
