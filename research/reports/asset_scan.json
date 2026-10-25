@@ -1,18 +1,5 @@
 [
   {
-    "pair": "SAND/USD",
-    "asset_class": "crypto",
-    "tf": "4h",
-    "close": 0.0491,
-    "momentum": -1.7658,
-    "micro_score": 1.4117,
-    "vol_regime": 1.0,
-    "volume_spike": 0.0,
-    "candle_position": 0.5,
-    "n_bars": 721,
-    "profit_score": 3.2035
-  },
-  {
     "pair": "EURUSD",
     "asset_class": "forex",
     "tf": "1d",
@@ -24,6 +11,19 @@
     "candle_position": 0.0,
     "n_bars": 638,
     "profit_score": 2.7545
+  },
+  {
+    "pair": "SAND/USD",
+    "asset_class": "crypto",
+    "tf": "4h",
+    "close": 0.0486,
+    "momentum": -2.1447,
+    "micro_score": 1.3928,
+    "vol_regime": 1.0,
+    "volume_spike": 0.0,
+    "candle_position": 0.5,
+    "n_bars": 721,
+    "profit_score": 2.389
   },
   {
     "pair": "USDJPY",
@@ -104,6 +104,19 @@
     "profit_score": 0.1039
   },
   {
+    "pair": "MANA/USD",
+    "asset_class": "crypto",
+    "tf": "4h",
+    "close": 0.0786,
+    "momentum": -1.2497,
+    "micro_score": 0.4375,
+    "vol_regime": 0.0,
+    "volume_spike": 0.0,
+    "candle_position": 0.5,
+    "n_bars": 721,
+    "profit_score": -0.1869
+  },
+  {
     "pair": "USDCHF",
     "asset_class": "forex",
     "tf": "1d",
@@ -143,6 +156,32 @@
     "profit_score": -0.6163
   },
   {
+    "pair": "BTC/USD",
+    "asset_class": "crypto",
+    "tf": "4h",
+    "close": 80594.8,
+    "momentum": -0.2905,
+    "micro_score": -0.0145,
+    "vol_regime": 0.0,
+    "volume_spike": 0.0,
+    "candle_position": 0.0,
+    "n_bars": 10550,
+    "profit_score": -0.6245
+  },
+  {
+    "pair": "ICP/USD",
+    "asset_class": "crypto",
+    "tf": "4h",
+    "close": 2.612,
+    "momentum": -1.4868,
+    "micro_score": 0.4257,
+    "vol_regime": 0.0,
+    "volume_spike": 0.0,
+    "candle_position": 0.5,
+    "n_bars": 721,
+    "profit_score": -0.6965
+  },
+  {
     "pair": "NVDA",
     "asset_class": "equity",
     "tf": "1d",
@@ -169,94 +208,55 @@
     "profit_score": -0.7552
   },
   {
-    "pair": "ICP/USD",
-    "asset_class": "crypto",
-    "tf": "4h",
-    "close": 2.61,
-    "momentum": -1.5155,
-    "micro_score": 0.4242,
-    "vol_regime": 0.0,
-    "volume_spike": 0.0,
-    "candle_position": 0.5,
-    "n_bars": 721,
-    "profit_score": -0.7584
-  },
-  {
-    "pair": "BTC/USD",
-    "asset_class": "crypto",
-    "tf": "4h",
-    "close": 80429.4,
-    "momentum": -0.3698,
-    "micro_score": -0.0185,
-    "vol_regime": 0.0,
-    "volume_spike": 0.0,
-    "candle_position": 0.0,
-    "n_bars": 10550,
-    "profit_score": -0.7951
-  },
-  {
-    "pair": "SOL/USD",
-    "asset_class": "crypto",
-    "tf": "4h",
-    "close": 101.64,
-    "momentum": -0.4458,
-    "micro_score": -0.0223,
-    "vol_regime": 0.0,
-    "volume_spike": 0.0,
-    "candle_position": 0.0,
-    "n_bars": 10550,
-    "profit_score": -0.9585
-  },
-  {
     "pair": "FIL/USD",
     "asset_class": "crypto",
     "tf": "4h",
-    "close": 0.922,
-    "momentum": -1.6201,
-    "micro_score": 0.419,
+    "close": 0.923,
+    "momentum": -1.5796,
+    "micro_score": 0.421,
     "vol_regime": 0.0,
     "volume_spike": 0.0,
     "candle_position": 0.5,
     "n_bars": 721,
-    "profit_score": -0.9832
-  },
-  {
-    "pair": "XAUUSD",
-    "asset_class": "forex",
-    "tf": "1d",
-    "close": 4007.8999,
-    "momentum": -1.6914,
-    "micro_score": 0.4154,
-    "vol_regime": 0.0,
-    "volume_spike": 0.0,
-    "candle_position": 0.5,
-    "n_bars": 620,
-    "profit_score": -1.1366
+    "profit_score": -0.8962
   },
   {
     "pair": "ATOM/USD",
     "asset_class": "crypto",
     "tf": "4h",
-    "close": 1.6172,
-    "momentum": -1.6947,
-    "micro_score": 0.4153,
+    "close": 1.6211,
+    "momentum": -1.6048,
+    "micro_score": 0.4198,
     "vol_regime": 0.0,
     "volume_spike": 0.0,
     "candle_position": 0.5,
     "n_bars": 721,
-    "profit_score": -1.1435
+    "profit_score": -0.9502
+  },
+  {
+    "pair": "SOL/USD",
+    "asset_class": "crypto",
+    "tf": "4h",
+    "close": 101.59,
+    "momentum": -0.4647,
+    "micro_score": -0.0232,
+    "vol_regime": 0.0,
+    "volume_spike": 0.0,
+    "candle_position": 0.0,
+    "n_bars": 10550,
+    "profit_score": -0.999
   },
   {
     "pair": "ETH/USD",
     "asset_class": "crypto",
     "tf": "4h",
-    "close": 2345.14,
-    "momentum": -0.5518,
-    "micro_score": -0.0276,
+    "close": 2347.03,
+    "momentum": -0.5209,
+    "micro_score": -0.026,
     "vol_regime": 0.0,
     "volume_spike": 0.0,
     "candle_position": 0.0,
     "n_bars": 10550,
-    "profit_score": -1.1864
+    "profit_score": -1.1198
   }
 ]
