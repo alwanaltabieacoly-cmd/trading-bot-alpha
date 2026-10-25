@@ -1,6 +1,6 @@
 {
-  "asof": "2026-10-25T07:00:00+00:00",
-  "generated_at": "2026-10-25T07:58:30.062825+00:00",
+  "asof": "2026-10-25T11:00:00+00:00",
+  "generated_at": "2026-10-25T11:15:47.701092+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -44,7 +44,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
     "age_hours": 0.06,
-    "generated_at": "2026-10-25T07:55:09.910765+00:00",
+    "generated_at": "2026-10-25T11:12:12.276301+00:00",
     "asof": "2026-10-23",
     "zoo": "academic",
     "universe": "sp500",
@@ -153,16 +153,28 @@
     },
     "asset_scan": [
       {
+        "pair": "OP/USD",
+        "profit_score": 3.4801,
+        "momentum": -1.6371,
+        "micro_score": 1.4181
+      },
+      {
         "pair": "EURUSD",
         "profit_score": 2.7545,
         "momentum": -0.1142,
         "micro_score": 0.9943
       },
       {
+        "pair": "APT/USD",
+        "profit_score": 2.312,
+        "momentum": -2.1805,
+        "micro_score": 1.391
+      },
+      {
         "pair": "SAND/USD",
-        "profit_score": 2.389,
-        "momentum": -2.1447,
-        "micro_score": 1.3928
+        "profit_score": 2.2512,
+        "momentum": -2.2088,
+        "micro_score": 1.3896
       },
       {
         "pair": "USDJPY",
@@ -199,18 +211,6 @@
         "profit_score": 0.1039,
         "momentum": -1.1145,
         "micro_score": 0.4443
-      },
-      {
-        "pair": "MANA/USD",
-        "profit_score": -0.1869,
-        "momentum": -1.2497,
-        "micro_score": 0.4375
-      },
-      {
-        "pair": "USDCHF",
-        "profit_score": -0.223,
-        "momentum": -0.1037,
-        "micro_score": -0.0052
       }
     ],
     "scan_ic": {
@@ -222,7 +222,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 36 labelled outcomes, accuracy 53%): (1) GO verdicts are historically reliable: 100% over 8 labels. Honour them. (2) NO-GO verdicts are anti-predictive: 39% accuracy over 28 labels. Do not treat a NO-GO as a directional signal; require extra confirmation. (3) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-25T07:58:30.062446+00:00",
+    "generated_at": "2026-10-25T11:15:47.700815+00:00",
     "overall": {
       "n": 36,
       "hits": 19,
