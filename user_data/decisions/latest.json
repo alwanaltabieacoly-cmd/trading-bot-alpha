@@ -1,6 +1,6 @@
 {
-  "asof": "2026-10-25T11:00:00+00:00",
-  "generated_at": "2026-10-25T11:15:47.701092+00:00",
+  "asof": "2026-10-25T14:00:00+00:00",
+  "generated_at": "2026-10-25T14:16:17.759207+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -44,7 +44,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
     "age_hours": 0.06,
-    "generated_at": "2026-10-25T11:12:12.276301+00:00",
+    "generated_at": "2026-10-25T14:12:52.260923+00:00",
     "asof": "2026-10-23",
     "zoo": "academic",
     "universe": "sp500",
@@ -103,7 +103,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.04,
+      "age_hours": 0.03,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -153,10 +153,10 @@
     },
     "asset_scan": [
       {
-        "pair": "OP/USD",
-        "profit_score": 3.4801,
-        "momentum": -1.6371,
-        "micro_score": 1.4181
+        "pair": "APT/USD",
+        "profit_score": 2.9854,
+        "momentum": -1.8672,
+        "micro_score": 1.4066
       },
       {
         "pair": "EURUSD",
@@ -165,16 +165,10 @@
         "micro_score": 0.9943
       },
       {
-        "pair": "APT/USD",
-        "profit_score": 2.312,
-        "momentum": -2.1805,
-        "micro_score": 1.391
-      },
-      {
         "pair": "SAND/USD",
-        "profit_score": 2.2512,
-        "momentum": -2.2088,
-        "micro_score": 1.3896
+        "profit_score": 2.2755,
+        "momentum": -2.1974,
+        "micro_score": 1.3901
       },
       {
         "pair": "USDJPY",
@@ -189,28 +183,34 @@
         "micro_score": 0.0471
       },
       {
+        "pair": "USDCAD",
+        "profit_score": 1.7332,
+        "momentum": -0.3567,
+        "micro_score": 0.4822
+      },
+      {
         "pair": "SPY",
         "profit_score": 1.5141,
         "momentum": -0.4586,
         "micro_score": 0.4771
       },
       {
+        "pair": "OP/USD",
+        "profit_score": 1.3499,
+        "momentum": -1.4651,
+        "micro_score": 0.9267
+      },
+      {
+        "pair": "ATOM/USD",
+        "profit_score": 0.5136,
+        "momentum": -0.9239,
+        "micro_score": 0.4538
+      },
+      {
         "pair": "TSLA",
         "profit_score": 0.4194,
         "momentum": 0.195,
         "micro_score": 0.0098
-      },
-      {
-        "pair": "GBPUSD",
-        "profit_score": 0.3858,
-        "momentum": 0.1794,
-        "micro_score": 0.009
-      },
-      {
-        "pair": "QQQ",
-        "profit_score": 0.1039,
-        "momentum": -1.1145,
-        "micro_score": 0.4443
       }
     ],
     "scan_ic": {
@@ -222,7 +222,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 36 labelled outcomes, accuracy 53%): (1) GO verdicts are historically reliable: 100% over 8 labels. Honour them. (2) NO-GO verdicts are anti-predictive: 39% accuracy over 28 labels. Do not treat a NO-GO as a directional signal; require extra confirmation. (3) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-25T11:15:47.700815+00:00",
+    "generated_at": "2026-10-25T14:16:17.758931+00:00",
     "overall": {
       "n": 36,
       "hits": 19,
