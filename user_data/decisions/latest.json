@@ -1,6 +1,6 @@
 {
   "asof": "2026-10-26T11:00:00+00:00",
-  "generated_at": "2026-10-26T11:06:15.420938+00:00",
+  "generated_at": "2026-10-26T11:51:51.453661+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -92,7 +92,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-26_0356_academic_sp500.txt",
     "age_hours": 0.07,
-    "generated_at": "2026-10-26T11:02:07.611161+00:00",
+    "generated_at": "2026-10-26T11:47:47.053081+00:00",
     "asof": "2026-10-26",
     "zoo": "academic",
     "universe": "sp500",
@@ -202,21 +202,15 @@
     "asset_scan": [
       {
         "pair": "USDJPY",
-        "profit_score": 7.0256,
-        "momentum": -0.2207,
-        "micro_score": 1.989
+        "profit_score": 7.045,
+        "momentum": -0.2116,
+        "micro_score": 1.9894
       },
       {
         "pair": "APT/USD",
-        "profit_score": 2.7851,
-        "momentum": -0.7976,
-        "micro_score": 0.9601
-      },
-      {
-        "pair": "ADA/USD",
-        "profit_score": 2.1013,
-        "momentum": -0.418,
-        "micro_score": 0.9791
+        "profit_score": 3.0802,
+        "momentum": -0.6604,
+        "micro_score": 0.967
       },
       {
         "pair": "AAPL",
@@ -225,40 +219,46 @@
         "micro_score": 0.0471
       },
       {
+        "pair": "UNI/USD",
+        "profit_score": 1.7151,
+        "momentum": 0.7977,
+        "micro_score": 0.0399
+      },
+      {
+        "pair": "USDCHF",
+        "profit_score": 1.6945,
+        "momentum": -0.3747,
+        "micro_score": 0.4813
+      },
+      {
+        "pair": "USDCAD",
+        "profit_score": 1.6017,
+        "momentum": -0.4178,
+        "micro_score": 0.4791
+      },
+      {
         "pair": "SPY",
         "profit_score": 1.5141,
         "momentum": -0.4586,
         "micro_score": 0.4771
       },
       {
-        "pair": "UNI/USD",
-        "profit_score": 1.4837,
-        "momentum": 0.6901,
-        "micro_score": 0.0345
-      },
-      {
         "pair": "BCH/USD",
-        "profit_score": 0.7468,
-        "momentum": 0.3473,
-        "micro_score": 0.0174
+        "profit_score": 0.9227,
+        "momentum": 0.4291,
+        "micro_score": 0.0215
       },
       {
         "pair": "ARB/USD",
-        "profit_score": 0.671,
-        "momentum": 0.3121,
-        "micro_score": 0.0156
+        "profit_score": 0.869,
+        "momentum": 0.4042,
+        "micro_score": 0.0202
       },
       {
         "pair": "TSLA",
         "profit_score": 0.4194,
         "momentum": 0.195,
         "micro_score": 0.0098
-      },
-      {
-        "pair": "DOT/USD",
-        "profit_score": 0.384,
-        "momentum": -0.9842,
-        "micro_score": 0.4508
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 36 labelled outcomes, accuracy 53%): (1) GO verdicts are historically reliable: 100% over 8 labels. Honour them. (2) NO-GO verdicts are anti-predictive: 39% accuracy over 28 labels. Do not treat a NO-GO as a directional signal; require extra confirmation. (3) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-26T11:06:15.420616+00:00",
+    "generated_at": "2026-10-26T11:51:51.453327+00:00",
     "overall": {
       "n": 36,
       "hits": 19,
