@@ -655,3 +655,12 @@ Files: `gate_analyst.py` (one structured call per liquid perp, fixed reason tags
 - Calls on the same day across coins are highly correlated, so effective sample size is far below 1,335.
 - Conclusion: the rules in `gate_analyst.decide` show no proven edge. They are a baseline for the judge to improve on, not a strategy. Do not trade them.
 - The live testnet paths (orders, trigger orders, leverage) are unverified until a testnet key is stored; field names come from Gate's official SDK docs, not from a successful call.
+
+### 18.5 Testnet order test (2026-10-26, Gate futures testnet, 1,000 virtual USDT)
+Verified against the live testnet, not just the SDK docs:
+- Testnet key works at `api-testnet.gateapi.io`; the testnet site (`testnet.gate.com`, "Demo Trading") has its own login and its own API Management page. Live keys are rejected there (INVALID_KEY).
+- Contract spec matches live (BTC_USDT multiplier 0.0001, tick 0.1, min size 1); testnet max leverage is 125 (live 200). Position mode: single.
+- `gate_trader.open_trade` worked first try on BTC long, ETH short, SOL long: market entry (price "0", tif ioc), leverage path `/positions/{c}/leverage`, stop + target trigger orders (`close-long-position` / `close-short-position`), all read back as open with the intended price/rule. `close_trade` closed the position and cancelled both triggers every time.
+- Gate rejects a stop on the wrong side of the market (`AUTO_TRIGGER_PRICE_LESS_MARK`, code 1030): a free safety check.
+- NOT yet verified: a stop or target actually firing. A 0.06% stop on SOL did not trigger within 120 s because price never reached it. Needs a test that crosses.
+- Cost reality: four round trips of ~$1,000 notional took the account from 1,000.00 to 996.85 USDT (fees + spread + slippage), roughly 0.08% per round trip.
