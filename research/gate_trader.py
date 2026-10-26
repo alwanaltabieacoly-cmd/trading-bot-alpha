@@ -54,6 +54,8 @@ def open_trade(contract, side, stop_pct, target_pct, limits=None):
     open_pos = [p for p in api("GET", "/futures/usdt/positions") if float(p["size"]) != 0]
     if len(open_pos) >= L["max_open"]: raise SystemExit(f"max_open {L['max_open']} reached")
     if any(p["contract"] == contract for p in open_pos): raise SystemExit(f"{contract} already has a position")
+    book = api("GET", "/futures/usdt/order_book", f"contract={contract}&limit=1")["asks" if side == "long" else "bids"]
+    if not book: raise SystemExit(f"{contract} testnet book has no {'asks' if side == 'long' else 'bids'}: a market order would be refused (CONTRACT_NO_COUNTER)")
     spec = public(f"/futures/usdt/contracts/{contract}"); entry = float(spec["mark_price"])
     p = plan(contract, side, entry, stop_pct, target_pct, equity, spec, limits)
     lev = max(1, min(L["max_leverage"], int(float(spec["leverage_max"]))))

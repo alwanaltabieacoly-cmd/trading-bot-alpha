@@ -51,4 +51,23 @@ class Trigger(unittest.TestCase):
 class Safety(unittest.TestCase):
     def test_testnet_only(self): self.assertEqual(t.ENV, "testnet")
 
+class EmptyBook(unittest.TestCase):
+    """PEPE_USDT on the testnet had 0 asks: Gate answered CONTRACT_NO_COUNTER. Refuse before any order is sent."""
+    def run_open(self, side, book):
+        calls = []
+        def fake(method, path, query="", body=None):
+            calls.append((method, path))
+            if path == "/futures/usdt/accounts": return {"total": "1000"}
+            if path == "/futures/usdt/positions": return []
+            if path == "/futures/usdt/order_book": return book
+            raise AssertionError(f"unexpected {method} {path}")
+        old, t.api = t.api, fake
+        try: t.open_trade("PEPE_USDT", side, 5.0, 10.0)
+        finally: t.api = old
+        return calls
+    def test_long_refused_without_asks(self):
+        with self.assertRaisesRegex(SystemExit, "no asks"): self.run_open("long", {"asks": [], "bids": [{"p": "1", "s": 1}]})
+    def test_short_refused_without_bids(self):
+        with self.assertRaisesRegex(SystemExit, "no bids"): self.run_open("short", {"asks": [{"p": "1", "s": 1}], "bids": []})
+
 if __name__ == "__main__": unittest.main()
