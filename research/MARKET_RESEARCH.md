@@ -644,3 +644,14 @@ Files: `gate_analyst.py` (one structured call per liquid perp, fixed reason tags
 - Same-day calls across coins are highly correlated, so effective sample size is far below 1,335.
 - Conclusion: `gate_analyst.decide` has no proven edge. It is a baseline for the judge, not a strategy. Do not trade it.
 - Testnet order paths (orders, trigger orders, leverage) are unverified until a testnet key is stored; field names come from Gate's official SDK docs, not from a successful call.
+
+## 18. Gate analyst, judge and trader built (2026-10-26)
+Files: `gate_analyst.py` (one structured call per liquid perp, fixed reason tags, public data), `gate_judge.py` (resolves calls on hourly candles, stop before target, 0.10% round-trip cost, Wilson 95% lower bound per tag), `gate_trader.py` (testnet-only order logic: risk-based sizing, mandatory stop + target trigger orders read back from Gate, auto-close if the stop cannot be placed), `tests/test_gate_trader.py` (9 pass).
+
+### 18.1 Backfill of the analyst rules (in-sample, 8 coins, ~13 months of hourly data, 1,335 calls, 24h horizon)
+- Overall: 49% win, 95% lower bound 46%, mean net +0.12% per call vs +0.085% for simply holding the same direction. No tag has a lower bound above 50%.
+- `setup_pullback` (above SMA200, below SMA20, RSI<40; the setup that produced all 5 long calls on 2026-10-26): 42% win, lower bound 33%, mean net **-0.28%**, and **-0.86% in the second half**. It is the worst setup tested.
+- `setup_trend` was positive in the second half (+0.42%) and negative in the first (-0.15%): not stable.
+- Calls on the same day across coins are highly correlated, so effective sample size is far below 1,335.
+- Conclusion: the rules in `gate_analyst.decide` show no proven edge. They are a baseline for the judge to improve on, not a strategy. Do not trade them.
+- The live testnet paths (orders, trigger orders, leverage) are unverified until a testnet key is stored; field names come from Gate's official SDK docs, not from a successful call.
