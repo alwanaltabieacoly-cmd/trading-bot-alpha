@@ -12,7 +12,7 @@
     .\push-to-github.ps1 -RepoName my-repo -Private
 #>
 param(
-  [string]$RepoName = "trading-bot",
+  [string]$RepoName = "trading-bot-alpha",
   [string]$Branch = "main",
   [string]$User = "alwanaltabieacoly-cmd",
   [switch]$Private
