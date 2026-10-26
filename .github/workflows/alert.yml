@@ -1,20 +1,25 @@
 name: Alert
 
-# Roadmap B: one issue per failing workflow, closed automatically when that workflow is green again.
+# Roadmap B: one issue per failing workflow. Opened on failure; a daily sweep closes it once that workflow is green again.
+# Only failures start a job (success runs are skipped, which costs no Actions minutes).
 # The digest on the PC lists the open issues, so a red workflow is seen at the next session instead of days later.
 
 on:
   workflow_run:
     workflows: [CI, Warmup, Deliberate, Outcome, Scan IC, Sentiment, News, Daily learning, Strategy research, Vibe-Trading research, Watchdog]
     types: [completed]
+  schedule:
+    - cron: "30 5 * * *"   # daily sweep: close issues whose workflow is green again
+  workflow_dispatch:
 
 permissions:
   contents: read
   issues: write
+  actions: read
 
 jobs:
   alert:
-    if: contains(fromJSON('["failure","timed_out","success"]'), github.event.workflow_run.conclusion)
+    if: github.event_name != 'workflow_run' || contains(fromJSON('["failure","timed_out"]'), github.event.workflow_run.conclusion)
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -31,4 +36,8 @@ jobs:
           WF_URL: ${{ github.event.workflow_run.html_url }}
           WF_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
-          python scripts/alert_issue.py "$WF_NAME" "$WF_CONCLUSION" "$WF_URL" "$WF_BRANCH"
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            python scripts/alert_issue.py "$WF_NAME" "$WF_CONCLUSION" "$WF_URL" "$WF_BRANCH"
+          else
+            python scripts/alert_issue.py --sweep
+          fi

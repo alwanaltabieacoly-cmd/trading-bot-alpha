@@ -67,6 +67,8 @@ class AlertTest(unittest.TestCase):
         self.assertEqual(alert_issue.decide(open_, "Warmup", "failure"), ("create", None))  # other workflow, own issue
         self.assertEqual(alert_issue.decide(open_, "Outcome", "cancelled"), ("none", None))
         self.assertEqual(alert_issue.decide({}, "Outcome", "timed_out"), ("create", None))
+        self.assertEqual(alert_issue.stale(open_, {"Outcome": "success", "Warmup": "success"}), [(7, "Outcome")])
+        self.assertEqual(alert_issue.stale(open_, {"Outcome": "failure"}), [])
         self.assertEqual(alert_issue.decide(open_, "Outcome", "timed_out"), ("comment", 7))
 
     def test_other_branch_never_opens_or_closes(self):
