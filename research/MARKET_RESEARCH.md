@@ -586,3 +586,9 @@ Method: enter at every close, exit at first of +TP / -SL / 30 min timeout. Stop 
 - Break-even for 0.30% target / 0.30% stop: net win = +0.10%, net loss = -0.50%, so win rate must exceed 83%. Spot scalping at 0.30% targets is not viable at tier 0.
 - Account balance is dust (~$0.05 USDT, 0.00000098 BTC). Nothing to trade live; paper/testnet only.
 - Fee cuts to test: GT-fee discount, futures fees (separate schedule), larger targets (>=0.8%) where 0.20% is a smaller share.
+
+### 15.11 Futures fees and key security (2026-10-26)
+- **Account-level futures fees:** maker 0.02%, taker 0.05% (`/wallet/fee`). Contract listing shows maker -0.01% / taker 0.075% (contract defaults; the account figure is what we are billed, unverified). GT discount: off.
+- **Futures round trip:** 0.04% (maker+maker) to 0.10% (taker+taker), versus 0.20% on spot. Funding ~0.005% per 8 h, negligible for minute-scale holds.
+- **Break-even win rate, 0.30% target / 0.30% stop:** taker both ways 66.7%; maker both ways 56.7%. Measured random-entry win rate is ~50% with ~-0.005% gross per trade, so still a loss (about -0.045% to -0.105% per trade). A signal needs to add more than ~0.05-0.10% per trade of real edge net of slippage. Maker entries are not guaranteed to fill, and fills skew toward adverse moves.
+- **SECURITY:** the stored key has **withdraw, wallet, spot, futures, account and p2p all writable**, and **no IP whitelist**. It must be revoked and replaced with a read-only key before any further use.
