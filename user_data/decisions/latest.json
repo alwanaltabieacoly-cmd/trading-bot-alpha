@@ -1,6 +1,6 @@
 {
-  "asof": "2026-10-26T00:00:00+00:00",
-  "generated_at": "2026-10-26T00:51:20.835276+00:00",
+  "asof": "2026-10-26T01:00:00+00:00",
+  "generated_at": "2026-10-26T01:22:20.921822+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -21,13 +21,43 @@
       "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
+    "BNB/USDT": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "XRP/USDT": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "ADA/USDT": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
     "AAPL": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "MSFT": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "NVDA": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "AMZN": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
@@ -38,13 +68,31 @@
       "size": 0.0,
       "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "XAUUSD": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "GBPUSD": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+    },
+    "USDJPY": {
+      "action": "block",
+      "size": 0.0,
+      "confidence": 0.5,
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     }
   },
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
     "age_hours": 0.06,
-    "generated_at": "2026-10-26T00:47:52.980092+00:00",
+    "generated_at": "2026-10-26T01:18:27.158869+00:00",
     "asof": "2026-10-23",
     "zoo": "academic",
     "universe": "sp500",
@@ -222,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 36 labelled outcomes, accuracy 53%): (1) GO verdicts are historically reliable: 100% over 8 labels. Honour them. (2) NO-GO verdicts are anti-predictive: 39% accuracy over 28 labels. Do not treat a NO-GO as a directional signal; require extra confirmation. (3) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-26T00:51:20.835057+00:00",
+    "generated_at": "2026-10-26T01:22:20.921490+00:00",
     "overall": {
       "n": 36,
       "hits": 19,
