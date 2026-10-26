@@ -1,3 +1,4 @@
+import itertools
 import json
 import sys
 import tempfile
@@ -8,6 +9,9 @@ from pathlib import Path
 from agents import daily_learning
 
 
+_PRICE = itertools.count(100)
+
+
 def _rows(count, result, pair="BTC/USDT", verdict="GO", score=1.0, start_hours_ago=1):
     base = datetime.now(timezone.utc)
     out = []
@@ -15,6 +19,7 @@ def _rows(count, result, pair="BTC/USDT", verdict="GO", score=1.0, start_hours_a
         out.append({
             "ts": (base - timedelta(hours=start_hours_ago + i)).isoformat(),
             "pair": pair,
+            "last_price": next(_PRICE),  # distinct per row: compute_metrics keeps one row per (pair, last_price)
             "verdict": verdict,
             "price_change_pct": 0.1 if result == "CORRECT" else -0.1,
             "result": result,
