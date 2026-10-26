@@ -598,3 +598,20 @@ Method: enter at every close, exit at first of +TP / -SL / 30 min timeout. Stop 
 - Leak scan of bot-repo, feed, memory, Logs, .alphacontrol, Workspace and shell history: no copy of key or secret found.
 - `gate_auth.py` refuses every non-GET call unless `ALPHA_GATE_TRADE=1` is set (verified: POST blocked before any network call).
 - `gate_auth.py audit` exits non-zero if the key has writable dangerous permissions (withdraw, wallet, p2p, account, ...) or no IP whitelist. Current key FAILS both; replace it with a read-only key + whitelist 102.206.105.31, then rerun `audit` until it exits 0.
+
+## 16. Gate Futures 1m Signal Test (2026-10-26)
+Probe: `research/gate_signal_probe.py`. Data: last 10,000 1m bars (6.9 days, Gate's API maximum) of USDT perps BTC, ETH, SOL. Entry at signal bar close, TP 0.30% / SL 0.30%, 30 min timeout, stop checked first, non-overlapping events, first half and second half of the data reported separately. Net = gross minus 0.04% (maker round trip, optimistic: assumes every limit order fills at the signal price).
+
+| Signal | BTC (h1 / h2 gross) | ETH | SOL |
+|---|---|---|---|
+| sweep_low_reversal | +0.018% / +0.045% | +0.063% / +0.011% | +0.010% / -0.027% |
+| sweep_high_reversal | +0.012% / +0.001% | +0.001% / -0.010% | +0.007% / +0.012% |
+| volspike_continue | -0.002% / -0.001% | +0.033% / -0.002% | -0.012% / -0.014% |
+| volspike_fade | +0.002% / +0.001% | -0.033% / +0.002% | +0.012% / +0.014% |
+| momentum_5 | -0.006% / -0.002% | -0.001% / -0.009% | +0.002% / +0.017% |
+
+### 16.1 Verdict
+- **No signal is proven.** 30 signal/half cells; only one has t > 2 (ETH sweep_low, first half, t=+2.0) and it fades to t=+0.3 in the second half and is negative on SOL. With 30 cells, one t=2 is expected by chance.
+- Only 2 of 30 cells are positive after the optimistic 0.04% maker cost. Taker cost (0.10%) leaves none.
+- **Weak lead only:** `sweep_low_reversal` is positive gross in 5 of 6 cells (BTC both halves, ETH both halves, SOL first half), avg ~+0.02%, below the 0.04% needed. Worth retesting on more data and with order-book imbalance as a filter, not worth trading.
+- Candle-only signals on 6.9 days do not clear costs. Next evidence must come from the order-book logger (`research/data/gate/`) and a longer sample.
