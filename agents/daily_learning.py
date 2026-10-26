@@ -87,6 +87,7 @@ def load_outcomes(log_paths=None):
                         "change_pct": change,
                         "result": item.get("result"),
                         "score": item.get("score"),
+                        "last_price": item.get("last_price"),
                     })
             elif rec.get("result"):
                 rows.append({
@@ -96,6 +97,7 @@ def load_outcomes(log_paths=None):
                     "change_pct": rec.get("price_change_pct"),
                     "result": rec.get("result"),
                     "score": rec.get("score"),
+                    "last_price": rec.get("last_price"),
                 })
     for row in rows:
         dt = _parse_ts(row["ts"])
@@ -130,9 +132,18 @@ def _bucket(score):
 
 
 def compute_metrics(records, now=None):
-    """Aggregate accuracy overall, per verdict, per pair, per score bucket, trend."""
+    """Aggregate accuracy overall, per verdict, per pair, per score bucket, trend.
+
+    Deduplicates by (pair, last_price): the warmup re-scores the same candle on
+    every run, so raw counts inflate n by up to ~4x. Only the newest call about
+    a given candle is kept, matching the edge.py independent() rule.
+    """
     now = now or datetime.now(timezone.utc)
-    rows = [r for r in records if r.get("result")]
+    raw = [r for r in records if r.get("result")]
+    seen = {}
+    for r in sorted(raw, key=lambda x: (x.get("ts") or "")):
+        seen[(r.get("pair"), r.get("last_price"))] = r
+    rows = list(seen.values())
     overall = _acc(rows)
 
     by_verdict = {}
@@ -286,7 +297,7 @@ def prompt_block(metrics=None):
         return ""
     overall = metrics["overall"]
     head = (
-        f"HISTORICAL LESSONS (from {overall['n']} labelled outcomes, "
+        f"HISTORICAL LESSONS (from {overall['n']} labelled outcomes, deduped; accuracy {overall['accuracy']:.0%}):"
         f"accuracy {overall['accuracy']:.0%}):"
     )
     bullets = " ".join(f"({i}) {item['text']}" for i, item in enumerate(lessons, 1))
