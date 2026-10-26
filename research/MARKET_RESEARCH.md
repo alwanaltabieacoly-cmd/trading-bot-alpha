@@ -579,3 +579,10 @@ Method: enter at every close, exit at first of +TP / -SL / 30 min timeout. Stop 
 2. Signal tests (15.4) on logged data with fees: not started, waits for data.
 3. hftbacktest queue-model replay: not started.
 4. Futures testnet paper trading: not started.
+
+### 15.10 Verified Gate account facts (2026-10-26, via `gate_auth.py check`)
+- API key valid (32/64 chars), read calls succeed. VIP tier 0.
+- **Spot fees BTC_USDT: taker 0.10%, maker 0.10%** -> round trip **0.20%** whether using market or limit orders. The 0.08% maker figure in 15.1/15.3 was wrong for this account; use 0.20%.
+- Break-even for a 0.30% target / 0.30% stop: win rate must exceed ~(0.30+0.20)/(0.60) = 83%?? No: net win = +0.10%, net loss = -0.50%, so win rate must exceed 83%. Spot scalping at 0.30% targets is not viable at tier 0.
+- Account balance is dust (~$0.05 USDT, 0.00000098 BTC). Nothing to trade live; paper/testnet only.
+- Fee cuts to test: GT-fee discount, futures fees (separate schedule), larger targets (>=0.8%) where 0.20% is a smaller share.

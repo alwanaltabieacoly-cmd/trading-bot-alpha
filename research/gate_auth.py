@@ -2,7 +2,7 @@
 Set once:   python research/gate_auth.py set      (prompts, hidden input)
 Check:      python research/gate_auth.py check    (read-only call: shows fee rates + key permissions)
 """
-import getpass, hashlib, hmac, json, sys, time, urllib.request
+import hashlib, hmac, json, subprocess, sys, time, urllib.request
 import keyring
 
 SERVICE, HOST = "alpha-gate", "https://api.gateio.ws"
@@ -22,9 +22,16 @@ def call(method, path, query="", body=""):
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"
     if cmd == "set":
-        keyring.set_password(SERVICE, "key", getpass.getpass("Gate API key: ").strip())
-        keyring.set_password(SERVICE, "secret", getpass.getpass("Gate API secret: ").strip())
-        print("stored in Windows Credential Manager (service 'alpha-gate')")
+        def from_clipboard(label):
+            input(f"Copy the Gate API {label} (Ctrl+C on Gate's page), then press Enter here: ")
+            v = subprocess.run(["powershell", "-NoProfile", "-Command", "Get-Clipboard"], capture_output=True, text=True).stdout.strip()
+            if len(v) < 16: raise SystemExit(f"Clipboard holds {len(v)} chars, too short for a {label}. Nothing stored.")
+            print(f"  read {len(v)} chars")
+            return v
+        key = from_clipboard("key"); secret = from_clipboard("secret")
+        keyring.set_password(SERVICE, "key", key); keyring.set_password(SERVICE, "secret", secret)
+        subprocess.run(["powershell", "-NoProfile", "-Command", "Set-Clipboard -Value ' '"])
+        print("stored in Windows Credential Manager (service 'alpha-gate'); clipboard cleared")
     elif cmd == "check":
         fee = call("GET", "/wallet/fee", "currency_pair=BTC_USDT")
         print("spot fees BTC_USDT: taker", fee.get("taker_fee"), "maker", fee.get("maker_fee"))
