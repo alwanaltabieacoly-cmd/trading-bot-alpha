@@ -9,7 +9,7 @@ Testnet is treated as real money: sizing, stops and limits are the live rules, e
 is proven yet (see BACKFILL.md). Trades are evidence-gathering, and the judge's gate decides if anything ever goes live."""
 import contextlib, io, json, subprocess, sys, time, urllib.error
 from pathlib import Path
-import gate_analyst as A, gate_judge as J, gate_notify as N, gate_trader as T
+import gate_alpha as G, gate_analyst as A, gate_judge as J, gate_notify as N, gate_trader as T
 
 LOG = A.PRIVATE / "trades.jsonl"; SCORED = A.PRIVATE / "scored.jsonl"; BACKFILL = A.PRIVATE / "backfill_rows.jsonl"
 EXPLORE_RISK_PCT = 0.25
@@ -87,13 +87,42 @@ def manage():
     for t in trades:
         if "closed" in t: continue
         if t["coin"] in open_pos and time.time() < t["opened"] + (t["horizon_h"] - GRACE_H) * 3600: continue  # the daily run can start minutes before the horizon: without grace a trade would sit another full day
-        if t["coin"] in open_pos: T.close_trade(t["coin"]); t["exit"] = "horizon"
+        if t["coin"] in open_pos: T.close_trade(t["coin"]); t["exit"] = t.pop("close_reason", "horizon")
         else: t["exit"] = "stop_or_target"
         T.api("DELETE", "/futures/usdt/price_orders", f"contract={t['coin']}")  # remove the leftover stop/target
         res = [x for x in T.api("GET", "/futures/usdt/position_close", f"contract={t['coin']}&limit=5") if x["time"] >= t["opened"]]
         t["pnl_usd"] = round(sum(float(x["pnl"]) for x in res), 4); t["closed"] = int(time.time())
         print(f"CLOSED {t['coin']} {t['exit']} pnl ${t['pnl_usd']}")
     LOG.write_text("".join(json.dumps(t) + "\n" for t in trades))
+
+def alpha_trade(coin, side, stop_pct, target_pct, why, tags=()):
+    """Alpha's own trade. Logged as an Alpha call first (the judge scores it whatever happens), then opened at EXPLORE_RISK_PCT through the same
+    halts, sizing, stop and target as the bot's trades. Alpha cannot raise its risk or clear a halt. Raises ValueError with the reason if refused."""
+    if side not in ("long", "short"): raise ValueError("side must be long or short")
+    trades = read(LOG)
+    if HALT.exists(): raise ValueError(f"halted: {HALT.read_text().strip()} (a human must run `gate_bot.py resume`)")
+    equity, peak = equity_now(); stop = check_halt(trades, equity, peak, time.strftime("%Y-%m-%d", time.gmtime()))
+    if stop:
+        if stop.startswith("drawdown"): HALT.write_text(stop)
+        raise ValueError(f"halted: {stop}")
+    if any(t["coin"] == coin and "closed" not in t for t in trades): raise ValueError(f"already holding {coin}")
+    G.make_call(coin, side, stop_pct, target_pct, why, tags)
+    try: r = T.open_trade(coin, side, stop_pct, target_pct, {"risk_pct": EXPLORE_RISK_PCT})
+    except SystemExit as e: raise ValueError(f"call logged for scoring, trade not opened: {e}")
+    except urllib.error.HTTPError as e: raise ValueError(f"call logged for scoring, Gate refused the order: {e.read().decode()[:120]}")
+    rec = {"opened": int(time.time()), "coin": coin, "side": side, "setup": "alpha", "tags": ["alpha", *tags], "why": why.strip()[:600],
+           "horizon_h": A.HORIZON_H, "fill": r["fill_price"], "stop": r["stop"], "target": r["target"], "contracts": r["contracts"],
+           "risk_usd": r["risk_usd"], "notional": r["notional"], "gate": f"alpha: explore risk {EXPLORE_RISK_PCT}% until the versus scoreboard proves it"}
+    with open(LOG, "a") as f: f.write(json.dumps(rec) + "\n")
+    return rec
+
+def alpha_close(coin, why="manual"):
+    """Close one of Alpha's own open trades now and record the result. Only trades opened by alpha_trade."""
+    trades = read(LOG); t = next((t for t in trades if t["coin"] == coin and t.get("setup") == "alpha" and "closed" not in t), None)
+    if not t: raise ValueError(f"no open Alpha trade on {coin}")
+    t["horizon_h"] = 0; t["close_reason"] = f"alpha: {why.strip()[:200]}"
+    LOG.write_text("".join(json.dumps(x) + "\n" for x in trades)); manage()
+    return next(x for x in read(LOG) if x["coin"] == coin and x["opened"] == t["opened"])
 
 def review():
     for t in read(LOG):

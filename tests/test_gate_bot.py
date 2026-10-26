@@ -1,4 +1,4 @@
-import sys, time, unittest
+import json, sys, time, unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "research"))
 import gate_bot as b
@@ -35,5 +35,48 @@ class Halts(unittest.TestCase):
     def test_drawdown(self): self.assertIn("drawdown", b.check_halt([], 940, 1000, TODAY))
     def test_small_drawdown_ok(self): self.assertIsNone(b.check_halt([], 960, 1000, TODAY))
     def test_gain_never_halts(self): self.assertIsNone(b.check_halt([self.closed(30)], 1030, 1030, TODAY))
+
+class AlphaTrade(unittest.TestCase):
+    """Alpha trades through the bot's own halts and risk. Everything external is faked."""
+    def setUp(self):
+        import tempfile, gate_alpha as G
+        self.d = Path(tempfile.mkdtemp()); self.G = G; self.saved = (b.LOG, b.HALT, b.EQUITY, b.T, b.G, b.equity_now)
+        b.LOG, b.HALT, b.EQUITY = self.d / "trades.jsonl", self.d / "HALT.txt", self.d / "equity.json"
+        self.made, self.opened = [], []
+        class T:
+            @staticmethod
+            def open_trade(coin, side, stop, target, limits): outer.opened.append((coin, side, limits)); return {"fill_price": 1.0, "stop": 0.9, "target": 1.2, "contracts": 3, "risk_usd": 2.0, "notional": 30.0}
+        outer = self; b.T = T
+        class GG:
+            @staticmethod
+            def make_call(*a, **k): outer.made.append(a)
+        b.G = GG; b.equity_now = lambda: (1000.0, 1000.0)
+    def tearDown(self): b.LOG, b.HALT, b.EQUITY, b.T, b.G, b.equity_now = self.saved
+    def test_opens_at_explore_risk_after_logging_the_call(self):
+        r = b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "reclaimed the low")
+        self.assertEqual(self.made[0][:3], ("ETH_USDT", "long", 2.0)); self.assertEqual(self.opened, [("ETH_USDT", "long", {"risk_pct": b.EXPLORE_RISK_PCT})])
+        self.assertEqual((r["setup"], r["coin"]), ("alpha", "ETH_USDT")); self.assertEqual(len(b.read(b.LOG)), 1)
+    def test_halt_refuses_before_logging_or_trading(self):
+        b.HALT.write_text("drawdown")
+        with self.assertRaisesRegex(ValueError, "halted"): b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "x")
+        self.assertEqual((self.made, self.opened), ([], []))
+    def test_daily_loss_halt_refuses(self):
+        b.LOG.write_text(json.dumps({"coin": "A", "opened": NOW, "closed": NOW, "pnl_usd": -50.0}) + "\n")
+        with self.assertRaisesRegex(ValueError, "daily loss"): b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "x")
+        self.assertEqual(self.opened, [])
+    def test_already_holding_refused(self):
+        b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "x")
+        with self.assertRaisesRegex(ValueError, "already holding"): b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "again")
+        self.assertEqual(len(self.opened), 1)
+    def test_flat_is_not_a_trade(self):
+        with self.assertRaises(ValueError): b.alpha_trade("ETH_USDT", "flat", 2.0, 4.0, "x")
+    def test_failed_order_keeps_the_call_but_not_a_trade(self):
+        def boom(*a, **k): raise SystemExit("max_open 3 reached")
+        b.T.open_trade = boom
+        with self.assertRaisesRegex(ValueError, "trade not opened"): b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "x")
+        self.assertEqual((len(self.made), b.read(b.LOG)), (1, []))
+    def test_close_rejects_bots_own_trades(self):
+        b.LOG.write_text(json.dumps({"coin": "SOL_USDT", "setup": "setup_trend", "opened": NOW, "horizon_h": 24}) + "\n")
+        with self.assertRaisesRegex(ValueError, "no open Alpha trade"): b.alpha_close("SOL_USDT")
 
 if __name__ == "__main__": unittest.main()
