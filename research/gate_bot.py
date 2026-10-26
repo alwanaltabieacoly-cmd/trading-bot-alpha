@@ -11,6 +11,7 @@ import gate_analyst as A, gate_trader as T
 
 LOG = A.PRIVATE / "trades.jsonl"
 EXPLORE_RISK_PCT = 0.25
+GRACE_H = 2
 BLOCKED = {"setup_pullback": "negative in the second half of history (-1.45% mean, 30 calls): the data rejects it"}
 WHY = {"setup_trend": "price above SMA50 above SMA200 with RSI 50-70: an uptrend that is not overheated",
        "setup_breakdown": "price below SMA200 and SMA50 with RSI above 40: a downtrend with room left to fall"}
@@ -42,7 +43,7 @@ def manage():
     trades = read(LOG); open_pos = {p["contract"] for p in T.api("GET", "/futures/usdt/positions") if float(p["size"])}
     for t in trades:
         if "closed" in t: continue
-        if t["coin"] in open_pos and time.time() < t["opened"] + t["horizon_h"] * 3600: continue
+        if t["coin"] in open_pos and time.time() < t["opened"] + (t["horizon_h"] - GRACE_H) * 3600: continue  # the daily run can start minutes before the horizon: without grace a trade would sit another full day
         if t["coin"] in open_pos: T.close_trade(t["coin"]); t["exit"] = "horizon"
         else: t["exit"] = "stop_or_target"
         T.api("DELETE", "/futures/usdt/price_orders", f"contract={t['coin']}")  # remove the leftover stop/target
