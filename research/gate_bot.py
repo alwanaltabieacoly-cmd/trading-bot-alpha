@@ -2,21 +2,57 @@
   python research/gate_bot.py run      run the analyst, take its calls through the filters, open trades, log the reasons
   python research/gate_bot.py manage   close trades past their horizon, record outcomes
   python research/gate_bot.py review   print every trade: what, why, result
-  python research/gate_bot.py daily    once per UTC day: manage, score the judge, run (what the GitHub workflow calls)
+  python research/gate_bot.py daily    once per UTC day: manage, score the judge, run, send the Telegram summary (what the GitHub workflow calls)
+  python research/gate_bot.py status   which setups may trade, at what risk, and whether a halt is active
+  python research/gate_bot.py resume   clear a drawdown halt after you have looked at why
 Testnet is treated as real money: sizing, stops and limits are the live rules, except risk is cut to EXPLORE_RISK_PCT because no setup
 is proven yet (see BACKFILL.md). Trades are evidence-gathering, and the judge's gate decides if anything ever goes live."""
-import json, subprocess, sys, time, urllib.error
+import contextlib, io, json, subprocess, sys, time, urllib.error
 from pathlib import Path
-import gate_analyst as A, gate_trader as T
+import gate_analyst as A, gate_judge as J, gate_notify as N, gate_trader as T
 
-LOG = A.PRIVATE / "trades.jsonl"
+LOG = A.PRIVATE / "trades.jsonl"; SCORED = A.PRIVATE / "scored.jsonl"; BACKFILL = A.PRIVATE / "backfill_rows.jsonl"
 EXPLORE_RISK_PCT = 0.25
 GRACE_H = 2
-BLOCKED = {"setup_pullback": "negative in the second half of history (-1.45% mean, 30 calls): the data rejects it"}
+DAILY_LOSS_PCT = 1.0        # realised loss today beyond this % of equity: no new trades until the next UTC day
+DRAWDOWN_PCT = 5.0          # equity this far under its peak: halt until a human runs `resume`
+EXPLORE_DAYS, PROVEN_DAYS = 10, 30
+HALT = A.PRIVATE / "HALT.txt"; EQUITY = A.PRIVATE / "equity.json"
 WHY = {"setup_trend": "price above SMA50 above SMA200 with RSI 50-70: an uptrend that is not overheated",
        "setup_breakdown": "price below SMA200 and SMA50 with RSI above 40: a downtrend with room left to fall"}
 
 def read(p): return [json.loads(x) for x in open(p)] if Path(p).exists() else []
+
+def setup_status(setup, backfill, live):
+    """The auto-gate. Returns (state, risk_pct, reason). Live-scored calls are out of sample, so they outrank the backfill.
+    <10 live days: the backfill mean decides.  10-29: live mean decides, explore risk.  30+ and Wilson lower bound >50% and beats hold: full risk."""
+    if not setup: return "blocked", 0.0, "no named setup"
+    mean = lambda xs: sum(xs) / len(xs)
+    by_day = {}
+    for r in live:
+        if setup in r["tags"]: by_day.setdefault(r["day"], []).append(r)
+    net = [mean([r["net"] for r in rs]) for rs in by_day.values()]; base = [mean([r["base"] for r in rs]) for rs in by_day.values()]
+    n = len(net)
+    if n >= PROVEN_DAYS:
+        lower = J.wilson_lower(sum(x > 0 for x in net), n)
+        if lower > 0.5 and mean(net) > mean(base): return "proven", T.LIMITS["risk_pct"], f"live {n} days, 95% lower bound {lower:.0%}, mean {mean(net):+.3f}% vs hold {mean(base):+.3f}%"
+    if n >= EXPLORE_DAYS:
+        ok = mean(net) > 0; return ("explore", EXPLORE_RISK_PCT, f"live {n} days, mean {mean(net):+.3f}%") if ok else ("blocked", 0.0, f"live {n} days, mean {mean(net):+.3f}% is not positive")
+    bf = [r["net"] for r in backfill if setup in r["tags"]]
+    if not bf: return "blocked", 0.0, "no evidence yet"
+    return ("explore", EXPLORE_RISK_PCT, f"backfill {len(bf)} calls, mean {mean(bf):+.3f}% (live {n} days so far)") if mean(bf) > 0 else \
+           ("blocked", 0.0, f"backfill {len(bf)} calls, mean {mean(bf):+.3f}% is not positive")
+
+def check_halt(trades, equity, peak, today):
+    """Returns a reason to stop opening trades, or None. trades: log rows; today: 'YYYY-MM-DD' (UTC)."""
+    if peak and equity < peak * (1 - DRAWDOWN_PCT / 100): return f"drawdown halt: equity {equity:.2f} is {100 * (1 - equity / peak):.1f}% under the peak {peak:.2f}"
+    lost = -sum(t.get("pnl_usd", 0) for t in trades if "closed" in t and time.strftime("%Y-%m-%d", time.gmtime(t["closed"])) == today)
+    if lost > equity * DAILY_LOSS_PCT / 100: return f"daily loss halt: lost ${lost:.2f} today, limit ${equity * DAILY_LOSS_PCT / 100:.2f}"
+    return None
+
+def equity_now():
+    e = float(T.api("GET", "/futures/usdt/accounts")["total"]); peak = json.loads(EQUITY.read_text())["peak"] if EQUITY.exists() else e
+    EQUITY.write_text(json.dumps({"peak": max(peak, e), "equity": e, "ts": int(time.time())})); return e, max(peak, e)
 
 def todays_calls():
     subprocess.run([sys.executable, str(Path(__file__).parent / "gate_analyst.py")], check=True)
@@ -24,20 +60,27 @@ def todays_calls():
     return [r for r in rows if r["ts"] == last and r["call"] != "flat"]
 
 def run():
-    held = {t["coin"] for t in read(LOG) if "closed" not in t}
+    trades = read(LOG); held = {t["coin"] for t in trades if "closed" not in t}
+    if HALT.exists(): print(f"HALTED, no new trades: {HALT.read_text().strip()} (run `gate_bot.py resume` after review)"); return
+    equity, peak = equity_now(); why = check_halt(trades, equity, peak, time.strftime("%Y-%m-%d", time.gmtime()))
+    if why:
+        if why.startswith("drawdown"): HALT.write_text(why)
+        print(f"HALTED, no new trades: {why}"); return
+    backfill, live = read(BACKFILL), read(SCORED); status = {}
     for c in todays_calls():
         setup = next((t for t in c["tags"] if t.startswith("setup_")), None)
-        if setup in BLOCKED: print(f"skip {c['coin']} {c['call']}: {setup} blocked: {BLOCKED[setup]}"); continue
+        state, risk, reason = status[setup] = status.get(setup) or setup_status(setup, backfill, live)
+        if state == "blocked": print(f"skip {c['coin']} {c['call']}: {setup} blocked: {reason}"); continue
         if c["coin"] in held: print(f"skip {c['coin']}: already holding"); continue
-        try: r = T.open_trade(c["coin"], c["call"], c["stop_pct"], c["target_pct"], {"risk_pct": EXPLORE_RISK_PCT})
+        try: r = T.open_trade(c["coin"], c["call"], c["stop_pct"], c["target_pct"], {"risk_pct": risk})
         except SystemExit as e: print(f"skip {c['coin']}: {e}"); continue
         except ValueError as e: print(f"skip {c['coin']}: {e}"); continue
         except urllib.error.HTTPError as e: print(f"skip {c['coin']}: Gate refused the order: {e.read().decode()[:120]}"); continue
         rec = {"opened": int(time.time()), "coin": c["coin"], "side": c["call"], "setup": setup, "tags": c["tags"], "why": WHY.get(setup, ""),
                "horizon_h": c["horizon_h"], "fill": r["fill_price"], "stop": r["stop"], "target": r["target"], "contracts": r["contracts"],
-               "risk_usd": r["risk_usd"], "notional": r["notional"]}
+               "risk_usd": r["risk_usd"], "notional": r["notional"], "gate": f"{state}: {reason}"}
         with open(LOG, "a") as f: f.write(json.dumps(rec) + "\n")
-        print(f"OPEN {rec['side']} {rec['coin']} {rec['contracts']} @ {rec['fill']} stop {rec['stop']} target {rec['target']} risk ${rec['risk_usd']} | {rec['why']}")
+        print(f"OPEN {rec['side']} {rec['coin']} {rec['contracts']} @ {rec['fill']} stop {rec['stop']} target {rec['target']} risk ${rec['risk_usd']} | {rec['why']} | gate {rec['gate']}")
 
 def manage():
     trades = read(LOG); open_pos = {p["contract"] for p in T.api("GET", "/futures/usdt/positions") if float(p["size"])}
@@ -57,12 +100,27 @@ def review():
         res = f"{t['exit']} pnl ${t['pnl_usd']}" if "closed" in t else "open"
         print(f"{time.strftime('%m-%d %H:%M', time.gmtime(t['opened']))} {t['side']:5s} {t['coin']:10s} risk ${t['risk_usd']} -> {res}\n   why: {t['why']}  [{', '.join(t['tags'])}]")
 
+def status():
+    backfill, live = read(BACKFILL), read(SCORED)
+    for setup in sorted({t for r in backfill + live for t in r["tags"] if t.startswith("setup_")}):
+        state, risk, reason = setup_status(setup, backfill, live); print(f"{setup:18s} {state:8s} risk {risk}%  {reason}")
+    eq, peak = equity_now(); print(f"equity {eq:.2f}, peak {peak:.2f}; " + (f"HALT: {HALT.read_text().strip()}" if HALT.exists() else "no halt") +
+        f"; today: {check_halt(read(LOG), eq, peak, time.strftime('%Y-%m-%d', time.gmtime())) or 'within limits'}")
+
+def resume():
+    HALT.unlink(missing_ok=True); e = float(T.api("GET", "/futures/usdt/accounts")["total"]); EQUITY.write_text(json.dumps({"peak": e, "equity": e, "ts": int(time.time())})); print(f"halt cleared; peak reset to {e:.2f}")
+
 def daily():
     A.PRIVATE.mkdir(parents=True, exist_ok=True); stamp = A.PRIVATE / "last_daily.txt"; today = time.strftime("%Y-%m-%d", time.gmtime())
     if stamp.exists() and stamp.read_text().strip() == today: print(f"already ran for {today}"); return
-    manage()
-    subprocess.run([sys.executable, str(Path(__file__).parent / "gate_judge.py"), "live"], check=True)
-    run(); stamp.write_text(today)
+    buf = io.StringIO()
+    with contextlib.redirect_stdout(buf):
+        manage()
+        print(subprocess.run([sys.executable, str(Path(__file__).parent / "gate_judge.py"), "live"], check=True, capture_output=True, text=True).stdout.strip())
+        run()
+    out = buf.getvalue(); print(out); stamp.write_text(today)
+    lines = [l[:300] for l in out.splitlines() if l.startswith(("OPEN", "CLOSED", "HALT", "skip", "scored"))]
+    N.send(f"Alpha {today}\n" + ("\n".join(lines) or "nothing to report"))
 
 if __name__ == "__main__":
-    {"run": run, "manage": manage, "review": review, "daily": daily}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()
+    {"run": run, "manage": manage, "review": review, "daily": daily, "status": status, "resume": resume}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()

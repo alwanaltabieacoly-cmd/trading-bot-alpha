@@ -31,9 +31,18 @@ jobs:
         env:
           GATE_TESTNET_KEY: ${{ secrets.GATE_TESTNET_KEY }}
           GATE_TESTNET_SECRET: ${{ secrets.GATE_TESTNET_SECRET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ALPHA_STATE_DIR: research/gate_state
           PYTHONIOENCODING: utf-8
         run: python research/gate_bot.py daily
+
+      - name: Tell Telegram if the run failed
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python -c "import sys; sys.path.insert(0,'research'); import gate_notify as n; n.send('Alpha: Gate daily FAILED. ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}')"
 
       - name: Write the review and save the state
         env:
