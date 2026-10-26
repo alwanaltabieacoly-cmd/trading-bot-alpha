@@ -119,7 +119,7 @@ def daily():
         print(subprocess.run([sys.executable, str(Path(__file__).parent / "gate_judge.py"), "live"], check=True, capture_output=True, text=True).stdout.strip())
         run()
     out = buf.getvalue(); print(out); stamp.write_text(today)
-    lines = [l[:300] for l in out.splitlines() if l.startswith(("OPEN", "CLOSED", "HALT", "skip", "scored"))]
+    lines = [l[:300] for l in out.splitlines() if l.startswith(("OPEN", "CLOSED", "HALT", "skip", "scored", "VERSUS"))]
     N.send(f"Alpha {today}\n" + ("\n".join(lines) or "nothing to report"))
 
 if __name__ == "__main__":
