@@ -1,4 +1,5 @@
 import sys, unittest
+from decimal import Decimal
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "research"))
 import gate_trader as t
@@ -23,6 +24,17 @@ class Plan(unittest.TestCase):
             with self.assertRaises(ValueError): t.plan("BTC_USDT", "long", 80000, bad, 2.0, 1000, SPEC)
     def test_too_small_account_refused(self):
         with self.assertRaises(ValueError): t.plan("BTC_USDT", "long", 80000, 1.0, 2.0, 5, SPEC)
+
+class Rounding(unittest.TestCase):
+    def test_no_float_noise(self):   # the bug that made Gate reject BTC stops: 793649 * 0.1 = 79364.90000000001
+        self.assertEqual(t.fmt(t.round_to(79364.9000000001, 0.1)), "79364.9")
+    def test_many_prices_are_clean(self):
+        for step in (0.1, 0.01, 0.001, 0.00001, 0.5, 1):
+            for i in range(1, 3000, 7):
+                px = t.round_to(i * 1.0371 * step * 13.7, step); s = t.fmt(px)
+                self.assertLessEqual(-Decimal(s).as_tuple().exponent if "." in s else 0, -Decimal(repr(step)).as_tuple().exponent, (step, px, s))
+    def test_small_prices_not_scientific(self): self.assertEqual(t.fmt(4.2e-06), "0.0000042")
+    def test_snaps_to_step(self): self.assertEqual(t.fmt(t.round_to(1.2913, 0.0001)), "1.2913")
 
 class Trigger(unittest.TestCase):
     def rule(self, side, kind): return t.trigger_body("BTC_USDT", side, 1, kind)["trigger"]["rule"]

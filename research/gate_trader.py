@@ -4,6 +4,7 @@ Every order is read back from Gate and compared with what was intended. Sizing r
 Gate field meanings (gateapi-python docs): size>0 long / <0 short; price "0"+tif ioc = market; trigger rule 1 = price >= trigger, 2 = price <= trigger;
 price_type 1 = mark price; order_type close-long-position / close-short-position close the whole position.
 Untested against a live testnet until a testnet key is stored (see gate_auth.py set testnet)."""
+from decimal import Decimal
 import json, math, urllib.request
 import gate_auth as g
 
@@ -16,8 +17,10 @@ def public(path):
 def api(method, path, query="", body=None):
     return g.call(method, path, query, json.dumps(body, separators=(",", ":")) if body is not None else "", env=ENV)
 
-def round_to(x, step): return round(round(x / step) * step, 12)
-def fmt(x): return f"{x:.12f}".rstrip("0").rstrip(".")  # plain decimals, never 4.2e-06
+def round_to(x, step):
+    """Nearest multiple of step, exact in decimal: float math gives 79364.90000000001 for 793649 * 0.1, which Gate rejects."""
+    d = Decimal(str(step)); return float((Decimal(str(x)) / d).to_integral_value() * d)
+def fmt(x): return f"{Decimal(repr(float(x))).normalize():f}"  # plain decimals, never 4.2e-06
 
 def plan(contract, side, entry, stop_pct, target_pct, equity, spec, limits=None):
     """Pure function: returns an order plan or raises ValueError with the reason. side: 'long'|'short'."""

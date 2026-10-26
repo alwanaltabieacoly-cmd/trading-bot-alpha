@@ -1,0 +1,35 @@
+name: Gate selftest
+
+# End-to-end check on the Gate TESTNET (fake money): one small BTC trade opened, verified on Gate, closed; halts; judge; Telegram; collector freshness.
+# Shares a concurrency group with the daily bot so they never trade at the same time. Weekly, plus on demand.
+on:
+  schedule:
+    - cron: "40 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gate-daily
+  cancel-in-progress: false
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python -m unittest tests.test_gate_trader tests.test_gate_bot tests.test_gate_notify
+      - name: End-to-end on the testnet
+        env:
+          GATE_TESTNET_KEY: ${{ secrets.GATE_TESTNET_KEY }}
+          GATE_TESTNET_SECRET: ${{ secrets.GATE_TESTNET_SECRET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PYTHONIOENCODING: utf-8
+        run: python research/gate_selftest.py --require-telegram

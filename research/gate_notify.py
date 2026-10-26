@@ -18,8 +18,9 @@ def send(text):
     token, chat = creds()
     if not (token and chat): print("telegram not configured, message not sent"); return False
     data = urllib.parse.urlencode({"chat_id": chat, "text": text[:4000], "disable_web_page_preview": "true"}).encode()
-    try: return json.load(urllib.request.urlopen(f"https://api.telegram.org/bot{token}/sendMessage", data, timeout=15)).get("ok", False)
-    except Exception as e: print(f"telegram failed: {type(e).__name__}"); return False   # never print the URL: it contains the token
+    try: r = json.load(urllib.request.urlopen(f"https://api.telegram.org/bot{token}/sendMessage", data, timeout=15))
+    except Exception as e: print(f"telegram failed: {type(e).__name__}"); return False   # never print the URL or the error text: they contain the token
+    print(f"telegram sent (message_id {r['result']['message_id']})" if r.get("ok") else "telegram refused the message"); return bool(r.get("ok"))
 
 def _chat_id(token):
     for u in reversed(json.load(urllib.request.urlopen(f"https://api.telegram.org/bot{token}/getUpdates", timeout=15))["result"]):
@@ -36,5 +37,5 @@ if __name__ == "__main__":
         keyring.set_password(SERVICE, "token", token); keyring.set_password(SERVICE, "chat_id", chat)
         subprocess.run(["powershell", "-NoProfile", "-Command", "Set-Clipboard -Value ' '"]); print("stored; clipboard cleared")
     elif sys.argv[1:2] == ["test"]: print("sent" if send("Alpha: Telegram link works.") else "not sent")
-    elif sys.argv[1:2] == ["say"]: send(" ".join(sys.argv[2:]))
+    elif sys.argv[1:2] == ["say"]: sys.exit(0 if send(" ".join(sys.argv[2:])) else 1)
     else: print(__doc__)
