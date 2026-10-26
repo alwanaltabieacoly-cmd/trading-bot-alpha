@@ -66,6 +66,7 @@ if __name__ == "__main__":
         rows = backfill(A.liquid_contracts()[:int(sys.argv[2]) if len(sys.argv) > 2 else 15])
         # one count per coin per day already; split in time halves
         rows.sort(key=lambda r: r["day"]); half = len(rows) // 2
+        (A.PRIVATE / "backfill_rows.jsonl").write_text("\n".join(json.dumps(r) for r in rows), encoding="utf-8")
         txt = [f"# Backfill of analyst rules ({len(rows)} calls, {len({r['coin'] for r in rows})} coins, in-sample, cost {COST}% round trip)", "",
                "Calls overlap across coins on the same day (crypto is highly correlated), so effective n is much smaller than shown.", "",
                report(rows, "All"), "", report(rows[:half], "First half"), "", report(rows[half:], "Second half")]

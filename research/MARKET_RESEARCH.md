@@ -664,3 +664,6 @@ Verified against the live testnet, not just the SDK docs:
 - Gate rejects a stop on the wrong side of the market (`AUTO_TRIGGER_PRICE_LESS_MARK`, code 1030): a free safety check.
 - NOT yet verified: a stop or target actually firing. A 0.06% stop on SOL did not trigger within 120 s because price never reached it. Needs a test that crosses.
 - Cost reality: four round trips of ~$1,000 notional took the account from 1,000.00 to 996.85 USDT (fees + spread + slippage), roughly 0.08% per round trip.
+
+### 18.6 Rule: the bot trades only analyst calls
+The first testnet trades (18.5) were hand-picked to test plumbing. That was wrong: testnet money is treated as real. `gate_bot.py` now trades only what `gate_analyst.py` calls, records the reason for each trade, and sizes risk at 0.25% of equity (no setup is proven). It blocks `setup_pullback` because the history rejects it (second half -1.45% mean net). First run, 2026-10-26: 6 long calls, 5 blocked (pullback), 1 refused by Gate (PEPE_USDT testnet book has no asks, `CONTRACT_NO_COUNTER`), so 0 trades. Fix found on the way: trigger prices must be plain decimals, not `4.2e-06`.

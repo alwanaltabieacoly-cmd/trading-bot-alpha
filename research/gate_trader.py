@@ -16,7 +16,8 @@ def public(path):
 def api(method, path, query="", body=None):
     return g.call(method, path, query, json.dumps(body, separators=(",", ":")) if body is not None else "", env=ENV)
 
-def round_to(x, step): return round(round(x / step) * step, 10)
+def round_to(x, step): return round(round(x / step) * step, 12)
+def fmt(x): return f"{x:.12f}".rstrip("0").rstrip(".")  # plain decimals, never 4.2e-06
 
 def plan(contract, side, entry, stop_pct, target_pct, equity, spec, limits=None):
     """Pure function: returns an order plan or raises ValueError with the reason. side: 'long'|'short'."""
@@ -40,7 +41,7 @@ def trigger_body(contract, side, price, kind):
     """Close-whole-position trigger. kind 'stop'|'target'. Long stop fires at price <= p (rule 2); long target at >= p (rule 1); reversed for shorts."""
     long = side == "long"; rule = 2 if (kind == "stop") == long else 1
     return {"initial": {"contract": contract, "size": 0, "price": "0", "close": True, "tif": "ioc", "reduce_only": True, "text": "api"},
-            "trigger": {"strategy_type": 0, "price_type": 1, "price": str(price), "rule": rule, "expiration": 86400 * 7},
+            "trigger": {"strategy_type": 0, "price_type": 1, "price": fmt(price), "rule": rule, "expiration": 86400 * 7},
             "order_type": "close-long-position" if long else "close-short-position"}
 
 def open_trade(contract, side, stop_pct, target_pct, limits=None):
@@ -63,7 +64,7 @@ def open_trade(contract, side, stop_pct, target_pct, limits=None):
         ids = {k: api("POST", "/futures/usdt/price_orders", body=trigger_body(contract, side, p[k], k))["id"] for k in ("stop", "target")}
         for k, i in ids.items():
             r = api("GET", f"/futures/usdt/price_orders/{i}")
-            if r.get("status") != "open" or r["trigger"]["price"] != str(p[k]): raise RuntimeError(f"{k} order read back as {r.get('status')} {r['trigger']}")
+            if r.get("status") != "open" or float(r["trigger"]["price"]) != p[k]: raise RuntimeError(f"{k} order read back as {r.get('status')} {r['trigger']}")
     except Exception as e:  # never leave a position without a stop
         api("POST", "/futures/usdt/orders", body={"contract": contract, "size": 0, "price": "0", "close": True, "tif": "ioc", "text": "t-alpha-abort"})
         api("DELETE", "/futures/usdt/price_orders", f"contract={contract}")
