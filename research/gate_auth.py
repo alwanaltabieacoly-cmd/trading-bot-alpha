@@ -4,13 +4,13 @@
 Commands:  set [live|testnet]   check [env]   audit   (audit inspects the live key)
 """
 import hashlib, hmac, json, os, subprocess, sys, time, urllib.request
-import keyring
 
 ENVS = {"live": ("alpha-gate", "https://api.gateio.ws"), "testnet": ("alpha-gate-testnet", "https://api-testnet.gateapi.io")}
 DANGEROUS = {"withdraw", "wallet", "p2p", "account", "sub_accounts", "custody", "otc", "pay", "loan", "quant", "copy"}
 
 def creds(env="live"):
     service = ENVS[env][0]
+    import keyring  # lazy: the GitHub runner has no Windows Credential Manager, and the unit tests never need keys
     k, s = keyring.get_password(service, "key"), keyring.get_password(service, "secret")
     if not (k and s): raise SystemExit(f"No {env} key stored. Run: python research/gate_auth.py set {env}")
     return k, s
@@ -34,6 +34,7 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "check"; env = sys.argv[2] if len(sys.argv) > 2 else "live"
     if cmd == "set":
         key = _clipboard("key"); secret = _clipboard("secret")
+        import keyring
         keyring.set_password(ENVS[env][0], "key", key); keyring.set_password(ENVS[env][0], "secret", secret)
         subprocess.run(["powershell", "-NoProfile", "-Command", "Set-Clipboard -Value ' '"])
         print(f"stored {env} key in Windows Credential Manager (service '{ENVS[env][0]}'); clipboard cleared")
