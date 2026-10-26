@@ -597,7 +597,7 @@ Method: enter at every close, exit at first of +TP / -SL / 30 min timeout. Stop 
 - Storage: Windows Credential Manager (`alpha-gate`). Readable by any process running as this Windows user; protection is the Windows login, not secrecy from our own tools.
 - Leak scan of bot-repo, feed, memory, Logs, .alphacontrol, Workspace and shell history: no copy of key or secret found.
 - `gate_auth.py` refuses every non-GET call unless `ALPHA_GATE_TRADE=1` is set (verified: POST blocked before any network call).
-- `gate_auth.py audit` exits non-zero if the key has writable dangerous permissions (withdraw, wallet, p2p, account, ...) or no IP whitelist. Current key FAILS both; replace it with a read-only key + whitelist 102.206.105.31, then rerun `audit` until it exits 0.
+- `gate_auth.py audit` exits non-zero if the key has writable dangerous permissions (withdraw, wallet, p2p, account, ...) or no IP whitelist. Current key FAILS both; replace it with a read-only key + whitelist your own IP, then rerun `audit` until it exits 0.
 
 ## 16. Gate Futures 1m Signal Test (2026-10-26)
 Probe: `research/gate_signal_probe.py`. Data: last 10,000 1m bars (6.9 days, Gate's API maximum) of USDT perps BTC, ETH, SOL. Entry at signal bar close, TP 0.30% / SL 0.30%, 30 min timeout, stop checked first, non-overlapping events, first half and second half of the data reported separately. Net = gross minus 0.04% (maker round trip, optimistic: assumes every limit order fills at the signal price).
