@@ -1,6 +1,6 @@
 {
-  "asof": "2026-10-25T14:00:00+00:00",
-  "generated_at": "2026-10-25T14:16:17.759207+00:00",
+  "asof": "2026-10-26T00:00:00+00:00",
+  "generated_at": "2026-10-26T00:51:20.835276+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -25,7 +25,7 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      "rationale": "synthesizer: blocked (critic=block)"
     },
     "MSFT": {
       "action": "block",
@@ -44,7 +44,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot/trading-bot/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
     "age_hours": 0.06,
-    "generated_at": "2026-10-25T14:12:52.260923+00:00",
+    "generated_at": "2026-10-26T00:47:52.980092+00:00",
     "asof": "2026-10-23",
     "zoo": "academic",
     "universe": "sp500",
@@ -103,7 +103,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.03,
+      "age_hours": 0.04,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -153,28 +153,28 @@
     },
     "asset_scan": [
       {
+        "pair": "USDJPY",
+        "profit_score": 6.9097,
+        "momentum": -0.2746,
+        "micro_score": 1.9863
+      },
+      {
+        "pair": "OP/USD",
+        "profit_score": 3.0022,
+        "momentum": -0.6967,
+        "micro_score": 0.9652
+      },
+      {
         "pair": "APT/USD",
-        "profit_score": 2.9854,
-        "momentum": -1.8672,
-        "micro_score": 1.4066
+        "profit_score": 2.8504,
+        "momentum": -0.7672,
+        "micro_score": 0.9616
       },
       {
         "pair": "EURUSD",
-        "profit_score": 2.7545,
-        "momentum": -0.1142,
-        "micro_score": 0.9943
-      },
-      {
-        "pair": "SAND/USD",
-        "profit_score": 2.2755,
-        "momentum": -2.1974,
-        "micro_score": 1.3901
-      },
-      {
-        "pair": "USDJPY",
-        "profit_score": 2.2215,
-        "momentum": -0.3621,
-        "micro_score": 0.9819
+        "profit_score": 2.8204,
+        "momentum": -0.0835,
+        "micro_score": 0.9958
       },
       {
         "pair": "AAPL",
@@ -183,10 +183,16 @@
         "micro_score": 0.0471
       },
       {
-        "pair": "USDCAD",
-        "profit_score": 1.7332,
-        "momentum": -0.3567,
-        "micro_score": 0.4822
+        "pair": "USDCHF",
+        "profit_score": 1.6945,
+        "momentum": -0.3747,
+        "micro_score": 0.4813
+      },
+      {
+        "pair": "ADA/USD",
+        "profit_score": 1.6496,
+        "momentum": -0.6281,
+        "micro_score": 0.9686
       },
       {
         "pair": "SPY",
@@ -195,22 +201,16 @@
         "micro_score": 0.4771
       },
       {
-        "pair": "OP/USD",
-        "profit_score": 1.3499,
-        "momentum": -1.4651,
-        "micro_score": 0.9267
+        "pair": "BCH/USD",
+        "profit_score": 1.2583,
+        "momentum": 0.5852,
+        "micro_score": 0.0293
       },
       {
-        "pair": "ATOM/USD",
-        "profit_score": 0.5136,
-        "momentum": -0.9239,
-        "micro_score": 0.4538
-      },
-      {
-        "pair": "TSLA",
-        "profit_score": 0.4194,
-        "momentum": 0.195,
-        "micro_score": 0.0098
+        "pair": "UNI/USD",
+        "profit_score": 0.8573,
+        "momentum": 0.3988,
+        "micro_score": 0.0199
       }
     ],
     "scan_ic": {
@@ -222,7 +222,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 36 labelled outcomes, accuracy 53%): (1) GO verdicts are historically reliable: 100% over 8 labels. Honour them. (2) NO-GO verdicts are anti-predictive: 39% accuracy over 28 labels. Do not treat a NO-GO as a directional signal; require extra confirmation. (3) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-25T14:16:17.758931+00:00",
+    "generated_at": "2026-10-26T00:51:20.835057+00:00",
     "overall": {
       "n": 36,
       "hits": 19,
