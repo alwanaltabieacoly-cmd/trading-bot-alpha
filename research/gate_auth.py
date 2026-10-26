@@ -2,7 +2,7 @@
 Set once:   python research/gate_auth.py set      (prompts, hidden input)
 Check:      python research/gate_auth.py check    (read-only call: shows fee rates + key permissions)
 """
-import hashlib, hmac, json, subprocess, sys, time, urllib.request
+import hashlib, hmac, json, os, subprocess, sys, time, urllib.request
 import keyring
 
 SERVICE, HOST = "alpha-gate", "https://api.gateio.ws"
@@ -12,7 +12,11 @@ def creds():
     if not (k and s): raise SystemExit("No Gate key stored. Run: python research/gate_auth.py set")
     return k, s
 
+DANGEROUS = {"withdraw", "wallet", "p2p", "account", "sub_accounts", "custody", "otc", "pay", "loan", "quant", "copy"}
+
 def call(method, path, query="", body=""):
+    if method != "GET" and os.environ.get("ALPHA_GATE_TRADE") != "1":
+        raise SystemExit(f"Blocked {method} {path}: read-only mode. Orders need ALPHA_GATE_TRADE=1 and a passed trade gate.")
     k, s = creds(); ts = str(int(time.time()))
     sig = hmac.new(s.encode(), f"{method}\n/api/v4{path}\n{query}\n{hashlib.sha512(body.encode()).hexdigest()}\n{ts}".encode(), hashlib.sha512).hexdigest()
     req = urllib.request.Request(f"{HOST}/api/v4{path}" + (f"?{query}" if query else ""), data=body.encode() or None, method=method,
@@ -32,6 +36,18 @@ if __name__ == "__main__":
         keyring.set_password(SERVICE, "key", key); keyring.set_password(SERVICE, "secret", secret)
         subprocess.run(["powershell", "-NoProfile", "-Command", "Set-Clipboard -Value ' '"])
         print("stored in Windows Credential Manager (service 'alpha-gate'); clipboard cleared")
+    elif cmd == "audit":
+        k, _ = creds(); me = next(x for x in call("GET", "/account/main_keys") if x.get("key") == k)
+        bad = sorted(p["name"] for p in me["perms"] if not p["read_only"] and p["name"] in DANGEROUS)
+        print("dangerous writable permissions:", bad or "none")
+        print("ip whitelist:", me.get("ip_whitelist") or "NONE")
+        sys.exit(1 if bad or not me.get("ip_whitelist") else 0)
+    elif cmd == "audit":
+        k, _ = creds(); me = next(x for x in call("GET", "/account/main_keys") if x.get("key") == k)
+        bad = sorted(p["name"] for p in me["perms"] if not p["read_only"] and p["name"] in DANGEROUS)
+        print("dangerous writable permissions:", bad or "none")
+        print("ip whitelist:", me.get("ip_whitelist") or "NONE")
+        sys.exit(1 if bad or not me.get("ip_whitelist") else 0)
     elif cmd == "check":
         fee = call("GET", "/wallet/fee", "currency_pair=BTC_USDT")
         print("spot fees BTC_USDT: taker", fee.get("taker_fee"), "maker", fee.get("maker_fee"))

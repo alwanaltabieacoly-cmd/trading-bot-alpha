@@ -592,3 +592,9 @@ Method: enter at every close, exit at first of +TP / -SL / 30 min timeout. Stop 
 - **Futures round trip:** 0.04% (maker+maker) to 0.10% (taker+taker), versus 0.20% on spot. Funding ~0.005% per 8 h, negligible for minute-scale holds.
 - **Break-even win rate, 0.30% target / 0.30% stop:** taker both ways 66.7%; maker both ways 56.7%. Measured random-entry win rate is ~50% with ~-0.005% gross per trade, so still a loss (about -0.045% to -0.105% per trade). A signal needs to add more than ~0.05-0.10% per trade of real edge net of slippage. Maker entries are not guaranteed to fill, and fills skew toward adverse moves.
 - **SECURITY:** the stored key has **withdraw, wallet, spot, futures, account and p2p all writable**, and **no IP whitelist**. It must be revoked and replaced with a read-only key before any further use.
+
+### 15.12 Key protection (2026-10-26)
+- Storage: Windows Credential Manager (`alpha-gate`). Readable by any process running as this Windows user; protection is the Windows login, not secrecy from our own tools.
+- Leak scan of bot-repo, feed, memory, Logs, .alphacontrol, Workspace and shell history: no copy of key or secret found.
+- `gate_auth.py` refuses every non-GET call unless `ALPHA_GATE_TRADE=1` is set (verified: POST blocked before any network call).
+- `gate_auth.py audit` exits non-zero if the key has writable dangerous permissions (withdraw, wallet, p2p, account, ...) or no IP whitelist. Current key FAILS both; replace it with a read-only key + whitelist 102.206.105.31, then rerun `audit` until it exits 0.
