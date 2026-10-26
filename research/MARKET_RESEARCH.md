@@ -673,3 +673,9 @@ The first testnet trades (18.5) were hand-picked to test plumbing. That was wron
 - **Repo:** `alwanaltabieacoly-cmd/trading-bot-alpha`, public. The GitHub run logs show the secrets as `***`; the key tail is not in the logs. Secret scanning and push protection are on; workflows from outside contributors need approval.
 - **Daily run:** `gate-daily.yml` (00:20-00:50 and 01:10 UTC, tick guard: once per UTC day) runs `gate_bot.py daily`: manage open trades, score the judge, trade the analyst's calls. State is committed to `research/gate_state/`, testnet data only. Only the testnet key is a GitHub secret.
 - **First GitHub run:** 6 long calls, 5 blocked (`setup_pullback`), 1 refused by Gate (PEPE, no asks on testnet): 0 trades, as designed.
+
+### 19. The AAPL paper trade and the tuned 1-minute scalp (checked 2026-10-26)
+- The AAPL position was a TradingView paper trade made while learning the interface (2 shares long at ~$345.18, +$0.30 = +0.04% when last recorded; `Workspace/TRADINGVIEW_MASTER.md`). No research note records why it was chosen; the entry rule written afterwards (price > SMA200, RSI < 50) is a description, not evidence. +0.04% on 2 shares is within noise.
+- `SCALP_STRATEGY.md` claims "expectancy +4.08%". Its own numbers (92 trades, +3.75% total) give about +0.04% per trade, and it charges no costs. The +4.08% figure is wrong.
+- Fresh test, Yahoo 1m AAPL, 7 sessions (2026-10-16 to 10-26), the tuned rule (tp 0.30/0.40%, stop 0.30%, 30-bar hold, no gates): 130 trades, 52% win, +0.0185% per trade before costs, -0.0015% per trade after a 0.02% round-trip cost. Only 10-23 and 10-26 were not used in tuning: both negative (-0.05%, -0.01% before costs), 37 trades, too few to conclude. AAPL itself moved -0.70% over the window.
+- Verdict: no edge shown. Same result as the crypto 1m tests (sections 15 and 16).
