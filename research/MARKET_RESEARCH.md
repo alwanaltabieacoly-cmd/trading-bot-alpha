@@ -667,3 +667,9 @@ Verified against the live testnet, not just the SDK docs:
 
 ### 18.6 Rule: the bot trades only analyst calls
 The first testnet trades (18.5) were hand-picked to test plumbing. That was wrong: testnet money is treated as real. `gate_bot.py` now trades only what `gate_analyst.py` calls, records the reason for each trade, and sizes risk at 0.25% of equity (no setup is proven). It blocks `setup_pullback` because the history rejects it (second half -1.45% mean net). First run, 2026-10-26: 6 long calls, 5 blocked (pullback), 1 refused by Gate (PEPE_USDT testnet book has no asks, `CONTRACT_NO_COUNTER`), so 0 trades. Fix found on the way: trigger prices must be plain decimals, not `4.2e-06`.
+
+### 18.7 Stop firing verified; bot runs on GitHub (2026-10-26)
+- **Stop fires:** BTC_USDT long, 1 contract at 79931.5, stop trigger order 0.02% below (79915.5). Gate fired it by itself after about 65 s and closed the position (trigger record: `finished / succeeded`). Open triggers afterwards: 0. A stop is held by Gate, so it works with the PC off.
+- **Repo:** `alwanaltabieacoly-cmd/trading-bot-alpha`, public. The GitHub run logs show the secrets as `***`; the key tail is not in the logs. Secret scanning and push protection are on; workflows from outside contributors need approval.
+- **Daily run:** `gate-daily.yml` (00:20-00:50 and 01:10 UTC, tick guard: once per UTC day) runs `gate_bot.py daily`: manage open trades, score the judge, trade the analyst's calls. State is committed to `research/gate_state/`, testnet data only. Only the testnet key is a GitHub secret.
+- **First GitHub run:** 6 long calls, 5 blocked (`setup_pullback`), 1 refused by Gate (PEPE, no asks on testnet): 0 trades, as designed.
