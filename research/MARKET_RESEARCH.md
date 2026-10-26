@@ -615,3 +615,21 @@ Probe: `research/gate_signal_probe.py`. Data: last 10,000 1m bars (6.9 days, Gat
 - Only 2 of 30 cells are positive after the optimistic 0.04% maker cost. Taker cost (0.10%) leaves none.
 - **Weak lead only:** `sweep_low_reversal` is positive gross in 5 of 6 cells (BTC both halves, ETH both halves, SOL first half), avg ~+0.02%, below the 0.04% needed. Worth retesting on more data and with order-book imbalance as a filter, not worth trading.
 - Candle-only signals on 6.9 days do not clear costs. Next evidence must come from the order-book logger (`research/data/gate/`) and a longer sample.
+
+## 17. Full Crypto Scan (2026-10-26) — see `research/CRYPTO_SCAN.md`
+Scripts: `crypto_scan.py` (state of every liquid Gate perp + rule backtest), `crypto_rule_check.py` (SMA200 rule split in halves). Universe: 33 perps with >= $5M 24h volume and >= 260 daily bars. Gate also lists perps on gold (XAU), silver (XAG), and stocks (MU, INTC).
+
+### 17.1 Market state
+- Above SMA200: 23/33. Above SMA50: 10/33. Median 30d return -15.5%, 90d +29.5%, RSI 42. Pullback inside a longer uptrend, not a breakdown.
+- Funding is flat (median +0.002%/8h): no crowded longs. Extreme negative funding only on illiquid small caps (ERA, DOOD, IRYS), not tradeable size.
+- Rule (above SMA200 and ATR30 < 4%) is ON only for BTC, ETH, BNB. ETH RSI 34 (oversold), BTC 42, BNB 51.
+- BTC/ETH/SOL/XRP/BNB books are the tightest (spread <= 1 bp). 
+
+### 17.2 Rule backtest across coins (daily, long/flat, 0.10%/side, in-sample)
+- The ATR<4% filter keeps most altcoins out of the market entirely (their ATR is >4%), so "rule +0% vs buy&hold -11%" for the median coin only means "stayed in cash". It is not evidence of an edge.
+- SMA200-only, 10 liquid coins, 400-day halves: positive in the first half on 8/10 coins but trailing buy&hold in almost every one (it sat out the rally); positive in the second half (market fell) on only 3/10. It lost less than buy&hold in the second half on 8/10 and had a smaller max drawdown on 10/10.
+- Conclusion: the SMA200 rule is a **drawdown reducer, not a return generator**. It does not make money in a falling market. Only BTC and BNB show gains with the ATR filter, and BTC's second half was flat (+0%).
+- Survivorship bias: only coins still listed and liquid today are tested.
+
+### 17.3 What this gives us
+Nothing that clears the trade gate. Usable now: a ranked state table, regime read (pullback in uptrend), the list of ON coins (BTC, ETH, BNB) as paper-track candidates, and the finding that the rule protects capital rather than grows it.
