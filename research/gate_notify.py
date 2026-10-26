@@ -1,7 +1,8 @@
 """Telegram notifications for the Gate bot. Token and chat id come from env TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID (GitHub Actions secrets)
 or Windows Credential Manager service 'alpha-telegram'. With neither, send() prints and returns False, so nothing breaks.
   python research/gate_notify.py set        store the token (from clipboard) and find your chat id (send your bot any message first)
-  python research/gate_notify.py test       send a test message"""
+  python research/gate_notify.py test       send a test message
+  python research/gate_notify.py say TEXT   send TEXT (used by workflows)"""
 import json, os, subprocess, sys, urllib.parse, urllib.request
 SERVICE = "alpha-telegram"
 
@@ -35,4 +36,5 @@ if __name__ == "__main__":
         keyring.set_password(SERVICE, "token", token); keyring.set_password(SERVICE, "chat_id", chat)
         subprocess.run(["powershell", "-NoProfile", "-Command", "Set-Clipboard -Value ' '"]); print("stored; clipboard cleared")
     elif sys.argv[1:2] == ["test"]: print("sent" if send("Alpha: Telegram link works.") else "not sent")
+    elif sys.argv[1:2] == ["say"]: send(" ".join(sys.argv[2:]))
     else: print(__doc__)

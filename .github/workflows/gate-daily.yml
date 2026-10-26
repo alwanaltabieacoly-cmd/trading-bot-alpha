@@ -42,8 +42,7 @@ jobs:
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          python -c "import sys; sys.path.insert(0, 'research'); import gate_notify; gate_notify.send('Alpha - Gate daily FAILED ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}')"
+        run: python research/gate_notify.py say "Alpha - Gate daily FAILED ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Write the review and save the state
         env:
