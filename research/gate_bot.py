@@ -2,6 +2,7 @@
   python research/gate_bot.py run      run the analyst, take its calls through the filters, open trades, log the reasons
   python research/gate_bot.py manage   close trades past their horizon, record outcomes
   python research/gate_bot.py review   print every trade: what, why, result
+  python research/gate_bot.py daily    once per UTC day: manage, score the judge, run (what the GitHub workflow calls)
 Testnet is treated as real money: sizing, stops and limits are the live rules, except risk is cut to EXPLORE_RISK_PCT because no setup
 is proven yet (see BACKFILL.md). Trades are evidence-gathering, and the judge's gate decides if anything ever goes live."""
 import json, subprocess, sys, time, urllib.error
@@ -55,5 +56,12 @@ def review():
         res = f"{t['exit']} pnl ${t['pnl_usd']}" if "closed" in t else "open"
         print(f"{time.strftime('%m-%d %H:%M', time.gmtime(t['opened']))} {t['side']:5s} {t['coin']:10s} risk ${t['risk_usd']} -> {res}\n   why: {t['why']}  [{', '.join(t['tags'])}]")
 
+def daily():
+    A.PRIVATE.mkdir(parents=True, exist_ok=True); stamp = A.PRIVATE / "last_daily.txt"; today = time.strftime("%Y-%m-%d", time.gmtime())
+    if stamp.exists() and stamp.read_text().strip() == today: print(f"already ran for {today}"); return
+    manage()
+    subprocess.run([sys.executable, str(Path(__file__).parent / "gate_judge.py"), "live"], check=True)
+    run(); stamp.write_text(today)
+
 if __name__ == "__main__":
-    {"run": run, "manage": manage, "review": review}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()
+    {"run": run, "manage": manage, "review": review, "daily": daily}.get(sys.argv[1] if len(sys.argv) > 1 else "", lambda: print(__doc__))()

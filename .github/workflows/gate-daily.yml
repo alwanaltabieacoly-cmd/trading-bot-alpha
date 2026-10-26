@@ -1,0 +1,47 @@
+name: Gate daily
+
+# The testnet bot, once per UTC day shortly after the daily bar closes (00:00 UTC), which is the entry time the judge measured.
+# Several ticks because GitHub's scheduler drops runs; `gate_bot.py daily` trades at most once per UTC day.
+# Uses ONLY the Gate futures TESTNET key (fake money). The live key never goes on GitHub.
+on:
+  schedule:
+    - cron: "20,30,40,50 0 * * *"
+    - cron: "10 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gate-daily
+  cancel-in-progress: false
+
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Manage open trades, score the judge, trade today's analyst calls
+        env:
+          GATE_TESTNET_KEY: ${{ secrets.GATE_TESTNET_KEY }}
+          GATE_TESTNET_SECRET: ${{ secrets.GATE_TESTNET_SECRET }}
+          ALPHA_STATE_DIR: research/state
+          PYTHONIOENCODING: utf-8
+        run: python research/gate_bot.py daily
+
+      - name: Write the review and save the state
+        env:
+          ALPHA_STATE_DIR: research/state
+        run: |
+          python research/gate_bot.py review > research/state/REVIEW.md || true
+          git config user.name "alpha-bot"
+          git config user.email "alpha-bot@users.noreply.github.com"
+          git add research/state
+          git diff --cached --quiet || git commit -m "gate daily: $(date -u +%Y-%m-%d)"
+          git pull -q --rebase && git push -q

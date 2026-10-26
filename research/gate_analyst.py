@@ -1,11 +1,11 @@
 """Daily Gate analyst: one structured call per liquid USDT perp, from public data only.
 call = {ts, coin, call: long|short|flat, horizon_h, entry, stop_pct, target_pct, tags[], ...}. Tags come from a fixed list so the judge can score each reason.
 Rules use only bars closed at the call time. Run: python research/gate_analyst.py   -> appends to research/private/calls.jsonl"""
-import json, sys, time, urllib.request
+import json, os, sys, time, urllib.request
 from pathlib import Path
 
 HORIZON_H, MIN_VOL, SKIP = 24, 20e6, ("XAU", "XAG", "MU_", "INTC", "XAUT")
-PRIVATE = Path(__file__).parent / "private"
+PRIVATE = Path(os.environ.get("ALPHA_STATE_DIR") or Path(__file__).parent / "private")  # CI sets research/state (testnet data only)
 
 def get(u):
     for _ in range(3):

@@ -10,6 +10,8 @@ DANGEROUS = {"withdraw", "wallet", "p2p", "account", "sub_accounts", "custody", 
 
 def creds(env="live"):
     service = ENVS[env][0]
+    if env == "testnet" and os.environ.get("GATE_TESTNET_KEY") and os.environ.get("GATE_TESTNET_SECRET"):  # GitHub Actions secrets; testnet only, never live
+        return os.environ["GATE_TESTNET_KEY"], os.environ["GATE_TESTNET_SECRET"]
     import keyring  # lazy: the GitHub runner has no Windows Credential Manager, and the unit tests never need keys
     k, s = keyring.get_password(service, "key"), keyring.get_password(service, "secret")
     if not (k and s): raise SystemExit(f"No {env} key stored. Run: python research/gate_auth.py set {env}")

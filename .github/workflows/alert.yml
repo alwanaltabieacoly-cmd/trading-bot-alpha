@@ -6,7 +6,7 @@ name: Alert
 
 on:
   workflow_run:
-    workflows: [CI, Warmup, Deliberate, Outcome, Scan IC, Sentiment, News, Daily learning, Strategy research, Vibe-Trading research, Watchdog]
+    workflows: [CI, Warmup, Deliberate, Outcome, Scan IC, Sentiment, News, Daily learning, Strategy research, Vibe-Trading research, Watchdog, Gate daily]
     types: [completed]
   schedule:
     - cron: "30 5 * * *"   # daily sweep: close issues whose workflow is green again
