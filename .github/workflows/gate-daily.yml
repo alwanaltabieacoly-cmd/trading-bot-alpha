@@ -31,17 +31,17 @@ jobs:
         env:
           GATE_TESTNET_KEY: ${{ secrets.GATE_TESTNET_KEY }}
           GATE_TESTNET_SECRET: ${{ secrets.GATE_TESTNET_SECRET }}
-          ALPHA_STATE_DIR: research/state
+          ALPHA_STATE_DIR: research/gate_state
           PYTHONIOENCODING: utf-8
         run: python research/gate_bot.py daily
 
       - name: Write the review and save the state
         env:
-          ALPHA_STATE_DIR: research/state
+          ALPHA_STATE_DIR: research/gate_state
         run: |
-          python research/gate_bot.py review > research/state/REVIEW.md || true
+          python research/gate_bot.py review > research/gate_state/REVIEW.md || true
           git config user.name "alpha-bot"
           git config user.email "alpha-bot@users.noreply.github.com"
-          git add research/state
+          git add research/gate_state
           git diff --cached --quiet || git commit -m "gate daily: $(date -u +%Y-%m-%d)"
           git pull -q --rebase && git push -q
