@@ -97,6 +97,10 @@ def manage():
         print(f"CLOSED {t['coin']} {t['exit']} pnl ${t['pnl_usd']}")
     LOG.write_text("".join(json.dumps(t) + "\n" for t in trades))
 
+def alpha_trades_left():
+    today = G.day_key(time.time())
+    return max(0, ALPHA_MAX_PER_DAY - sum(1 for r in G._rows(G.FILE) if r["source"] == "alpha" and r["day"] == today and r["call"] != "flat"))
+
 def alpha_trade(coin, side, stop_pct, target_pct, why, tags=()):
     """Alpha's own trade. Logged as an Alpha call first (the judge scores it whatever happens), then opened at EXPLORE_RISK_PCT through the same
     halts, sizing, stop and target as the bot's trades. Alpha cannot raise its risk or clear a halt. Raises ValueError with the reason if refused."""
@@ -110,8 +114,7 @@ def alpha_trade(coin, side, stop_pct, target_pct, why, tags=()):
         if stop.startswith("drawdown"): HALT.write_text(stop)
         raise ValueError(f"halted: {stop}")
     if any(t["coin"] == coin and "closed" not in t for t in trades): raise ValueError(f"already holding {coin}")
-    today_key = G.day_key(time.time())
-    if sum(1 for r in G._rows(G.FILE) if r["source"] == "alpha" and r["day"] == today_key and r["call"] != "flat") >= ALPHA_MAX_PER_DAY:
+    if not alpha_trades_left():
         raise ValueError(f"daily limit: Alpha already made {ALPHA_MAX_PER_DAY} long/short calls for this UTC day (config alpha_max_trades_per_day)")
     G.make_call(coin, side, stop_pct, target_pct, why, tags)
     try: r = T.open_trade(coin, side, stop_pct, target_pct, {"risk_pct": EXPLORE_RISK_PCT})
