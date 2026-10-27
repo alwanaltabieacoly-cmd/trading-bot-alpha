@@ -9,7 +9,8 @@ import json, math, urllib.request
 import gate_auth as g
 
 ENV = "testnet"
-LIMITS = {"risk_pct": 1.0, "max_notional_x_equity": 3.0, "max_open": 3, "max_leverage": 3}
+import gate_config
+LIMITS = {k: gate_config.CFG[k] for k in ("risk_pct", "max_notional_x_equity", "max_open", "max_leverage")}  # config/gate.json
 
 def public(path):
     return json.load(urllib.request.urlopen(urllib.request.Request("https://api.gateio.ws/api/v4" + path, headers={"User-Agent": "alpha"}), timeout=15))

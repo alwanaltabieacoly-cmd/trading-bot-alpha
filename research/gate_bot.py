@@ -9,14 +9,14 @@ Testnet is treated as real money: sizing, stops and limits are the live rules, e
 is proven yet (see BACKFILL.md). Trades are evidence-gathering, and the judge's gate decides if anything ever goes live."""
 import contextlib, io, json, subprocess, sys, time, urllib.error
 from pathlib import Path
-import gate_alpha as G, gate_analyst as A, gate_judge as J, gate_notify as N, gate_trader as T
+import gate_config, gate_alpha as G, gate_analyst as A, gate_judge as J, gate_notify as N, gate_trader as T
 
 LOG = A.PRIVATE / "trades.jsonl"; SCORED = A.PRIVATE / "scored.jsonl"; BACKFILL = A.PRIVATE / "backfill_rows.jsonl"
-EXPLORE_RISK_PCT = 0.25
-GRACE_H = 2
-DAILY_LOSS_PCT = 1.0        # realised loss today beyond this % of equity: no new trades until the next UTC day
-DRAWDOWN_PCT = 5.0          # equity this far under its peak: halt until a human runs `resume`
-EXPLORE_DAYS, PROVEN_DAYS = 10, 30
+CFG = gate_config.CFG    # limits live in config/gate.json
+EXPLORE_RISK_PCT, GRACE_H = CFG["explore_risk_pct"], CFG["grace_h"]
+DAILY_LOSS_PCT = CFG["daily_loss_pct"]    # realised loss today beyond this % of equity: no new trades until the next UTC day
+DRAWDOWN_PCT = CFG["drawdown_pct"]        # equity this far under its peak: halt until a human runs `resume`
+EXPLORE_DAYS, PROVEN_DAYS = CFG["explore_days"], CFG["proven_days"]
 HALT = A.PRIVATE / "HALT.txt"; EQUITY = A.PRIVATE / "equity.json"
 WHY = {"setup_trend": "price above SMA50 above SMA200 with RSI 50-70: an uptrend that is not overheated",
        "setup_breakdown": "price below SMA200 and SMA50 with RSI above 40: a downtrend with room left to fall"}
@@ -52,7 +52,8 @@ def check_halt(trades, equity, peak, today):
 
 def equity_now():
     e = float(T.api("GET", "/futures/usdt/accounts")["total"]); peak = json.loads(EQUITY.read_text())["peak"] if EQUITY.exists() else e
-    EQUITY.write_text(json.dumps({"peak": max(peak, e), "equity": e, "ts": int(time.time())})); return e, max(peak, e)
+    if not EQUITY.exists() or e > peak: EQUITY.write_text(json.dumps({"peak": max(peak, e), "equity": e, "ts": int(time.time())}))  # only the peak is read back; writing on every read kept the repo dirty
+    return e, max(peak, e)
 
 def todays_calls():
     subprocess.run([sys.executable, str(Path(__file__).parent / "gate_analyst.py")], check=True)

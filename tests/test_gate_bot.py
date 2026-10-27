@@ -1,4 +1,5 @@
 import json, sys, time, unittest
+from unittest import mock
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "research"))
 import gate_bot as b
@@ -80,3 +81,24 @@ class AlphaTrade(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "no open Alpha trade"): b.alpha_close("SOL_USDT")
 
 if __name__ == "__main__": unittest.main()
+
+
+class EquityFileOnlyOnNewPeak(unittest.TestCase):
+    def test_reads_do_not_rewrite_the_file(self):
+        import tempfile, pathlib
+        with tempfile.TemporaryDirectory() as d:
+            f = pathlib.Path(d) / "equity.json"; f.write_text(json.dumps({"peak": 1000.0, "equity": 1000.0, "ts": 1}))
+            with mock.patch.object(b, "EQUITY", f), mock.patch.object(b.T, "api", return_value={"total": "990"}):
+                self.assertEqual(b.equity_now(), (990.0, 1000.0))
+                self.assertEqual(json.loads(f.read_text())["ts"], 1)            # unchanged: below peak
+            with mock.patch.object(b, "EQUITY", f), mock.patch.object(b.T, "api", return_value={"total": "1010"}):
+                self.assertEqual(b.equity_now(), (1010.0, 1010.0))
+                self.assertEqual(json.loads(f.read_text())["peak"], 1010.0)     # new peak: saved
+
+    def test_first_run_creates_the_file(self):
+        import tempfile, pathlib
+        with tempfile.TemporaryDirectory() as d:
+            f = pathlib.Path(d) / "equity.json"
+            with mock.patch.object(b, "EQUITY", f), mock.patch.object(b.T, "api", return_value={"total": "500"}):
+                b.equity_now()
+            self.assertEqual(json.loads(f.read_text())["peak"], 500.0)
