@@ -36,6 +36,7 @@ RULES = (
     ("research/reports/vibe/latest.json", "Vibe-Trading research", 50.0),
     ("research/reports/news/latest.json", "News", 9.0),   # every 3 h; 9 h = two missed runs
     ("research/reports/scan_ic.json", "Scan IC", 192.0),   # weekly measurement
+    ("research/gate_state/last_daily.txt", "Gate daily", 28.0),   # holds the UTC date of the last run: 24 h + the retry ticks
 )
 
 
@@ -67,6 +68,8 @@ def content_time(path):
         return None
     try:
         text = path.read_text(encoding="utf-8").strip()
+        if len(text) == 10 and text[4] == text[7] == "-":      # bare date, as in gate_state/last_daily.txt
+            return datetime.strptime(text, "%Y-%m-%d").replace(tzinfo=timezone.utc)
         data = json.loads(text.splitlines()[-1] if path.suffix == ".jsonl" else text)
         if isinstance(data, dict):
             stamp = _parse(data.get("generated_at") or data.get("asof") or data.get("ts"))
