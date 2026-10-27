@@ -7,7 +7,7 @@ import gate_analyst
 
 TTL_S = 600
 REPO = Path(__file__).resolve().parent.parent
-FILE = gate_analyst.PRIVATE / "LOCK.json"
+FILE = (gate_analyst.PRIVATE / "LOCK.json").resolve()
 
 class LockBusy(Exception): pass
 
