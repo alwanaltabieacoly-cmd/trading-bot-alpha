@@ -45,6 +45,7 @@ jobs:
         run: python research/gate_notify.py say "Alpha - Gate daily FAILED ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
       - name: Write the review and save the state
+        if: always()    # a run that opened a trade and then failed must still record it
         env:
           ALPHA_STATE_DIR: research/gate_state
         run: |
