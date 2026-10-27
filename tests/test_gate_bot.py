@@ -49,10 +49,16 @@ class AlphaTrade(unittest.TestCase):
             def open_trade(coin, side, stop, target, limits): outer.opened.append((coin, side, limits)); return {"fill_price": 1.0, "stop": 0.9, "target": 1.2, "contracts": 3, "risk_usd": 2.0, "notional": 30.0}
         outer = self; b.T = T
         class GG:
+            FILE = None
             @staticmethod
             def make_call(*a, **k): outer.made.append(a)
-        b.G = GG; b.equity_now = lambda: (1000.0, 1000.0)
-    def tearDown(self): b.LOG, b.HALT, b.EQUITY, b.T, b.G, b.equity_now = self.saved
+            @staticmethod
+            def day_key(now): return 100
+            @staticmethod
+            def _rows(path): return list(outer.calls_today)
+        self.calls_today = []; self.managed = []
+        b.G = GG; b.equity_now = lambda: (1000.0, 1000.0); self.saved_manage = b.manage; b.manage = lambda: self.managed.append(1)
+    def tearDown(self): b.LOG, b.HALT, b.EQUITY, b.T, b.G, b.equity_now = self.saved; b.manage = self.saved_manage
     def test_opens_at_explore_risk_after_logging_the_call(self):
         r = b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "reclaimed the low")
         self.assertEqual(self.made[0][:3], ("ETH_USDT", "long", 2.0)); self.assertEqual(self.opened, [("ETH_USDT", "long", {"risk_pct": b.EXPLORE_RISK_PCT})])
@@ -76,11 +82,24 @@ class AlphaTrade(unittest.TestCase):
         b.T.open_trade = boom
         with self.assertRaisesRegex(ValueError, "trade not opened"): b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "x")
         self.assertEqual((len(self.made), b.read(b.LOG)), (1, []))
+    def test_reconciles_before_checking_the_daily_loss(self):
+        b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "x"); self.assertEqual(self.managed, [1])
+    def test_unreconcilable_gate_state_refuses(self):
+        def boom(): raise OSError("gate down")
+        b.manage = boom
+        with self.assertRaisesRegex(ValueError, "cannot reconcile"): b.alpha_trade("ETH_USDT", "long", 2.0, 4.0, "x")
+        self.assertEqual((self.made, self.opened), ([], []))
+    def test_daily_cap_is_enforced_in_code(self):
+        self.calls_today = [{"source": "alpha", "day": 100, "call": "long"}] * b.ALPHA_MAX_PER_DAY
+        with self.assertRaisesRegex(ValueError, "daily limit"): b.alpha_trade("SOL_USDT", "long", 2.0, 4.0, "x")
+        self.assertEqual((self.made, self.opened), ([], []))
+    def test_flat_calls_and_other_days_do_not_use_the_cap(self):
+        self.calls_today = [{"source": "alpha", "day": 100, "call": "flat"}, {"source": "alpha", "day": 99, "call": "long"}, {"source": "rules", "day": 100, "call": "long"}]
+        b.alpha_trade("SOL_USDT", "long", 2.0, 4.0, "x"); self.assertEqual(len(self.opened), 1)
     def test_close_rejects_bots_own_trades(self):
         b.LOG.write_text(json.dumps({"coin": "SOL_USDT", "setup": "setup_trend", "opened": NOW, "horizon_h": 24}) + "\n")
         with self.assertRaisesRegex(ValueError, "no open Alpha trade"): b.alpha_close("SOL_USDT")
 
-if __name__ == "__main__": unittest.main()
 
 
 class EquityFileOnlyOnNewPeak(unittest.TestCase):
@@ -102,3 +121,5 @@ class EquityFileOnlyOnNewPeak(unittest.TestCase):
             with mock.patch.object(b, "EQUITY", f), mock.patch.object(b.T, "api", return_value={"total": "500"}):
                 b.equity_now()
             self.assertEqual(json.loads(f.read_text())["peak"], 500.0)
+
+if __name__ == "__main__": unittest.main()

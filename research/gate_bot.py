@@ -14,6 +14,7 @@ import gate_config, gate_alpha as G, gate_analyst as A, gate_judge as J, gate_no
 LOG = A.PRIVATE / "trades.jsonl"; SCORED = A.PRIVATE / "scored.jsonl"; BACKFILL = A.PRIVATE / "backfill_rows.jsonl"
 CFG = gate_config.CFG    # limits live in config/gate.json
 EXPLORE_RISK_PCT, GRACE_H = CFG["explore_risk_pct"], CFG["grace_h"]
+ALPHA_MAX_PER_DAY = CFG["alpha_max_trades_per_day"]
 DAILY_LOSS_PCT = CFG["daily_loss_pct"]    # realised loss today beyond this % of equity: no new trades until the next UTC day
 DRAWDOWN_PCT = CFG["drawdown_pct"]        # equity this far under its peak: halt until a human runs `resume`
 EXPLORE_DAYS, PROVEN_DAYS = CFG["explore_days"], CFG["proven_days"]
@@ -92,7 +93,7 @@ def manage():
         else: t["exit"] = "stop_or_target"
         T.api("DELETE", "/futures/usdt/price_orders", f"contract={t['coin']}")  # remove the leftover stop/target
         res = [x for x in T.api("GET", "/futures/usdt/position_close", f"contract={t['coin']}&limit=5") if x["time"] >= t["opened"]]
-        t["pnl_usd"] = round(sum(float(x["pnl"]) for x in res), 4); t["closed"] = int(time.time())
+        t["pnl_usd"] = round(sum(float(x["pnl"]) for x in res), 4); t["closed"] = int(max((x["time"] for x in res), default=time.time()))   # Gate's own close time, so a loss lands on the right UTC day
         print(f"CLOSED {t['coin']} {t['exit']} pnl ${t['pnl_usd']}")
     LOG.write_text("".join(json.dumps(t) + "\n" for t in trades))
 
@@ -100,6 +101,8 @@ def alpha_trade(coin, side, stop_pct, target_pct, why, tags=()):
     """Alpha's own trade. Logged as an Alpha call first (the judge scores it whatever happens), then opened at EXPLORE_RISK_PCT through the same
     halts, sizing, stop and target as the bot's trades. Alpha cannot raise its risk or clear a halt. Raises ValueError with the reason if refused."""
     if side not in ("long", "short"): raise ValueError("side must be long or short")
+    try: manage()    # book stopped-out trades first, so today's realised loss is complete before the daily-loss check
+    except Exception as e: raise ValueError(f"cannot reconcile Gate trades, so the daily-loss check would be incomplete: {e}")
     trades = read(LOG)
     if HALT.exists(): raise ValueError(f"halted: {HALT.read_text().strip()} (a human must run `gate_bot.py resume`)")
     equity, peak = equity_now(); stop = check_halt(trades, equity, peak, time.strftime("%Y-%m-%d", time.gmtime()))
@@ -107,6 +110,9 @@ def alpha_trade(coin, side, stop_pct, target_pct, why, tags=()):
         if stop.startswith("drawdown"): HALT.write_text(stop)
         raise ValueError(f"halted: {stop}")
     if any(t["coin"] == coin and "closed" not in t for t in trades): raise ValueError(f"already holding {coin}")
+    today_key = G.day_key(time.time())
+    if sum(1 for r in G._rows(G.FILE) if r["source"] == "alpha" and r["day"] == today_key and r["call"] != "flat") >= ALPHA_MAX_PER_DAY:
+        raise ValueError(f"daily limit: Alpha already made {ALPHA_MAX_PER_DAY} long/short calls for this UTC day (config alpha_max_trades_per_day)")
     G.make_call(coin, side, stop_pct, target_pct, why, tags)
     try: r = T.open_trade(coin, side, stop_pct, target_pct, {"risk_pct": EXPLORE_RISK_PCT})
     except SystemExit as e: raise ValueError(f"call logged for scoring, trade not opened: {e}")

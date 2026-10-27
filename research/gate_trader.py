@@ -61,25 +61,34 @@ def open_trade(contract, side, stop_pct, target_pct, limits=None):
     p = plan(contract, side, entry, stop_pct, target_pct, equity, spec, limits)
     lev = max(1, min(L["max_leverage"], int(float(spec["leverage_max"]))))
     api("POST", f"/futures/usdt/positions/{contract}/leverage", f"leverage={lev}")
-    o = api("POST", "/futures/usdt/orders", body={"contract": contract, "size": p["size"], "price": "0", "tif": "ioc", "text": "t-alpha"})
-    back = api("GET", f"/futures/usdt/orders/{o['id']}")
-    if back.get("status") != "finished" or int(back.get("left", 1)) != 0:
-        raise SystemExit(f"entry not fully filled: status={back.get('status')} left={back.get('left')} finish_as={back.get('finish_as')}")
-    fill = float(back["fill_price"])
-    try:
+    try:  # the whole entry is protected: a partial fill or a failed read-back must never leave a position without a stop
+        o = api("POST", "/futures/usdt/orders", body={"contract": contract, "size": p["size"], "price": "0", "tif": "ioc", "text": "t-alpha"})
+        back = api("GET", f"/futures/usdt/orders/{o['id']}")
+        if back.get("status") != "finished" or int(back.get("left", 1)) != 0:
+            raise RuntimeError(f"entry not fully filled: status={back.get('status')} left={back.get('left')} finish_as={back.get('finish_as')}")
+        fill = float(back["fill_price"])
         ids = {k: api("POST", "/futures/usdt/price_orders", body=trigger_body(contract, side, p[k], k))["id"] for k in ("stop", "target")}
         for k, i in ids.items():
             r = api("GET", f"/futures/usdt/price_orders/{i}")
             if r.get("status") != "open" or float(r["trigger"]["price"]) != p[k]: raise RuntimeError(f"{k} order read back as {r.get('status')} {r['trigger']}")
-    except Exception as e:  # never leave a position without a stop
-        api("POST", "/futures/usdt/orders", body={"contract": contract, "size": 0, "price": "0", "close": True, "tif": "ioc", "text": "t-alpha-abort"})
-        api("DELETE", "/futures/usdt/price_orders", f"contract={contract}")
-        raise SystemExit(f"stop/target failed, position closed: {e}")
+    except Exception as e:
+        flat = flatten(contract)
+        raise SystemExit(f"entry failed ({e}); " + ("position is flat and triggers are removed" if flat else "COULD NOT CONFIRM FLAT: CHECK GATE NOW, a position may be open"))
     return {**p, "fill_price": fill, "order_id": o["id"], "trigger_ids": ids}
 
+def position_size(contract):
+    return sum(float(x["size"]) for x in api("GET", "/futures/usdt/positions") if x["contract"] == contract)
+
+def flatten(contract):
+    """Close the whole position, remove its stop/target orders, then read the position back. True only when Gate shows it flat."""
+    try:
+        if position_size(contract) != 0: api("POST", "/futures/usdt/orders", body={"contract": contract, "size": 0, "price": "0", "close": True, "tif": "ioc", "text": "t-alpha-close"})
+        api("DELETE", "/futures/usdt/price_orders", f"contract={contract}")
+        return position_size(contract) == 0
+    except Exception: return False
+
 def close_trade(contract):
-    api("POST", "/futures/usdt/orders", body={"contract": contract, "size": 0, "price": "0", "close": True, "tif": "ioc", "text": "t-alpha-close"})
-    api("DELETE", "/futures/usdt/price_orders", f"contract={contract}")
+    if not flatten(contract): raise SystemExit(f"{contract}: could not confirm the position is flat; its stop/target orders were kept or removed unverified. CHECK GATE")
 
 if __name__ == "__main__":
     import sys

@@ -1,4 +1,5 @@
 import sys, unittest
+from unittest import mock
 from decimal import Decimal
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "research"))
@@ -69,5 +70,49 @@ class EmptyBook(unittest.TestCase):
         with self.assertRaisesRegex(SystemExit, "no asks"): self.run_open("long", {"asks": [], "bids": [{"p": "1", "s": 1}]})
     def test_short_refused_without_bids(self):
         with self.assertRaisesRegex(SystemExit, "no bids"): self.run_open("short", {"asks": [{"p": "1", "s": 1}], "bids": []})
+
+
+
+class EntryNeverLeavesAnUnprotectedPosition(unittest.TestCase):
+    """Review finding 2026-10-27: a partial fill or a failed read-back used to leave a position with no stop."""
+    def run_open(self, fail_at, pos_after_close=0):
+        sent, state = [], {"pos": 0}
+        spec = {"mark_price": "100", "quanto_multiplier": "0.01", "order_price_round": "0.1", "order_size_min": 1, "leverage_max": "10", "order_size_max": 100000}
+        def fake(method, path, query="", body=None):
+            sent.append((method, path, (body or {}).get("text")))
+            if path == "/futures/usdt/accounts": return {"total": "1000"}
+            if path == "/futures/usdt/positions": return [{"contract": "X_USDT", "size": state["pos"]}] if state["pos"] else []
+            if path == "/futures/usdt/order_book": return {"asks": [{"p": "1", "s": 1}], "bids": [{"p": "1", "s": 1}]}
+            if path.endswith("/leverage"): return {}
+            if path == "/futures/usdt/orders" and method == "POST":
+                if body.get("close"): state["pos"] = pos_after_close; return {"id": 9}
+                state["pos"] = 5; return {"id": 7}
+            if path == "/futures/usdt/orders/7":
+                if fail_at == "partial": return {"status": "finished", "left": 2, "finish_as": "ioc"}
+                if fail_at == "readback": raise OSError("network")
+                return {"status": "finished", "left": 0, "fill_price": "100"}
+            if path == "/futures/usdt/price_orders" and method == "POST": return {"id": 1 if body["trigger"]["rule"] == 2 else 2}
+            if path.startswith("/futures/usdt/price_orders/"): return {"status": "open", "trigger": {"price": "x"}} if fail_at == "trigger" else {"status": "open", "trigger": {"price": "1"}}
+            return {}
+        with mock.patch.object(t, "api", fake), mock.patch.object(t, "public", return_value=spec), mock.patch.object(t, "plan", return_value={"size": 5, "stop": 99.0, "target": 102.0}):
+            try: t.open_trade("X_USDT", "long", 1.0, 2.0)
+            except SystemExit as e: return str(e), sent, state
+        return "NO ERROR", sent, state
+    def test_partial_fill_is_flattened(self):
+        msg, sent, state = self.run_open("partial"); self.assertIn("position is flat", msg); self.assertEqual(state["pos"], 0)
+        self.assertTrue(any(s[2] == "t-alpha-close" for s in sent))
+    def test_failed_readback_after_fill_is_flattened(self):
+        msg, sent, state = self.run_open("readback"); self.assertIn("position is flat", msg); self.assertEqual(state["pos"], 0)
+    def test_bad_trigger_readback_is_flattened(self):
+        msg, sent, state = self.run_open("trigger"); self.assertIn("position is flat", msg); self.assertEqual(state["pos"], 0)
+    def test_unconfirmed_flat_is_loud(self):
+        msg, sent, state = self.run_open("partial", pos_after_close=5); self.assertIn("COULD NOT CONFIRM FLAT", msg)
+    def test_close_trade_refuses_to_claim_flat_when_not(self):
+        calls = {"pos": 5}
+        def fake(method, path, query="", body=None):
+            if path == "/futures/usdt/positions": return [{"contract": "X_USDT", "size": calls["pos"]}]
+            return {}
+        with mock.patch.object(t, "api", fake):
+            with self.assertRaisesRegex(SystemExit, "could not confirm"): t.close_trade("X_USDT")
 
 if __name__ == "__main__": unittest.main()
