@@ -9,7 +9,7 @@ Testnet is treated as real money: sizing, stops and limits are the live rules, e
 is proven yet (see BACKFILL.md). Trades are evidence-gathering, and the judge's gate decides if anything ever goes live."""
 import contextlib, io, json, subprocess, sys, time, urllib.error
 from pathlib import Path
-import gate_config, gate_alpha as G, gate_analyst as A, gate_judge as J, gate_notify as N, gate_trader as T
+import gate_config, gate_lock, gate_alpha as G, gate_analyst as A, gate_judge as J, gate_notify as N, gate_trader as T
 
 LOG = A.PRIVATE / "trades.jsonl"; SCORED = A.PRIVATE / "scored.jsonl"; BACKFILL = A.PRIVATE / "backfill_rows.jsonl"
 CFG = gate_config.CFG    # limits live in config/gate.json
@@ -153,7 +153,7 @@ def daily():
     A.PRIVATE.mkdir(parents=True, exist_ok=True); stamp = A.PRIVATE / "last_daily.txt"; today = time.strftime("%Y-%m-%d", time.gmtime())
     if stamp.exists() and stamp.read_text().strip() == today: print(f"already ran for {today}"); return
     buf = io.StringIO()
-    with contextlib.redirect_stdout(buf):
+    with gate_lock.held("daily", wait_s=420), contextlib.redirect_stdout(buf):    # Alpha on the PC may be mid-trade
         manage()
         print(subprocess.run([sys.executable, str(Path(__file__).parent / "gate_judge.py"), "live"], check=True, capture_output=True, text=True).stdout.strip())
         run()
