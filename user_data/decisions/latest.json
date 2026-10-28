@@ -1,19 +1,19 @@
 {
   "asof": "2026-10-28T12:00:00+00:00",
-  "generated_at": "2026-10-28T12:02:48.401804+00:00",
+  "generated_at": "2026-10-28T12:07:31.701948+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      "rationale": "synthesizer: blocked (critic=block)"
     },
     "ETH/USDT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.5,
-      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      "confidence": 0.45,
+      "rationale": "synthesizer: blocked (critic=block)"
     },
     "SOL/USDT": {
       "action": "block",
@@ -90,10 +90,10 @@
   },
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
-    "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-23_1815_academic_sp500.txt",
-    "age_hours": 0.07,
-    "generated_at": "2026-10-28T11:58:46.411349+00:00",
-    "asof": "2026-10-23",
+    "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
+    "age_hours": 0.08,
+    "generated_at": "2026-10-28T12:02:59.974437+00:00",
+    "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
     "period": "2024-2025",
@@ -103,7 +103,7 @@
       {
         "alpha": "academic_carhart_mom",
         "theme": "momentum",
-        "ic_mean": 0.028393,
+        "ic_mean": 0.028392,
         "ir": 0.1217,
         "ic_positive_ratio": 0.5944,
         "ic_count": 249
@@ -127,7 +127,7 @@
       {
         "alpha": "academic_high52w",
         "theme": "momentum",
-        "ic_mean": 0.00021,
+        "ic_mean": 0.000209,
         "ir": 0.0009,
         "ic_positive_ratio": 0.536,
         "ic_count": 250
@@ -156,7 +156,7 @@
         {
           "alpha": "academic_carhart_mom",
           "theme": "momentum",
-          "ic_mean": 0.028393,
+          "ic_mean": 0.028392,
           "ir": 0.1217,
           "ic_positive_ratio": 0.5944,
           "ic_count": 249
@@ -180,7 +180,7 @@
         {
           "alpha": "academic_high52w",
           "theme": "momentum",
-          "ic_mean": 0.00021,
+          "ic_mean": 0.000209,
           "ir": 0.0009,
           "ic_positive_ratio": 0.536,
           "ic_count": 250
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-28T12:02:48.401405+00:00",
+    "generated_at": "2026-10-28T12:07:31.701624+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
