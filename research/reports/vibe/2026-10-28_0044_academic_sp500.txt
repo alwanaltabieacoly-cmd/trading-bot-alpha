@@ -1,0 +1,286 @@
+Bench: 12 alphas x sp500 x 2024-2025
+ETA: ~3-5 min (cache hit) / ~10-20 min (cold fetch)
+SP500 universe uses current constituents (wikipedia @ 2026-05-17) → survivorship-biased
+yahoo failed for FDXF.US: 400 Client Error: Bad Request for url: https://query1.finance.yahoo.com/v8/finance/chart/FDXF?interval=1d&events=div%2Csplits&period1=1704067200&period2=1767225600
+yahoo failed for HONA.US: 400 Client Error: Bad Request for url: https://query1.finance.yahoo.com/v8/finance/chart/HONA?interval=1d&events=div%2Csplits&period1=1704067200&period2=1767225600
+yahoo failed for VYLR.US: 400 Client Error: Bad Request for url: https://query1.finance.yahoo.com/v8/finance/chart/VYLR?interval=1d&events=div%2Csplits&period1=1704067200&period2=1767225600
+stooq is unavailable to this process (anti-bot challenge page); skipping it for 300 seconds. Move stooq to the end of the chain via MARKET_DATA_ORDER_* (e.g. MARKET_DATA_ORDER_US_EQUITY); the override must be a permutation of the default chain, so a source can be reordered but not removed.
+eastmoney failed for FDXF.US: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+eastmoney failed for HONA.US: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+eastmoney failed for VYLR.US: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+$FDXF: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+$VYLR: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+
+3 Failed downloads:
+['HONA']: OperationalError('database is locked')
+['FDXF', 'VYLR']: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+$FDXF: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+
+1 Failed download:
+['FDXF']: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+yfinance returned no usable data for FDXF
+$HONA: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+
+1 Failed download:
+['HONA']: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+yfinance returned no usable data for HONA
+$VYLR: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+
+1 Failed download:
+['VYLR']: Data doesn't exist for startDate = 1704085200, endDate = 1767243600
+yfinance returned no usable data for VYLR
+  Benching ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12/12 academic_strev 0:06:55
+✓ Bench complete. 12 tested, 0 skipped. Report: 
+/home/runner/.vibe-trading/reports/alpha_bench_20261028T005115Z.html
+{
+  "status": "ok",
+  "zoo": "academic",
+  "universe": "sp500",
+  "period": "2024-2025",
+  "n_alphas_tested": 12,
+  "n_skipped": 0,
+  "top": [
+    {
+      "id": "academic_carhart_mom",
+      "zoo": "academic",
+      "theme": [
+        "momentum"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl((\\mathrm{close}_{t-21} - \\mathrm{close}_{t-252})/\\mathrm{close}_{t-252}\\bigr)",
+      "ic_mean": 0.028392,
+      "ic_std": 0.233362,
+      "ir": 0.1217,
+      "ic_positive_ratio": 0.5944,
+      "ic_count": 249,
+      "category": "dead"
+    },
+    {
+      "id": "academic_strev",
+      "zoo": "academic",
+      "theme": [
+        "reversal"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl(-(\\mathrm{close}_t - \\mathrm{close}_{t-21}) / \\mathrm{close}_{t-21}\\bigr)",
+      "ic_mean": 0.011185,
+      "ic_std": 0.191602,
+      "ir": 0.0584,
+      "ic_positive_ratio": 0.5062,
+      "ic_count": 480,
+      "category": "dead"
+    },
+    {
+      "id": "academic_cma",
+      "zoo": "academic",
+      "theme": [
+        "quality"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl(-\\Delta_{60}\\log(\\mathrm{ts\\_mean}(\\mathrm{volume},\\,60) + 1)\\bigr)",
+      "ic_mean": 0.002398,
+      "ic_std": 0.083372,
+      "ir": 0.0288,
+      "ic_positive_ratio": 0.5366,
+      "ic_count": 382,
+      "category": "dead"
+    },
+    {
+      "id": "academic_high52w",
+      "zoo": "academic",
+      "theme": [
+        "momentum"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl(\\mathrm{close}_t / \\mathrm{ts\\_max}(\\mathrm{close},\\,252)\\bigr)",
+      "ic_mean": 0.000209,
+      "ic_std": 0.230991,
+      "ir": 0.0009,
+      "ic_positive_ratio": 0.536,
+      "ic_count": 250,
+      "category": "dead"
+    },
+    {
+      "id": "academic_corr_rewire",
+      "zoo": "academic",
+      "theme": [
+        "volatility"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\Bigl(-\\,\\frac{1}{|J_i|}\\sum_{j \\in J_i}\\bigl|\\rho_{ij}^{\\mathrm{event}} - \\rho_{ij}^{\\mathrm{calm}}\\bigr|\\Bigr),\\quad \\rho^{\\mathrm{event}} = \\mathrm{corr}(r_{t-19..t}),\\ \\rho^{\\mathrm{calm}} = \\mathrm{corr}(r_{t-139..t-20})",
+      "ic_mean": -0.000129,
+      "ic_std": 0.139206,
+      "ir": -0.0009,
+      "ic_positive_ratio": 0.511,
+      "ic_count": 362,
+      "category": "dead"
+    },
+    {
+      "id": "academic_illiq",
+      "zoo": "academic",
+      "theme": [
+        "liquidity"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl(\\mathrm{ts\\_mean}(|r_t| / (\\mathrm{close}_t \\cdot \\mathrm{volume}_t),\\,21)\\bigr)",
+      "ic_mean": -0.001828,
+      "ic_std": 0.128272,
+      "ir": -0.0143,
+      "ic_positive_ratio": 0.4813,
+      "ic_count": 480,
+      "category": "dead"
+    },
+    {
+      "id": "academic_retskew",
+      "zoo": "academic",
+      "theme": [
+        "volatility"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl(-\\mathrm{skew}_{60}(r_t)\\bigr)",
+      "ic_mean": -0.003147,
+      "ic_std": 0.106669,
+      "ir": -0.0295,
+      "ic_positive_ratio": 0.5079,
+      "ic_count": 441,
+      "category": "dead"
+    },
+    {
+      "id": "academic_rmw",
+      "zoo": "academic",
+      "theme": [
+        "quality"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl(-\\mathrm{ts\\_std}((\\mathrm{close}_t - \\mathrm{close}_{t-1}) / \\mathrm{close}_{t-1},\\,60)\\bigr)",
+      "ic_mean": -0.014787,
+      "ic_std": 0.267764,
+      "ir": -0.0552,
+      "ic_positive_ratio": 0.4671,
+      "ic_count": 441,
+      "category": "dead"
+    },
+    {
+      "id": "academic_mkt_rf",
+      "zoo": "academic",
+      "theme": [
+        "momentum"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl((\\mathrm{close}_t - \\mathrm{close}_{t-21}) / \\mathrm{close}_{t-21}\\bigr)",
+      "ic_mean": -0.011185,
+      "ic_std": 0.191602,
+      "ir": -0.0584,
+      "ic_positive_ratio": 0.4938,
+      "ic_count": 480,
+      "category": "dead"
+    },
+    {
+      "id": "academic_bab",
+      "zoo": "academic",
+      "theme": [
+        "volatility"
+      ],
+      "formula_latex": "\\mathrm{zscore}_{x}\\bigl(-\\,\\mathrm{ts\\_cov}(r_i, r_m, 252) / \\mathrm{ts\\_std}(r_m, 252)^2\\bigr)",
+      "ic_mean": -0.021079,
+      "ic_std": 0.35684,
+      "ir": -0.0591,
+      "ic_positive_ratio": 0.502,
+      "ic_count": 249,
+      "category": "dead"
+    }
+  ],
+  "wall_seconds": 415.42,
+  "horizon": 1,
+  "forward_return_sampling": "daily",
+  "meta": {
+    "universe": "sp500",
+    "requested_instruments": 503,
+    "fetched_instruments": 500,
+    "missing_instruments": [
+      "FDXF.US",
+      "HONA.US",
+      "VYLR.US"
+    ],
+    "data_diagnostics": {
+      "FDXF.US": {
+        "attempts": [
+          {
+            "source": "yahoo",
+            "reason": "no_data"
+          },
+          {
+            "source": "stooq",
+            "reason": "no_data"
+          },
+          {
+            "source": "sina",
+            "reason": "no_data"
+          },
+          {
+            "source": "eastmoney",
+            "reason": "no_data"
+          },
+          {
+            "source": "yfinance",
+            "reason": "no_data"
+          }
+        ],
+        "recovery": "Use search_symbol to confirm the symbol and venue; check supported history/interval. source_unavailable means the source needs configuration or an optional dependency; fetch_failed means the request failed; no_data means that source returned no bars for this range. For recent intraday bars, narrow the date range or request daily bars."
+      },
+      "HONA.US": {
+        "attempts": [
+          {
+            "source": "yahoo",
+            "reason": "no_data"
+          },
+          {
+            "source": "stooq",
+            "reason": "no_data"
+          },
+          {
+            "source": "sina",
+            "reason": "no_data"
+          },
+          {
+            "source": "eastmoney",
+            "reason": "no_data"
+          },
+          {
+            "source": "yfinance",
+            "reason": "no_data"
+          }
+        ],
+        "recovery": "Use search_symbol to confirm the symbol and venue; check supported history/interval. source_unavailable means the source needs configuration or an optional dependency; fetch_failed means the request failed; no_data means that source returned no bars for this range. For recent intraday bars, narrow the date range or request daily bars."
+      },
+      "VYLR.US": {
+        "attempts": [
+          {
+            "source": "yahoo",
+            "reason": "no_data"
+          },
+          {
+            "source": "stooq",
+            "reason": "no_data"
+          },
+          {
+            "source": "sina",
+            "reason": "no_data"
+          },
+          {
+            "source": "eastmoney",
+            "reason": "no_data"
+          },
+          {
+            "source": "yfinance",
+            "reason": "no_data"
+          }
+        ],
+        "recovery": "Use search_symbol to confirm the symbol and venue; check supported history/interval. source_unavailable means the source needs configuration or an optional dependency; fetch_failed means the request failed; no_data means that source returned no bars for this range. For recent intraday bars, narrow the date range or request daily bars."
+      }
+    },
+    "price_sources": [
+      "yahoo"
+    ],
+    "survivorship_bias": true,
+    "degraded": false,
+    "constituent_source": "wikipedia",
+    "constituent_source_date": "2026-05-17",
+    "constituent_count": 503,
+    "sector_source": "wikipedia GICS",
+    "sector_coverage": 1.0
+  },
+  "report_path": "/home/runner/.vibe-trading/reports/alpha_bench_20261028T005115Z.html"
+}
+exit_code=0
