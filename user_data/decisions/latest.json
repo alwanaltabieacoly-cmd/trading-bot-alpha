@@ -1,6 +1,6 @@
 {
-  "asof": "2026-10-29T06:00:00+00:00",
-  "generated_at": "2026-10-29T06:54:50.911788+00:00",
+  "asof": "2026-10-29T10:00:00+00:00",
+  "generated_at": "2026-10-29T10:51:26.712089+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -91,8 +91,8 @@
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
-    "age_hours": 0.07,
-    "generated_at": "2026-10-29T06:50:56.360742+00:00",
+    "age_hours": 0.06,
+    "generated_at": "2026-10-29T10:47:58.427273+00:00",
     "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
@@ -208,9 +208,9 @@
       },
       {
         "pair": "USDCAD",
-        "profit_score": 4.9158,
-        "momentum": -0.2717,
-        "micro_score": 1.4864
+        "profit_score": 4.9273,
+        "momentum": -0.2664,
+        "micro_score": 1.4867
       },
       {
         "pair": "AMD",
@@ -225,16 +225,16 @@
         "micro_score": 0.0946
       },
       {
-        "pair": "EURUSD",
-        "profit_score": 2.3253,
-        "momentum": -0.3138,
-        "micro_score": 0.9843
+        "pair": "USDJPY",
+        "profit_score": 3.2664,
+        "momentum": 0.1239,
+        "micro_score": 1.0062
       },
       {
-        "pair": "NEAR/USD",
-        "profit_score": 2.0559,
-        "momentum": -1.3693,
-        "micro_score": 0.9315
+        "pair": "EURUSD",
+        "profit_score": 2.3534,
+        "momentum": -0.3008,
+        "micro_score": 0.985
       },
       {
         "pair": "MSFT",
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-29T06:54:50.911571+00:00",
+    "generated_at": "2026-10-29T10:51:26.711829+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
