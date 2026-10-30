@@ -1,0 +1,497 @@
+{
+  "BTC/USDT": {
+    "asof": "2026-10-30T12:31:47.454592+00:00",
+    "pair": "BTC/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -5.5,
+    "regime": "bear",
+    "regime_tf": "1h",
+    "fng": {
+      "value": 30,
+      "classification": "Fear",
+      "date": "2026-10-30",
+      "source": "sqlite"
+    },
+    "fng_7d_change": -20,
+    "gdelt": {
+      "bitcoin": {
+        "tone_24h": null,
+        "tone_7d": -0.304323,
+        "n_24h": 0,
+        "n_7d": 99
+      },
+      "ethereum": {
+        "tone_24h": null,
+        "tone_7d": -0.043725,
+        "n_24h": 0,
+        "n_7d": 20
+      }
+    },
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-30T12:31:47.454592+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "BTC/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": true,
+              "close": 77326.4,
+              "ema50": 79215.669632,
+              "ema200": 80171.734872,
+              "ema50_slope": -0.46664,
+              "dist_to_high20_pct": -4.740998,
+              "dist_to_low20_pct": 1.305252,
+              "atr_pct_14": 0.868194,
+              "volume_z_48": -0.930409,
+              "regime": "bear"
+            },
+            "4h": {
+              "available": true,
+              "close": 77326.4,
+              "ema50": 80322.173653,
+              "ema200": 81393.690542,
+              "ema50_slope": -0.722527,
+              "dist_to_high20_pct": -5.563616,
+              "dist_to_low20_pct": 1.305252,
+              "atr_pct_14": 1.569636,
+              "volume_z_48": -1.088687,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 77326.3,
+              "ema50": 80549.354881,
+              "ema200": 76454.527584,
+              "ema50_slope": -0.321682,
+              "dist_to_high20_pct": -8.927274,
+              "dist_to_low20_pct": 1.305121,
+              "atr_pct_14": 2.58078,
+              "volume_z_48": -1.206389,
+              "regime": "bull"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-30T07:00:00+00:00",
+      "action": null,
+      "size": null,
+      "confidence": null,
+      "rationale": null
+    },
+    "blockers": [
+      "regime=bear (1h)",
+      "gdelt[bitcoin] tone_7d=-0.304323 (negative)",
+      "gdelt[ethereum] tone_7d=-0.043725 (negative)",
+      "momentum down (1h)"
+    ],
+    "features": {
+      "1h": {
+        "tf": "1h",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": -0.3991,
+        "vol_regime": -0.5,
+        "volume_spike": 0.0,
+        "candle_position": 0.0,
+        "micro_score": -0.52,
+        "n_bars": 48,
+        "last_close": 77326.4
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  },
+  "ETH/USDT": {
+    "asof": "2026-10-30T12:31:47.844393+00:00",
+    "pair": "ETH/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -5.5,
+    "regime": "bear",
+    "regime_tf": "1h",
+    "fng": {
+      "value": 30,
+      "classification": "Fear",
+      "date": "2026-10-30",
+      "source": "sqlite"
+    },
+    "fng_7d_change": -20,
+    "gdelt": {
+      "bitcoin": {
+        "tone_24h": null,
+        "tone_7d": -0.304323,
+        "n_24h": 0,
+        "n_7d": 99
+      },
+      "ethereum": {
+        "tone_24h": null,
+        "tone_7d": -0.043725,
+        "n_24h": 0,
+        "n_7d": 20
+      }
+    },
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-30T12:31:47.844393+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "ETH/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": true,
+              "close": 2232.1,
+              "ema50": 2284.785374,
+              "ema200": 2317.733891,
+              "ema50_slope": -0.50079,
+              "dist_to_high20_pct": -5.10021,
+              "dist_to_low20_pct": 2.861751,
+              "atr_pct_14": 1.179319,
+              "volume_z_48": -0.701253,
+              "regime": "bear"
+            },
+            "4h": {
+              "available": true,
+              "close": 2232.75,
+              "ema50": 2337.562751,
+              "ema200": 2441.100997,
+              "ema50_slope": -0.950493,
+              "dist_to_high20_pct": -6.576762,
+              "dist_to_low20_pct": 2.891705,
+              "atr_pct_14": 2.088808,
+              "volume_z_48": -0.831742,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 2232.75,
+              "ema50": 2434.133002,
+              "ema200": 2317.844118,
+              "ema50_slope": -1.213208,
+              "dist_to_high20_pct": -13.442528,
+              "dist_to_low20_pct": 2.891705,
+              "atr_pct_14": 3.896316,
+              "volume_z_48": -1.32395,
+              "regime": "range"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-30T07:00:00+00:00",
+      "action": null,
+      "size": null,
+      "confidence": null,
+      "rationale": null
+    },
+    "blockers": [
+      "regime=bear (1h)",
+      "gdelt[bitcoin] tone_7d=-0.304323 (negative)",
+      "gdelt[ethereum] tone_7d=-0.043725 (negative)",
+      "momentum down (1h)"
+    ],
+    "features": {
+      "1h": {
+        "tf": "1h",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": -0.1996,
+        "vol_regime": -0.5,
+        "volume_spike": 0.0,
+        "candle_position": 0.0,
+        "micro_score": -0.51,
+        "n_bars": 48,
+        "last_close": 2232.1
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  },
+  "SOL/USDT": {
+    "asof": "2026-10-30T12:31:47.963875+00:00",
+    "pair": "SOL/USDT",
+    "equity": false,
+    "verdict": "NO-GO",
+    "score": -5.5,
+    "regime": "bear",
+    "regime_tf": "1h",
+    "fng": {
+      "value": 30,
+      "classification": "Fear",
+      "date": "2026-10-30",
+      "source": "sqlite"
+    },
+    "fng_7d_change": -20,
+    "gdelt": {
+      "bitcoin": {
+        "tone_24h": null,
+        "tone_7d": -0.304323,
+        "n_24h": 0,
+        "n_7d": 99
+      },
+      "ethereum": {
+        "tone_24h": null,
+        "tone_7d": -0.043725,
+        "n_24h": 0,
+        "n_7d": 20
+      }
+    },
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-30T12:31:47.963875+00:00",
+      "live_orderbook": true,
+      "pairs": {
+        "SOL/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": true,
+              "close": 96.5,
+              "ema50": 98.760072,
+              "ema200": 100.289971,
+              "ema50_slope": -0.442764,
+              "dist_to_high20_pct": -5.262124,
+              "dist_to_low20_pct": 4.720564,
+              "atr_pct_14": 1.387861,
+              "volume_z_48": -0.34123,
+              "regime": "bear"
+            },
+            "4h": {
+              "available": true,
+              "close": 96.51,
+              "ema50": 101.140644,
+              "ema200": 105.729021,
+              "ema50_slope": -1.003167,
+              "dist_to_high20_pct": -7.032078,
+              "dist_to_low20_pct": 4.731416,
+              "atr_pct_14": 2.479388,
+              "volume_z_48": -0.67171,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 96.51,
+              "ema50": 104.884797,
+              "ema200": 98.28412,
+              "ema50_slope": -1.200703,
+              "dist_to_high20_pct": -14.909187,
+              "dist_to_low20_pct": 4.731416,
+              "atr_pct_14": 4.28453,
+              "volume_z_48": -0.747893,
+              "regime": "range"
+            }
+          },
+          "orderbook": null
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-30T07:00:00+00:00",
+      "action": null,
+      "size": null,
+      "confidence": null,
+      "rationale": null
+    },
+    "blockers": [
+      "regime=bear (1h)",
+      "gdelt[bitcoin] tone_7d=-0.304323 (negative)",
+      "gdelt[ethereum] tone_7d=-0.043725 (negative)",
+      "momentum down (1h)"
+    ],
+    "features": {
+      "1h": {
+        "tf": "1h",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": -0.2812,
+        "vol_regime": -0.5,
+        "volume_spike": 0.0,
+        "candle_position": 0.0,
+        "micro_score": -0.5141,
+        "n_bars": 48,
+        "last_close": 96.5
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  },
+  "AAPL": {
+    "asof": "2026-10-30T12:31:48.088203+00:00",
+    "pair": "AAPL",
+    "equity": true,
+    "verdict": "GO",
+    "score": 1.5,
+    "regime": "bull",
+    "regime_tf": "1d",
+    "fng": {
+      "value": 30,
+      "classification": "Fear",
+      "date": "2026-10-30",
+      "source": "sqlite"
+    },
+    "fng_7d_change": -20,
+    "gdelt": {
+      "bitcoin": {
+        "tone_24h": null,
+        "tone_7d": -0.304323,
+        "n_24h": 0,
+        "n_7d": 99
+      },
+      "ethereum": {
+        "tone_24h": null,
+        "tone_7d": -0.043725,
+        "n_24h": 0,
+        "n_7d": 20
+      }
+    },
+    "reddit": null,
+    "market": {
+      "asof": "2026-10-30T12:31:48.088203+00:00",
+      "live_orderbook": false,
+      "pairs": {
+        "AAPL": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 348.220001,
+              "ema50": 331.007387,
+              "ema200": 300.540002,
+              "ema50_slope": 0.857007,
+              "dist_to_high20_pct": -0.040184,
+              "dist_to_low20_pct": 6.878243,
+              "atr_pct_14": 1.747049,
+              "volume_z_48": 0.544014,
+              "regime": "bull"
+            }
+          }
+        }
+      }
+    },
+    "deliberation": {
+      "asof": "2026-10-30T07:00:00+00:00",
+      "action": null,
+      "size": null,
+      "confidence": null,
+      "rationale": null
+    },
+    "blockers": [
+      "gdelt[bitcoin] tone_7d=-0.304323 (negative)",
+      "gdelt[ethereum] tone_7d=-0.043725 (negative)"
+    ],
+    "features": {
+      "1d": {
+        "tf": "1d",
+        "body_absorption": 0.0,
+        "body_exhaustion": 0.0,
+        "momentum_3_5_10_21": 0.788,
+        "vol_regime": 0.0,
+        "volume_spike": 0.0,
+        "candle_position": -0.5,
+        "micro_score": -0.4606,
+        "n_bars": 1100,
+        "last_close": 348.22
+      }
+    },
+    "weights": {
+      "regime_bull": 2.0,
+      "regime_bear": -2.0,
+      "fng_fear": 1.0,
+      "fng_greed": -1.0,
+      "gdelt_neg": -1.0,
+      "deliberation_block": -3.0,
+      "momentum_up": 1.5,
+      "momentum_down": -1.5,
+      "vol_squeeze": 1.0,
+      "vol_expand": -0.5,
+      "absorption": 1.0,
+      "exhaustion": -1.0,
+      "volume_spike": 1.0
+    }
+  }
+}
