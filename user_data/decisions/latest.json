@@ -1,6 +1,6 @@
 {
-  "asof": "2026-10-30T07:00:00+00:00",
-  "generated_at": "2026-10-30T07:02:50.657728+00:00",
+  "asof": "2026-10-30T12:00:00+00:00",
+  "generated_at": "2026-10-30T12:39:35.729071+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -92,7 +92,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
     "age_hours": 0.06,
-    "generated_at": "2026-10-30T06:59:01.541556+00:00",
+    "generated_at": "2026-10-30T12:36:04.636719+00:00",
     "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
@@ -151,7 +151,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.04,
+      "age_hours": 0.03,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -208,9 +208,9 @@
       },
       {
         "pair": "USDCAD",
-        "profit_score": 4.8847,
-        "momentum": -0.2862,
-        "micro_score": 1.4857
+        "profit_score": 4.7954,
+        "momentum": -0.3277,
+        "micro_score": 1.4836
       },
       {
         "pair": "AMD",
@@ -226,9 +226,9 @@
       },
       {
         "pair": "EURUSD",
-        "profit_score": 2.7682,
-        "momentum": -0.1078,
-        "micro_score": 0.9946
+        "profit_score": 2.8149,
+        "momentum": -0.0861,
+        "micro_score": 0.9957
       },
       {
         "pair": "AAPL",
@@ -249,16 +249,16 @@
         "micro_score": 0.0087
       },
       {
-        "pair": "GBPUSD",
-        "profit_score": 0.3014,
-        "momentum": 0.1402,
-        "micro_score": 0.007
+        "pair": "ARB/USD",
+        "profit_score": 0.1315,
+        "momentum": 0.0611,
+        "micro_score": 0.0031
       },
       {
-        "pair": "USDJPY",
-        "profit_score": 0.1677,
-        "momentum": 0.078,
-        "micro_score": 0.0039
+        "pair": "XAUUSD",
+        "profit_score": -0.0307,
+        "momentum": -1.177,
+        "micro_score": 0.4411
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-10-30T07:02:50.657454+00:00",
+    "generated_at": "2026-10-30T12:39:35.728818+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
