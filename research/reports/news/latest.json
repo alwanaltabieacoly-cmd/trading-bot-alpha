@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-01T19:41:39Z",
+ "generated_at": "2026-11-02T00:46:14Z",
  "keep_hours": 48,
  "feeds": [
   {
@@ -20,12 +20,12 @@
   {
    "feed": "bbc-business",
    "ok": true,
-   "items": 53
+   "items": 44
   },
   {
    "feed": "bbc-world",
    "ok": true,
-   "items": 29
+   "items": 30
   },
   {
    "feed": "nyt-business",
@@ -59,19 +59,117 @@
   },
   {
    "feed": "gnews-bitcoin",
-   "ok": true,
-   "items": 100
+   "ok": false,
+   "error": "HTTP Error 503: Service Unavailable"
   },
   {
    "feed": "gnews-fx",
-   "ok": true,
-   "items": 71
+   "ok": false,
+   "error": "HTTP Error 503: Service Unavailable"
   }
  ],
- "ok_feeds": 13,
+ "ok_feeds": 11,
  "items": [
   {
-   "ts": "2026-11-01T19:40:52Z",
+   "ts": "2026-11-02T00:31:38Z",
+   "title": "U.S. stock futures edge high after bruising Oct; earnings, elections in focus",
+   "link": "https://www.investing.com/news/stock-market-news/us-stock-futures-edge-high-after-bruising-oct-earnings-elections-in-focus-4989789",
+   "source": "investing",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-02T00:30:20Z",
+   "title": "Oil slips more than 1% as talks continue on ending Iran war",
+   "link": "https://www.investing.com/news/commodities-news/oil-slips-more-than-1-as-talks-continue-on-ending-iran-war-4989784",
+   "source": "investing",
+   "tags": [
+    "politics"
+   ],
+   "tone": -1.0
+  },
+  {
+   "ts": "2026-11-02T00:25:12Z",
+   "title": "Democrats have high hopes for midterms, but polls have let them down before",
+   "link": "https://www.bbc.co.uk/news/articles/cmg47p3edv4do?at_medium=RSS&at_campaign=rss",
+   "source": "bbc-world",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-02T00:15:30Z",
+   "title": "France launches attempted murder investigation after petrol bomb thrown at police",
+   "link": "https://www.bbc.co.uk/news/articles/cwvg05z184j0o?at_medium=RSS&at_campaign=rss",
+   "source": "bbc-world",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-02T00:11:37Z",
+   "title": "Binance sees $3.64 billion in net outflows as withdrawals resume after massive hack",
+   "link": "https://www.cnbc.com/2026/11/02/binance-outflow-hack-bitcoin.html",
+   "source": "cnbc",
+   "tags": [],
+   "tone": -1.0
+  },
+  {
+   "ts": "2026-11-02T00:06:22Z",
+   "title": "Bank of England poised to raise rates but may push back on bets for more",
+   "link": "https://www.investing.com/news/economy-news/bank-of-england-poised-to-raise-rates-but-may-push-back-on-bets-for-more-4989788",
+   "source": "investing",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-02T00:02:15Z",
+   "title": "Democrat endorses Republican candidate in key Michigan Senate race as party spat erupts",
+   "link": "https://www.bbc.co.uk/news/articles/c95ynzv88n68o?at_medium=RSS&at_campaign=rss",
+   "source": "bbc-world",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T23:59:27Z",
+   "title": "Binance net outflows surge to $5.8B as withdrawals resume after record hack",
+   "link": "https://cointelegraph.com/news/binance-net-outflows-surge-to-58b-as-withdrawals-resume-after-record-hack?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+   "source": "cointelegraph",
+   "tags": [],
+   "tone": 0.33
+  },
+  {
+   "ts": "2026-11-01T23:56:14Z",
+   "title": "Westpac FY profit dips as higher credit charges offset growth",
+   "link": "https://www.investing.com/news/earnings/westpac-fy-profit-dips-as-higher-credit-charges-offset-growth-4989787",
+   "source": "investing",
+   "tags": [],
+   "tone": 1.0
+  },
+  {
+   "ts": "2026-11-01T23:34:49Z",
+   "title": "Don't get caught out by new Buy Now Pay Later rules",
+   "link": "https://www.bbc.co.uk/news/articles/crpdgp4y017go?at_medium=RSS&at_campaign=rss",
+   "source": "bbc-business",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T23:24:17Z",
+   "title": "Binance sees spike in withdrawals as exchange returns online after $6.3 billion heist",
+   "link": "https://www.investing.com/news/stock-market-news/binance-to-resume-withdrawals-after-recovering-bulk-of-6-billion-in-stolen-funds-4989388",
+   "source": "investing",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T23:18:23Z",
+   "title": "China’s big banks post fastest quarterly profit growth in years as margins stabilise",
+   "link": "https://www.investing.com/news/stock-market-news/chinas-big-banks-post-fastest-quarterly-profit-growth-in-years-as-margins-stabilise-4989783",
+   "source": "investing",
+   "tags": [],
+   "tone": 1.0
+  },
+  {
+   "ts": "2026-11-01T23:17:57Z",
    "title": "Judge dismisses Alaska Senate election lawsuit; DOJ vows appeal",
    "link": "https://www.cnbc.com/2026/11/01/alaska-senate-doj-lawsuit-dismissed-sullivan-peltola.html",
    "source": "cnbc",
@@ -82,7 +180,75 @@
    "tone": -1.0
   },
   {
-   "ts": "2026-11-01T19:39:15Z",
+   "ts": "2026-11-01T23:12:21Z",
+   "title": "China’s robot makers have mastered the moves. Now comes the race for brains",
+   "link": "https://www.investing.com/news/stock-market-news/chinas-robot-makers-have-mastered-the-moves-now-comes-the-race-for-brains-4989782",
+   "source": "investing",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T23:09:13Z",
+   "title": "Billions flee Binance on reopen, THORChain founder opposes coin freeze: Hodler’s Digest",
+   "link": "https://cointelegraph.com/magazine/36b-flees-binance-on-reopen-thorchain-co-founder-opposes-coin-freeze-hodlers-digest?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
+   "source": "cointelegraph",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T22:42:30Z",
+   "title": "Iran offers 48-hour Hormuz reopening plan as Trump signals progress in talks",
+   "link": "https://www.investing.com/news/economy-news/iran-offers-48hour-hormuz-reopening-plan-as-trump-signals-progress-in-talks-4989413",
+   "source": "investing",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T22:38:24Z",
+   "title": "Ukraine air raid app apparently hacked as users receive false radiation threat, Air Force says",
+   "link": "https://www.bbc.co.uk/news/articles/c51kdy1ew7zvo?at_medium=RSS&at_campaign=rss",
+   "source": "bbc-world",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T22:36:21Z",
+   "title": "Australian home prices fall for seventh month, looming rate hike adds to pain",
+   "link": "https://www.investing.com/news/economy-news/australian-home-prices-fall-for-seventh-month-looming-rate-hike-adds-to-pain-4989781",
+   "source": "investing",
+   "tags": [
+    "rates"
+   ],
+   "tone": -1.0
+  },
+  {
+   "ts": "2026-11-01T22:25:51Z",
+   "title": "'I've had people eating cat food': Rising cost of living top of mind for US voters",
+   "link": "https://www.bbc.co.uk/news/videos/cwly0eev3m44o?at_medium=RSS&at_campaign=rss",
+   "source": "bbc-business",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T21:55:01Z",
+   "title": "Russian strikes cut power to thousands in Ukraine as Kherson ceasefire ends",
+   "link": "https://www.bbc.co.uk/news/articles/c64g1y90p71eo?at_medium=RSS&at_campaign=rss",
+   "source": "bbc-world",
+   "tags": [
+    "politics"
+   ],
+   "tone": 1.0
+  },
+  {
+   "ts": "2026-11-01T21:42:33Z",
+   "title": "Westpac’s full-year profit ticks higher, flags slowing loan demand",
+   "link": "https://www.investing.com/news/stock-market-news/australian-lender-westpacs-fullyear-profit-ticks-higher-4989776",
+   "source": "investing",
+   "tags": [],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T21:06:42Z",
    "title": "Democratic Rep. Stevens endorses Republican Rogers over rival El-Sayed in Michigan Senate election",
    "link": "https://www.cnbc.com/2026/11/01/michigan-senate-stevens-rogers-endorsement-el-sayed.html",
    "source": "cnbc",
@@ -102,14 +268,6 @@
    "tone": 0.0
   },
   {
-   "ts": "2026-11-01T19:17:34Z",
-   "title": "Democrat endorses Republican candidate in key Michigan Senate race as party spat escalates",
-   "link": "https://www.bbc.co.uk/news/articles/c95ynzv88n68o?at_medium=RSS&at_campaign=rss",
-   "source": "bbc-world",
-   "tags": [],
-   "tone": 0.0
-  },
-  {
    "ts": "2026-11-01T19:11:15Z",
    "title": "Here’s How Much Binance Users Withdrew as Bitcoin Bulls Spot an FTX-Era Signal - CryptoRank",
    "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQVTRxYVpQbFprMEZfTUdvanM1ZjRIY0p1UExLUDEyX0ZTelNSMjdZN1NvTHkwTEJZY3BUdC03ajZOcVJCUDYtYUZvdDBfYVAtenlPMXVUb3JDNmZEQWo4U3FIRnVQRkRUMXpBM1RyUFd5azlPQzhKUTJkZmR3dVQ2al8wREFhREVnTzFoWlhMSUdiMVBVdVpFSEEtZlNPTExjVWY5c290N0VsTWxlZXRTOUVOaHN1UQ?oc=5",
@@ -117,6 +275,14 @@
    "tags": [
     "BTC-USD"
    ],
+   "tone": 0.0
+  },
+  {
+   "ts": "2026-11-01T19:10:12Z",
+   "title": "Connecticut Sen. Chris Murphy has stroke and is in the hospital, office says",
+   "link": "https://www.cnbc.com/2026/11/01/chris-murphy-stroke-senate-hospital.html",
+   "source": "cnbc",
+   "tags": [],
    "tone": 0.0
   },
   {
@@ -182,14 +348,6 @@
    "title": "Binance Reports $3.64 Billion in Outflows as It Resumes Normal Transactions",
    "link": "https://www.nytimes.com/2026/11/01/business/binance-hack-crypto-north-korea.html",
    "source": "nyt-business",
-   "tags": [],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-11-01T18:24:42Z",
-   "title": "Binance sees spike in withdrawals as exchange returns online after $6.3 billion heist",
-   "link": "https://www.investing.com/news/stock-market-news/binance-to-resume-withdrawals-after-recovering-bulk-of-6-billion-in-stolen-funds-4989388",
-   "source": "investing",
    "tags": [],
    "tone": 0.0
   },
@@ -3628,189 +3786,6 @@
    "ts": "2026-10-31T16:13:57Z",
    "title": "The Perfect Storm in Bitcoin - CryptoQuant",
    "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPd3ZUZ20tY0lHQ2Z6dDFib2hXemFHSm5nSndJTzJteUhQZG5PeFQwUWpiRjF1Qm5aR2lhUzNsZ2Q1M1BqTnpkS2EyWkVtajB3bmhCeFpiNk5VWmdiVThmU2RUSkFWcnJMOFlldFdLb3ktZnd0bHlWZU1DZmViQUZPaDE5OWRneTFWcE8tU3MtTUdVS3VZTmxPZFNZVkw?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T16:13:56Z",
-   "title": "Bitcoin Returns to the Cost of Conviction - CryptoQuant",
-   "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPV0U3NTBvUFdDTkY1TjE4YkJETEhCUDF4ZndyTENhVzRqV0dGTktIc1ZyMTY0NzJqaXhROGx2eTFGaVB0T1YtUHM0Y1pZWHk0bVVsNnlsZEVBa0dRRmt1Q1A5d0RMenBWU1k2bmY1QmpJN04tMVZrVy1kLWE1eWRmVG8taFJ6U0lldjYzcVByMmkyMkRZRENaeHhmNlJzQjVRS2ZnX2djbG0wTEZkLUE?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T16:13:06Z",
-   "title": "Binance, crypto and hacks: What to know about keeping coin safe as cyber criminals advance",
-   "link": "https://www.cnbc.com/2026/10/31/binance-crypto-hack-safety.html",
-   "source": "cnbc",
-   "tags": [],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T16:09:30Z",
-   "title": "A stolen iPhone, $14,000 in losses and London's crypto theft problem",
-   "link": "https://www.coindesk.com/business/2026/11/01/a-stolen-iphone-usd14-000-in-losses-and-london-s-crypto-theft-problem",
-   "source": "coindesk",
-   "tags": [
-    "AAPL"
-   ],
-   "tone": -1.0
-  },
-  {
-   "ts": "2026-10-31T16:07:47Z",
-   "title": "Jordi Visser Says One Overlooked Event Could Help Bitcoin Break Out Of Its Slump - TradingView",
-   "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNYlBOZEJPdWQzNFliczBuSC1mYVcwU3pxSEVWdGFjOXVIcjVBMTU4NWdfQ20wWTdwdWRXSnJBd2MwS0ItU25MeDgyUl8yeXJkcU5QMDdpRHgwdVNyWHM1ay00bXM1djhXcEhiU3dMdXNHbXZLdTJwcVAtenoyaWRRR1lwV2xzUDl0MExxUU1xLWw0S04xOGpTUVZEM1hkbFdmSXVTNzk4Zm1fRlY5dzNONXpyNWxHWmpyZElWVFc5S1FhWFJhbWs1aTVRdW9FVTN0dmhMMEExVGw?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": -1.0
-  },
-  {
-   "ts": "2026-10-31T16:07:00Z",
-   "title": "Jordi Visser Says One Overlooked Event Could Help Bitcoin Break Out Of Its Slump - Stocktwits",
-   "link": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxOWms4MXpRUDF2Z0xrb1RHQ2ZaVERQU0tnNjlTSHNkSl9UbzRZYVZXRVpqVEJub1VqRlFwZG4ybEhKYXJ6R2s3a0o1TWJHOTNvZko3Ym5aTHlHcmtLdzdPQTB3T1RnZ1dKWFZBRlN6MFp1T0s5UUNubUpabWZndGJTUHdiU2QyZ1JQS1NPaGNIVXVuREhZaWhjOWNiOEx6eFR4VTF0QlNVYlZPUkgyNTVIeHFmQmZOWURid3lBdE5wVkFheFNETWt6Q3BwNnM4RXNqeWQzTkh2ejREN3lWSm1udF9sQU1zSFk?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": -1.0
-  },
-  {
-   "ts": "2026-10-31T16:05:00Z",
-   "title": "Galaxy's Abebe: Bitcoin's $80,000 Window Is Closing Fast - BigGo Finance",
-   "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE92dWRpWHhqaXVJZmNneE55UWhaaTE5WTVpOEtXeWlVWGtuaDdoSk1LT21DTjNYcHUzdnU3TXJkSmhONU5mczFQbVhMNFlNckIwdEZadHR0bUt6UmhXMEZ2VEluMU4xSGgta2dEVTc1ZEktS2RiR2c?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T16:04:11Z",
-   "title": "U.S. Treasury, European Bond Yields Fall After Fed, ECB Hold - WSJ",
-   "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNMVJzTU8waHdld3FnbVROOGw4ZEtGS2g3UHpKYVFXTXhzdW9DeW8xYmJrY1RmWGFvNUlqWThQR2FWaTRuaklmYWlhbTNQV0lfa3BNNmFjSHBUaTk0NDVNSHRFLUg5MFFhTFZZMWZrTHh5ZHpYVnVzMlpNZ2hqaEM3LVJuOUhrUV9kc3NGRHpfdFNkUEhTX2oyTzVRMUhvS1dyNkF1UVV4eEtFM3VXTXJvUG9Lc3dnRjRDc190d0Vzem5ZNmxfNktGcUl3?oc=5",
-   "source": "gnews-fx",
-   "tags": [
-    "EURUSD=X",
-    "USD",
-    "rates"
-   ],
-   "tone": -1.0
-  },
-  {
-   "ts": "2026-10-31T16:01:25Z",
-   "title": "Strive CEO Says Bitcoin's Drop After Binance Incident Was Milder Than Expected - TOKENPOST",
-   "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE55M3QzTTdpdy1tcGhVYjRCZThUbnhvVm1FWWp0dG5PRm9PQ0lxNXVuNGVjc3hqZWtLRF9XUURTS1VfZVdEMjVLVlJGMzdpbXhRRmNFaFB3YU4xdw?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": -1.0
-  },
-  {
-   "ts": "2026-10-31T16:00:29Z",
-   "title": "Why is CZ expecting limited Bitcoin downside from the $6.3B Binance hack? - AMBCrypto",
-   "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQVFlhS1NxUDRxaFdOQi0zeHNlRlhobGVmc2Z5MXpBdjlvQ3pCUXpsUlB3RG1CZWtsNnFyVS1ERkFnQS1VLTY0YzY0T0tlN2xZeGRULUE4YUdERnNlUkV4SVNpbjh0Y0otelhSLW1IbzNuU1FmelNTY3FNS0JDMk9nMVNyZU1tdU5sSEcxMXlZVEdyRlJrRjBCN21n?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": -1.0
-  },
-  {
-   "ts": "2026-10-31T16:00:18Z",
-   "title": "Bitcoin DRIP: New ETFs from Franklin Templeton - Bit2Me News",
-   "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE05LUZXUzM4dnpyalcwS05GQWVHeENscEdDZUVicmZKRkN3RjA2aGo5Q2R6czlwZTRFMXRqWXBadnR2Z1I5SmVXRTlsbWwtLWRxQU5zaFUtdHJPYjlqTzJ1eEhOa1d0eDh5RGt6MUdJdVlZYXVQMVBVeDNoS0J0QQ?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T16:00:00Z",
-   "title": "Traders are already placing leveraged bets on Anthropic’s IPO using crypto contracts",
-   "link": "https://www.coindesk.com/business/2026/10/31/traders-are-already-placing-leveraged-bets-on-anthropic-s-ipo-using-crypto-contracts",
-   "source": "coindesk",
-   "tags": [],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T15:58:08Z",
-   "title": "Strategy’s Bitcoin Holdings Rise 26% YTD as BTC Yield Stands at Negative 3.7% - TOKENPOST",
-   "link": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9ueWgwMXVJdlRXenlRYzRqU2YyS3BqR1JCYmRHRHBoYlRXOW1vUlIxMDBNUHBuVUJFZGVWeWljb0VWcG1STTJqbkZObHM0cG9uTmxlWXZCWTc?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD",
-    "rates"
-   ],
-   "tone": 1.0
-  },
-  {
-   "ts": "2026-10-31T15:44:18Z",
-   "title": "Fidelity Wise Origin Bitcoin Fund Releases Q1 2024 10-Q Report - TradingView",
-   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPY2tlU2xJdVdvM1hpZzVUVC12azRpR1FiYTQ5YXVmNDMxdkM5UV9sRlNpdVcyNzQyQldCVFVkRC1iTGZaVmNuNzFxTTVCUVZoQlBLOS1NTW1BZlRabTlNLTNWQ2VLVldvaHVLNnYyVVVjY0ZOZFQweFZ3YjBlU1ljV3NJcXFrS0dPZkdRZFM3V2tUUHdKQmRaREpVTExZTmlReUh6Nl9sMWNUR1FlVTgtUGp3MGd0VmhhRE0tX20taU9MUQ?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T15:43:45Z",
-   "title": "F.D.A. Warns of Tractor Wheels Snack Bar Linked to Choking Hazard",
-   "link": "https://www.nytimes.com/2026/10/31/well/family/fda-tractor-wheels-choking-hazard.html",
-   "source": "nyt-business",
-   "tags": [],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T15:42:26Z",
-   "title": "Fidelity Wise Origin Bitcoin Fund Releases Q2 2024 10-Q Report - TradingView",
-   "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOcWF0VXdEYkthMy1mcTMtYVZZbWVCRjFaeldsMXBmUEkyT2pOR1UybzE3Um95OU5PTU00eEwxdktLWkF1NldCY19qcWJ3X2hORWZ6OG9kY0YwcVBTd0kyU3JsZ1Z4ZGRjYVg1S256T1p6TXJLbHRwVms4SEdSNFM4VWs5bl9FY1lobmxWbndReTFoM0J0QThsQndxWmE5TU90bHRfbl9USVY5NTBjWGh0RzV5bW1mM2pTdmNCSDFTbkdTZw?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T15:37:11Z",
-   "title": "Stocks started the week with promise but ended in despair. Our take on the big reversal",
-   "link": "https://www.cnbc.com/investingclub/2026/10/31/stocks-started-the-week-with-promise-but-ended-in-despair.html",
-   "source": "cnbc",
-   "tags": [],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T15:36:01Z",
-   "title": "Binance says 90% of stolen assets replenished, targets Sunday withdrawals",
-   "link": "https://cointelegraph.com/news/binance-hack-90-percent-replenished?utm_source=rss_feed&utm_medium=rss&utm_campaign=rss_partner_inbound",
-   "source": "cointelegraph",
-   "tags": [],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T15:33:48Z",
-   "title": "Bitcoin Price After a $643 Million ETF Outflow: Here Are the Reasons - CryptoTicker.io",
-   "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPSlczVnNTQ3doR3VlOFVpZWJQWlNiRmhSemUxTTJuWlgxTjRIb2pIQzZrUTRta2JEendWMkxBYnAwUEdHRjFSaHRJRW1qS1dQTm45U3J3ZkpoUWtZbE1iOVZxVXlySVlzVE5Pd2lUZ2otMGlKaEpXRldKYjAycWdMd3ZB?oc=5",
-   "source": "gnews-bitcoin",
-   "tags": [
-    "BTC-USD"
-   ],
-   "tone": 0.0
-  },
-  {
-   "ts": "2026-10-31T15:32:20Z",
-   "title": "Bitcoin New (bitcoinnewtoken.com) price today, BTCN to USD live price, marketcap and chart - CoinMarketCap",
-   "link": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE13RDdpLUVlemd6YlYxS0Z1QmJadGY0LTNjMWlfam5yVDlQQ2NDYzNvUU5GdTVmcXRjcTBJSEtTbVFxOE9LWlRxdE1ycVZSVkpVZTZpWmZYcWZYeThiWEE?oc=5",
    "source": "gnews-bitcoin",
    "tags": [
     "BTC-USD"
