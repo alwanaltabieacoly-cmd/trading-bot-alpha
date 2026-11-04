@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-03T16:00:00+00:00",
-  "generated_at": "2026-11-03T16:48:55.426603+00:00",
+  "asof": "2026-11-04T06:00:00+00:00",
+  "generated_at": "2026-11-04T06:42:12.217042+00:00",
   "source": "fallback",
   "pairs": {
     "BTC/USDT": {
@@ -55,7 +55,7 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "AMZN": {
       "action": "block",
@@ -92,7 +92,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-03_0304_academic_sp500.txt",
     "age_hours": 0.2,
-    "generated_at": "2026-11-03T16:36:41.750154+00:00",
+    "generated_at": "2026-11-04T06:30:05.872644+00:00",
     "asof": "2026-11-03",
     "zoo": "academic",
     "universe": "sp500",
@@ -201,64 +201,64 @@
     },
     "asset_scan": [
       {
-        "pair": "ETH/USD",
-        "profit_score": 11.142,
-        "momentum": 0.7637,
-        "micro_score": 2.0382
+        "pair": "APT/USD",
+        "profit_score": 4.9617,
+        "momentum": 0.2148,
+        "micro_score": 1.0107
       },
       {
-        "pair": "DOGE/USD",
-        "profit_score": 10.5138,
-        "momentum": 0.4715,
-        "micro_score": 2.0236
-      },
-      {
-        "pair": "ICP/USD",
-        "profit_score": 10.4003,
-        "momentum": 0.4188,
-        "micro_score": 2.0209
-      },
-      {
-        "pair": "BTC/USD",
-        "profit_score": 9.9673,
-        "momentum": 0.2173,
-        "micro_score": 2.0109
+        "pair": "USDCAD",
+        "profit_score": 4.9527,
+        "momentum": -0.2546,
+        "micro_score": 1.4873
       },
       {
         "pair": "SAND/USD",
-        "profit_score": 7.165,
-        "momentum": 1.2395,
-        "micro_score": 1.062
+        "profit_score": 4.7123,
+        "momentum": 0.0988,
+        "micro_score": 1.0049
       },
       {
-        "pair": "FIL/USD",
-        "profit_score": 6.1471,
-        "momentum": 0.7661,
-        "micro_score": 1.0383
+        "pair": "ARB/USD",
+        "profit_score": 4.6214,
+        "momentum": 0.0565,
+        "micro_score": 1.0028
       },
       {
-        "pair": "SOL/USD",
-        "profit_score": 5.059,
-        "momentum": 0.26,
-        "micro_score": 1.013
+        "pair": "OP/USD",
+        "profit_score": 4.5649,
+        "momentum": 0.0302,
+        "micro_score": 1.0015
       },
       {
         "pair": "ADA/USD",
-        "profit_score": 4.7713,
-        "momentum": 0.1262,
-        "micro_score": 1.0063
+        "profit_score": 4.4973,
+        "momentum": -0.0012,
+        "micro_score": 0.9999
       },
       {
-        "pair": "APT/USD",
-        "profit_score": 4.3972,
-        "momentum": -0.0478,
-        "micro_score": 0.9976
+        "pair": "DOT/USD",
+        "profit_score": 4.4021,
+        "momentum": -0.0455,
+        "micro_score": 0.9977
       },
       {
-        "pair": "LTC/USD",
-        "profit_score": 4.1677,
-        "momentum": -0.1546,
-        "micro_score": 0.9923
+        "pair": "MANA/USD",
+        "profit_score": 4.2107,
+        "momentum": -0.1346,
+        "micro_score": 0.9933
+      },
+      {
+        "pair": "ALGO/USD",
+        "profit_score": 4.0841,
+        "momentum": -0.1934,
+        "micro_score": 0.9903
+      },
+      {
+        "pair": "BCH/USD",
+        "profit_score": 3.4641,
+        "momentum": -0.4818,
+        "micro_score": 0.9759
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-03T16:48:55.426258+00:00",
+    "generated_at": "2026-11-04T06:42:12.216702+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
