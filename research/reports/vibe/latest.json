@@ -1,9 +1,9 @@
 {
   "source": "vibe-trading alpha_bench",
-  "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-04_0139_academic_sp500.txt",
+  "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-05_0146_academic_sp500.txt",
   "age_hours": 0.0,
-  "generated_at": "2026-11-04T01:46:41.686111+00:00",
-  "asof": "2026-11-04",
+  "generated_at": "2026-11-05T01:53:52.031816+00:00",
+  "asof": "2026-11-05",
   "zoo": "academic",
   "universe": "sp500",
   "period": "2024-2025",
@@ -13,41 +13,41 @@
     {
       "alpha": "academic_carhart_mom",
       "theme": "momentum",
-      "ic_mean": 0.028417,
-      "ir": 0.1218,
+      "ic_mean": 0.02834,
+      "ir": 0.1216,
       "ic_positive_ratio": 0.5944,
       "ic_count": 249
     },
     {
       "alpha": "academic_strev",
       "theme": "reversal",
-      "ic_mean": 0.011183,
-      "ir": 0.0584,
-      "ic_positive_ratio": 0.5062,
+      "ic_mean": 0.011409,
+      "ir": 0.0597,
+      "ic_positive_ratio": 0.5083,
       "ic_count": 480
     },
     {
       "alpha": "academic_cma",
       "theme": "quality",
-      "ic_mean": 0.002416,
-      "ir": 0.029,
-      "ic_positive_ratio": 0.5366,
+      "ic_mean": 0.002379,
+      "ir": 0.0286,
+      "ic_positive_ratio": 0.5393,
       "ic_count": 382
     },
     {
       "alpha": "academic_high52w",
       "theme": "momentum",
-      "ic_mean": 0.000257,
+      "ic_mean": 0.000247,
       "ir": 0.0011,
-      "ic_positive_ratio": 0.544,
+      "ic_positive_ratio": 0.54,
       "ic_count": 250
     },
     {
       "alpha": "academic_corr_rewire",
       "theme": "volatility",
-      "ic_mean": -0.000155,
-      "ir": -0.0011,
-      "ic_positive_ratio": 0.511,
+      "ic_mean": -0.000443,
+      "ir": -0.0032,
+      "ic_positive_ratio": 0.5138,
       "ic_count": 362
     }
   ],
