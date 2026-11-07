@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-06T13:00:00+00:00",
-  "generated_at": "2026-11-06T13:16:38.177478+00:00",
+  "asof": "2026-11-07T06:00:00+00:00",
+  "generated_at": "2026-11-07T07:06:35.500908+00:00",
   "source": "fallback",
   "pairs": {
     "BTC/USDT": {
@@ -92,7 +92,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
     "age_hours": 0.2,
-    "generated_at": "2026-11-06T13:04:26.285556+00:00",
+    "generated_at": "2026-11-07T06:54:31.576610+00:00",
     "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
@@ -151,7 +151,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.04,
+      "age_hours": 0.03,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -202,63 +202,63 @@
     "asset_scan": [
       {
         "pair": "AMZN",
-        "profit_score": 4.1413,
-        "momentum": 1.9262,
-        "micro_score": 0.0963
-      },
-      {
-        "pair": "USDJPY",
-        "profit_score": 3.3743,
-        "momentum": 0.1741,
-        "micro_score": 1.0087
+        "profit_score": 3.9775,
+        "momentum": 1.85,
+        "micro_score": 0.0925
       },
       {
         "pair": "USDCAD",
-        "profit_score": 3.1851,
-        "momentum": 0.0861,
-        "micro_score": 1.0043
-      },
-      {
-        "pair": "MSFT",
-        "profit_score": 2.6463,
-        "momentum": 1.2309,
-        "micro_score": 0.0615
-      },
-      {
-        "pair": "USDCHF",
-        "profit_score": 2.586,
-        "momentum": -0.1926,
-        "micro_score": 0.9904
+        "profit_score": 3.6053,
+        "momentum": 0.2815,
+        "micro_score": 1.0141
       },
       {
         "pair": "XAUUSD",
-        "profit_score": 2.125,
-        "momentum": 0.9884,
-        "micro_score": 0.0494
+        "profit_score": 2.1969,
+        "momentum": 1.0218,
+        "micro_score": 0.0511
       },
       {
-        "pair": "NFLX",
-        "profit_score": 1.8883,
-        "momentum": 0.8783,
-        "micro_score": 0.0439
+        "pair": "USDCHF",
+        "profit_score": 1.8057,
+        "momentum": -0.323,
+        "micro_score": 0.4839
       },
       {
-        "pair": "ARB/USD",
-        "profit_score": 1.4969,
-        "momentum": 1.7428,
-        "micro_score": -0.4129
+        "pair": "MSFT",
+        "profit_score": 1.3508,
+        "momentum": 0.6283,
+        "micro_score": 0.0314
+      },
+      {
+        "pair": "UNI/USD",
+        "profit_score": 1.1059,
+        "momentum": 0.5144,
+        "micro_score": 0.0257
       },
       {
         "pair": "AUDUSD",
-        "profit_score": 1.0132,
-        "momentum": -0.6915,
-        "micro_score": 0.4654
+        "profit_score": 0.9602,
+        "momentum": -0.7162,
+        "micro_score": 0.4642
       },
       {
-        "pair": "OP/USD",
-        "profit_score": 0.792,
-        "momentum": 0.3684,
-        "micro_score": 0.0184
+        "pair": "XAGUSD",
+        "profit_score": 0.6659,
+        "momentum": 0.3097,
+        "micro_score": 0.0155
+      },
+      {
+        "pair": "AAPL",
+        "profit_score": 0.6266,
+        "momentum": 0.2914,
+        "micro_score": 0.0146
+      },
+      {
+        "pair": "GBPUSD",
+        "profit_score": 0.526,
+        "momentum": 0.2447,
+        "micro_score": 0.0122
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-06T13:16:38.177151+00:00",
+    "generated_at": "2026-11-07T07:06:35.500598+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
