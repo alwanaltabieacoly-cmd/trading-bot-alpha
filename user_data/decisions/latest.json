@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-07T15:00:00+00:00",
-  "generated_at": "2026-11-07T15:44:58.311520+00:00",
+  "asof": "2026-11-08T07:00:00+00:00",
+  "generated_at": "2026-11-08T07:22:46.242246+00:00",
   "source": "fallback",
   "pairs": {
     "BTC/USDT": {
@@ -92,7 +92,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
     "age_hours": 0.2,
-    "generated_at": "2026-11-07T15:32:53.764462+00:00",
+    "generated_at": "2026-11-08T07:10:40.367989+00:00",
     "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
@@ -213,10 +213,10 @@
         "micro_score": 1.0141
       },
       {
-        "pair": "ARB/USD",
-        "profit_score": 2.8628,
-        "momentum": 1.3315,
-        "micro_score": 0.0666
+        "pair": "BTC/USD",
+        "profit_score": 2.3306,
+        "momentum": -0.3113,
+        "micro_score": 0.9844
       },
       {
         "pair": "XAUUSD",
@@ -225,16 +225,22 @@
         "micro_score": 0.0511
       },
       {
+        "pair": "ETH/USD",
+        "profit_score": 2.0685,
+        "momentum": -0.4332,
+        "micro_score": 0.9783
+      },
+      {
         "pair": "USDCHF",
         "profit_score": 1.8057,
         "momentum": -0.323,
         "micro_score": 0.4839
       },
       {
-        "pair": "UNI/USD",
-        "profit_score": 1.5918,
-        "momentum": 0.7404,
-        "micro_score": 0.037
+        "pair": "SOL/USD",
+        "profit_score": 1.7047,
+        "momentum": -0.6025,
+        "micro_score": 0.9699
       },
       {
         "pair": "MSFT",
@@ -243,22 +249,16 @@
         "micro_score": 0.0314
       },
       {
-        "pair": "XLM/USD",
-        "profit_score": 1.1432,
-        "momentum": -0.631,
-        "micro_score": 0.4684
+        "pair": "ARB/USD",
+        "profit_score": 1.0664,
+        "momentum": 0.496,
+        "micro_score": 0.0248
       },
       {
         "pair": "AUDUSD",
         "profit_score": 0.9602,
         "momentum": -0.7162,
         "micro_score": 0.4642
-      },
-      {
-        "pair": "LINK/USD",
-        "profit_score": 0.9435,
-        "momentum": 0.4389,
-        "micro_score": 0.0219
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-07T15:44:58.311320+00:00",
+    "generated_at": "2026-11-08T07:22:46.241779+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
