@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-13T11:00:00+00:00",
-  "generated_at": "2026-11-13T11:52:57.872798+00:00",
+  "asof": "2026-11-13T12:00:00+00:00",
+  "generated_at": "2026-11-13T12:51:50.407537+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -91,8 +91,8 @@
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
-    "age_hours": 0.08,
-    "generated_at": "2026-11-13T11:47:55.656824+00:00",
+    "age_hours": 0.07,
+    "generated_at": "2026-11-13T12:47:42.129000+00:00",
     "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
@@ -151,7 +151,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.04,
+      "age_hours": 0.03,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -213,16 +213,10 @@
         "micro_score": -0.2225
       },
       {
-        "pair": "GBPUSD",
-        "profit_score": 4.4422,
-        "momentum": -0.492,
-        "micro_score": 1.4754
-      },
-      {
         "pair": "EURUSD",
-        "profit_score": 4.322,
-        "momentum": -0.5479,
-        "micro_score": 1.4726
+        "profit_score": 4.2948,
+        "momentum": -0.5606,
+        "micro_score": 1.472
       },
       {
         "pair": "TSLA",
@@ -237,6 +231,12 @@
         "micro_score": 0.0696
       },
       {
+        "pair": "NEAR/USD",
+        "profit_score": 2.3697,
+        "momentum": 1.1022,
+        "micro_score": 0.0551
+      },
+      {
         "pair": "AAPL",
         "profit_score": 1.8173,
         "momentum": 0.8452,
@@ -249,16 +249,16 @@
         "micro_score": 0.0407
       },
       {
-        "pair": "USDCAD",
-        "profit_score": 1.6379,
-        "momentum": 0.5292,
-        "micro_score": 0.5265
+        "pair": "XLM/USD",
+        "profit_score": 1.4417,
+        "momentum": 0.6706,
+        "micro_score": 0.0335
       },
       {
-        "pair": "ICP/USD",
-        "profit_score": 1.5474,
-        "momentum": 0.7197,
-        "micro_score": 0.036
+        "pair": "AVAX/USD",
+        "profit_score": 1.4313,
+        "momentum": 0.6657,
+        "micro_score": 0.0333
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-13T11:52:57.872501+00:00",
+    "generated_at": "2026-11-13T12:51:50.407317+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
