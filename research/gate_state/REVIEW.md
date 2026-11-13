@@ -4,3 +4,5 @@
    why: SYSTEM TEST 2 of the reviewed trade path, not a market view; closed right after  [alpha, other]
 10-28 12:03 short DOGE_USDT  risk $2.5194 -> target pnl $3.0215
    why: DOGE below all three SMAs (0.08011 vs SMA20 0.0811, SMA50 0.0868, SMA200 0.0867); RSI 40.3 neutral-not oversold so trend can continue; funding +0.01% means longs pay shorts (bearish bias); taker buy share 0.485 shows seller-side aggression. Only allowed setup today per gate.  [alpha, below_sma200, below_sma50, below_sma20, momentum, liquidations]
+11-13 09:52 short BTC_USDT   risk $2.3568 -> open
+   why: Live scan short BTC_USDT setup_breakdown: price 68988 below SMA20/50/200 (77304/80906/73102), RSI14 29.5, last 7 days net negative with -3.46% latest bar. 24h long liq $66.9M vs short $4.5M. ETF outflows $1.44B/5d, BlackRock $2B/9d. Breakdown setup allowed at 0.25% risk.  [alpha, below_sma200, below_sma50, below_sma20, rsi_oversold, liquidations, news]
