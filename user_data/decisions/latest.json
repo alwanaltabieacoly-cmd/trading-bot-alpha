@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-13T12:00:00+00:00",
-  "generated_at": "2026-11-13T12:51:50.407537+00:00",
+  "asof": "2026-11-14T06:00:00+00:00",
+  "generated_at": "2026-11-14T06:33:41.364219+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -43,13 +43,13 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "MSFT": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "NVDA": {
       "action": "block",
@@ -61,7 +61,7 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "EURUSD": {
       "action": "block",
@@ -91,8 +91,8 @@
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
-    "age_hours": 0.07,
-    "generated_at": "2026-11-13T12:47:42.129000+00:00",
+    "age_hours": 0.06,
+    "generated_at": "2026-11-14T06:29:49.077515+00:00",
     "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
@@ -151,7 +151,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.03,
+      "age_hours": 0.04,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -201,64 +201,64 @@
     },
     "asset_scan": [
       {
-        "pair": "AMD",
-        "profit_score": 13.798,
-        "momentum": 7.5805,
-        "micro_score": -0.121
+        "pair": "AVGO",
+        "profit_score": 6.9515,
+        "momentum": 3.2332,
+        "micro_score": 0.1617
       },
       {
-        "pair": "AVGO",
-        "profit_score": 9.4319,
-        "momentum": 5.5497,
-        "micro_score": -0.2225
+        "pair": "AMD",
+        "profit_score": 6.0841,
+        "momentum": 2.8298,
+        "micro_score": 0.1415
       },
       {
         "pair": "EURUSD",
-        "profit_score": 4.2948,
-        "momentum": -0.5606,
-        "micro_score": 1.472
+        "profit_score": 4.289,
+        "momentum": -0.5632,
+        "micro_score": 1.4718
       },
       {
         "pair": "TSLA",
-        "profit_score": 3.8234,
-        "momentum": 2.8249,
-        "micro_score": -0.3588
-      },
-      {
-        "pair": "AMZN",
-        "profit_score": 2.9928,
-        "momentum": 1.392,
-        "micro_score": 0.0696
-      },
-      {
-        "pair": "NEAR/USD",
-        "profit_score": 2.3697,
-        "momentum": 1.1022,
-        "micro_score": 0.0551
+        "profit_score": 3.4916,
+        "momentum": 1.624,
+        "micro_score": 0.0812
       },
       {
         "pair": "AAPL",
-        "profit_score": 1.8173,
-        "momentum": 0.8452,
-        "micro_score": 0.0423
+        "profit_score": 2.7303,
+        "momentum": 1.2699,
+        "micro_score": 0.0635
+      },
+      {
+        "pair": "AMZN",
+        "profit_score": 2.6085,
+        "momentum": 1.2132,
+        "micro_score": 0.0607
+      },
+      {
+        "pair": "GBPUSD",
+        "profit_score": 1.4268,
+        "momentum": -0.4991,
+        "micro_score": 0.475
+      },
+      {
+        "pair": "NZDUSD",
+        "profit_score": 1.4017,
+        "momentum": -0.5109,
+        "micro_score": 0.4745
       },
       {
         "pair": "GOOGL",
-        "profit_score": 1.7483,
-        "momentum": 0.8131,
-        "micro_score": 0.0407
+        "profit_score": 1.006,
+        "momentum": 0.4679,
+        "micro_score": 0.0234
       },
       {
-        "pair": "XLM/USD",
-        "profit_score": 1.4417,
-        "momentum": 0.6706,
-        "micro_score": 0.0335
-      },
-      {
-        "pair": "AVAX/USD",
-        "profit_score": 1.4313,
-        "momentum": 0.6657,
-        "micro_score": 0.0333
+        "pair": "AUDUSD",
+        "profit_score": 0.8773,
+        "momentum": -0.7548,
+        "micro_score": 0.4623
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-13T12:51:50.407317+00:00",
+    "generated_at": "2026-11-14T06:33:41.363880+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
