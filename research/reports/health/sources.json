@@ -1,25 +1,24 @@
 {
-  "generated_at": "2026-11-16T09:12:29.077126+00:00",
-  "all_ok": true,
+  "generated_at": "2026-11-16T20:06:29.662631+00:00",
+  "all_ok": false,
   "any_ok": true,
   "sources": {
     "kraken": {
-      "ok": true,
-      "latency_ms": 3314,
-      "rows": 5,
-      "last_close": 64225.6
+      "ok": false,
+      "latency_ms": 3135,
+      "error": "NetworkError: kraken GET https://api.kraken.com/0/public/OHLC?pair=XXBTZUSD&interval=1440"
     },
     "okx": {
       "ok": true,
-      "latency_ms": 1767,
+      "latency_ms": 1947,
       "rows": 5,
-      "last_close": 64296.8
+      "last_close": 65092.7
     },
     "yahoo": {
       "ok": true,
-      "latency_ms": 822,
-      "rows": 6,
-      "last_close": 356.2699890136719
+      "latency_ms": 985,
+      "rows": 7,
+      "last_close": 351.9898986816406
     }
   }
 }
