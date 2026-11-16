@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-16T06:00:00+00:00",
-  "generated_at": "2026-11-16T06:40:29.518859+00:00",
+  "asof": "2026-11-16T21:00:00+00:00",
+  "generated_at": "2026-11-16T21:37:05.781868+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -25,7 +25,7 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "XRP/USDT": {
       "action": "block",
@@ -43,13 +43,13 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "MSFT": {
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "NVDA": {
       "action": "block",
@@ -61,7 +61,7 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "EURUSD": {
       "action": "block",
@@ -85,15 +85,15 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     }
   },
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
-    "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-09_0745_academic_sp500.txt",
-    "age_hours": 0.08,
-    "generated_at": "2026-11-16T06:35:31.710702+00:00",
-    "asof": "2026-11-09",
+    "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-10-27_0047_academic_sp500.txt",
+    "age_hours": 0.07,
+    "generated_at": "2026-11-16T21:32:37.571561+00:00",
+    "asof": "2026-10-27",
     "zoo": "academic",
     "universe": "sp500",
     "period": "2024-2025",
@@ -103,41 +103,41 @@
       {
         "alpha": "academic_carhart_mom",
         "theme": "momentum",
-        "ic_mean": 0.02834,
-        "ir": 0.1216,
+        "ic_mean": 0.028392,
+        "ir": 0.1217,
         "ic_positive_ratio": 0.5944,
         "ic_count": 249
       },
       {
         "alpha": "academic_strev",
         "theme": "reversal",
-        "ic_mean": 0.01141,
-        "ir": 0.0597,
-        "ic_positive_ratio": 0.5083,
+        "ic_mean": 0.011184,
+        "ir": 0.0584,
+        "ic_positive_ratio": 0.5062,
         "ic_count": 480
       },
       {
         "alpha": "academic_cma",
         "theme": "quality",
-        "ic_mean": 0.002379,
-        "ir": 0.0286,
-        "ic_positive_ratio": 0.5393,
+        "ic_mean": 0.002398,
+        "ir": 0.0288,
+        "ic_positive_ratio": 0.5366,
         "ic_count": 382
       },
       {
         "alpha": "academic_high52w",
         "theme": "momentum",
-        "ic_mean": 0.000246,
-        "ir": 0.0011,
-        "ic_positive_ratio": 0.54,
+        "ic_mean": 0.000209,
+        "ir": 0.0009,
+        "ic_positive_ratio": 0.536,
         "ic_count": 250
       },
       {
         "alpha": "academic_corr_rewire",
         "theme": "volatility",
-        "ic_mean": -0.000444,
-        "ir": -0.0032,
-        "ic_positive_ratio": 0.5138,
+        "ic_mean": -0.000129,
+        "ir": -0.0009,
+        "ic_positive_ratio": 0.511,
         "ic_count": 362
       }
     ],
@@ -151,46 +151,46 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.03,
+      "age_hours": 0.04,
       "top": [
         {
           "alpha": "academic_carhart_mom",
           "theme": "momentum",
-          "ic_mean": 0.02834,
-          "ir": 0.1216,
+          "ic_mean": 0.028392,
+          "ir": 0.1217,
           "ic_positive_ratio": 0.5944,
           "ic_count": 249
         },
         {
           "alpha": "academic_strev",
           "theme": "reversal",
-          "ic_mean": 0.01141,
-          "ir": 0.0597,
-          "ic_positive_ratio": 0.5083,
+          "ic_mean": 0.011184,
+          "ir": 0.0584,
+          "ic_positive_ratio": 0.5062,
           "ic_count": 480
         },
         {
           "alpha": "academic_cma",
           "theme": "quality",
-          "ic_mean": 0.002379,
-          "ir": 0.0286,
-          "ic_positive_ratio": 0.5393,
+          "ic_mean": 0.002398,
+          "ir": 0.0288,
+          "ic_positive_ratio": 0.5366,
           "ic_count": 382
         },
         {
           "alpha": "academic_high52w",
           "theme": "momentum",
-          "ic_mean": 0.000246,
-          "ir": 0.0011,
-          "ic_positive_ratio": 0.54,
+          "ic_mean": 0.000209,
+          "ir": 0.0009,
+          "ic_positive_ratio": 0.536,
           "ic_count": 250
         },
         {
           "alpha": "academic_corr_rewire",
           "theme": "volatility",
-          "ic_mean": -0.000444,
-          "ir": -0.0032,
-          "ic_positive_ratio": 0.5138,
+          "ic_mean": -0.000129,
+          "ir": -0.0009,
+          "ic_positive_ratio": 0.511,
           "ic_count": 362
         }
       ],
@@ -201,64 +201,64 @@
     },
     "asset_scan": [
       {
-        "pair": "AVGO",
-        "profit_score": 6.9515,
-        "momentum": 3.2332,
-        "micro_score": 0.1617
-      },
-      {
-        "pair": "AMD",
-        "profit_score": 6.0841,
-        "momentum": 2.8298,
-        "micro_score": 0.1415
+        "pair": "ICP/USD",
+        "profit_score": 10.1855,
+        "momentum": 4.7374,
+        "micro_score": 0.2369
       },
       {
         "pair": "EURUSD",
-        "profit_score": 4.4232,
-        "momentum": -0.5009,
-        "micro_score": 1.475
+        "profit_score": 4.289,
+        "momentum": -0.5632,
+        "micro_score": 1.4718
       },
       {
-        "pair": "TSLA",
-        "profit_score": 3.4916,
-        "momentum": 1.624,
-        "micro_score": 0.0812
-      },
-      {
-        "pair": "AAPL",
-        "profit_score": 2.7303,
-        "momentum": 1.2699,
-        "micro_score": 0.0635
-      },
-      {
-        "pair": "AMZN",
-        "profit_score": 2.6085,
-        "momentum": 1.2132,
-        "micro_score": 0.0607
+        "pair": "ATOM/USD",
+        "profit_score": 2.0761,
+        "momentum": 0.9656,
+        "micro_score": 0.0483
       },
       {
         "pair": "GBPUSD",
-        "profit_score": 1.6318,
-        "momentum": -0.4038,
-        "micro_score": 0.4798
-      },
-      {
-        "pair": "USDCAD",
-        "profit_score": 1.3854,
-        "momentum": 0.4118,
-        "micro_score": 0.5206
+        "profit_score": 1.458,
+        "momentum": -0.4847,
+        "micro_score": 0.4758
       },
       {
         "pair": "NZDUSD",
-        "profit_score": 1.3695,
-        "momentum": -0.5258,
-        "micro_score": 0.4737
+        "profit_score": 1.0016,
+        "momentum": -0.697,
+        "micro_score": 0.4652
       },
       {
-        "pair": "GOOGL",
-        "profit_score": 1.006,
-        "momentum": 0.4679,
-        "micro_score": 0.0234
+        "pair": "AAPL",
+        "profit_score": 0.9392,
+        "momentum": 0.4369,
+        "micro_score": 0.0218
+      },
+      {
+        "pair": "AVGO",
+        "profit_score": 0.7398,
+        "momentum": 0.3441,
+        "micro_score": 0.0172
+      },
+      {
+        "pair": "USDJPY",
+        "profit_score": 0.6153,
+        "momentum": 0.2862,
+        "micro_score": 0.0143
+      },
+      {
+        "pair": "AUDUSD",
+        "profit_score": 0.4399,
+        "momentum": -0.9582,
+        "micro_score": 0.4521
+      },
+      {
+        "pair": "BCH/USD",
+        "profit_score": 0.1751,
+        "momentum": 0.0814,
+        "micro_score": 0.0041
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-16T06:40:29.518572+00:00",
+    "generated_at": "2026-11-16T21:37:05.781545+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
