@@ -1,0 +1,302 @@
+{
+  "run_at": "2026-11-16T02:53:21+00:00",
+  "duration_sec": 156.3,
+  "config": {
+    "assets": [
+      "BTC",
+      "ETH",
+      "SOL",
+      "BNB",
+      "XRP"
+    ],
+    "timeframes": [
+      "1d",
+      "4h"
+    ],
+    "equity_assets": [
+      "AAPL"
+    ],
+    "equity_timeframes": [
+      "1m",
+      "5m",
+      "15m",
+      "1h",
+      "1d"
+    ],
+    "fee_per_side": 0.001,
+    "slippage_per_side": 0.0002,
+    "train_end": "2026-05-19",
+    "holdout_start": "2026-05-20",
+    "holdout_days": 180,
+    "min_train_cagr": 5.0,
+    "min_holdout_cagr": 0.0,
+    "min_asset_consistency": 3,
+    "min_deflated_sharpe": 0.95,
+    "n_trials": 142
+  },
+  "champion": {
+    "id": "sma_trend_period200",
+    "params": {
+      "period": 200
+    },
+    "train_cagr": 12.414,
+    "holdout_cagr": 27.005,
+    "train_dd": -52.175,
+    "holdout_dd": -17.049,
+    "dsr": 0.1768,
+    "assets_positive": 9,
+    "promoted_at": "2026-10-19T23:46:19+00:00",
+    "status": "initial_backtest_only",
+    "note": "Chosen as the starting champion from the first run. Must confirm itself in live paper trading.",
+    "last_evaluated": "2026-11-16T02:53:21+00:00"
+  },
+  "n_candidates": 142,
+  "evolution": {
+    "retired_families": [
+      "aapl_scalp_trend",
+      "sma_trend_rsi_filter"
+    ],
+    "reasons": [
+      "RETIRE `aapl_scalp_trend`: median holdout CAGR -2.7% across 3 runs and 6 variants",
+      "RETIRE `sma_trend_rsi_filter`: median holdout CAGR -5.7% across 3 runs and 12 variants"
+    ],
+    "explore_next": [
+      {
+        "family": "sma_trend",
+        "median_holdout_cagr": 19.65,
+        "max_dsr": 0.2261,
+        "mean_assets_positive": 8.17,
+        "times_gate": 0,
+        "why": "median holdout 19.7%, best DSR 0.226, positive on 8.2/10 series"
+      },
+      {
+        "family": "sma_trend_vol_filter",
+        "median_holdout_cagr": 15.23,
+        "max_dsr": 0.6072,
+        "mean_assets_positive": 6.31,
+        "times_gate": 0,
+        "why": "median holdout 15.2%, best DSR 0.607, positive on 6.3/10 series"
+      },
+      {
+        "family": "sma_trend_efficiency",
+        "median_holdout_cagr": 13.08,
+        "max_dsr": 0.4933,
+        "mean_assets_positive": 7.07,
+        "times_gate": 0,
+        "why": "median holdout 13.1%, best DSR 0.493, positive on 7.1/10 series"
+      },
+      {
+        "family": "ema_trend",
+        "median_holdout_cagr": 11.02,
+        "max_dsr": 0.1548,
+        "mean_assets_positive": 6.02,
+        "times_gate": 0,
+        "why": "median holdout 11.0%, best DSR 0.155, positive on 6.0/10 series"
+      },
+      {
+        "family": "ema_trend_regime",
+        "median_holdout_cagr": 9.67,
+        "max_dsr": 0.2427,
+        "mean_assets_positive": 4.77,
+        "times_gate": 0,
+        "why": "median holdout 9.7%, best DSR 0.243, positive on 4.8/10 series"
+      }
+    ],
+    "n_runs_of_evidence": 106
+  },
+  "n_basic": 106,
+  "n_survivors": 0,
+  "challenger_proposed": false,
+  "champion_bootstrapped": false,
+  "top_basic": [
+    {
+      "id": "sma_trend_vol_filter_period200_vol_lookback30_vol_max_pct4.0",
+      "params": {
+        "period": 200,
+        "vol_lookback": 30,
+        "vol_max_pct": 4.0
+      },
+      "train_cagr": 7.698,
+      "holdout_cagr": 32.234,
+      "train_dd": -38.405,
+      "holdout_dd": -13.46,
+      "dsr": 0.504,
+      "dsr_min_series": 0.0001,
+      "assets_positive": 9,
+      "gate_failures": [
+        "deflated Sharpe prob 0.504 < 0.95"
+      ]
+    },
+    {
+      "id": "sma_trend_vol_filter_period200_vol_lookback30_vol_max_pct3.0",
+      "params": {
+        "period": 200,
+        "vol_lookback": 30,
+        "vol_max_pct": 3.0
+      },
+      "train_cagr": 3.247,
+      "holdout_cagr": 31.269,
+      "train_dd": -32.785,
+      "holdout_dd": -10.853,
+      "dsr": 0.2481,
+      "dsr_min_series": 0.0001,
+      "assets_positive": 10,
+      "gate_failures": [
+        "deflated Sharpe prob 0.248 < 0.95",
+        "train CAGR 3.2% < 5.0%"
+      ]
+    },
+    {
+      "id": "sma_trend_vol_filter_period175_vol_lookback30_vol_max_pct4.0",
+      "params": {
+        "period": 175,
+        "vol_lookback": 30,
+        "vol_max_pct": 4.0
+      },
+      "train_cagr": 7.9,
+      "holdout_cagr": 28.526,
+      "train_dd": -38.783,
+      "holdout_dd": -14.305,
+      "dsr": 0.5098,
+      "dsr_min_series": 0.0001,
+      "assets_positive": 10,
+      "gate_failures": [
+        "deflated Sharpe prob 0.510 < 0.95"
+      ]
+    },
+    {
+      "id": "sma_trend_period50",
+      "params": {
+        "period": 50
+      },
+      "train_cagr": 9.764,
+      "holdout_cagr": 27.595,
+      "train_dd": -52.239,
+      "holdout_dd": -17.363,
+      "dsr": 0.1976,
+      "dsr_min_series": 0.0012,
+      "assets_positive": 9,
+      "gate_failures": [
+        "deflated Sharpe prob 0.198 < 0.95"
+      ]
+    },
+    {
+      "id": "sma_trend_vol_filter_period225_vol_lookback30_vol_max_pct4.0",
+      "params": {
+        "period": 225,
+        "vol_lookback": 30,
+        "vol_max_pct": 4.0
+      },
+      "train_cagr": 8.174,
+      "holdout_cagr": 27.171,
+      "train_dd": -38.598,
+      "holdout_dd": -14.144,
+      "dsr": 0.5148,
+      "dsr_min_series": 0.0001,
+      "assets_positive": 8,
+      "gate_failures": [
+        "deflated Sharpe prob 0.515 < 0.95"
+      ]
+    },
+    {
+      "id": "sma_trend_period200",
+      "params": {
+        "period": 200
+      },
+      "train_cagr": 12.414,
+      "holdout_cagr": 27.005,
+      "train_dd": -48.93,
+      "holdout_dd": -17.049,
+      "dsr": 0.1768,
+      "dsr_min_series": 0.0041,
+      "assets_positive": 9,
+      "gate_failures": [
+        "deflated Sharpe prob 0.177 < 0.95"
+      ]
+    },
+    {
+      "id": "sma_trend_vol_filter_period100_vol_lookback30_vol_max_pct3.0",
+      "params": {
+        "period": 100,
+        "vol_lookback": 30,
+        "vol_max_pct": 3.0
+      },
+      "train_cagr": 3.95,
+      "holdout_cagr": 26.475,
+      "train_dd": -31.151,
+      "holdout_dd": -11.953,
+      "dsr": 0.4764,
+      "dsr_min_series": 0.0001,
+      "assets_positive": 9,
+      "gate_failures": [
+        "deflated Sharpe prob 0.476 < 0.95",
+        "train CAGR 4.0% < 5.0%"
+      ]
+    },
+    {
+      "id": "sma_trend_vol_filter_period225_vol_lookback30_vol_max_pct3.0",
+      "params": {
+        "period": 225,
+        "vol_lookback": 30,
+        "vol_max_pct": 3.0
+      },
+      "train_cagr": 3.259,
+      "holdout_cagr": 26.263,
+      "train_dd": -33.305,
+      "holdout_dd": -11.557,
+      "dsr": 0.1515,
+      "dsr_min_series": 0.0001,
+      "assets_positive": 8,
+      "gate_failures": [
+        "deflated Sharpe prob 0.151 < 0.95",
+        "train CAGR 3.3% < 5.0%"
+      ]
+    },
+    {
+      "id": "sma_trend_vol_filter_period300_vol_lookback30_vol_max_pct3.0",
+      "params": {
+        "period": 300,
+        "vol_lookback": 30,
+        "vol_max_pct": 3.0
+      },
+      "train_cagr": 3.64,
+      "holdout_cagr": 25.999,
+      "train_dd": -33.664,
+      "holdout_dd": -10.508,
+      "dsr": 0.0442,
+      "dsr_min_series": 0.0,
+      "assets_positive": 6,
+      "gate_failures": [
+        "deflated Sharpe prob 0.044 < 0.95",
+        "train CAGR 3.6% < 5.0%"
+      ]
+    },
+    {
+      "id": "sma_trend_vol_filter_period100_vol_lookback30_vol_max_pct4.0",
+      "params": {
+        "period": 100,
+        "vol_lookback": 30,
+        "vol_max_pct": 4.0
+      },
+      "train_cagr": 6.264,
+      "holdout_cagr": 25.547,
+      "train_dd": -40.08,
+      "holdout_dd": -15.343,
+      "dsr": 0.4047,
+      "dsr_min_series": 0.0002,
+      "assets_positive": 10,
+      "gate_failures": [
+        "deflated Sharpe prob 0.405 < 0.95"
+      ]
+    }
+  ],
+  "top_survivors": [],
+  "best_overall_by_holdout": {
+    "id": "sma_trend_vol_filter_period200_vol_lookback30_vol_max_pct4.0",
+    "train_cagr": 7.698,
+    "holdout_cagr": 32.234,
+    "dsr": 0.504,
+    "passed_gate": false
+  },
+  "cumulative_candidates_tested": 14998
+}
