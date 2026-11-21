@@ -6,7 +6,7 @@
   "explore_next": [
     {
       "family": "sma_trend",
-      "median_holdout_cagr": 19.52,
+      "median_holdout_cagr": 19.51,
       "max_dsr": 0.2261,
       "mean_assets_positive": 8.14,
       "times_gate": 0,
@@ -14,7 +14,7 @@
     },
     {
       "family": "sma_trend_vol_filter",
-      "median_holdout_cagr": 15.61,
+      "median_holdout_cagr": 15.63,
       "max_dsr": 0.6072,
       "mean_assets_positive": 6.33,
       "times_gate": 0,
@@ -22,15 +22,15 @@
     },
     {
       "family": "sma_trend_efficiency",
-      "median_holdout_cagr": 13.29,
+      "median_holdout_cagr": 13.31,
       "max_dsr": 0.4994,
-      "mean_assets_positive": 7.03,
+      "mean_assets_positive": 7.02,
       "times_gate": 0,
       "why": "median holdout 13.3%, best DSR 0.499, positive on 7.0/10 series"
     },
     {
       "family": "ema_trend",
-      "median_holdout_cagr": 10.63,
+      "median_holdout_cagr": 10.62,
       "max_dsr": 0.1548,
       "mean_assets_positive": 6.0,
       "times_gate": 0,
@@ -38,7 +38,7 @@
     },
     {
       "family": "ema_trend_regime",
-      "median_holdout_cagr": 9.76,
+      "median_holdout_cagr": 9.77,
       "max_dsr": 0.2427,
       "mean_assets_positive": 4.78,
       "times_gate": 0,
@@ -56,7 +56,7 @@
       "family": "sma_trend_slope",
       "median_holdout_cagr": 7.52,
       "max_dsr": 0.1862,
-      "mean_assets_positive": 5.05,
+      "mean_assets_positive": 5.06,
       "times_gate": 0,
       "why": "median holdout 7.5%, best DSR 0.186, positive on 5.1/10 series"
     },
@@ -70,54 +70,6 @@
     }
   ],
   "history": [
-    {
-      "at": "2026-10-20T01:25:53+00:00",
-      "retired_families": [],
-      "explore_next": [
-        {
-          "family": "sma_trend",
-          "median_holdout_cagr": 17.4,
-          "max_dsr": 0.2017,
-          "mean_assets_positive": 8.0,
-          "times_gate": 0,
-          "why": "median holdout 17.4%, best DSR 0.202, positive on 8.0/10 series"
-        },
-        {
-          "family": "sma_trend_vol_filter",
-          "median_holdout_cagr": 13.03,
-          "max_dsr": 0.5035,
-          "mean_assets_positive": 5.83,
-          "times_gate": 0,
-          "why": "median holdout 13.0%, best DSR 0.503, positive on 5.8/10 series"
-        },
-        {
-          "family": "ema_trend",
-          "median_holdout_cagr": 11.07,
-          "max_dsr": 0.1548,
-          "mean_assets_positive": 6.17,
-          "times_gate": 0,
-          "why": "median holdout 11.1%, best DSR 0.155, positive on 6.2/10 series"
-        },
-        {
-          "family": "sma_trend_fast_slow",
-          "median_holdout_cagr": 7.86,
-          "max_dsr": 0.1874,
-          "mean_assets_positive": 5.67,
-          "times_gate": 0,
-          "why": "median holdout 7.9%, best DSR 0.187, positive on 5.7/10 series"
-        },
-        {
-          "family": "ema_trend_regime",
-          "median_holdout_cagr": 7.38,
-          "max_dsr": 0.1279,
-          "mean_assets_positive": 4.33,
-          "times_gate": 0,
-          "why": "median holdout 7.4%, best DSR 0.128, positive on 4.3/10 series"
-        }
-      ],
-      "reasons": [],
-      "n_runs": 2
-    },
     {
       "at": "2026-10-20T01:25:55+00:00",
       "retired_families": [],
@@ -9131,10 +9083,88 @@
         "RETIRE `sma_trend_rsi_filter`: median holdout CAGR -5.7% across 3 runs and 12 variants"
       ],
       "n_runs": 120
+    },
+    {
+      "at": "2026-11-21T02:35:31+00:00",
+      "retired_families": [
+        "aapl_scalp_trend",
+        "sma_trend_rsi_filter"
+      ],
+      "explore_next": [
+        {
+          "family": "sma_trend",
+          "median_holdout_cagr": 19.51,
+          "max_dsr": 0.2261,
+          "mean_assets_positive": 8.14,
+          "times_gate": 0,
+          "why": "median holdout 19.5%, best DSR 0.226, positive on 8.1/10 series"
+        },
+        {
+          "family": "sma_trend_vol_filter",
+          "median_holdout_cagr": 15.63,
+          "max_dsr": 0.6072,
+          "mean_assets_positive": 6.33,
+          "times_gate": 0,
+          "why": "median holdout 15.6%, best DSR 0.607, positive on 6.3/10 series"
+        },
+        {
+          "family": "sma_trend_efficiency",
+          "median_holdout_cagr": 13.31,
+          "max_dsr": 0.4994,
+          "mean_assets_positive": 7.02,
+          "times_gate": 0,
+          "why": "median holdout 13.3%, best DSR 0.499, positive on 7.0/10 series"
+        },
+        {
+          "family": "ema_trend",
+          "median_holdout_cagr": 10.62,
+          "max_dsr": 0.1548,
+          "mean_assets_positive": 6.0,
+          "times_gate": 0,
+          "why": "median holdout 10.6%, best DSR 0.155, positive on 6.0/10 series"
+        },
+        {
+          "family": "ema_trend_regime",
+          "median_holdout_cagr": 9.77,
+          "max_dsr": 0.2427,
+          "mean_assets_positive": 4.78,
+          "times_gate": 0,
+          "why": "median holdout 9.8%, best DSR 0.243, positive on 4.8/10 series"
+        },
+        {
+          "family": "sma_trend_fast_slow",
+          "median_holdout_cagr": 8.09,
+          "max_dsr": 0.2325,
+          "mean_assets_positive": 6.68,
+          "times_gate": 0,
+          "why": "median holdout 8.1%, best DSR 0.233, positive on 6.7/10 series"
+        },
+        {
+          "family": "sma_trend_slope",
+          "median_holdout_cagr": 7.52,
+          "max_dsr": 0.1862,
+          "mean_assets_positive": 5.06,
+          "times_gate": 0,
+          "why": "median holdout 7.5%, best DSR 0.186, positive on 5.1/10 series"
+        },
+        {
+          "family": "sma_trend_confirm",
+          "median_holdout_cagr": 5.46,
+          "max_dsr": 0.1812,
+          "mean_assets_positive": 5.71,
+          "times_gate": 0,
+          "why": "median holdout 5.5%, best DSR 0.181, positive on 5.7/10 series"
+        }
+      ],
+      "reasons": [
+        "RETIRE `aapl_scalp_trend`: median holdout CAGR -2.7% across 3 runs and 6 variants",
+        "RETIRE `sma_trend_rsi_filter`: median holdout CAGR -5.7% across 3 runs and 12 variants"
+      ],
+      "n_runs": 121
     }
   ],
   "last_decision": {
-    "at": "2026-11-20T21:18:25+00:00",
+    "at": "2026-11-21T02:35:31+00:00",
     "retired_families": [
       "aapl_scalp_trend",
       "sma_trend_rsi_filter"
@@ -9142,7 +9172,7 @@
     "explore_next": [
       {
         "family": "sma_trend",
-        "median_holdout_cagr": 19.52,
+        "median_holdout_cagr": 19.51,
         "max_dsr": 0.2261,
         "mean_assets_positive": 8.14,
         "times_gate": 0,
@@ -9150,7 +9180,7 @@
       },
       {
         "family": "sma_trend_vol_filter",
-        "median_holdout_cagr": 15.61,
+        "median_holdout_cagr": 15.63,
         "max_dsr": 0.6072,
         "mean_assets_positive": 6.33,
         "times_gate": 0,
@@ -9158,15 +9188,15 @@
       },
       {
         "family": "sma_trend_efficiency",
-        "median_holdout_cagr": 13.29,
+        "median_holdout_cagr": 13.31,
         "max_dsr": 0.4994,
-        "mean_assets_positive": 7.03,
+        "mean_assets_positive": 7.02,
         "times_gate": 0,
         "why": "median holdout 13.3%, best DSR 0.499, positive on 7.0/10 series"
       },
       {
         "family": "ema_trend",
-        "median_holdout_cagr": 10.63,
+        "median_holdout_cagr": 10.62,
         "max_dsr": 0.1548,
         "mean_assets_positive": 6.0,
         "times_gate": 0,
@@ -9174,7 +9204,7 @@
       },
       {
         "family": "ema_trend_regime",
-        "median_holdout_cagr": 9.76,
+        "median_holdout_cagr": 9.77,
         "max_dsr": 0.2427,
         "mean_assets_positive": 4.78,
         "times_gate": 0,
@@ -9192,7 +9222,7 @@
         "family": "sma_trend_slope",
         "median_holdout_cagr": 7.52,
         "max_dsr": 0.1862,
-        "mean_assets_positive": 5.05,
+        "mean_assets_positive": 5.06,
         "times_gate": 0,
         "why": "median holdout 7.5%, best DSR 0.186, positive on 5.1/10 series"
       },
@@ -9209,6 +9239,6 @@
       "RETIRE `aapl_scalp_trend`: median holdout CAGR -2.7% across 3 runs and 6 variants",
       "RETIRE `sma_trend_rsi_filter`: median holdout CAGR -5.7% across 3 runs and 12 variants"
     ],
-    "n_runs": 120
+    "n_runs": 121
   }
 }
