@@ -1,9 +1,9 @@
 {
   "source": "vibe-trading alpha_bench",
-  "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-21_0249_academic_sp500.txt",
+  "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-23_0844_academic_sp500.txt",
   "age_hours": 0.0,
-  "generated_at": "2026-11-21T02:57:43.786308+00:00",
-  "asof": "2026-11-21",
+  "generated_at": "2026-11-23T08:51:50.310762+00:00",
+  "asof": "2026-11-23",
   "zoo": "academic",
   "universe": "sp500",
   "period": "2024-2025",
@@ -21,7 +21,7 @@
     {
       "alpha": "academic_strev",
       "theme": "reversal",
-      "ic_mean": 0.01141,
+      "ic_mean": 0.011409,
       "ir": 0.0597,
       "ic_positive_ratio": 0.5083,
       "ic_count": 480
@@ -29,7 +29,7 @@
     {
       "alpha": "academic_cma",
       "theme": "quality",
-      "ic_mean": 0.002378,
+      "ic_mean": 0.002379,
       "ir": 0.0286,
       "ic_positive_ratio": 0.5393,
       "ic_count": 382
@@ -37,7 +37,7 @@
     {
       "alpha": "academic_high52w",
       "theme": "momentum",
-      "ic_mean": 0.000247,
+      "ic_mean": 0.000248,
       "ir": 0.0011,
       "ic_positive_ratio": 0.54,
       "ic_count": 250
@@ -45,7 +45,7 @@
     {
       "alpha": "academic_corr_rewire",
       "theme": "volatility",
-      "ic_mean": -0.000442,
+      "ic_mean": -0.000446,
       "ir": -0.0032,
       "ic_positive_ratio": 0.5138,
       "ic_count": 362
