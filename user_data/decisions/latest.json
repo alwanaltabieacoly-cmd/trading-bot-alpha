@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-24T11:00:00+00:00",
-  "generated_at": "2026-11-24T11:56:11.782192+00:00",
+  "asof": "2026-11-24T12:00:00+00:00",
+  "generated_at": "2026-11-24T12:53:04.470711+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -43,7 +43,7 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "MSFT": {
       "action": "block",
@@ -85,14 +85,14 @@
       "action": "block",
       "size": 0.0,
       "confidence": 0.5,
-      "rationale": "synthesizer: blocked (critic=block)"
+      "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     }
   },
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-13_0207_academic_sp500.txt",
-    "age_hours": 0.14,
-    "generated_at": "2026-11-24T11:47:52.440072+00:00",
+    "age_hours": 0.09,
+    "generated_at": "2026-11-24T12:47:50.946697+00:00",
     "asof": "2026-11-13",
     "zoo": "academic",
     "universe": "sp500",
@@ -201,28 +201,34 @@
     },
     "asset_scan": [
       {
-        "pair": "AUDUSD",
-        "profit_score": 3.5146,
-        "momentum": -0.9234,
-        "micro_score": 1.4538
+        "pair": "ATOM/USD",
+        "profit_score": 2.7772,
+        "momentum": 1.2917,
+        "micro_score": 0.0646
       },
       {
         "pair": "EURUSD",
-        "profit_score": 2.1619,
-        "momentum": -0.3898,
-        "micro_score": 0.9805
+        "profit_score": 2.2528,
+        "momentum": -0.3475,
+        "micro_score": 0.9826
       },
       {
-        "pair": "ATOM/USD",
-        "profit_score": 2.0376,
-        "momentum": 0.9477,
-        "micro_score": 0.0474
+        "pair": "GBPUSD",
+        "profit_score": 2.036,
+        "momentum": -0.4484,
+        "micro_score": 0.9776
       },
       {
         "pair": "NZDUSD",
-        "profit_score": 1.7284,
-        "momentum": -0.5914,
-        "micro_score": 0.9704
+        "profit_score": 1.8232,
+        "momentum": -0.5473,
+        "micro_score": 0.9726
+      },
+      {
+        "pair": "ICP/USD",
+        "profit_score": 1.4034,
+        "momentum": 0.6528,
+        "micro_score": 0.0326
       },
       {
         "pair": "TSLA",
@@ -231,34 +237,28 @@
         "micro_score": 0.0291
       },
       {
-        "pair": "USDCHF",
-        "profit_score": 0.4654,
-        "momentum": 0.2165,
-        "micro_score": 0.0108
-      },
-      {
-        "pair": "USDJPY",
-        "profit_score": 0.2396,
-        "momentum": 0.1114,
-        "micro_score": 0.0056
-      },
-      {
-        "pair": "ICP/USD",
-        "profit_score": 0.1869,
-        "momentum": 0.087,
-        "micro_score": 0.0043
-      },
-      {
         "pair": "LINK/USD",
-        "profit_score": -0.1556,
-        "momentum": -0.0724,
-        "micro_score": -0.0036
+        "profit_score": 1.1282,
+        "momentum": 0.5248,
+        "micro_score": 0.0262
+      },
+      {
+        "pair": "AUDUSD",
+        "profit_score": 1.0638,
+        "momentum": -0.9006,
+        "micro_score": 0.955
       },
       {
         "pair": "ALGO/USD",
-        "profit_score": -0.3383,
-        "momentum": -0.1573,
-        "micro_score": -0.0079
+        "profit_score": 0.8805,
+        "momentum": 0.4095,
+        "micro_score": 0.0205
+      },
+      {
+        "pair": "USDCAD",
+        "profit_score": 0.5543,
+        "momentum": 0.2578,
+        "micro_score": 0.0129
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-24T11:56:11.781855+00:00",
+    "generated_at": "2026-11-24T12:53:04.470453+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
