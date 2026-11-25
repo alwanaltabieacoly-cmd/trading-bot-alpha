@@ -1,98 +1,98 @@
 {
-  "asof": "2026-11-25T09:00:00+00:00",
-  "generated_at": "2026-11-25T09:51:54.823826+00:00",
+  "asof": "2026-11-25T17:00:00+00:00",
+  "generated_at": "2026-11-25T17:10:48.798606+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "ETH/USDT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "SOL/USDT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "BNB/USDT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "XRP/USDT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "ADA/USDT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "AAPL": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "MSFT": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "NVDA": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "AMZN": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "EURUSD": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "XAUUSD": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "GBPUSD": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     },
     "USDJPY": {
       "action": "block",
       "size": 0.0,
-      "confidence": 0.0,
+      "confidence": 0.5,
       "rationale": "synthesizer: blocked (analyst=block, critic=block)"
     }
   },
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-13_0207_academic_sp500.txt",
-    "age_hours": 0.12,
-    "generated_at": "2026-11-25T09:44:51.849883+00:00",
+    "age_hours": 0.1,
+    "generated_at": "2026-11-25T17:04:51.671000+00:00",
     "asof": "2026-11-13",
     "zoo": "academic",
     "universe": "sp500",
@@ -151,7 +151,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.03,
+      "age_hours": 0.04,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -202,63 +202,63 @@
     "asset_scan": [
       {
         "pair": "AUDUSD",
-        "profit_score": 3.272,
-        "momentum": -1.0363,
-        "micro_score": 1.4482
+        "profit_score": 3.3635,
+        "momentum": -0.9937,
+        "micro_score": 1.4503
+      },
+      {
+        "pair": "EURUSD",
+        "profit_score": 2.5325,
+        "momentum": -0.2174,
+        "micro_score": 0.9891
+      },
+      {
+        "pair": "LTC/USD",
+        "profit_score": 0.8586,
+        "momentum": 0.3993,
+        "micro_score": 0.02
       },
       {
         "pair": "AAPL",
-        "profit_score": 1.197,
-        "momentum": 0.5568,
-        "micro_score": 0.0278
+        "profit_score": 0.1628,
+        "momentum": 0.0757,
+        "micro_score": 0.0038
       },
       {
-        "pair": "TSLA",
-        "profit_score": 1.1518,
-        "momentum": 0.5357,
-        "micro_score": 0.0268
-      },
-      {
-        "pair": "BTC/USD",
-        "profit_score": 0.3396,
-        "momentum": -1.0049,
-        "micro_score": 0.4498
-      },
-      {
-        "pair": "OP/USD",
-        "profit_score": 0.2396,
-        "momentum": -1.0513,
-        "micro_score": 0.4474
+        "pair": "ICP/USD",
+        "profit_score": 0.1274,
+        "momentum": 0.0592,
+        "micro_score": 0.003
       },
       {
         "pair": "USDJPY",
-        "profit_score": 0.1796,
-        "momentum": 0.0835,
-        "micro_score": 0.0042
+        "profit_score": -0.2031,
+        "momentum": -0.0945,
+        "micro_score": -0.0047
       },
       {
         "pair": "USDCAD",
-        "profit_score": 0.1386,
-        "momentum": 0.0645,
-        "micro_score": 0.0032
+        "profit_score": -0.2435,
+        "momentum": -0.1132,
+        "micro_score": -0.0057
       },
       {
-        "pair": "ETH/USD",
-        "profit_score": 0.1092,
-        "momentum": -1.112,
-        "micro_score": 0.4444
+        "pair": "BCH/USD",
+        "profit_score": -0.5692,
+        "momentum": -0.2648,
+        "micro_score": -0.0132
       },
       {
-        "pair": "USDCHF",
-        "profit_score": -0.0635,
-        "momentum": -0.0295,
-        "micro_score": -0.0015
+        "pair": "ALGO/USD",
+        "profit_score": -0.6085,
+        "momentum": -1.4458,
+        "micro_score": 0.4277
       },
       {
-        "pair": "AVAX/USD",
-        "profit_score": -0.0671,
-        "momentum": -1.194,
-        "micro_score": 0.4403
+        "pair": "BNB/USD",
+        "profit_score": -0.6163,
+        "momentum": -0.2867,
+        "micro_score": -0.0143
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-25T09:51:54.823494+00:00",
+    "generated_at": "2026-11-25T17:10:48.798309+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
