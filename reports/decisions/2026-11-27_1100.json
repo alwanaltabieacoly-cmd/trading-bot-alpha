@@ -1,0 +1,1436 @@
+{
+  "asof": "2026-11-27T11:00:00+00:00",
+  "generated_at": "2026-11-27T11:52:45.020514+00:00",
+  "pairs": [
+    "BTC/USDT",
+    "ETH/USDT",
+    "SOL/USDT",
+    "BNB/USDT",
+    "XRP/USDT",
+    "ADA/USDT",
+    "AAPL",
+    "MSFT",
+    "NVDA",
+    "AMZN",
+    "EURUSD",
+    "XAUUSD",
+    "GBPUSD",
+    "USDJPY"
+  ],
+  "live_orderbook": false,
+  "use_llm": true,
+  "anonymize": false,
+  "inputs": {
+    "market": {
+      "asof": "2026-11-27T11:00:00+00:00",
+      "live_orderbook": false,
+      "pairs": {
+        "BTC/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 61543.9,
+              "ema50": 61317.234945,
+              "ema200": 68814.748248,
+              "ema50_slope": -0.064295,
+              "dist_to_high20_pct": -0.957851,
+              "dist_to_low20_pct": 7.574108,
+              "atr_pct_14": 1.630474,
+              "volume_z_48": -0.924222,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 61554.7,
+              "ema50": 71102.398824,
+              "ema200": 74414.950357,
+              "ema50_slope": -3.141533,
+              "dist_to_high20_pct": -19.109364,
+              "dist_to_low20_pct": 11.714519,
+              "atr_pct_14": 5.301812,
+              "volume_z_48": -1.106947,
+              "regime": "bear"
+            }
+          }
+        },
+        "ETH/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 1723.65,
+              "ema50": 1721.958058,
+              "ema200": 1976.190544,
+              "ema50_slope": -0.085914,
+              "dist_to_high20_pct": -1.636678,
+              "dist_to_low20_pct": 7.270215,
+              "atr_pct_14": 2.002147,
+              "volume_z_48": -0.909674,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 1723.66,
+              "ema50": 2064.262627,
+              "ema200": 2225.04995,
+              "ema50_slope": -3.780348,
+              "dist_to_high20_pct": -23.149015,
+              "dist_to_low20_pct": 12.217448,
+              "atr_pct_14": 6.502111,
+              "volume_z_48": -0.952648,
+              "regime": "bear"
+            }
+          }
+        },
+        "SOL/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 73.11,
+              "ema50": 71.570084,
+              "ema200": 82.132917,
+              "ema50_slope": 0.217914,
+              "dist_to_high20_pct": -0.975213,
+              "dist_to_low20_pct": 11.177007,
+              "atr_pct_14": 2.044864,
+              "volume_z_48": -0.485499,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 73.13,
+              "ema50": 86.329344,
+              "ema200": 93.644123,
+              "ema50_slope": -3.728823,
+              "dist_to_high20_pct": -18.635959,
+              "dist_to_low20_pct": 12.872357,
+              "atr_pct_14": 6.738489,
+              "volume_z_48": -1.186677,
+              "regime": "bear"
+            }
+          }
+        },
+        "BNB/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 732.17,
+              "ema50": 734.915516,
+              "ema200": 741.67318,
+              "ema50_slope": -0.056874,
+              "dist_to_high20_pct": -2.636968,
+              "dist_to_low20_pct": 1.138232,
+              "atr_pct_14": 0.833237,
+              "volume_z_48": -1.140512,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 732.17,
+              "ema50": 733.333346,
+              "ema200": 689.060203,
+              "ema50_slope": 0.063654,
+              "dist_to_high20_pct": -9.630955,
+              "dist_to_low20_pct": 3.771472,
+              "atr_pct_14": 2.46586,
+              "volume_z_48": -0.788136,
+              "regime": "bull"
+            }
+          }
+        },
+        "XRP/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 1.3082,
+              "ema50": 1.333818,
+              "ema200": 1.382869,
+              "ema50_slope": -0.232652,
+              "dist_to_high20_pct": -6.503716,
+              "dist_to_low20_pct": 1.686747,
+              "atr_pct_14": 1.632013,
+              "volume_z_48": -0.716492,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": true,
+              "close": 1.308,
+              "ema50": 1.373387,
+              "ema200": 1.374494,
+              "ema50_slope": -0.780034,
+              "dist_to_high20_pct": -14.565643,
+              "dist_to_low20_pct": 4.123547,
+              "atr_pct_14": 4.184688,
+              "volume_z_48": -0.613219,
+              "regime": "bear"
+            }
+          }
+        },
+        "ADA/USDT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": true,
+              "close": 0.152623,
+              "ema50": 0.148524,
+              "ema200": 0.170724,
+              "ema50_slope": 0.40266,
+              "dist_to_high20_pct": -0.669695,
+              "dist_to_low20_pct": 12.675984,
+              "atr_pct_14": 2.339378,
+              "volume_z_48": -0.347813,
+              "regime": "bear"
+            },
+            "1d": {
+              "available": false
+            }
+          }
+        },
+        "AAPL": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 348.220001,
+              "ema50": 331.007387,
+              "ema200": 300.540002,
+              "ema50_slope": 0.857007,
+              "dist_to_high20_pct": -0.040184,
+              "dist_to_low20_pct": 6.878243,
+              "atr_pct_14": 1.747049,
+              "volume_z_48": 0.544014,
+              "regime": "bull"
+            }
+          }
+        },
+        "MSFT": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 489.929993,
+              "ema50": 511.252099,
+              "ema200": 475.719731,
+              "ema50_slope": -0.816877,
+              "dist_to_high20_pct": -12.37951,
+              "dist_to_low20_pct": 2.626778,
+              "atr_pct_14": 3.480673,
+              "volume_z_48": 0.194609,
+              "regime": "bull"
+            }
+          }
+        },
+        "NVDA": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 149.300003,
+              "ema50": 191.403177,
+              "ema200": 201.13802,
+              "ema50_slope": -4.724962,
+              "dist_to_high20_pct": -30.664561,
+              "dist_to_low20_pct": 19.919681,
+              "atr_pct_14": 10.604247,
+              "volume_z_48": 0.916079,
+              "regime": "bear"
+            }
+          }
+        },
+        "AMZN": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 244.429993,
+              "ema50": 255.977571,
+              "ema200": 248.286254,
+              "ema50_slope": -0.42053,
+              "dist_to_high20_pct": -11.226122,
+              "dist_to_low20_pct": 6.570453,
+              "atr_pct_14": 4.279927,
+              "volume_z_48": 1.045596,
+              "regime": "range"
+            }
+          }
+        },
+        "EURUSD": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 1.096491,
+              "ema50": 1.117797,
+              "ema200": 1.142458,
+              "ema50_slope": -0.438236,
+              "dist_to_high20_pct": -2.752193,
+              "dist_to_low20_pct": 0.740127,
+              "atr_pct_14": 0.656417,
+              "volume_z_48": null,
+              "regime": "bear"
+            }
+          }
+        },
+        "XAUUSD": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 3702.300049,
+              "ema50": 4000.039273,
+              "ema200": 4265.887942,
+              "ema50_slope": -2.190696,
+              "dist_to_high20_pct": -10.953174,
+              "dist_to_low20_pct": 8.090042,
+              "atr_pct_14": 3.386891,
+              "volume_z_48": -0.270928,
+              "regime": "bear"
+            }
+          }
+        },
+        "GBPUSD": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 1.312629,
+              "ema50": 1.328492,
+              "ema200": 1.336973,
+              "ema50_slope": -0.311828,
+              "dist_to_high20_pct": -2.785394,
+              "dist_to_low20_pct": 0.868969,
+              "atr_pct_14": 0.662804,
+              "volume_z_48": null,
+              "regime": "bear"
+            }
+          }
+        },
+        "USDJPY": {
+          "timeframes": {
+            "1m": {
+              "available": false
+            },
+            "5m": {
+              "available": false
+            },
+            "15m": {
+              "available": false
+            },
+            "1h": {
+              "available": false
+            },
+            "4h": {
+              "available": false
+            },
+            "1d": {
+              "available": true,
+              "close": 159.388,
+              "ema50": 158.529752,
+              "ema200": 158.157918,
+              "ema50_slope": 0.089501,
+              "dist_to_high20_pct": -0.491955,
+              "dist_to_low20_pct": 1.250798,
+              "atr_pct_14": 0.53432,
+              "volume_z_48": null,
+              "regime": "bull"
+            }
+          }
+        }
+      }
+    },
+    "news": {
+      "asof": "2026-11-27T11:00:00+00:00",
+      "fng": {
+        "value": 12,
+        "classification": "Extreme Fear",
+        "date": "2026-11-27",
+        "source": "sqlite"
+      },
+      "fng_7d_change": 0,
+      "gdelt": {
+        "bitcoin": {
+          "tone_24h": null,
+          "tone_7d": -1.419443,
+          "n_24h": 0,
+          "n_7d": 21
+        },
+        "ethereum": {
+          "tone_24h": null,
+          "tone_7d": null,
+          "n_24h": 0,
+          "n_7d": 0
+        }
+      },
+      "reddit": null
+    },
+    "session": {
+      "asof": "2026-11-27T11:00:00+00:00",
+      "current_weekday": "Friday",
+      "current_session": [
+        "london"
+      ],
+      "pairs": {
+        "BTC/USDT": {
+          "available": false
+        },
+        "ETH/USDT": {
+          "available": false
+        },
+        "SOL/USDT": {
+          "available": false
+        },
+        "BNB/USDT": {
+          "available": false
+        },
+        "XRP/USDT": {
+          "available": false
+        },
+        "ADA/USDT": {
+          "available": false
+        },
+        "AAPL": {
+          "available": false
+        },
+        "MSFT": {
+          "available": false
+        },
+        "NVDA": {
+          "available": false
+        },
+        "AMZN": {
+          "available": false
+        },
+        "EURUSD": {
+          "available": false
+        },
+        "XAUUSD": {
+          "available": false
+        },
+        "GBPUSD": {
+          "available": false
+        },
+        "USDJPY": {
+          "available": false
+        }
+      }
+    },
+    "risk": {
+      "asof": "2026-11-27T11:00:00+00:00",
+      "btc": {
+        "available": true,
+        "close": 61554.7,
+        "ema200": 74414.950357,
+        "below_ema200": true
+      },
+      "account": null,
+      "drawdown": null,
+      "size_cap": 0.5,
+      "reasons": [
+        "BTC below EMA200"
+      ]
+    }
+  },
+  "prompts": [
+    "You are a risk veto layer for a crypto spot trading bot (Bybit, USDT pairs). Every number below is precomputed by deterministic Python agents; your job is only to interpret them. You may only ALLOW or BLOCK entries per pair and optionally shrink the position size. You can never place, modify or close orders. When in doubt, block. If an EVIDENCE block is present, your rationale must cite at least one alpha factor or asset-scan number from it verbatim; never invent a number that is not in DATA or EVIDENCE. Respond with ONLY one JSON object and nothing else, no prose and no code fences, using exactly this schema: {\"pairs\": {\"<PAIR>\": {\"action\": \"allow\" or \"block\", \"size\": <0.0-1.0>, \"confidence\": <0.0-1.0>, \"rationale\": \"<short text>\"}}, \"followups\": [\"<question>\", \"...\"]}. Include one entry for every requested pair. size is a fraction of the normal stake. followups may be an empty list if no further data is needed.\nDATA: {\"asof\": \"2026-11-27T11:00:00+00:00\", \"pairs\": [\"BTC/USDT\", \"ETH/USDT\", \"SOL/USDT\", \"BNB/USDT\", \"XRP/USDT\", \"ADA/USDT\", \"AAPL\", \"MSFT\", \"NVDA\", \"AMZN\", \"EURUSD\", \"XAUUSD\", \"GBPUSD\", \"USDJPY\"], \"market\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"live_orderbook\": false, \"pairs\": {\"BTC/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 61543.9, \"ema50\": 61317.234945, \"ema200\": 68814.748248, \"ema50_slope\": -0.064295, \"dist_to_high20_pct\": -0.957851, \"dist_to_low20_pct\": 7.574108, \"atr_pct_14\": 1.630474, \"volume_z_48\": -0.924222, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 61554.7, \"ema50\": 71102.398824, \"ema200\": 74414.950357, \"ema50_slope\": -3.141533, \"dist_to_high20_pct\": -19.109364, \"dist_to_low20_pct\": 11.714519, \"atr_pct_14\": 5.301812, \"volume_z_48\": -1.106947, \"regime\": \"bear\"}}}, \"ETH/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1723.65, \"ema50\": 1721.958058, \"ema200\": 1976.190544, \"ema50_slope\": -0.085914, \"dist_to_high20_pct\": -1.636678, \"dist_to_low20_pct\": 7.270215, \"atr_pct_14\": 2.002147, \"volume_z_48\": -0.909674, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1723.66, \"ema50\": 2064.262627, \"ema200\": 2225.04995, \"ema50_slope\": -3.780348, \"dist_to_high20_pct\": -23.149015, \"dist_to_low20_pct\": 12.217448, \"atr_pct_14\": 6.502111, \"volume_z_48\": -0.952648, \"regime\": \"bear\"}}}, \"SOL/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 73.11, \"ema50\": 71.570084, \"ema200\": 82.132917, \"ema50_slope\": 0.217914, \"dist_to_high20_pct\": -0.975213, \"dist_to_low20_pct\": 11.177007, \"atr_pct_14\": 2.044864, \"volume_z_48\": -0.485499, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 73.13, \"ema50\": 86.329344, \"ema200\": 93.644123, \"ema50_slope\": -3.728823, \"dist_to_high20_pct\": -18.635959, \"dist_to_low20_pct\": 12.872357, \"atr_pct_14\": 6.738489, \"volume_z_48\": -1.186677, \"regime\": \"bear\"}}}, \"BNB/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 732.17, \"ema50\": 734.915516, \"ema200\": 741.67318, \"ema50_slope\": -0.056874, \"dist_to_high20_pct\": -2.636968, \"dist_to_low20_pct\": 1.138232, \"atr_pct_14\": 0.833237, \"volume_z_48\": -1.140512, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 732.17, \"ema50\": 733.333346, \"ema200\": 689.060203, \"ema50_slope\": 0.063654, \"dist_to_high20_pct\": -9.630955, \"dist_to_low20_pct\": 3.771472, \"atr_pct_14\": 2.46586, \"volume_z_48\": -0.788136, \"regime\": \"bull\"}}}, \"XRP/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1.3082, \"ema50\": 1.333818, \"ema200\": 1.382869, \"ema50_slope\": -0.232652, \"dist_to_high20_pct\": -6.503716, \"dist_to_low20_pct\": 1.686747, \"atr_pct_14\": 1.632013, \"volume_z_48\": -0.716492, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1.308, \"ema50\": 1.373387, \"ema200\": 1.374494, \"ema50_slope\": -0.780034, \"dist_to_high20_pct\": -14.565643, \"dist_to_low20_pct\": 4.123547, \"atr_pct_14\": 4.184688, \"volume_z_48\": -0.613219, \"regime\": \"bear\"}}}, \"ADA/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 0.152623, \"ema50\": 0.148524, \"ema200\": 0.170724, \"ema50_slope\": 0.40266, \"dist_to_high20_pct\": -0.669695, \"dist_to_low20_pct\": 12.675984, \"atr_pct_14\": 2.339378, \"volume_z_48\": -0.347813, \"regime\": \"bear\"}, \"1d\": {\"available\": false}}}, \"AAPL\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 348.220001, \"ema50\": 331.007387, \"ema200\": 300.540002, \"ema50_slope\": 0.857007, \"dist_to_high20_pct\": -0.040184, \"dist_to_low20_pct\": 6.878243, \"atr_pct_14\": 1.747049, \"volume_z_48\": 0.544014, \"regime\": \"bull\"}}}, \"MSFT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 489.929993, \"ema50\": 511.252099, \"ema200\": 475.719731, \"ema50_slope\": -0.816877, \"dist_to_high20_pct\": -12.37951, \"dist_to_low20_pct\": 2.626778, \"atr_pct_14\": 3.480673, \"volume_z_48\": 0.194609, \"regime\": \"bull\"}}}, \"NVDA\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 149.300003, \"ema50\": 191.403177, \"ema200\": 201.13802, \"ema50_slope\": -4.724962, \"dist_to_high20_pct\": -30.664561, \"dist_to_low20_pct\": 19.919681, \"atr_pct_14\": 10.604247, \"volume_z_48\": 0.916079, \"regime\": \"bear\"}}}, \"AMZN\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 244.429993, \"ema50\": 255.977571, \"ema200\": 248.286254, \"ema50_slope\": -0.42053, \"dist_to_high20_pct\": -11.226122, \"dist_to_low20_pct\": 6.570453, \"atr_pct_14\": 4.279927, \"volume_z_48\": 1.045596, \"regime\": \"range\"}}}, \"EURUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.096491, \"ema50\": 1.117797, \"ema200\": 1.142458, \"ema50_slope\": -0.438236, \"dist_to_high20_pct\": -2.752193, \"dist_to_low20_pct\": 0.740127, \"atr_pct_14\": 0.656417, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"XAUUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 3702.300049, \"ema50\": 4000.039273, \"ema200\": 4265.887942, \"ema50_slope\": -2.190696, \"dist_to_high20_pct\": -10.953174, \"dist_to_low20_pct\": 8.090042, \"atr_pct_14\": 3.386891, \"volume_z_48\": -0.270928, \"regime\": \"bear\"}}}, \"GBPUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.312629, \"ema50\": 1.328492, \"ema200\": 1.336973, \"ema50_slope\": -0.311828, \"dist_to_high20_pct\": -2.785394, \"dist_to_low20_pct\": 0.868969, \"atr_pct_14\": 0.662804, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"USDJPY\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 159.388, \"ema50\": 158.529752, \"ema200\": 158.157918, \"ema50_slope\": 0.089501, \"dist_to_high20_pct\": -0.491955, \"dist_to_low20_pct\": 1.250798, \"atr_pct_14\": 0.53432, \"volume_z_48\": null, \"regime\": \"bull\"}}}}}, \"news\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"fng\": {\"value\": 12, \"classification\": \"Extreme Fear\", \"date\": \"2026-11-27\", \"source\": \"sqlite\"}, \"fng_7d_change\": 0, \"gdelt\": {\"bitcoin\": {\"tone_24h\": null, \"tone_7d\": -1.419443, \"n_24h\": 0, \"n_7d\": 21}, \"ethereum\": {\"tone_24h\": null, \"tone_7d\": null, \"n_24h\": 0, \"n_7d\": 0}}, \"reddit\": null}, \"session\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"current_weekday\": \"Friday\", \"current_session\": [\"london\"], \"pairs\": {\"BTC/USDT\": {\"available\": false}, \"ETH/USDT\": {\"available\": false}, \"SOL/USDT\": {\"available\": false}, \"BNB/USDT\": {\"available\": false}, \"XRP/USDT\": {\"available\": false}, \"ADA/USDT\": {\"available\": false}, \"AAPL\": {\"available\": false}, \"MSFT\": {\"available\": false}, \"NVDA\": {\"available\": false}, \"AMZN\": {\"available\": false}, \"EURUSD\": {\"available\": false}, \"XAUUSD\": {\"available\": false}, \"GBPUSD\": {\"available\": false}, \"USDJPY\": {\"available\": false}}}, \"risk\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"btc\": {\"available\": true, \"close\": 61554.7, \"ema200\": 74414.950357, \"below_ema200\": true}, \"account\": null, \"drawdown\": null, \"size_cap\": 0.5, \"reasons\": [\"BTC below EMA200\"]}}\nEVIDENCE: {\"alpha_bench\": {\"zoo\": \"academic\", \"universe\": \"sp500\", \"period\": \"2024-2025\", \"age_hours\": 0.04, \"top\": [{\"alpha\": \"academic_carhart_mom\", \"theme\": \"momentum\", \"ic_mean\": 0.028339, \"ir\": 0.1216, \"ic_positive_ratio\": 0.5944, \"ic_count\": 249}, {\"alpha\": \"academic_strev\", \"theme\": \"reversal\", \"ic_mean\": 0.011409, \"ir\": 0.0597, \"ic_positive_ratio\": 0.5083, \"ic_count\": 480}, {\"alpha\": \"academic_cma\", \"theme\": \"quality\", \"ic_mean\": 0.002378, \"ir\": 0.0286, \"ic_positive_ratio\": 0.5393, \"ic_count\": 382}, {\"alpha\": \"academic_high52w\", \"theme\": \"momentum\", \"ic_mean\": 0.000248, \"ir\": 0.0011, \"ic_positive_ratio\": 0.54, \"ic_count\": 250}, {\"alpha\": \"academic_corr_rewire\", \"theme\": \"volatility\", \"ic_mean\": -0.000444, \"ir\": -0.0032, \"ic_positive_ratio\": 0.5138, \"ic_count\": 362}], \"caveats\": [\"cross-sectional IC across the universe, not a per-pair entry signal\", \"constituents are the current list (survivorship-biased) -> IC quoted above is biased upward\"]}, \"asset_scan\": [{\"pair\": \"OP/USD\", \"profit_score\": 6.4103, \"momentum\": 1.8188, \"micro_score\": 0.5909}, {\"pair\": \"ARB/USD\", \"profit_score\": 3.6769, \"momentum\": 1.7102, \"micro_score\": 0.0855}, {\"pair\": \"LINK/USD\", \"profit_score\": 3.3556, \"momentum\": 1.5608, \"micro_score\": 0.078}, {\"pair\": \"NEAR/USD\", \"profit_score\": 2.4395, \"momentum\": 1.1347, \"micro_score\": 0.0567}, {\"pair\": \"AUDUSD\", \"profit_score\": 2.2934, \"momentum\": -0.3287, \"micro_score\": 0.9836}, {\"pair\": \"DOT/USD\", \"profit_score\": 2.167, \"momentum\": 1.0079, \"micro_score\": 0.0504}, {\"pair\": \"BCH/USD\", \"profit_score\": 2.0001, \"momentum\": 0.9303, \"micro_score\": 0.0465}, {\"pair\": \"ALGO/USD\", \"profit_score\": 1.9907, \"momentum\": 0.9259, \"micro_score\": 0.0463}, {\"pair\": \"XLM/USD\", \"profit_score\": 1.7868, \"momentum\": 0.831, \"micro_score\": 0.0416}, {\"pair\": \"META\", \"profit_score\": 1.7556, \"momentum\": 0.8166, \"micro_score\": 0.0408}], \"scan_ic\": {\"crypto\": \"no-evidence\", \"equity\": \"no-evidence\", \"forex\": \"no-evidence\"}, \"scan_ic_note\": \"scan_ic is the measured information coefficient of the scan score. Use the score only as descriptive context; never treat a positive score as evidence of an edge unless the verdict is 'predictive'.\", \"historical_lessons\": \"HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence.\"}\nReturn only the JSON object now.",
+    "You are a risk veto layer for a crypto spot trading bot (Bybit, USDT pairs). Every number below is precomputed by deterministic Python agents; your job is only to interpret them. You may only ALLOW or BLOCK entries per pair and optionally shrink the position size. You can never place, modify or close orders. When in doubt, block. If an EVIDENCE block is present, your rationale must cite at least one alpha factor or asset-scan number from it verbatim; never invent a number that is not in DATA or EVIDENCE. Respond with ONLY one JSON object and nothing else, no prose and no code fences, using exactly this schema: {\"pairs\": {\"<PAIR>\": {\"action\": \"allow\" or \"block\", \"size\": <0.0-1.0>, \"confidence\": <0.0-1.0>, \"rationale\": \"<short text>\"}}, \"followups\": [\"<question>\", \"...\"]}. Include one entry for every requested pair. size is a fraction of the normal stake. followups may be an empty list if no further data is needed.\nDATA: {\"asof\": \"2026-11-27T11:00:00+00:00\", \"pairs\": [\"BTC/USDT\", \"ETH/USDT\", \"SOL/USDT\", \"BNB/USDT\", \"XRP/USDT\", \"ADA/USDT\", \"AAPL\", \"MSFT\", \"NVDA\", \"AMZN\", \"EURUSD\", \"XAUUSD\", \"GBPUSD\", \"USDJPY\"], \"market\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"live_orderbook\": false, \"pairs\": {\"BTC/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 61543.9, \"ema50\": 61317.234945, \"ema200\": 68814.748248, \"ema50_slope\": -0.064295, \"dist_to_high20_pct\": -0.957851, \"dist_to_low20_pct\": 7.574108, \"atr_pct_14\": 1.630474, \"volume_z_48\": -0.924222, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 61554.7, \"ema50\": 71102.398824, \"ema200\": 74414.950357, \"ema50_slope\": -3.141533, \"dist_to_high20_pct\": -19.109364, \"dist_to_low20_pct\": 11.714519, \"atr_pct_14\": 5.301812, \"volume_z_48\": -1.106947, \"regime\": \"bear\"}}}, \"ETH/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1723.65, \"ema50\": 1721.958058, \"ema200\": 1976.190544, \"ema50_slope\": -0.085914, \"dist_to_high20_pct\": -1.636678, \"dist_to_low20_pct\": 7.270215, \"atr_pct_14\": 2.002147, \"volume_z_48\": -0.909674, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1723.66, \"ema50\": 2064.262627, \"ema200\": 2225.04995, \"ema50_slope\": -3.780348, \"dist_to_high20_pct\": -23.149015, \"dist_to_low20_pct\": 12.217448, \"atr_pct_14\": 6.502111, \"volume_z_48\": -0.952648, \"regime\": \"bear\"}}}, \"SOL/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 73.11, \"ema50\": 71.570084, \"ema200\": 82.132917, \"ema50_slope\": 0.217914, \"dist_to_high20_pct\": -0.975213, \"dist_to_low20_pct\": 11.177007, \"atr_pct_14\": 2.044864, \"volume_z_48\": -0.485499, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 73.13, \"ema50\": 86.329344, \"ema200\": 93.644123, \"ema50_slope\": -3.728823, \"dist_to_high20_pct\": -18.635959, \"dist_to_low20_pct\": 12.872357, \"atr_pct_14\": 6.738489, \"volume_z_48\": -1.186677, \"regime\": \"bear\"}}}, \"BNB/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 732.17, \"ema50\": 734.915516, \"ema200\": 741.67318, \"ema50_slope\": -0.056874, \"dist_to_high20_pct\": -2.636968, \"dist_to_low20_pct\": 1.138232, \"atr_pct_14\": 0.833237, \"volume_z_48\": -1.140512, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 732.17, \"ema50\": 733.333346, \"ema200\": 689.060203, \"ema50_slope\": 0.063654, \"dist_to_high20_pct\": -9.630955, \"dist_to_low20_pct\": 3.771472, \"atr_pct_14\": 2.46586, \"volume_z_48\": -0.788136, \"regime\": \"bull\"}}}, \"XRP/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1.3082, \"ema50\": 1.333818, \"ema200\": 1.382869, \"ema50_slope\": -0.232652, \"dist_to_high20_pct\": -6.503716, \"dist_to_low20_pct\": 1.686747, \"atr_pct_14\": 1.632013, \"volume_z_48\": -0.716492, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1.308, \"ema50\": 1.373387, \"ema200\": 1.374494, \"ema50_slope\": -0.780034, \"dist_to_high20_pct\": -14.565643, \"dist_to_low20_pct\": 4.123547, \"atr_pct_14\": 4.184688, \"volume_z_48\": -0.613219, \"regime\": \"bear\"}}}, \"ADA/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 0.152623, \"ema50\": 0.148524, \"ema200\": 0.170724, \"ema50_slope\": 0.40266, \"dist_to_high20_pct\": -0.669695, \"dist_to_low20_pct\": 12.675984, \"atr_pct_14\": 2.339378, \"volume_z_48\": -0.347813, \"regime\": \"bear\"}, \"1d\": {\"available\": false}}}, \"AAPL\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 348.220001, \"ema50\": 331.007387, \"ema200\": 300.540002, \"ema50_slope\": 0.857007, \"dist_to_high20_pct\": -0.040184, \"dist_to_low20_pct\": 6.878243, \"atr_pct_14\": 1.747049, \"volume_z_48\": 0.544014, \"regime\": \"bull\"}}}, \"MSFT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 489.929993, \"ema50\": 511.252099, \"ema200\": 475.719731, \"ema50_slope\": -0.816877, \"dist_to_high20_pct\": -12.37951, \"dist_to_low20_pct\": 2.626778, \"atr_pct_14\": 3.480673, \"volume_z_48\": 0.194609, \"regime\": \"bull\"}}}, \"NVDA\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 149.300003, \"ema50\": 191.403177, \"ema200\": 201.13802, \"ema50_slope\": -4.724962, \"dist_to_high20_pct\": -30.664561, \"dist_to_low20_pct\": 19.919681, \"atr_pct_14\": 10.604247, \"volume_z_48\": 0.916079, \"regime\": \"bear\"}}}, \"AMZN\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 244.429993, \"ema50\": 255.977571, \"ema200\": 248.286254, \"ema50_slope\": -0.42053, \"dist_to_high20_pct\": -11.226122, \"dist_to_low20_pct\": 6.570453, \"atr_pct_14\": 4.279927, \"volume_z_48\": 1.045596, \"regime\": \"range\"}}}, \"EURUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.096491, \"ema50\": 1.117797, \"ema200\": 1.142458, \"ema50_slope\": -0.438236, \"dist_to_high20_pct\": -2.752193, \"dist_to_low20_pct\": 0.740127, \"atr_pct_14\": 0.656417, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"XAUUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 3702.300049, \"ema50\": 4000.039273, \"ema200\": 4265.887942, \"ema50_slope\": -2.190696, \"dist_to_high20_pct\": -10.953174, \"dist_to_low20_pct\": 8.090042, \"atr_pct_14\": 3.386891, \"volume_z_48\": -0.270928, \"regime\": \"bear\"}}}, \"GBPUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.312629, \"ema50\": 1.328492, \"ema200\": 1.336973, \"ema50_slope\": -0.311828, \"dist_to_high20_pct\": -2.785394, \"dist_to_low20_pct\": 0.868969, \"atr_pct_14\": 0.662804, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"USDJPY\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 159.388, \"ema50\": 158.529752, \"ema200\": 158.157918, \"ema50_slope\": 0.089501, \"dist_to_high20_pct\": -0.491955, \"dist_to_low20_pct\": 1.250798, \"atr_pct_14\": 0.53432, \"volume_z_48\": null, \"regime\": \"bull\"}}}}}, \"news\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"fng\": {\"value\": 12, \"classification\": \"Extreme Fear\", \"date\": \"2026-11-27\", \"source\": \"sqlite\"}, \"fng_7d_change\": 0, \"gdelt\": {\"bitcoin\": {\"tone_24h\": null, \"tone_7d\": -1.419443, \"n_24h\": 0, \"n_7d\": 21}, \"ethereum\": {\"tone_24h\": null, \"tone_7d\": null, \"n_24h\": 0, \"n_7d\": 0}}, \"reddit\": null}, \"session\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"current_weekday\": \"Friday\", \"current_session\": [\"london\"], \"pairs\": {\"BTC/USDT\": {\"available\": false}, \"ETH/USDT\": {\"available\": false}, \"SOL/USDT\": {\"available\": false}, \"BNB/USDT\": {\"available\": false}, \"XRP/USDT\": {\"available\": false}, \"ADA/USDT\": {\"available\": false}, \"AAPL\": {\"available\": false}, \"MSFT\": {\"available\": false}, \"NVDA\": {\"available\": false}, \"AMZN\": {\"available\": false}, \"EURUSD\": {\"available\": false}, \"XAUUSD\": {\"available\": false}, \"GBPUSD\": {\"available\": false}, \"USDJPY\": {\"available\": false}}}, \"risk\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"btc\": {\"available\": true, \"close\": 61554.7, \"ema200\": 74414.950357, \"below_ema200\": true}, \"account\": null, \"drawdown\": null, \"size_cap\": 0.5, \"reasons\": [\"BTC below EMA200\"]}}\nEVIDENCE: {\"alpha_bench\": {\"zoo\": \"academic\", \"universe\": \"sp500\", \"period\": \"2024-2025\", \"age_hours\": 0.04, \"top\": [{\"alpha\": \"academic_carhart_mom\", \"theme\": \"momentum\", \"ic_mean\": 0.028339, \"ir\": 0.1216, \"ic_positive_ratio\": 0.5944, \"ic_count\": 249}, {\"alpha\": \"academic_strev\", \"theme\": \"reversal\", \"ic_mean\": 0.011409, \"ir\": 0.0597, \"ic_positive_ratio\": 0.5083, \"ic_count\": 480}, {\"alpha\": \"academic_cma\", \"theme\": \"quality\", \"ic_mean\": 0.002378, \"ir\": 0.0286, \"ic_positive_ratio\": 0.5393, \"ic_count\": 382}, {\"alpha\": \"academic_high52w\", \"theme\": \"momentum\", \"ic_mean\": 0.000248, \"ir\": 0.0011, \"ic_positive_ratio\": 0.54, \"ic_count\": 250}, {\"alpha\": \"academic_corr_rewire\", \"theme\": \"volatility\", \"ic_mean\": -0.000444, \"ir\": -0.0032, \"ic_positive_ratio\": 0.5138, \"ic_count\": 362}], \"caveats\": [\"cross-sectional IC across the universe, not a per-pair entry signal\", \"constituents are the current list (survivorship-biased) -> IC quoted above is biased upward\"]}, \"asset_scan\": [{\"pair\": \"OP/USD\", \"profit_score\": 6.4103, \"momentum\": 1.8188, \"micro_score\": 0.5909}, {\"pair\": \"ARB/USD\", \"profit_score\": 3.6769, \"momentum\": 1.7102, \"micro_score\": 0.0855}, {\"pair\": \"LINK/USD\", \"profit_score\": 3.3556, \"momentum\": 1.5608, \"micro_score\": 0.078}, {\"pair\": \"NEAR/USD\", \"profit_score\": 2.4395, \"momentum\": 1.1347, \"micro_score\": 0.0567}, {\"pair\": \"AUDUSD\", \"profit_score\": 2.2934, \"momentum\": -0.3287, \"micro_score\": 0.9836}, {\"pair\": \"DOT/USD\", \"profit_score\": 2.167, \"momentum\": 1.0079, \"micro_score\": 0.0504}, {\"pair\": \"BCH/USD\", \"profit_score\": 2.0001, \"momentum\": 0.9303, \"micro_score\": 0.0465}, {\"pair\": \"ALGO/USD\", \"profit_score\": 1.9907, \"momentum\": 0.9259, \"micro_score\": 0.0463}, {\"pair\": \"XLM/USD\", \"profit_score\": 1.7868, \"momentum\": 0.831, \"micro_score\": 0.0416}, {\"pair\": \"META\", \"profit_score\": 1.7556, \"momentum\": 0.8166, \"micro_score\": 0.0408}], \"scan_ic\": {\"crypto\": \"no-evidence\", \"equity\": \"no-evidence\", \"forex\": \"no-evidence\"}, \"scan_ic_note\": \"scan_ic is the measured information coefficient of the scan score. Use the score only as descriptive context; never treat a positive score as evidence of an edge unless the verdict is 'predictive'.\", \"historical_lessons\": \"HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence.\"}\nReturn only the JSON object now.\nFOLLOW-UP QUESTIONS: [\"Can we obtain live orderbook and 1h/15m confirmation before re-evaluating any pair?\", \"When will crypto, equity, or forex scan_ic have a predictive verdict instead of 'no-evidence'?\"]\nFULL MARKET AND SESSION DETAIL: {\"market\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"live_orderbook\": false, \"pairs\": {\"BTC/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 61543.9, \"ema50\": 61317.234945, \"ema200\": 68814.748248, \"ema50_slope\": -0.064295, \"dist_to_high20_pct\": -0.957851, \"dist_to_low20_pct\": 7.574108, \"atr_pct_14\": 1.630474, \"volume_z_48\": -0.924222, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 61554.7, \"ema50\": 71102.398824, \"ema200\": 74414.950357, \"ema50_slope\": -3.141533, \"dist_to_high20_pct\": -19.109364, \"dist_to_low20_pct\": 11.714519, \"atr_pct_14\": 5.301812, \"volume_z_48\": -1.106947, \"regime\": \"bear\"}}}, \"ETH/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1723.65, \"ema50\": 1721.958058, \"ema200\": 1976.190544, \"ema50_slope\": -0.085914, \"dist_to_high20_pct\": -1.636678, \"dist_to_low20_pct\": 7.270215, \"atr_pct_14\": 2.002147, \"volume_z_48\": -0.909674, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1723.66, \"ema50\": 2064.262627, \"ema200\": 2225.04995, \"ema50_slope\": -3.780348, \"dist_to_high20_pct\": -23.149015, \"dist_to_low20_pct\": 12.217448, \"atr_pct_14\": 6.502111, \"volume_z_48\": -0.952648, \"regime\": \"bear\"}}}, \"SOL/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 73.11, \"ema50\": 71.570084, \"ema200\": 82.132917, \"ema50_slope\": 0.217914, \"dist_to_high20_pct\": -0.975213, \"dist_to_low20_pct\": 11.177007, \"atr_pct_14\": 2.044864, \"volume_z_48\": -0.485499, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 73.13, \"ema50\": 86.329344, \"ema200\": 93.644123, \"ema50_slope\": -3.728823, \"dist_to_high20_pct\": -18.635959, \"dist_to_low20_pct\": 12.872357, \"atr_pct_14\": 6.738489, \"volume_z_48\": -1.186677, \"regime\": \"bear\"}}}, \"BNB/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 732.17, \"ema50\": 734.915516, \"ema200\": 741.67318, \"ema50_slope\": -0.056874, \"dist_to_high20_pct\": -2.636968, \"dist_to_low20_pct\": 1.138232, \"atr_pct_14\": 0.833237, \"volume_z_48\": -1.140512, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 732.17, \"ema50\": 733.333346, \"ema200\": 689.060203, \"ema50_slope\": 0.063654, \"dist_to_high20_pct\": -9.630955, \"dist_to_low20_pct\": 3.771472, \"atr_pct_14\": 2.46586, \"volume_z_48\": -0.788136, \"regime\": \"bull\"}}}, \"XRP/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1.3082, \"ema50\": 1.333818, \"ema200\": 1.382869, \"ema50_slope\": -0.232652, \"dist_to_high20_pct\": -6.503716, \"dist_to_low20_pct\": 1.686747, \"atr_pct_14\": 1.632013, \"volume_z_48\": -0.716492, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1.308, \"ema50\": 1.373387, \"ema200\": 1.374494, \"ema50_slope\": -0.780034, \"dist_to_high20_pct\": -14.565643, \"dist_to_low20_pct\": 4.123547, \"atr_pct_14\": 4.184688, \"volume_z_48\": -0.613219, \"regime\": \"bear\"}}}, \"ADA/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 0.152623, \"ema50\": 0.148524, \"ema200\": 0.170724, \"ema50_slope\": 0.40266, \"dist_to_high20_pct\": -0.669695, \"dist_to_low20_pct\": 12.675984, \"atr_pct_14\": 2.339378, \"volume_z_48\": -0.347813, \"regime\": \"bear\"}, \"1d\": {\"available\": false}}}, \"AAPL\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 348.220001, \"ema50\": 331.007387, \"ema200\": 300.540002, \"ema50_slope\": 0.857007, \"dist_to_high20_pct\": -0.040184, \"dist_to_low20_pct\": 6.878243, \"atr_pct_14\": 1.747049, \"volume_z_48\": 0.544014, \"regime\": \"bull\"}}}, \"MSFT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 489.929993, \"ema50\": 511.252099, \"ema200\": 475.719731, \"ema50_slope\": -0.816877, \"dist_to_high20_pct\": -12.37951, \"dist_to_low20_pct\": 2.626778, \"atr_pct_14\": 3.480673, \"volume_z_48\": 0.194609, \"regime\": \"bull\"}}}, \"NVDA\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 149.300003, \"ema50\": 191.403177, \"ema200\": 201.13802, \"ema50_slope\": -4.724962, \"dist_to_high20_pct\": -30.664561, \"dist_to_low20_pct\": 19.919681, \"atr_pct_14\": 10.604247, \"volume_z_48\": 0.916079, \"regime\": \"bear\"}}}, \"AMZN\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 244.429993, \"ema50\": 255.977571, \"ema200\": 248.286254, \"ema50_slope\": -0.42053, \"dist_to_high20_pct\": -11.226122, \"dist_to_low20_pct\": 6.570453, \"atr_pct_14\": 4.279927, \"volume_z_48\": 1.045596, \"regime\": \"range\"}}}, \"EURUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.096491, \"ema50\": 1.117797, \"ema200\": 1.142458, \"ema50_slope\": -0.438236, \"dist_to_high20_pct\": -2.752193, \"dist_to_low20_pct\": 0.740127, \"atr_pct_14\": 0.656417, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"XAUUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 3702.300049, \"ema50\": 4000.039273, \"ema200\": 4265.887942, \"ema50_slope\": -2.190696, \"dist_to_high20_pct\": -10.953174, \"dist_to_low20_pct\": 8.090042, \"atr_pct_14\": 3.386891, \"volume_z_48\": -0.270928, \"regime\": \"bear\"}}}, \"GBPUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.312629, \"ema50\": 1.328492, \"ema200\": 1.336973, \"ema50_slope\": -0.311828, \"dist_to_high20_pct\": -2.785394, \"dist_to_low20_pct\": 0.868969, \"atr_pct_14\": 0.662804, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"USDJPY\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 159.388, \"ema50\": 158.529752, \"ema200\": 158.157918, \"ema50_slope\": 0.089501, \"dist_to_high20_pct\": -0.491955, \"dist_to_low20_pct\": 1.250798, \"atr_pct_14\": 0.53432, \"volume_z_48\": null, \"regime\": \"bull\"}}}}}, \"session\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"current_weekday\": \"Friday\", \"current_session\": [\"london\"], \"pairs\": {\"BTC/USDT\": {\"available\": false}, \"ETH/USDT\": {\"available\": false}, \"SOL/USDT\": {\"available\": false}, \"BNB/USDT\": {\"available\": false}, \"XRP/USDT\": {\"available\": false}, \"ADA/USDT\": {\"available\": false}, \"AAPL\": {\"available\": false}, \"MSFT\": {\"available\": false}, \"NVDA\": {\"available\": false}, \"AMZN\": {\"available\": false}, \"EURUSD\": {\"available\": false}, \"XAUUSD\": {\"available\": false}, \"GBPUSD\": {\"available\": false}, \"USDJPY\": {\"available\": false}}}}\nAnswer again with the same JSON schema and only that JSON.",
+    "You are a risk veto layer for a crypto spot trading bot (Bybit, USDT pairs). Every number below is precomputed by deterministic Python agents; your job is only to interpret them. You may only ALLOW or BLOCK entries per pair and optionally shrink the position size. You can never place, modify or close orders. When in doubt, block. If an EVIDENCE block is present, your rationale must cite at least one alpha factor or asset-scan number from it verbatim; never invent a number that is not in DATA or EVIDENCE. Respond with ONLY one JSON object and nothing else, no prose and no code fences, using exactly this schema: {\"pairs\": {\"<PAIR>\": {\"action\": \"allow\" or \"block\", \"size\": <0.0-1.0>, \"confidence\": <0.0-1.0>, \"rationale\": \"<short text>\"}}, \"followups\": [\"<question>\", \"...\"]}. Include one entry for every requested pair. size is a fraction of the normal stake. followups may be an empty list if no further data is needed.\nDATA: {\"asof\": \"2026-11-27T11:00:00+00:00\", \"pairs\": [\"BTC/USDT\", \"ETH/USDT\", \"SOL/USDT\", \"BNB/USDT\", \"XRP/USDT\", \"ADA/USDT\", \"AAPL\", \"MSFT\", \"NVDA\", \"AMZN\", \"EURUSD\", \"XAUUSD\", \"GBPUSD\", \"USDJPY\"], \"market\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"live_orderbook\": false, \"pairs\": {\"BTC/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 61543.9, \"ema50\": 61317.234945, \"ema200\": 68814.748248, \"ema50_slope\": -0.064295, \"dist_to_high20_pct\": -0.957851, \"dist_to_low20_pct\": 7.574108, \"atr_pct_14\": 1.630474, \"volume_z_48\": -0.924222, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 61554.7, \"ema50\": 71102.398824, \"ema200\": 74414.950357, \"ema50_slope\": -3.141533, \"dist_to_high20_pct\": -19.109364, \"dist_to_low20_pct\": 11.714519, \"atr_pct_14\": 5.301812, \"volume_z_48\": -1.106947, \"regime\": \"bear\"}}}, \"ETH/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1723.65, \"ema50\": 1721.958058, \"ema200\": 1976.190544, \"ema50_slope\": -0.085914, \"dist_to_high20_pct\": -1.636678, \"dist_to_low20_pct\": 7.270215, \"atr_pct_14\": 2.002147, \"volume_z_48\": -0.909674, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1723.66, \"ema50\": 2064.262627, \"ema200\": 2225.04995, \"ema50_slope\": -3.780348, \"dist_to_high20_pct\": -23.149015, \"dist_to_low20_pct\": 12.217448, \"atr_pct_14\": 6.502111, \"volume_z_48\": -0.952648, \"regime\": \"bear\"}}}, \"SOL/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 73.11, \"ema50\": 71.570084, \"ema200\": 82.132917, \"ema50_slope\": 0.217914, \"dist_to_high20_pct\": -0.975213, \"dist_to_low20_pct\": 11.177007, \"atr_pct_14\": 2.044864, \"volume_z_48\": -0.485499, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 73.13, \"ema50\": 86.329344, \"ema200\": 93.644123, \"ema50_slope\": -3.728823, \"dist_to_high20_pct\": -18.635959, \"dist_to_low20_pct\": 12.872357, \"atr_pct_14\": 6.738489, \"volume_z_48\": -1.186677, \"regime\": \"bear\"}}}, \"BNB/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 732.17, \"ema50\": 734.915516, \"ema200\": 741.67318, \"ema50_slope\": -0.056874, \"dist_to_high20_pct\": -2.636968, \"dist_to_low20_pct\": 1.138232, \"atr_pct_14\": 0.833237, \"volume_z_48\": -1.140512, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 732.17, \"ema50\": 733.333346, \"ema200\": 689.060203, \"ema50_slope\": 0.063654, \"dist_to_high20_pct\": -9.630955, \"dist_to_low20_pct\": 3.771472, \"atr_pct_14\": 2.46586, \"volume_z_48\": -0.788136, \"regime\": \"bull\"}}}, \"XRP/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1.3082, \"ema50\": 1.333818, \"ema200\": 1.382869, \"ema50_slope\": -0.232652, \"dist_to_high20_pct\": -6.503716, \"dist_to_low20_pct\": 1.686747, \"atr_pct_14\": 1.632013, \"volume_z_48\": -0.716492, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1.308, \"ema50\": 1.373387, \"ema200\": 1.374494, \"ema50_slope\": -0.780034, \"dist_to_high20_pct\": -14.565643, \"dist_to_low20_pct\": 4.123547, \"atr_pct_14\": 4.184688, \"volume_z_48\": -0.613219, \"regime\": \"bear\"}}}, \"ADA/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 0.152623, \"ema50\": 0.148524, \"ema200\": 0.170724, \"ema50_slope\": 0.40266, \"dist_to_high20_pct\": -0.669695, \"dist_to_low20_pct\": 12.675984, \"atr_pct_14\": 2.339378, \"volume_z_48\": -0.347813, \"regime\": \"bear\"}, \"1d\": {\"available\": false}}}, \"AAPL\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 348.220001, \"ema50\": 331.007387, \"ema200\": 300.540002, \"ema50_slope\": 0.857007, \"dist_to_high20_pct\": -0.040184, \"dist_to_low20_pct\": 6.878243, \"atr_pct_14\": 1.747049, \"volume_z_48\": 0.544014, \"regime\": \"bull\"}}}, \"MSFT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 489.929993, \"ema50\": 511.252099, \"ema200\": 475.719731, \"ema50_slope\": -0.816877, \"dist_to_high20_pct\": -12.37951, \"dist_to_low20_pct\": 2.626778, \"atr_pct_14\": 3.480673, \"volume_z_48\": 0.194609, \"regime\": \"bull\"}}}, \"NVDA\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 149.300003, \"ema50\": 191.403177, \"ema200\": 201.13802, \"ema50_slope\": -4.724962, \"dist_to_high20_pct\": -30.664561, \"dist_to_low20_pct\": 19.919681, \"atr_pct_14\": 10.604247, \"volume_z_48\": 0.916079, \"regime\": \"bear\"}}}, \"AMZN\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 244.429993, \"ema50\": 255.977571, \"ema200\": 248.286254, \"ema50_slope\": -0.42053, \"dist_to_high20_pct\": -11.226122, \"dist_to_low20_pct\": 6.570453, \"atr_pct_14\": 4.279927, \"volume_z_48\": 1.045596, \"regime\": \"range\"}}}, \"EURUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.096491, \"ema50\": 1.117797, \"ema200\": 1.142458, \"ema50_slope\": -0.438236, \"dist_to_high20_pct\": -2.752193, \"dist_to_low20_pct\": 0.740127, \"atr_pct_14\": 0.656417, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"XAUUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 3702.300049, \"ema50\": 4000.039273, \"ema200\": 4265.887942, \"ema50_slope\": -2.190696, \"dist_to_high20_pct\": -10.953174, \"dist_to_low20_pct\": 8.090042, \"atr_pct_14\": 3.386891, \"volume_z_48\": -0.270928, \"regime\": \"bear\"}}}, \"GBPUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.312629, \"ema50\": 1.328492, \"ema200\": 1.336973, \"ema50_slope\": -0.311828, \"dist_to_high20_pct\": -2.785394, \"dist_to_low20_pct\": 0.868969, \"atr_pct_14\": 0.662804, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"USDJPY\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 159.388, \"ema50\": 158.529752, \"ema200\": 158.157918, \"ema50_slope\": 0.089501, \"dist_to_high20_pct\": -0.491955, \"dist_to_low20_pct\": 1.250798, \"atr_pct_14\": 0.53432, \"volume_z_48\": null, \"regime\": \"bull\"}}}}}, \"news\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"fng\": {\"value\": 12, \"classification\": \"Extreme Fear\", \"date\": \"2026-11-27\", \"source\": \"sqlite\"}, \"fng_7d_change\": 0, \"gdelt\": {\"bitcoin\": {\"tone_24h\": null, \"tone_7d\": -1.419443, \"n_24h\": 0, \"n_7d\": 21}, \"ethereum\": {\"tone_24h\": null, \"tone_7d\": null, \"n_24h\": 0, \"n_7d\": 0}}, \"reddit\": null}, \"session\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"current_weekday\": \"Friday\", \"current_session\": [\"london\"], \"pairs\": {\"BTC/USDT\": {\"available\": false}, \"ETH/USDT\": {\"available\": false}, \"SOL/USDT\": {\"available\": false}, \"BNB/USDT\": {\"available\": false}, \"XRP/USDT\": {\"available\": false}, \"ADA/USDT\": {\"available\": false}, \"AAPL\": {\"available\": false}, \"MSFT\": {\"available\": false}, \"NVDA\": {\"available\": false}, \"AMZN\": {\"available\": false}, \"EURUSD\": {\"available\": false}, \"XAUUSD\": {\"available\": false}, \"GBPUSD\": {\"available\": false}, \"USDJPY\": {\"available\": false}}}, \"risk\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"btc\": {\"available\": true, \"close\": 61554.7, \"ema200\": 74414.950357, \"below_ema200\": true}, \"account\": null, \"drawdown\": null, \"size_cap\": 0.5, \"reasons\": [\"BTC below EMA200\"]}}\nEVIDENCE: {\"alpha_bench\": {\"zoo\": \"academic\", \"universe\": \"sp500\", \"period\": \"2024-2025\", \"age_hours\": 0.04, \"top\": [{\"alpha\": \"academic_carhart_mom\", \"theme\": \"momentum\", \"ic_mean\": 0.028339, \"ir\": 0.1216, \"ic_positive_ratio\": 0.5944, \"ic_count\": 249}, {\"alpha\": \"academic_strev\", \"theme\": \"reversal\", \"ic_mean\": 0.011409, \"ir\": 0.0597, \"ic_positive_ratio\": 0.5083, \"ic_count\": 480}, {\"alpha\": \"academic_cma\", \"theme\": \"quality\", \"ic_mean\": 0.002378, \"ir\": 0.0286, \"ic_positive_ratio\": 0.5393, \"ic_count\": 382}, {\"alpha\": \"academic_high52w\", \"theme\": \"momentum\", \"ic_mean\": 0.000248, \"ir\": 0.0011, \"ic_positive_ratio\": 0.54, \"ic_count\": 250}, {\"alpha\": \"academic_corr_rewire\", \"theme\": \"volatility\", \"ic_mean\": -0.000444, \"ir\": -0.0032, \"ic_positive_ratio\": 0.5138, \"ic_count\": 362}], \"caveats\": [\"cross-sectional IC across the universe, not a per-pair entry signal\", \"constituents are the current list (survivorship-biased) -> IC quoted above is biased upward\"]}, \"asset_scan\": [{\"pair\": \"OP/USD\", \"profit_score\": 6.4103, \"momentum\": 1.8188, \"micro_score\": 0.5909}, {\"pair\": \"ARB/USD\", \"profit_score\": 3.6769, \"momentum\": 1.7102, \"micro_score\": 0.0855}, {\"pair\": \"LINK/USD\", \"profit_score\": 3.3556, \"momentum\": 1.5608, \"micro_score\": 0.078}, {\"pair\": \"NEAR/USD\", \"profit_score\": 2.4395, \"momentum\": 1.1347, \"micro_score\": 0.0567}, {\"pair\": \"AUDUSD\", \"profit_score\": 2.2934, \"momentum\": -0.3287, \"micro_score\": 0.9836}, {\"pair\": \"DOT/USD\", \"profit_score\": 2.167, \"momentum\": 1.0079, \"micro_score\": 0.0504}, {\"pair\": \"BCH/USD\", \"profit_score\": 2.0001, \"momentum\": 0.9303, \"micro_score\": 0.0465}, {\"pair\": \"ALGO/USD\", \"profit_score\": 1.9907, \"momentum\": 0.9259, \"micro_score\": 0.0463}, {\"pair\": \"XLM/USD\", \"profit_score\": 1.7868, \"momentum\": 0.831, \"micro_score\": 0.0416}, {\"pair\": \"META\", \"profit_score\": 1.7556, \"momentum\": 0.8166, \"micro_score\": 0.0408}], \"scan_ic\": {\"crypto\": \"no-evidence\", \"equity\": \"no-evidence\", \"forex\": \"no-evidence\"}, \"scan_ic_note\": \"scan_ic is the measured information coefficient of the scan score. Use the score only as descriptive context; never treat a positive score as evidence of an edge unless the verdict is 'predictive'.\", \"historical_lessons\": \"HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence.\"}\nReturn only the JSON object now.\nFOLLOW-UP QUESTIONS: [\"Can we obtain live orderbook and 1h/15m confirmation before re-evaluating any pair?\", \"When will crypto, equity, or forex scan_ic have a predictive verdict instead of 'no-evidence'?\"]\nFULL MARKET AND SESSION DETAIL: {\"market\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"live_orderbook\": false, \"pairs\": {\"BTC/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 61543.9, \"ema50\": 61317.234945, \"ema200\": 68814.748248, \"ema50_slope\": -0.064295, \"dist_to_high20_pct\": -0.957851, \"dist_to_low20_pct\": 7.574108, \"atr_pct_14\": 1.630474, \"volume_z_48\": -0.924222, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 61554.7, \"ema50\": 71102.398824, \"ema200\": 74414.950357, \"ema50_slope\": -3.141533, \"dist_to_high20_pct\": -19.109364, \"dist_to_low20_pct\": 11.714519, \"atr_pct_14\": 5.301812, \"volume_z_48\": -1.106947, \"regime\": \"bear\"}}}, \"ETH/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1723.65, \"ema50\": 1721.958058, \"ema200\": 1976.190544, \"ema50_slope\": -0.085914, \"dist_to_high20_pct\": -1.636678, \"dist_to_low20_pct\": 7.270215, \"atr_pct_14\": 2.002147, \"volume_z_48\": -0.909674, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1723.66, \"ema50\": 2064.262627, \"ema200\": 2225.04995, \"ema50_slope\": -3.780348, \"dist_to_high20_pct\": -23.149015, \"dist_to_low20_pct\": 12.217448, \"atr_pct_14\": 6.502111, \"volume_z_48\": -0.952648, \"regime\": \"bear\"}}}, \"SOL/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 73.11, \"ema50\": 71.570084, \"ema200\": 82.132917, \"ema50_slope\": 0.217914, \"dist_to_high20_pct\": -0.975213, \"dist_to_low20_pct\": 11.177007, \"atr_pct_14\": 2.044864, \"volume_z_48\": -0.485499, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 73.13, \"ema50\": 86.329344, \"ema200\": 93.644123, \"ema50_slope\": -3.728823, \"dist_to_high20_pct\": -18.635959, \"dist_to_low20_pct\": 12.872357, \"atr_pct_14\": 6.738489, \"volume_z_48\": -1.186677, \"regime\": \"bear\"}}}, \"BNB/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 732.17, \"ema50\": 734.915516, \"ema200\": 741.67318, \"ema50_slope\": -0.056874, \"dist_to_high20_pct\": -2.636968, \"dist_to_low20_pct\": 1.138232, \"atr_pct_14\": 0.833237, \"volume_z_48\": -1.140512, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 732.17, \"ema50\": 733.333346, \"ema200\": 689.060203, \"ema50_slope\": 0.063654, \"dist_to_high20_pct\": -9.630955, \"dist_to_low20_pct\": 3.771472, \"atr_pct_14\": 2.46586, \"volume_z_48\": -0.788136, \"regime\": \"bull\"}}}, \"XRP/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1.3082, \"ema50\": 1.333818, \"ema200\": 1.382869, \"ema50_slope\": -0.232652, \"dist_to_high20_pct\": -6.503716, \"dist_to_low20_pct\": 1.686747, \"atr_pct_14\": 1.632013, \"volume_z_48\": -0.716492, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1.308, \"ema50\": 1.373387, \"ema200\": 1.374494, \"ema50_slope\": -0.780034, \"dist_to_high20_pct\": -14.565643, \"dist_to_low20_pct\": 4.123547, \"atr_pct_14\": 4.184688, \"volume_z_48\": -0.613219, \"regime\": \"bear\"}}}, \"ADA/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 0.152623, \"ema50\": 0.148524, \"ema200\": 0.170724, \"ema50_slope\": 0.40266, \"dist_to_high20_pct\": -0.669695, \"dist_to_low20_pct\": 12.675984, \"atr_pct_14\": 2.339378, \"volume_z_48\": -0.347813, \"regime\": \"bear\"}, \"1d\": {\"available\": false}}}, \"AAPL\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 348.220001, \"ema50\": 331.007387, \"ema200\": 300.540002, \"ema50_slope\": 0.857007, \"dist_to_high20_pct\": -0.040184, \"dist_to_low20_pct\": 6.878243, \"atr_pct_14\": 1.747049, \"volume_z_48\": 0.544014, \"regime\": \"bull\"}}}, \"MSFT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 489.929993, \"ema50\": 511.252099, \"ema200\": 475.719731, \"ema50_slope\": -0.816877, \"dist_to_high20_pct\": -12.37951, \"dist_to_low20_pct\": 2.626778, \"atr_pct_14\": 3.480673, \"volume_z_48\": 0.194609, \"regime\": \"bull\"}}}, \"NVDA\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 149.300003, \"ema50\": 191.403177, \"ema200\": 201.13802, \"ema50_slope\": -4.724962, \"dist_to_high20_pct\": -30.664561, \"dist_to_low20_pct\": 19.919681, \"atr_pct_14\": 10.604247, \"volume_z_48\": 0.916079, \"regime\": \"bear\"}}}, \"AMZN\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 244.429993, \"ema50\": 255.977571, \"ema200\": 248.286254, \"ema50_slope\": -0.42053, \"dist_to_high20_pct\": -11.226122, \"dist_to_low20_pct\": 6.570453, \"atr_pct_14\": 4.279927, \"volume_z_48\": 1.045596, \"regime\": \"range\"}}}, \"EURUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.096491, \"ema50\": 1.117797, \"ema200\": 1.142458, \"ema50_slope\": -0.438236, \"dist_to_high20_pct\": -2.752193, \"dist_to_low20_pct\": 0.740127, \"atr_pct_14\": 0.656417, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"XAUUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 3702.300049, \"ema50\": 4000.039273, \"ema200\": 4265.887942, \"ema50_slope\": -2.190696, \"dist_to_high20_pct\": -10.953174, \"dist_to_low20_pct\": 8.090042, \"atr_pct_14\": 3.386891, \"volume_z_48\": -0.270928, \"regime\": \"bear\"}}}, \"GBPUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.312629, \"ema50\": 1.328492, \"ema200\": 1.336973, \"ema50_slope\": -0.311828, \"dist_to_high20_pct\": -2.785394, \"dist_to_low20_pct\": 0.868969, \"atr_pct_14\": 0.662804, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"USDJPY\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 159.388, \"ema50\": 158.529752, \"ema200\": 158.157918, \"ema50_slope\": 0.089501, \"dist_to_high20_pct\": -0.491955, \"dist_to_low20_pct\": 1.250798, \"atr_pct_14\": 0.53432, \"volume_z_48\": null, \"regime\": \"bull\"}}}}}, \"session\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"current_weekday\": \"Friday\", \"current_session\": [\"london\"], \"pairs\": {\"BTC/USDT\": {\"available\": false}, \"ETH/USDT\": {\"available\": false}, \"SOL/USDT\": {\"available\": false}, \"BNB/USDT\": {\"available\": false}, \"XRP/USDT\": {\"available\": false}, \"ADA/USDT\": {\"available\": false}, \"AAPL\": {\"available\": false}, \"MSFT\": {\"available\": false}, \"NVDA\": {\"available\": false}, \"AMZN\": {\"available\": false}, \"EURUSD\": {\"available\": false}, \"XAUUSD\": {\"available\": false}, \"GBPUSD\": {\"available\": false}, \"USDJPY\": {\"available\": false}}}}\nAnswer again with the same JSON schema and only that JSON.\nFOLLOW-UP QUESTIONS: [\"Can we obtain live orderbook and 1h/15m confirmation before re-evaluating any pair?\", \"When will crypto, equity, or forex scan_ic have a predictive verdict instead of 'no-evidence'?\", \"Can 1d data for ADA/USDT be restored before re-evaluation?\"]\nFULL MARKET AND SESSION DETAIL: {\"market\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"live_orderbook\": false, \"pairs\": {\"BTC/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 61543.9, \"ema50\": 61317.234945, \"ema200\": 68814.748248, \"ema50_slope\": -0.064295, \"dist_to_high20_pct\": -0.957851, \"dist_to_low20_pct\": 7.574108, \"atr_pct_14\": 1.630474, \"volume_z_48\": -0.924222, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 61554.7, \"ema50\": 71102.398824, \"ema200\": 74414.950357, \"ema50_slope\": -3.141533, \"dist_to_high20_pct\": -19.109364, \"dist_to_low20_pct\": 11.714519, \"atr_pct_14\": 5.301812, \"volume_z_48\": -1.106947, \"regime\": \"bear\"}}}, \"ETH/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1723.65, \"ema50\": 1721.958058, \"ema200\": 1976.190544, \"ema50_slope\": -0.085914, \"dist_to_high20_pct\": -1.636678, \"dist_to_low20_pct\": 7.270215, \"atr_pct_14\": 2.002147, \"volume_z_48\": -0.909674, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1723.66, \"ema50\": 2064.262627, \"ema200\": 2225.04995, \"ema50_slope\": -3.780348, \"dist_to_high20_pct\": -23.149015, \"dist_to_low20_pct\": 12.217448, \"atr_pct_14\": 6.502111, \"volume_z_48\": -0.952648, \"regime\": \"bear\"}}}, \"SOL/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 73.11, \"ema50\": 71.570084, \"ema200\": 82.132917, \"ema50_slope\": 0.217914, \"dist_to_high20_pct\": -0.975213, \"dist_to_low20_pct\": 11.177007, \"atr_pct_14\": 2.044864, \"volume_z_48\": -0.485499, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 73.13, \"ema50\": 86.329344, \"ema200\": 93.644123, \"ema50_slope\": -3.728823, \"dist_to_high20_pct\": -18.635959, \"dist_to_low20_pct\": 12.872357, \"atr_pct_14\": 6.738489, \"volume_z_48\": -1.186677, \"regime\": \"bear\"}}}, \"BNB/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 732.17, \"ema50\": 734.915516, \"ema200\": 741.67318, \"ema50_slope\": -0.056874, \"dist_to_high20_pct\": -2.636968, \"dist_to_low20_pct\": 1.138232, \"atr_pct_14\": 0.833237, \"volume_z_48\": -1.140512, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 732.17, \"ema50\": 733.333346, \"ema200\": 689.060203, \"ema50_slope\": 0.063654, \"dist_to_high20_pct\": -9.630955, \"dist_to_low20_pct\": 3.771472, \"atr_pct_14\": 2.46586, \"volume_z_48\": -0.788136, \"regime\": \"bull\"}}}, \"XRP/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 1.3082, \"ema50\": 1.333818, \"ema200\": 1.382869, \"ema50_slope\": -0.232652, \"dist_to_high20_pct\": -6.503716, \"dist_to_low20_pct\": 1.686747, \"atr_pct_14\": 1.632013, \"volume_z_48\": -0.716492, \"regime\": \"bear\"}, \"1d\": {\"available\": true, \"close\": 1.308, \"ema50\": 1.373387, \"ema200\": 1.374494, \"ema50_slope\": -0.780034, \"dist_to_high20_pct\": -14.565643, \"dist_to_low20_pct\": 4.123547, \"atr_pct_14\": 4.184688, \"volume_z_48\": -0.613219, \"regime\": \"bear\"}}}, \"ADA/USDT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": true, \"close\": 0.152623, \"ema50\": 0.148524, \"ema200\": 0.170724, \"ema50_slope\": 0.40266, \"dist_to_high20_pct\": -0.669695, \"dist_to_low20_pct\": 12.675984, \"atr_pct_14\": 2.339378, \"volume_z_48\": -0.347813, \"regime\": \"bear\"}, \"1d\": {\"available\": false}}}, \"AAPL\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 348.220001, \"ema50\": 331.007387, \"ema200\": 300.540002, \"ema50_slope\": 0.857007, \"dist_to_high20_pct\": -0.040184, \"dist_to_low20_pct\": 6.878243, \"atr_pct_14\": 1.747049, \"volume_z_48\": 0.544014, \"regime\": \"bull\"}}}, \"MSFT\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 489.929993, \"ema50\": 511.252099, \"ema200\": 475.719731, \"ema50_slope\": -0.816877, \"dist_to_high20_pct\": -12.37951, \"dist_to_low20_pct\": 2.626778, \"atr_pct_14\": 3.480673, \"volume_z_48\": 0.194609, \"regime\": \"bull\"}}}, \"NVDA\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 149.300003, \"ema50\": 191.403177, \"ema200\": 201.13802, \"ema50_slope\": -4.724962, \"dist_to_high20_pct\": -30.664561, \"dist_to_low20_pct\": 19.919681, \"atr_pct_14\": 10.604247, \"volume_z_48\": 0.916079, \"regime\": \"bear\"}}}, \"AMZN\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 244.429993, \"ema50\": 255.977571, \"ema200\": 248.286254, \"ema50_slope\": -0.42053, \"dist_to_high20_pct\": -11.226122, \"dist_to_low20_pct\": 6.570453, \"atr_pct_14\": 4.279927, \"volume_z_48\": 1.045596, \"regime\": \"range\"}}}, \"EURUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.096491, \"ema50\": 1.117797, \"ema200\": 1.142458, \"ema50_slope\": -0.438236, \"dist_to_high20_pct\": -2.752193, \"dist_to_low20_pct\": 0.740127, \"atr_pct_14\": 0.656417, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"XAUUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 3702.300049, \"ema50\": 4000.039273, \"ema200\": 4265.887942, \"ema50_slope\": -2.190696, \"dist_to_high20_pct\": -10.953174, \"dist_to_low20_pct\": 8.090042, \"atr_pct_14\": 3.386891, \"volume_z_48\": -0.270928, \"regime\": \"bear\"}}}, \"GBPUSD\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 1.312629, \"ema50\": 1.328492, \"ema200\": 1.336973, \"ema50_slope\": -0.311828, \"dist_to_high20_pct\": -2.785394, \"dist_to_low20_pct\": 0.868969, \"atr_pct_14\": 0.662804, \"volume_z_48\": null, \"regime\": \"bear\"}}}, \"USDJPY\": {\"timeframes\": {\"1m\": {\"available\": false}, \"5m\": {\"available\": false}, \"15m\": {\"available\": false}, \"1h\": {\"available\": false}, \"4h\": {\"available\": false}, \"1d\": {\"available\": true, \"close\": 159.388, \"ema50\": 158.529752, \"ema200\": 158.157918, \"ema50_slope\": 0.089501, \"dist_to_high20_pct\": -0.491955, \"dist_to_low20_pct\": 1.250798, \"atr_pct_14\": 0.53432, \"volume_z_48\": null, \"regime\": \"bull\"}}}}}, \"session\": {\"asof\": \"2026-11-27T11:00:00+00:00\", \"current_weekday\": \"Friday\", \"current_session\": [\"london\"], \"pairs\": {\"BTC/USDT\": {\"available\": false}, \"ETH/USDT\": {\"available\": false}, \"SOL/USDT\": {\"available\": false}, \"BNB/USDT\": {\"available\": false}, \"XRP/USDT\": {\"available\": false}, \"ADA/USDT\": {\"available\": false}, \"AAPL\": {\"available\": false}, \"MSFT\": {\"available\": false}, \"NVDA\": {\"available\": false}, \"AMZN\": {\"available\": false}, \"EURUSD\": {\"available\": false}, \"XAUUSD\": {\"available\": false}, \"GBPUSD\": {\"available\": false}, \"USDJPY\": {\"available\": false}}}}\nAnswer again with the same JSON schema and only that JSON."
+  ],
+  "raw": [
+    "{\"pairs\":{\"BTC/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.85,\"rationale\":\"4h/1d bear; close 61554.7 below EMA200 74414.950357 and risk says 'BTC below EMA200'; academic_carhart_mom ic_mean 0.028339 is cross-sectional, not a per-pair entry signal.\"},\"ETH/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.82,\"rationale\":\"4h/1d bear; close 1723.65 below EMA200 1976.190544; scan_ic crypto 'no-evidence' and academic_strev ic_mean 0.011409 is not a per-pair entry edge.\"},\"SOL/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.9,\"rationale\":\"Historical lesson: 'SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries'; academic_carhart_mom ic_mean 0.028339.\"},\"BNB/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.68,\"rationale\":\"4h bear, close 732.17 below EMA50 734.915516; 1d bull unconfirmed and scan_ic crypto 'no-evidence'; academic_cma ic_mean 0.002378.\"},\"XRP/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.8,\"rationale\":\"4h/1d bear; close 1.3082 below EMA200 1.382869; academic_strev ic_mean 0.011409 not a per-pair edge.\"},\"ADA/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.7,\"rationale\":\"4h bear, close 0.152623 below EMA200 0.170724 and 1d unavailable; academic_carhart_mom ic_mean 0.028339 is cross-sectional only.\"},\"AAPL\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.6,\"rationale\":\"1d bull above EMA50 331.007387/EMA200 300.540002 but scan_ic equity 'no-evidence'; academic_carhart_mom ic_mean 0.028339 is cross-sectional, so no validated per-pair edge.\"},\"MSFT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.72,\"rationale\":\"Close 489.929993 below EMA50 511.252099 with ema50_slope -0.816877 despite 'bull' label; academic_cma ic_mean 0.002378 is context-only.\"},\"NVDA\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.85,\"rationale\":\"1d bear, close 149.300003 below EMA200 201.13802 with atr_pct_14 10.604247; academic_corr_rewire ic_mean -0.000444.\"},\"AMZN\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.72,\"rationale\":\"1d range, close 244.429993 below EMA50 255.977571 and EMA200 248.286254; academic_strev ic_mean 0.011409 not a per-pair edge.\"},\"EURUSD\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.8,\"rationale\":\"1d bear, close 1.096491 below EMA200 1.142458 and near low20; academic_cma ic_mean 0.002378.\"},\"XAUUSD\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.82,\"rationale\":\"1d bear, close 3702.300049 below EMA200 4265.887942 with ema50_slope -2.190696; academic_carhart_mom ic_mean 0.028339.\"},\"GBPUSD\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.8,\"rationale\":\"1d bear, close 1.312629 below EMA200 1.336973; academic_strev ic_mean 0.011409 not a per-pair edge.\"},\"USDJPY\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.6,\"rationale\":\"1d bull above EMA50 158.529752/EMA200 158.157918 but scan_ic forex 'no-evidence'; academic_carhart_mom ic_mean 0.028339 is cross-sectional only.\"}},\"followups\":[\"Can we obtain live orderbook and 1h/15m confirmation before re-evaluating any pair?\",\"When will crypto, equity, or forex scan_ic have a predictive verdict instead of 'no-evidence'?\"]}\n",
+    "{\"pairs\":{\"BTC/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.88,\"rationale\":\"No live orderbook and 1h/15m unavailable; 4h and 1d regime bear, BTC below EMA200. academic_carhart_mom ic_mean 0.028339 is cross-sectional only, not a per-pair entry signal.\"},\"ETH/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.88,\"rationale\":\"No live orderbook and 1h/15m unavailable; 4h and 1d regime bear. academic_carhart_mom ic_mean 0.028339 is cross-sectional only, not a per-pair entry signal.\"},\"SOL/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.93,\"rationale\":\"Historical lesson says SOL/USDT verdict accuracy is 33% over 9 labels; no live orderbook or 1h confirmation. academic_strev ic_mean 0.011409 is cross-sectional only.\"},\"BNB/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.85,\"rationale\":\"No live orderbook or 1h/15m confirmation; 4h regime bear despite 1d bull. academic_carhart_mom ic_mean 0.028339 is not a per-pair signal.\"},\"XRP/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.87,\"rationale\":\"No live orderbook or 1h confirmation; 4h and 1d regime bear. academic_carhart_mom ic_mean 0.028339 is cross-sectional only.\"},\"ADA/USDT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.87,\"rationale\":\"No live orderbook or 1h confirmation and 1d unavailable; 4h regime bear. academic_cma ic_mean 0.002378 is cross-sectional only.\"},\"AAPL\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.8,\"rationale\":\"No live orderbook and no 4h/intraday confirmation; 1d regime bull but dist_to_high20_pct -0.040184. academic_carhart_mom ic_mean 0.028339 is cross-sectional only.\"},\"MSFT\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.82,\"rationale\":\"No live orderbook or 1h confirmation; 1d ema50_slope -0.816877 while labeled bull. academic_high52w ic_mean 0.000248 is cross-sectional only.\"},\"NVDA\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.87,\"rationale\":\"No live orderbook or 1h confirmation; 1d regime bear with atr_pct_14 10.604247. academic_carhart_mom ic_mean 0.028339 is not a per-pair signal.\"},\"AMZN\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.85,\"rationale\":\"No live orderbook or 1h confirmation; 1d regime range. academic_carhart_mom ic_mean 0.028339 is cross-sectional only.\"},\"EURUSD\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.85,\"rationale\":\"No live orderbook or 1h confirmation; 1d regime bear and session unavailable. academic_corr_rewire ic_mean -0.000444 is cross-sectional only.\"},\"XAUUSD\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.87,\"rationale\":\"No live orderbook or 1h confirmation; 1d regime bear and below EMA200. academic_carhart_mom ic_mean 0.028339 is not a per-pair signal.\"},\"GBPUSD\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.85,\"rationale\":\"No live orderbook or 1h confirmation; 1d regime bear. academic_strev ic_mean 0.011409 is cross-sectional only.\"},\"USDJPY\":{\"action\":\"block\",\"size\":0.0,\"confidence\":0.8,\"rationale\":\"No live orderbook or 1h confirmation; 1d bull but intraday unavailable. academic_carhart_mom ic_mean 0.028339 is cross-sectional only.\"}},\"followups\":[\"Can we obtain live orderbook and 1h/15m confirmation before re-evaluating any pair?\",\"When will crypto, equity, or forex scan_ic have a predictive verdict instead of 'no-evidence'?\",\"Can 1d data for ADA/USDT be restored before re-evaluation?\"]}\n",
+    "{\"pairs\": {\"BTC/USDT\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.85, \"rationale\": \"4h/1d bear and BTC below EMA200 (61554.7) with live_orderbook false; scan_ic crypto 'no-evidence' and academic_carhart_mom ic_mean 0.028339 is cross-sectional, not a per-pair signal.\"}, \"ETH/USDT\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.85, \"rationale\": \"4h/1d bear, close 1723.65 below EMA200 1976.19, no 1h/15m or live orderbook; scan_ic crypto 'no-evidence' and academic_strev ic_mean 0.011409 is not a per-pair entry signal.\"}, \"SOL/USDT\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.92, \"rationale\": \"historical_lessons: SOL/USDT verdict accuracy is 33% over 9 labels - exclude from new entries; 4h bear and scan_ic 'no-evidence' reinforce block.\"}, \"BNB/USDT\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.8, \"rationale\": \"4h bear with close 732.17 below EMA200 741.67 and 1d close below ema50; live_orderbook false and scan_ic crypto 'no-evidence'; academic_cma ic_mean 0.002378 is not per-pair.\"}, \"XRP/USDT\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.84, \"rationale\": \"4h/1d bear, close 1.3082 below EMA200 1.382869, no intraday confirmation; scan_ic crypto 'no-evidence' and academic_high52w ic_mean 0.000248 is cross-sectional only.\"}, \"ADA/USDT\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.88, \"rationale\": \"1d data unavailable and 4h bear; cannot validate multi-timeframe; scan_ic crypto 'no-evidence' and academic_corr_rewire ic_mean -0.000444 is not a per-pair signal.\"}, \"AAPL\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.7, \"rationale\": \"Only 1d available (close 348.22) and session unavailable; scan_ic equity 'no-evidence'; academic_carhart_mom ic_mean 0.028339 is cross-sectional, so no per-pair edge.\"}, \"MSFT\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.78, \"rationale\": \"1d close 489.93 below ema50 511.25 with negative slope -0.816877; scan_ic equity 'no-evidence' and academic_strev ic_mean 0.011409 is not per-pair.\"}, \"NVDA\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.86, \"rationale\": \"1d bear, close 149.3 far below EMA200 201.14 with atr_pct_14 10.604247; scan_ic equity 'no-evidence'; academic_cma ic_mean 0.002378 is not a per-pair signal.\"}, \"AMZN\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.78, \"rationale\": \"1d range, close 244.43 below ema50 255.98; only daily data and scan_ic equity 'no-evidence'; academic_high52w ic_mean 0.000248 is cross-sectional only.\"}, \"EURUSD\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.8, \"rationale\": \"1d bear below EMA200 1.142458 and volume_z_48 null; scan_ic forex 'no-evidence' and academic_corr_rewire ic_mean -0.000444 is not per-pair.\"}, \"XAUUSD\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.82, \"rationale\": \"1d bear, close 3702.3 below EMA200 4265.89 with ema50_slope -2.190696; scan_ic forex 'no-evidence'; academic_carhart_mom ic_mean 0.028339 is not per-pair.\"}, \"GBPUSD\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.8, \"rationale\": \"1d bear below EMA200 1.336973, volume_z_48 null, no intraday; scan_ic forex 'no-evidence' and academic_strev ic_mean 0.011409 is cross-sectional only.\"}, \"USDJPY\": {\"action\": \"block\", \"size\": 0.0, \"confidence\": 0.75, \"rationale\": \"1d bull but only daily data, atr_pct_14 0.53432 and no live orderbook; scan_ic forex 'no-evidence'; academic_cma ic_mean 0.002378 is not a per-pair signal.\"}}, \"followups\": [\"Can we obtain live orderbook and 1h/15m confirmation before re-evaluating any pair?\", \"When will crypto, equity, or forex scan_ic have a predictive verdict instead of 'no-evidence'?\", \"Can 1d data for ADA/USDT be restored before re-evaluation?\"]}\n"
+  ],
+  "model": "opencode/deepseek-v4.1-flash-free",
+  "decision": {
+    "source": "llm",
+    "followups": [
+      "Can we obtain live orderbook and 1h/15m confirmation before re-evaluating any pair?",
+      "When will crypto, equity, or forex scan_ic have a predictive verdict instead of 'no-evidence'?",
+      "Can 1d data for ADA/USDT be restored before re-evaluation?"
+    ],
+    "pairs": {
+      "BTC/USDT": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "ETH/USDT": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "SOL/USDT": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "BNB/USDT": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "XRP/USDT": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "ADA/USDT": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "AAPL": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "MSFT": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "NVDA": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "AMZN": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "EURUSD": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "XAUUSD": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "GBPUSD": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      },
+      "USDJPY": {
+        "action": "block",
+        "size": 0.0,
+        "confidence": 0.5,
+        "rationale": "synthesizer: blocked (analyst=block, critic=block)"
+      }
+    }
+  },
+  "deliberation": {
+    "asof": "2026-11-27T11:00:00+00:00",
+    "pairs": [
+      "BTC/USDT",
+      "ETH/USDT",
+      "SOL/USDT",
+      "BNB/USDT",
+      "XRP/USDT",
+      "ADA/USDT",
+      "AAPL",
+      "MSFT",
+      "NVDA",
+      "AMZN",
+      "EURUSD",
+      "XAUUSD",
+      "GBPUSD",
+      "USDJPY"
+    ],
+    "rounds": {
+      "1": {
+        "analyst": {
+          "agent": "analyst",
+          "round": 1,
+          "claims": [
+            {
+              "text": "LLM decision source=llm",
+              "evidence": [
+                "decision.pairs"
+              ]
+            }
+          ],
+          "recommendation": "block",
+          "confidence": 0.816429,
+          "blockers": [],
+          "pair_recommendations": {
+            "BTC/USDT": "block",
+            "ETH/USDT": "block",
+            "SOL/USDT": "block",
+            "BNB/USDT": "block",
+            "XRP/USDT": "block",
+            "ADA/USDT": "block",
+            "AAPL": "block",
+            "MSFT": "block",
+            "NVDA": "block",
+            "AMZN": "block",
+            "EURUSD": "block",
+            "XAUUSD": "block",
+            "GBPUSD": "block",
+            "USDJPY": "block"
+          }
+        },
+        "risk": {
+          "agent": "risk",
+          "round": 1,
+          "claims": [
+            {
+              "text": "size_cap=0.5",
+              "evidence": [
+                "drawdown=None",
+                "reasons=['BTC below EMA200']"
+              ]
+            }
+          ],
+          "recommendation": "allow",
+          "confidence": 0.9,
+          "blockers": [
+            "BTC below EMA200"
+          ],
+          "pair_recommendations": {}
+        },
+        "critic": {
+          "agent": "critic",
+          "round": 1,
+          "claims": [
+            {
+              "text": "Red-teamed BTC/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed ETH/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed SOL/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed BNB/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed XRP/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed ADA/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed AAPL: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed MSFT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed NVDA: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed AMZN: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed EURUSD: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed XAUUSD: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed GBPUSD: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "Red-teamed USDJPY: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            }
+          ],
+          "recommendation": "allow",
+          "confidence": 0.7,
+          "blockers": [],
+          "pair_recommendations": {
+            "BTC/USDT": "block",
+            "ETH/USDT": "block",
+            "SOL/USDT": "block",
+            "BNB/USDT": "block",
+            "XRP/USDT": "block",
+            "ADA/USDT": "block",
+            "AAPL": "block",
+            "MSFT": "block",
+            "NVDA": "block",
+            "AMZN": "block",
+            "EURUSD": "block",
+            "XAUUSD": "block",
+            "GBPUSD": "block",
+            "USDJPY": "block"
+          }
+        },
+        "vibe-factors": {
+          "agent": "vibe-factors",
+          "round": 1,
+          "claims": [
+            {
+              "text": "Vibe-Trading alpha bench academic / sp500 2024-2025: best factor academic_carhart_mom IR=0.1216 IC_mean=0.028339 N=249; next: academic_strev (IR 0.0597), academic_cma (IR 0.0286), academic_high52w (IR 0.0011)",
+              "evidence": [
+                "artifact=/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-27_0347_academic_sp500.txt",
+                "n_alphas_tested=12",
+                "best_alpha=academic_carhart_mom ir=0.1216 ic_mean=0.028339",
+                "caveat=cross-sectional IC across the universe, not a per-pair entry signal"
+              ]
+            }
+          ],
+          "recommendation": "abstain",
+          "confidence": 0.5,
+          "blockers": [],
+          "pair_recommendations": {}
+        },
+        "lessons": {
+          "agent": "lessons",
+          "round": 1,
+          "claims": [
+            {
+              "text": "SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers.",
+              "evidence": [
+                "lesson=pair-unreliable-sol-usdt",
+                "SOL/USDT: 3/9 correct"
+              ]
+            }
+          ],
+          "recommendation": "abstain",
+          "confidence": 0.5,
+          "blockers": [],
+          "pair_recommendations": {}
+        }
+      },
+      "2": {
+        "synthesizer": {
+          "agent": "synthesizer",
+          "round": 2,
+          "claims": [
+            {
+              "text": "BTC/USDT: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "ETH/USDT: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "SOL/USDT: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "BNB/USDT: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "XRP/USDT: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "ADA/USDT: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "AAPL: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "MSFT: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "NVDA: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "AMZN: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "EURUSD: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "XAUUSD: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "GBPUSD: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            },
+            {
+              "text": "USDJPY: block size=0.0",
+              "evidence": [
+                "analyst_action=block",
+                "critic_action=block",
+                "size_cap=0.5"
+              ]
+            }
+          ],
+          "recommendation": "block",
+          "confidence": 0.5,
+          "blockers": [
+            "BTC/USDT: synthesizer: blocked (analyst=block, critic=block)",
+            "ETH/USDT: synthesizer: blocked (analyst=block, critic=block)",
+            "SOL/USDT: synthesizer: blocked (analyst=block, critic=block)",
+            "BNB/USDT: synthesizer: blocked (analyst=block, critic=block)",
+            "XRP/USDT: synthesizer: blocked (analyst=block, critic=block)",
+            "ADA/USDT: synthesizer: blocked (analyst=block, critic=block)",
+            "AAPL: synthesizer: blocked (analyst=block, critic=block)",
+            "MSFT: synthesizer: blocked (analyst=block, critic=block)",
+            "NVDA: synthesizer: blocked (analyst=block, critic=block)",
+            "AMZN: synthesizer: blocked (analyst=block, critic=block)",
+            "EURUSD: synthesizer: blocked (analyst=block, critic=block)",
+            "XAUUSD: synthesizer: blocked (analyst=block, critic=block)",
+            "GBPUSD: synthesizer: blocked (analyst=block, critic=block)",
+            "USDJPY: synthesizer: blocked (analyst=block, critic=block)"
+          ],
+          "pair_recommendations": {
+            "BTC/USDT": "block",
+            "ETH/USDT": "block",
+            "SOL/USDT": "block",
+            "BNB/USDT": "block",
+            "XRP/USDT": "block",
+            "ADA/USDT": "block",
+            "AAPL": "block",
+            "MSFT": "block",
+            "NVDA": "block",
+            "AMZN": "block",
+            "EURUSD": "block",
+            "XAUUSD": "block",
+            "GBPUSD": "block",
+            "USDJPY": "block"
+          }
+        },
+        "auditor": {
+          "agent": "auditor",
+          "round": 2,
+          "claims": [
+            {
+              "text": "verified analyst claim: LLM decision source=llm",
+              "evidence": [
+                "decision.pairs"
+              ]
+            },
+            {
+              "text": "verified risk claim: size_cap=0.5",
+              "evidence": [
+                "drawdown=None",
+                "reasons=['BTC below EMA200']"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed BTC/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed ETH/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed SOL/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed BNB/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed XRP/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed ADA/USDT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=bear",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed AAPL: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed MSFT: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed NVDA: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed AMZN: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed EURUSD: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed XAUUSD: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed GBPUSD: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified critic claim: Red-teamed USDJPY: critic: no falsifying evidence found after checking regime + ATR",
+              "evidence": [
+                "regime_1h=None",
+                "regime_4h=None",
+                "atr_pct_1h=None",
+                "dist_to_high20_1h=None"
+              ]
+            },
+            {
+              "text": "verified vibe-factors claim: Vibe-Trading alpha bench academic / sp500 2024-2025: best factor academic_carhart_mom IR=0.1216 IC_mean=0.028339 N=249; next: academic_strev (IR 0.0597), academic_cma (IR 0.0286), academic_high52w (IR 0.0011)",
+              "evidence": [
+                "artifact=/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-27_0347_academic_sp500.txt",
+                "n_alphas_tested=12",
+                "best_alpha=academic_carhart_mom ir=0.1216 ic_mean=0.028339",
+                "caveat=cross-sectional IC across the universe, not a per-pair entry signal"
+              ]
+            },
+            {
+              "text": "verified lessons claim: SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers.",
+              "evidence": [
+                "lesson=pair-unreliable-sol-usdt",
+                "SOL/USDT: 3/9 correct"
+              ]
+            }
+          ],
+          "recommendation": "allow",
+          "confidence": 0.9,
+          "blockers": [],
+          "pair_recommendations": {}
+        }
+      }
+    },
+    "convergence": true
+  },
+  "vibe_factors": {
+    "source": "vibe-trading alpha_bench",
+    "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-27_0347_academic_sp500.txt",
+    "age_hours": 0.08,
+    "generated_at": "2026-11-27T11:48:02.304229+00:00",
+    "asof": "2026-11-27",
+    "zoo": "academic",
+    "universe": "sp500",
+    "period": "2024-2025",
+    "n_alphas_tested": 12,
+    "n_skipped": 0,
+    "top": [
+      {
+        "alpha": "academic_carhart_mom",
+        "theme": "momentum",
+        "ic_mean": 0.028339,
+        "ir": 0.1216,
+        "ic_positive_ratio": 0.5944,
+        "ic_count": 249
+      },
+      {
+        "alpha": "academic_strev",
+        "theme": "reversal",
+        "ic_mean": 0.011409,
+        "ir": 0.0597,
+        "ic_positive_ratio": 0.5083,
+        "ic_count": 480
+      },
+      {
+        "alpha": "academic_cma",
+        "theme": "quality",
+        "ic_mean": 0.002378,
+        "ir": 0.0286,
+        "ic_positive_ratio": 0.5393,
+        "ic_count": 382
+      },
+      {
+        "alpha": "academic_high52w",
+        "theme": "momentum",
+        "ic_mean": 0.000248,
+        "ir": 0.0011,
+        "ic_positive_ratio": 0.54,
+        "ic_count": 250
+      },
+      {
+        "alpha": "academic_corr_rewire",
+        "theme": "volatility",
+        "ic_mean": -0.000444,
+        "ir": -0.0032,
+        "ic_positive_ratio": 0.5138,
+        "ic_count": 362
+      }
+    ],
+    "caveats": [
+      "cross-sectional IC across the universe, not a per-pair entry signal",
+      "constituents are the current list (survivorship-biased) -> IC quoted above is biased upward"
+    ]
+  },
+  "lessons": {
+    "generated_at": "2026-11-27T11:52:45.020202+00:00",
+    "overall": {
+      "n": 28,
+      "hits": 12,
+      "misses": 16,
+      "accuracy": 0.429
+    },
+    "by_verdict": {
+      "GO": {
+        "n": 1,
+        "hits": 1,
+        "misses": 0,
+        "accuracy": 1.0
+      },
+      "NO-GO": {
+        "n": 27,
+        "hits": 11,
+        "misses": 16,
+        "accuracy": 0.407
+      }
+    },
+    "by_pair": {
+      "AAPL": {
+        "n": 1,
+        "hits": 1,
+        "misses": 0,
+        "accuracy": 1.0
+      },
+      "BTC/USDT": {
+        "n": 9,
+        "hits": 4,
+        "misses": 5,
+        "accuracy": 0.444
+      },
+      "ETH/USDT": {
+        "n": 9,
+        "hits": 4,
+        "misses": 5,
+        "accuracy": 0.444
+      },
+      "SOL/USDT": {
+        "n": 9,
+        "hits": 3,
+        "misses": 6,
+        "accuracy": 0.333
+      }
+    },
+    "by_score_bucket": {
+      "<-5": {
+        "n": 4,
+        "hits": 1,
+        "misses": 3,
+        "accuracy": 0.25
+      },
+      "-5..-2": {
+        "n": 23,
+        "hits": 10,
+        "misses": 13,
+        "accuracy": 0.435
+      },
+      "0..2": {
+        "n": 1,
+        "hits": 1,
+        "misses": 0,
+        "accuracy": 1.0
+      }
+    },
+    "trend_7d": {
+      "recent": {
+        "n": 0,
+        "hits": 0,
+        "misses": 0,
+        "accuracy": null
+      },
+      "previous": {
+        "n": 0,
+        "hits": 0,
+        "misses": 0,
+        "accuracy": null
+      },
+      "delta": null
+    },
+    "sample_ok": true,
+    "lessons": [
+      {
+        "id": "pair-unreliable-sol-usdt",
+        "text": "SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers.",
+        "evidence": "SOL/USDT: 3/9 correct"
+      }
+    ]
+  }
+}

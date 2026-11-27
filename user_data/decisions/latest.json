@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-27T10:00:00+00:00",
-  "generated_at": "2026-11-27T10:57:51.141548+00:00",
+  "asof": "2026-11-27T11:00:00+00:00",
+  "generated_at": "2026-11-27T11:52:45.020514+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -90,10 +90,10 @@
   },
   "vibe_factors": {
     "source": "vibe-trading alpha_bench",
-    "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-13_0207_academic_sp500.txt",
+    "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-27_0347_academic_sp500.txt",
     "age_hours": 0.08,
-    "generated_at": "2026-11-27T10:53:07.527004+00:00",
-    "asof": "2026-11-13",
+    "generated_at": "2026-11-27T11:48:02.304229+00:00",
+    "asof": "2026-11-27",
     "zoo": "academic",
     "universe": "sp500",
     "period": "2024-2025",
@@ -103,7 +103,7 @@
       {
         "alpha": "academic_carhart_mom",
         "theme": "momentum",
-        "ic_mean": 0.02834,
+        "ic_mean": 0.028339,
         "ir": 0.1216,
         "ic_positive_ratio": 0.5944,
         "ic_count": 249
@@ -119,7 +119,7 @@
       {
         "alpha": "academic_cma",
         "theme": "quality",
-        "ic_mean": 0.002379,
+        "ic_mean": 0.002378,
         "ir": 0.0286,
         "ic_positive_ratio": 0.5393,
         "ic_count": 382
@@ -127,7 +127,7 @@
       {
         "alpha": "academic_high52w",
         "theme": "momentum",
-        "ic_mean": 0.000247,
+        "ic_mean": 0.000248,
         "ir": 0.0011,
         "ic_positive_ratio": 0.54,
         "ic_count": 250
@@ -151,12 +151,12 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.03,
+      "age_hours": 0.04,
       "top": [
         {
           "alpha": "academic_carhart_mom",
           "theme": "momentum",
-          "ic_mean": 0.02834,
+          "ic_mean": 0.028339,
           "ir": 0.1216,
           "ic_positive_ratio": 0.5944,
           "ic_count": 249
@@ -172,7 +172,7 @@
         {
           "alpha": "academic_cma",
           "theme": "quality",
-          "ic_mean": 0.002379,
+          "ic_mean": 0.002378,
           "ir": 0.0286,
           "ic_positive_ratio": 0.5393,
           "ic_count": 382
@@ -180,7 +180,7 @@
         {
           "alpha": "academic_high52w",
           "theme": "momentum",
-          "ic_mean": 0.000247,
+          "ic_mean": 0.000248,
           "ir": 0.0011,
           "ic_positive_ratio": 0.54,
           "ic_count": 250
@@ -201,64 +201,64 @@
     },
     "asset_scan": [
       {
+        "pair": "OP/USD",
+        "profit_score": 6.4103,
+        "momentum": 1.8188,
+        "micro_score": 0.5909
+      },
+      {
         "pair": "ARB/USD",
-        "profit_score": 3.9748,
-        "momentum": 1.8488,
-        "micro_score": 0.0924
+        "profit_score": 3.6769,
+        "momentum": 1.7102,
+        "micro_score": 0.0855
       },
       {
         "pair": "LINK/USD",
-        "profit_score": 3.6925,
-        "momentum": 1.7174,
-        "micro_score": 0.0859
+        "profit_score": 3.3556,
+        "momentum": 1.5608,
+        "micro_score": 0.078
       },
       {
-        "pair": "GBPUSD",
-        "profit_score": 3.0016,
-        "momentum": 0.0008,
-        "micro_score": 1.0
-      },
-      {
-        "pair": "ALGO/USD",
-        "profit_score": 2.4494,
-        "momentum": 1.1392,
-        "micro_score": 0.057
+        "pair": "NEAR/USD",
+        "profit_score": 2.4395,
+        "momentum": 1.1347,
+        "micro_score": 0.0567
       },
       {
         "pair": "AUDUSD",
-        "profit_score": 2.3323,
-        "momentum": -0.3106,
-        "micro_score": 0.9845
-      },
-      {
-        "pair": "BCH/USD",
-        "profit_score": 2.3087,
-        "momentum": 1.0738,
-        "micro_score": 0.0537
-      },
-      {
-        "pair": "ETH/USD",
-        "profit_score": 1.806,
-        "momentum": 0.84,
-        "micro_score": 0.042
+        "profit_score": 2.2934,
+        "momentum": -0.3287,
+        "micro_score": 0.9836
       },
       {
         "pair": "DOT/USD",
-        "profit_score": 1.7786,
-        "momentum": 0.8272,
-        "micro_score": 0.0414
+        "profit_score": 2.167,
+        "momentum": 1.0079,
+        "micro_score": 0.0504
+      },
+      {
+        "pair": "BCH/USD",
+        "profit_score": 2.0001,
+        "momentum": 0.9303,
+        "micro_score": 0.0465
+      },
+      {
+        "pair": "ALGO/USD",
+        "profit_score": 1.9907,
+        "momentum": 0.9259,
+        "micro_score": 0.0463
+      },
+      {
+        "pair": "XLM/USD",
+        "profit_score": 1.7868,
+        "momentum": 0.831,
+        "micro_score": 0.0416
       },
       {
         "pair": "META",
         "profit_score": 1.7556,
         "momentum": 0.8166,
         "micro_score": 0.0408
-      },
-      {
-        "pair": "AAPL",
-        "profit_score": 1.6772,
-        "momentum": 0.7801,
-        "micro_score": 0.039
       }
     ],
     "scan_ic": {
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-27T10:57:51.141219+00:00",
+    "generated_at": "2026-11-27T11:52:45.020202+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
