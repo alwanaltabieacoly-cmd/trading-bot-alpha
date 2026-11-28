@@ -1,6 +1,6 @@
 {
-  "asof": "2026-11-28T10:00:00+00:00",
-  "generated_at": "2026-11-28T10:45:19.650869+00:00",
+  "asof": "2026-11-28T11:00:00+00:00",
+  "generated_at": "2026-11-28T11:51:23.112040+00:00",
   "source": "llm",
   "pairs": {
     "BTC/USDT": {
@@ -92,7 +92,7 @@
     "source": "vibe-trading alpha_bench",
     "artifact": "/home/runner/work/trading-bot-alpha/trading-bot-alpha/research/reports/vibe/2026-11-13_0207_academic_sp500.txt",
     "age_hours": 0.06,
-    "generated_at": "2026-11-28T10:41:41.736366+00:00",
+    "generated_at": "2026-11-28T11:47:48.291597+00:00",
     "asof": "2026-11-13",
     "zoo": "academic",
     "universe": "sp500",
@@ -151,7 +151,7 @@
       "zoo": "academic",
       "universe": "sp500",
       "period": "2024-2025",
-      "age_hours": 0.04,
+      "age_hours": 0.03,
       "top": [
         {
           "alpha": "academic_carhart_mom",
@@ -225,22 +225,22 @@
         "micro_score": 0.043
       },
       {
+        "pair": "LTC/USD",
+        "profit_score": 0.3882,
+        "momentum": 0.1806,
+        "micro_score": 0.009
+      },
+      {
         "pair": "BCH/USD",
-        "profit_score": 0.4767,
-        "momentum": 0.2217,
-        "micro_score": 0.0111
+        "profit_score": 0.2848,
+        "momentum": 0.1325,
+        "micro_score": 0.0066
       },
       {
         "pair": "USDJPY",
         "profit_score": 0.2367,
         "momentum": 0.1101,
         "micro_score": 0.0055
-      },
-      {
-        "pair": "LTC/USD",
-        "profit_score": 0.216,
-        "momentum": 0.1005,
-        "micro_score": 0.005
       },
       {
         "pair": "USDCAD",
@@ -270,7 +270,7 @@
     "historical_lessons": "HISTORICAL LESSONS (from 28 labelled outcomes, deduped; accuracy 43%):accuracy 43%): (1) SOL/USDT verdict accuracy is 33% over 9 labels - exclude it from new entries until accuracy recovers. Do not contradict these without new labelled evidence."
   },
   "lessons": {
-    "generated_at": "2026-11-28T10:45:19.650491+00:00",
+    "generated_at": "2026-11-28T11:51:23.111738+00:00",
     "overall": {
       "n": 28,
       "hits": 12,
